@@ -2,7 +2,19 @@
 	"ros.distro": "noetic",
 	"editor.wordWrap": "on",
 	"editor.wrappingIndent": "same",
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": true
+	},
+	"editor.suggestOnTriggerCharacters": true,
 	"[latex]": {
-		"editor.wordWrap": "on"
+		"editor.wordWrap": "on",
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		},
+		"editor.suggestOnTriggerCharacters": true
 	}
 }
