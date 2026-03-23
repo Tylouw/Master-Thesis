@@ -20,7 +20,7 @@ The experimental setup is built around a UR5e robotic manipulator equipped with 
     \label{fig:setup_schematic}
 \end{figure}
 
-For the experimenst the UR5e robot was selected due to its ease of use, broad availability combined with sufficient accuracy to achieve repeatable cartesian motion to perform the insertions. Since the robot itself is not the subject of investigation in this work, only its functional role within the setup is considered here. Similarly, the Robotiq Hand-E gripper is used to reliably grasp and release the insertion rods and furthermore allow different shapes of rods to be grasped due to interchangeable and fully customizable fingers. Different finger configurations were designed to ensure safe grasping of the respective rod types while also allowing little play to generate diverse training data. The specific rod and finger geometries are described in Section~\ref{sec:rods-fingers}.
+For the experiments the UR5e robot was selected due to its ease of use, broad availability combined with sufficient accuracy to achieve repeatable cartesian motion to perform the insertions. Since the robot itself is not the subject of investigation in this work, only its functional role within the setup is considered here. Similarly, the Robotiq Hand-E gripper is used to reliably grasp and release the insertion rods and furthermore allow different shapes of rods to be grasped due to interchangeable and fully customizable fingers. Different finger configurations were designed to ensure safe grasping of the respective rod types while also allowing little play to generate diverse training data. The specific rod and finger geometries are described in Section~\ref{sec:rods-fingers}.
 
 The robot interacts with a custom taskboard mounted next to it. The taskboard contains the respective insertion holes with a movable loadcell underneath to detect successful insertions, which enables automated success detection during data acquisition. The taskboard design is described in Section~\ref{sec:taskboard}, while the loadcell-based success detection system is presented in Section~\ref{sec:loadcell}.
 
@@ -28,8 +28,8 @@ The robot interacts with a custom taskboard mounted next to it. The taskboard co
 
 The insertion tasks consists of a set of custom insertion rods with different cross-sectional geometries. In total 3 rod types are used: 
 \begin{enumerate}
-    \item Small Rod with $8.8$ mm diameter
-    \item Big Rod with $15.8$ mm diameter
+    \item Small Rod with $8.7$ mm diameter
+    \item Big Rod with $16.7$ mm diameter
     \item Rectangular Rod with side length $12\times8$ mm
 \end{enumerate}
 These shapes were picked to represent common insertion conditions while still providing comparable results. Figure~\ref{fig:rods_overview} shows the 3 rods used in this work. All rods are $50$ mm long and machined out of steel.
@@ -41,90 +41,141 @@ These shapes were picked to represent common insertion conditions while still pr
     \label{fig:rods_overview}
 \end{figure}
 
-Since the different rods could not be grasped equally well using a single finger geometry, three dedicated gripper finger configurations were used. The fingers were designed to provide secure and repeatable grasps for the respective rod types while minimizing undesired motion of the rod relative to the gripper during insertion.
-
-A representative overview of the finger designs is shown in Figure~\ref{fig:finger_designs}. Depending on the available visual material, either CAD renderings, technical drawings, or photographs of the mounted fingers can be used here. For the purposes of this thesis, the important aspect is not the full manufacturing detail of the fingers, but their functional relation to the rod geometries.
+To grasp the different shaped rods, three fingers were designed with different purposes in mind regarding the later experiments. The first finger type (Round) can be seen in \figref{fig:finger_designs} (a) and is used with its triangular indent for grasping both the Small Rod and Big Rod. The second finger type (Rect) in \figref{fig:finger_designs} (b) consists of a rectangular indent used for grasping only the Rectangular Rod. Both finger types (Round and Rect) were used in the first and second data acquisition run. The third finger type (Flat) in \figref{fig:finger_designs} (c) is a generic type used for grasping both round and rectangular rods for the third data acquisition run.
 
 \begin{figure}[htbp]
     \centering
-    % \includegraphics[width=0.9\textwidth]{[PATH_TO_FINGER_FIGURE]}
-    \caption{Interchangeable gripper finger configurations used for grasping the different insertion rods.}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/3-robotic_system_and_experimental_setup/round_fingers.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/3-robotic_system_and_experimental_setup/rect_finger.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/3-robotic_system_and_experimental_setup/flat_fingers.png}
+        \caption{}
+    \end{subfigure}
+    \caption{Overview of the 3 gripper fingers. (a) Gripper finger (Round) with triangular indent for Round Rod. (b) Gripper finger (Rect) with rectangular indent for Rectangular Rod. (c) Gripper finger (Flat) without indent, suitable for all rod types.}
     \label{fig:finger_designs}
 \end{figure}
 
-If relevant, the grasping concept can additionally be summarized in Table~\ref{tab:finger_assignment}.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Assignment of rod geometries to gripper finger configurations.}
-    \label{tab:finger_assignment}
-    \begin{tabular}{lll}
-        \hline
-        Rod ID & Finger configuration & Functional purpose \\
-        \hline
-        [ROD\_1] & [FINGER\_A] & [e.g.\ centered pinch grasp] \\
-        jo & [FINGER\_B] & [e.g.\ improved support for rectangular profile] \\
-        jo & [FINGER\_C] & [e.g.\ increased contact stability] \\
-        \hline
-    \end{tabular}
-\end{table}
-
 \section{Taskboard}\label{sec:taskboard}
 
-The mating features for the insertion experiments are integrated into a custom taskboard. The taskboard serves as the central interaction object of the experimental setup and defines the physical insertion conditions for all recorded trials. A CAD rendering of the taskboard is shown in Figure~\ref{fig:taskboard_cad}, followed by a photograph of the manufactured assembly in Figure~\ref{fig:taskboard_real}.
+The matching features of the insertion rods are integrated into a custom designed taskboard. The taskboard serves as the central interaction object of the experimental setup and defines the physical insertion conditions for all recorded trials. A CAD rendering of the taskboard is shown in \figref{fig:taskboard_cad} (a) with a CAD drawing in \figref{fig:taskboard_cad} (b) showing the dimensions of the relevant features. The Taskboard was lasercut out of $3$ mm sheet metal.
 
 \begin{figure}[htbp]
     \centering
-    % \includegraphics[width=0.9\textwidth]{[PATH_TO_TASKBOARD_CAD]}
-    \caption{CAD model of the taskboard used for the insertion experiments.}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/3-robotic_system_and_experimental_setup/task_board_flipped.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/3-robotic_system_and_experimental_setup/taskboard_drawing.png}
+        \caption{}
+    \end{subfigure}
+    \caption{CAD rendering and drawing of the Taskboard. (a) CAD rendering of the Taskboard used for experiments. (b) CAD drawing of all relevant dimensions. All measurements are in mm.}
     \label{fig:taskboard_cad}
 \end{figure}
 
+Two holding legs were designed and 3D-printed out of PLA material, to hold the metal Taskboard in place at a height of $72$ mm. These can be seen in \figref{fig:taskboard_legs} (a) and (b). \figref{fig:taskboard_legs} (c) shows the three rods in their dedicated holder, which is integrated into the taskboard's right leg design.
+
 \begin{figure}[htbp]
     \centering
-    % \includegraphics[width=0.9\textwidth]{[PATH_TO_TASKBOARD_PHOTO]}
-    \caption{Manufactured taskboard integrated into the experimental setup.}
-    \label{fig:taskboard_real}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/3-robotic_system_and_experimental_setup/task_board_left_leg.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/3-robotic_system_and_experimental_setup/task_board_right_leg.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/3-robotic_system_and_experimental_setup/rob_setup_5.jpeg}
+        \caption{}
+    \end{subfigure}
+    \caption{The Taskboard legs. (a) CAD rendering of left leg. (b) CAD rendering of right leg with rods holder. (c) Real image of right leg with rods inserted into holder.}
+    \label{fig:taskboard_legs}
 \end{figure}
 
-The taskboard contains insertion features corresponding to the rod geometries described in Section~\ref{sec:rods-fingers}. For each geometry, multiple tolerance variants were implemented in order to generate insertion tasks with different levels of difficulty. This allows the dataset to cover a broader range of contact interactions and insertion outcomes while preserving a controlled and comparable experimental environment.
+For each rod, multiple tolerance levels were used in order to generate insertion tasks with different levels of difficulty. This allows the dataset to cover a broader range of contact interactions and insertion outcomes while preserving a controlled and comparable experimental environment. In this way, the later trained machine learning model can learn to generalize across a diverse range of rod geometries, tolerance levels and grasping conditions. The exact tolerance values used for each feature are summarized in \tabref{tab:taskboard_tolerances} (a), while \tabref{tab:taskboard_tolerances} (b) shows the matrix of insertion hole labels, which are later used throughout the code implementation.
 
-The selected tolerance levels were chosen to create distinguishable insertion conditions without changing the task principle itself. In this way, the influence of geometric fit on the recorded force and torque signatures can be investigated systematically. The exact tolerance values used for each feature are summarized in Table~\ref{tab:taskboard_tolerances}.
+% in the preamble
+% \usepackage{subcaption}
+\captionsetup[subtable]{labelformat=parens} % gives (a), (b)
 
 \begin{table}[htbp]
     \centering
     \caption{Insertion features and tolerance levels implemented in the taskboard.}
     \label{tab:taskboard_tolerances}
-    \begin{tabular}{llll}
-        \hline
-        Feature ID & Rod geometry & Nominal dimension / fit & Tolerance \\
-        \hline
-        [FEATURE\_1] & [GEOMETRY] & [VALUE] & [e.g.\ $\pm 0.1$ mm] \\
-        jo & [GEOMETRY] & [VALUE] & [e.g.\ $\pm 0.2$ mm] \\
-        jo & [GEOMETRY] & [VALUE] & [e.g.\ $\pm 0.3$ mm] \\
-        \hline
-    \end{tabular}
+
+    \begin{subtable}[t]{\textwidth}
+        \centering
+        \caption{Rod geometries and tolerance levels.}
+        \begin{tabular}{lll}
+            \hline
+            Rod type & Dimension & Tolerance \\
+            \hline
+            Small Rod & 8.7 mm diameter & +0.1, +0.2, +0.3 mm diameter \\
+            Big Rod & 16.7 mm diameter & +0.1, +0.2, +0.3 mm diameter \\
+            Rectangular Rod & 12$\times$8 mm side length & +0.1, +0.2, +0.3 mm side length \\
+            \hline
+        \end{tabular}
+        \label{tab:taskboard_tolerances_a}
+    \end{subtable}
+
+    \vspace{1.5em}
+
+    \begin{subtable}[t]{\textwidth}
+        \centering
+        \caption{Matrix of insertionhole labels.}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            rect\_rod\_t0.3 & big\_rod\_t0.3 & small\_rod\_t0.3 \\
+            \hline
+            rect\_rod\_t0.2 & big\_rod\_t0.2 & small\_rod\_t0.2 \\
+            \hline
+            rect\_rod\_t0.1 & big\_rod\_t0.1 & small\_rod\_t0.1 \\
+            \hline
+        \end{tabular}
+        \label{tab:taskboard_tolerances_b}
+    \end{subtable}
 \end{table}
 
-In addition to the rod-based insertion features, the taskboard also includes mounting provisions for snap-fit experiments. These features were part of the original taskboard design because snap-fit assembly was initially considered as a second task family. However, snap-fit trials were not included in the final dataset used in this thesis. The main reason for this decision was to keep the scope of data acquisition manageable while maintaining sufficient data volume per task variant. In addition, reliable automatic label assignment is more straightforward for the rod insertion tasks, since successful completion can be detected mechanically by the loadcell system described in Section~\ref{sec:loadcell}. For snap-fit tasks, defining an equally robust external success criterion would have required additional sensing or validation steps. Therefore, the final experiments in this thesis focus exclusively on rod insertion tasks.
+In addition to the rod-based insertion features, the taskboard also includes mounting holes for 3 snap-fit experiments, shown in \figref{fig:taskboard_cad} (b) at the top. These features were part of the original taskboard design as snap-fit was initially considered as a second task family. However, snap-fit trials are not included in the final dataset produced and used in this thesis. The main reason for this decision was to keep the scope of data acquisition manageable. Especially, reliable semi-automatic label assignment is more straightforward for the rod insertion tasks, since a successful insertion can be detected automatically by the loadcell system described in Section~\ref{sec:loadcell}. For snap-fit tasks, defining a similar success criterion would have required additional sensing or validation steps. Therefore, the final experiments in this thesis focus only on rod insertion tasks.
 
+\newpage
 \section{Loadcell-Based Success Detection}\label{sec:loadcell}
 
-To enable automated label assignment during data acquisition, the setup includes a loadcell mounted underneath the taskboard. The purpose of this subsystem is to detect whether an insertion rod has passed through the corresponding taskboard feature far enough to mechanically contact the loadcell target beneath the board. In the experimental logic of this work, such a contact event is interpreted as a successful insertion.
+To enable semi-automated label assignment during data acquisition, the setup includes a loadcell mounted underneath the taskboard. The purpose of this subsystem is to detect whether an insertion rod has passed through its corresponding hole far enough to mechanically contact the loadcell beneath the board. In the experimental logic of this work, this contact is interpreted as a successful insertion, when readout value exceeds a tuned threshold. Semi-automatic means, that when an insertion fails (fail criteria are described in \textcolor{red}{TODO}) the human robot operator has to manually pick up the rod and insert it in the predefined holder shown in \figref{fig:taskboard_legs} (c).
 
-A schematic side view of the loadcell integration is shown in Figure~\ref{fig:loadcell_concept}. If available, this figure should illustrate the relation between the taskboard, the insertion rod, and the loadcell position below the board.
+In \figref{fig:loadcell_concept} (a) the loadcell's placement underneath the hole of rect\_rod\_t0.3 is shown, while \figref{fig:loadcell_concept} (b) shows all components and how they are connected. The loadcell is screwed on to a 3D-printed bracket, which is then fixed to the table.
 
-\begin{figure}[htbp]
+\begin{figure}[b]
     \centering
-    % \includegraphics[width=0.8\textwidth]{[PATH_TO_LOADCELL_SCHEMATIC]}
-    \caption{Principle of loadcell-based success detection below the taskboard.}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/3-robotic_system_and_experimental_setup/rob_setup_1.jpeg}
+        \caption{Principle of loadcell-based success detection below the taskboard.}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/3-robotic_system_and_experimental_setup/Loadcell.png}
+        \caption{Principle of loadcell-based success detection below the taskboard.}
+    \end{subfigure}
+    \caption{Loadcell setup for semi-automatic data labelling.}
     \label{fig:loadcell_concept}
 \end{figure}
 
-Mechanically, the loadcell is mounted below the taskboard using a dedicated support structure attached to the main experimental frame or table. [ADD ONE SENTENCE HERE DESCRIBING THE MOUNTING PRINCIPLE, e.g.\ whether a 3D-printed bracket was used and whether vertical alignment was adjustable.] The exact geometry of the mounting hardware is not critical to the understanding of the experiment, provided that the position of the sensing element relative to the taskboard is reproducible and mechanically stable.
+The loadcell used in this work is a RS PRO Lavprofil Tryk Vejecelle rated for $0.06$ kg to $3$ kg (labelled as "Loadcell" in \figref{fig:loadcell_concept} (b)) and is connected to a dedicated loadcell analog-to-digital converter, namely Load Cell click, which uses the HX711 chip (labelled as "ADC" in \figref{fig:loadcell_concept} (b)). The converter is interfaced with an Arduino Uno R4 WiFi (labelled as "Arduino" in \figref{fig:loadcell_concept} (b)), which samples the sensor signal at approximately $10$ Hz. The measured loadcell value is transmitted wirelessly to the recording computer, where it is monitored during data acquisition.
 
-The loadcell used in this work is a [LOADCELL PART NUMBER / TYPE / NOMINAL RANGE] and is connected to a dedicated loadcell analog-to-digital converter, namely [ADC PART NUMBER]. The converter is interfaced with an Arduino Uno R4 WiFi, which samples the sensor signal at approximately [SAMPLING RATE]~Hz. The measured loadcell value is transmitted wirelessly to the recording computer, where it is monitored during data acquisition.
-
-At the level relevant for this chapter, the signal processing principle is intentionally simple: when the transmitted loadcell value exceeds a predefined threshold of [THRESHOLD VALUE AND UNIT], the corresponding trial is marked as successful. This approach provides a direct and hardware-based success signal that can be used for automated labelling. The detailed recording implementation, synchronization with the robot data stream, and the final labelling pipeline are described in Chapter~\ref{[LABEL_OF_CH4]}.
-
-The loadcell subsystem is included specifically to avoid purely manual success annotation and to provide a reproducible criterion for successful insertion. Since the success label plays a central role in the dataset generation, the sensor placement and thresholding principle are experimentally important even though the underlying microcontroller and communication implementation are not themselves the focus of this thesis.
+The loadcell subsystem is included specifically to avoid purely manual success annotation and to provide reproducible results for successful insertion, as human errors would introduce inconsistencies into the dataset during long recording sessions.
