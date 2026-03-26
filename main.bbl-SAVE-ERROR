@@ -16,18 +16,5 @@
   {}
 \endgroup
 
-
-\refsection{0}
-  \datalist[entry]{none/global//global/global}
-    \entry{what-is-computer-vision}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.ibm.com/topics/computer-vision}}
-      \field{note}{Accessed: 2022-11-02}
-      \field{title}{What is computer vision?}
-    \endentry
-  \enddatalist
-\endrefsection
 \endinput
 

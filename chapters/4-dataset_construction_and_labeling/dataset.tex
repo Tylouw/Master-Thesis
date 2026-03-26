@@ -1,1 +1,261 @@
 \chapter{Dataset Construction and Labeling}\label{ch:dataset}
+
+This chapter describes how the dataset used in this thesis was generated, labelled, and stored. Since the performance of the classification models depends strongly on the diversity and quality of the recorded insertion attempts, the dataset generation was treated as a central methodological part of the work.
+
+\section{Data Collection Procedure}\label{sec:dataset_collection}
+
+All data were recorded on the real robotic system described in \chapref{ch:rob_setup}. Each sample corresponds to one insertion attempt of one workpiece into one taskboard hole under a defined set of experimental conditions. During each cycle, the robot grasped one of the rods from the dedicated holder, moved to the selected insertion pose above the corresponding hole, performed the insertion under force control, and then based on success or fail pulled the rod back out and released it in its holder or released the rod (opened gripper) where it failed, requiring for manual intervention to place the rod back in its holder.
+
+The dataset was generated in three recording batches. In the first recording batch, 100 insertion attempts were recorded for each of the nine holes, resulting in 900 samples in total. In this initial batch, only random positional and angular deviations were applied, while other experimental factors were kept fixed. This first dataset was mainly useful for early development and initial model tests. However, it turned out to be too easy for the classifier. In a preliminary experiment using \texttt{rect\_rod\_t0.2} as validation data, the model reached \(100\%\) accuracy on this unseen dataset.
+
+\figref{fig:batch1_example} shows the time series plot of all insertions marked as success in green and fail in red of the first batch on \texttt{rect\_rod\_t0.2}. This visualizes that it is almost possible to classify the failed insertions only with a tuned threshold to trigger at $\approx 2.2$ s, which suggested that the recorded variability was not yet sufficient. For this reason, the dataset design of the first batch was not used as the final dataset design, but instead motivated a more systematic second and third batch.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{chapters/4-dataset_construction_and_labeling/tcp_force_z_success_fail.pdf}
+    \caption{Time series plot of \texttt{rect\_rod\_t0.2} with 100 insertions from batch 1, showing individual success and failed force curves.}
+    \label{fig:batch1_example}
+\end{figure}
+
+For the second and third recording batches, the data collection strategy was redesigned and made systematic, meaning deterministic and not random within bounds as before. First, the dataset should include a broader, more controlled variety of insertion configurations. Which consequently required more attempts per run to cover the full range of possibilities and more time. Typically took one recording session about 1 to 1.5 hours. Second, these long recording runs should be resumable in a reproducible manner without losing track of which settings had already been recorded.
+
+The systematic recording plan was built around three main experimental factors: grasp height, approach height, and insertion force level. Two grasp heights, two approach heights, and three force levels were used, resulting in
+\begin{equation}
+    2 \times 2 \times 3 = 12
+    \label{eq:combs_per_hole}
+\end{equation}
+
+main setting combinations per hole. For tight holes, 40 insertion attempts were recorded for each of these combinations, which resulted in
+\begin{equation}
+    12 \times 40 = 480
+    \label{eq:insertions_tight}
+\end{equation}
+samples per hole. For non-tight holes, i.e.\ the medium and loose tolerances, 30 insertion attempts were recorded per combination, which resulted in
+\begin{equation}
+    12 \times 30 = 360
+    \label{eq:insertions_nontight}    
+\end{equation}
+
+samples per hole.
+
+In addition to these three main factors, each insertion attempt was assigned a deterministic deviation state. This state contains Radial in-plane deviations were generated between $0.0$ mm and $0.3$ mm in three steps and combined with four angular directions, resulting in $3\times 4 = 12$ defined horizontal offset states. Furthermore, the rod tilt around the tool \(x\)- and \(y\)-axes was varied using the values \(-3^\circ\), \(0^\circ\), and \(3^\circ\), resulting in $3\times 3=9$ tilt combinations. The force limit for aborting an insertion was cycled through \SIlist{30;40;50}{\newton}, and the recording offset was cycled through \SIlist{-0.2;0.0;0.3;0.6;0.9}{\second}. As a result, the later batches were no longer purely random, but followed a deterministic, pseudorandom and reproducible recording schedule.
+
+\usetikzlibrary{calc}
+
+% -----------------------------------------
+% Figure
+% -----------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[x=0.33cm,y=0.9cm,font=\small]
+        \def\n{40}
+
+        % Row macro:
+        % #1 = y-bottom
+        % #2 = row label
+        % #3 = period m_i
+        % #4 = color/style
+        \newcommand{\periodrow}[4]{%
+            \pgfmathtruncatemacro{\m}{#3}%
+            \pgfmathtruncatemacro{\full}{int(\n/\m)}%
+            \pgfmathtruncatemacro{\lastfull}{\full-1}%
+            \pgfmathtruncatemacro{\rem}{mod(\n,\m)}%
+
+            % horizontal borders of the band
+            \draw (0,#1) -- (\n,#1);
+            \draw (0,#1+1) -- (\n,#1+1);
+
+            % left label
+            \node[left=8pt, align=right] at (0,#1+0.5) {#2};
+
+            % left boundary
+            \draw[thick] (0,#1) -- (0,#1+1);
+
+            % full separators
+            \foreach \k in {1,...,\full} {
+                \pgfmathsetmacro{\xk}{\k*\m}
+                \draw[#4,thick] (\xk,#1) -- (\xk,#1+1);
+            }
+
+            % labels for full segments
+            \foreach \k in {0,...,\lastfull} {
+                \pgfmathsetmacro{\xa}{\k*\m}
+                \pgfmathsetmacro{\xb}{(\k+1)*\m}
+                \node[#4] at ({(\xa+\xb)/2},{#1+0.5}) {\(\m\)};
+            }
+
+            % remainder segment, if any
+            \ifnum\rem>0
+                \pgfmathsetmacro{\xa}{\full*\m}
+                \draw[#4,thick] (\n,#1) -- (\n,#1+1);
+                \node[#4] at ({(\xa+\n)/2},{#1+0.5}) {\(\rem\)};
+            \fi
+        }
+
+        % left spine
+        \draw[thick] (0,0) -- (0,4.45);
+
+        % top count line
+        \draw[thick] (0,4) -- (\n,4);
+        \node[above left] at (0,4.15) {$12\times$};
+
+        % small ticks on top line
+        \foreach \x in {0,...,40}{
+            \draw (\x,4) -- (\x,4.07);
+        }
+
+        % top labels
+        \foreach \i in {1,5,10,15,20,25,30,35,40}{
+            \node[above] at ({\i-0.5},4.07) {\i};
+        }
+
+        % rows
+        \periodrow{3}{Position}{12}{red!75!black}
+        \periodrow{2}{Tilt}{9}{red!75!black}
+        \periodrow{1}{Force limit}{3}{red!75!black}
+        \periodrow{0}{Record offset}{5}{red!75!black}
+    \end{tikzpicture}
+    \caption{Periodic modulation scheme used in \texttt{create\_plan()} for one 40-sample block. The four deviations are generated with periods \(m_i \in \{12,9,3,5\}\). For the complete recording plan, this 40-sample block is repeated 12 times based on \equref{eq:combs_per_hole}}
+    \label{fig:create_plan_periodic_bars}
+\end{figure}
+
+The function \texttt{create\_plan()} generated this schedule before the recording run started. For each combination of grasp height, approach height, and force level, the function generated either 40 or 30 attempts depending on the hole tolerance. Within these attempts, the positional deviations, tilt values, force limits, and recording offsets were assigned cyclically. This means that the dataset was not a full Cartesian sweep over all factors, but it still ensured broad and repeatable coverage of the relevant operating conditions.
+
+The robot trajectory itself was also optimized to reduce unnecessary waiting and travel time between attempts. In successful insertions, one full cycle typically took about \SI{5}{\second}. In failed insertions, the cycle time increased to approximately \SIrange{8}{10}{\second}, because the rod had to be placed back manually into the robot holder before the next attempt could start.
+
+The insertion was executed using the UR force mode. After the robot reached the pose above the target hole, the force/torque sensor was zeroed and the force controller was configured with a damping value of 0.1 and a gain scaling of 1.2. The task frame was defined at the insertion pose. In the final recording implementation, the selection vector was set to
+\[
+[0,0,1,0,0,0],
+\]
+which means that only the translational \(z\)-axis was compliant while the remaining axes were kept position-controlled. The applied wrench was
+\[
+[0,0,F_z,0,0,0],
+\]
+where \(F_z\) corresponds to the selected force level of the current trial. The force-mode limits were set to
+\[
+[0.001,\ 0.001,\ 0.08,\ 0.8,\ 0.8,\ 0.20].
+\]
+
+Another important design choice concerned the sequence timing. Once a success or failure condition had been detected, the insertion motion was stopped, but the recording was not terminated immediately. Instead, the program continued recording until the full predefined sequence length of \SI{3.0}{\second} had been reached. This was necessary to avoid label leakage through sequence length. Otherwise, the machine learning model could potentially distinguish successful and failed insertions simply based on how early the recording stopped, rather than based on the actual signal content. The additional recording offset parameter further shifted the capture window slightly before or after the onset of the insertion, which introduced temporal variation into the dataset without changing the final sequence length.
+
+\section{Success and Failure Labeling}\label{sec:dataset_labeling}
+
+The labeling procedure was fully rule-based and was performed online during data collection. No manual post-hoc annotation of successful and failed insertions was required. The mechanical principle of success detection has already been explained in Chapter~\ref{ch:rob_setup}. From the software perspective, an insertion attempt was labelled as successful when the measured load-cell value exceeded a threshold of 30\,000 during the insertion process. Once this threshold was reached, the motion was stopped and the current sample was marked as a successful insertion.
+
+All remaining attempts were labelled as failures. In order to preserve additional information about the failure mode, three different failure reasons were stored in the metadata. The first failure condition was a timeout. This occurred when no successful insertion had been detected before the predefined sequence length of \SI{3.0}{\second} had elapsed. The second failure condition was a stall or jam. This was detected when the absolute TCP velocity in insertion direction fell below \SI{0.002}{\meter\per\second} while the absolute force in \(z\)-direction exceeded \SI{15}{\newton} for more than \SI{0.25}{\second}. The third failure condition was an exceeded force limit. In this case, the measured force in insertion direction became larger than the force limit defined for the current trial. Depending on the plan item, this threshold was set to \SI{30}{\newton}, \SI{40}{\newton}, or \SI{50}{\newton}.
+
+Consequently, the dataset defines a strictly binary classification problem, namely successful versus failed insertion, while still preserving the more detailed failure cause in the metadata for later analysis. No ambiguous intermediate class was introduced.
+
+\section{Dataset Composition and Storage}\label{sec:dataset_composition}
+
+For each recorded insertion attempt, 48 robot signals were sampled at \SI{500}{\hertz}. Since each sequence had a fixed length of \SI{3.0}{\second}, each sample contained 1500 time steps. One insertion attempt was saved as one CSV file containing the time series data and one JSON file containing the associated metadata. Both files shared the same basename and followed the naming scheme \texttt{sample\_\{n\}\_session\_\{m\}}.
+
+The sample index \(n\) denotes the running insertion number, while the session index \(m\) denotes the recording session. The session number was increased whenever a recording run was interrupted and later resumed, for example after changing settings or taking a break. This was particularly useful for the longer systematic recordings, because it allowed the collection process to continue from the correct point in the plan without overwriting existing files.
+
+Each CSV file is approximately \SI{770}{\kilo\byte} in size and stores the full recorded multivariate time series. The recorded signals are summarized in Table~\ref{tab:recorded_signals}. For Cartesian quantities, the six dimensions correspond to the translational and rotational components. For joint-space quantities, the six dimensions correspond to the six robot joints.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Recorded signals stored for each insertion attempt.}
+    \label{tab:recorded_signals}
+    \begin{tabular}{lll}
+        \hline
+        Signal group & Count & Unit / description \\
+        \hline
+        Timestamp & 1 & time since start of sequence [s] \\
+        TCP force/torque wrench & 6 & forces [N], torques [Nm] \\
+        TCP pose & 6 & position [m], orientation [rad] \\
+        TCP velocity & 6 & linear [m/s], angular [rad/s] \\
+        Joint positions \(q\) & 6 & joint angles [rad] \\
+        Joint velocities \(\dot{q}\) & 6 & joint velocities [rad/s] \\
+        Tool accelerometer & 3 & Cartesian tool acceleration [m/s\(^2\)] \\
+        Robot current & 1 & total robot current [A] \\
+        Robot voltage & 1 & total robot voltage [V] \\
+        Joint currents & 6 & motor current per joint [A] \\
+        Joint temperatures & 6 & joint temperature per joint [\(^\circ\)C] \\
+        \hline
+        Total & 48 & -- \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Besides the recorded time series, a JSON metadata file was stored for each insertion. This metadata links the recorded sample to its generation context and label. In particular, it contains the time of recording, storage location, corresponding CSV file, sampling configuration, sequence length, the complete plan item of the current trial, the binary success label, the failure reason if applicable, the insertion task, the tolerance level, the relevant robot poses, and the measured cycle time. An overview is given in Table~\ref{tab:recorded_metadata}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Metadata stored for each recorded insertion attempt.}
+    \label{tab:recorded_metadata}
+    \begin{tabular}{ll}
+        \hline
+        Metadata field & Description \\
+        \hline
+        \texttt{saved\_at} & timestamp of file creation \\
+        \texttt{saved\_in} & target folder of the sample \\
+        \texttt{corresponding\_csv} & path of the associated CSV file \\
+        \texttt{sample\_rate\_Hz} & sampling rate \\
+        \texttt{sample\_deltatime\_s} & time between samples \\
+        \texttt{num\_samples} & number of recorded time steps \\
+        \texttt{num\_insertions} & total number of planned insertions \\
+        \texttt{sequence\_length\_s} & saved sequence length \\
+        \texttt{plan\_item.grasp\_height} & selected grasp height \\
+        \texttt{plan\_item.approach\_height} & selected approach height \\
+        \texttt{plan\_item.force\_level} & selected insertion force level \\
+        \texttt{plan\_item.force\_limit} & selected abort force threshold \\
+        \texttt{plan\_item.record\_offset} & temporal offset of recording start \\
+        \texttt{plan\_item.deviation} & Cartesian positional deviation \\
+        \texttt{plan\_item.tilt} & angular deviation in tool \(x\)- and \(y\)-axes \\
+        \texttt{successful\_insertion} & binary success label \\
+        \texttt{failure\_reason} & timeout, stall/jam, or force limit \\
+        \texttt{insertion\_task} & task geometry identifier \\
+        \texttt{tolerance} & tolerance level of the current hole \\
+        \texttt{holderPose\_Up}, \texttt{holderPose\_Down} & grasping poses \\
+        \texttt{insertionPose} & nominal insertion pose \\
+        \texttt{cycle\_time\_s} & measured cycle duration \\
+        \hline
+    \end{tabular}
+\end{table}
+
+In terms of dataset size, the first recording batch contains 900 insertion attempts. For the later systematic batches, each batch contains 3 tight holes with 480 samples each and 6 non-tight holes with 360 samples each, resulting in
+\[
+3 \times 480 + 6 \times 360 = 3600
+\]
+samples per batch. Thus, if both systematic batches were completed fully, the total dataset size amounts to
+\[
+900 + 3600 + 3600 = 8100
+\]
+samples.
+
+Class balance was not enforced perfectly, but an approximately balanced distribution between successful and failed insertions was targeted. Table~\ref{tab:batch2_classbalance} shows the class balance for the second batch. It can be seen that the balance differs slightly between holes, which reflects the fact that some geometries and tolerances are inherently easier or harder than others. Nevertheless, the batch remains sufficiently balanced overall for the intended binary classification task.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Class balance of recording batch 2.}
+    \label{tab:batch2_classbalance}
+    \begin{tabular}{lrrr}
+        \hline
+        Dataset subset & Success & Failure & Total \\
+        \hline
+        \texttt{big\_rod\_t0.1}   & 255 & 225 & 480 \\
+        \texttt{big\_rod\_t0.2}   & 193 & 167 & 360 \\
+        \texttt{big\_rod\_t0.3}   & 194 & 166 & 360 \\
+        \texttt{small\_rod\_t0.1} & 310 & 170 & 480 \\
+        \texttt{small\_rod\_t0.2} & 230 & 130 & 360 \\
+        \texttt{small\_rod\_t0.3} & 196 & 164 & 360 \\
+        \texttt{rect\_rod\_t0.1}  & 224 & 256 & 480 \\
+        \texttt{rect\_rod\_t0.2}  & 200 & 160 & 360 \\
+        \texttt{rect\_rod\_t0.3}  & 174 & 186 & 360 \\
+        \hline
+        Total batch 2 & 1976 & 1624 & 3600 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+[OPTIONAL PLACEHOLDER: add equivalent tables or summary numbers for batch 1 and batch 3 here.]
+
+\section{Preprocessing}\label{sec:dataset_preprocessing}
+
+The aim of this work was to train the classification models on data that remains as close as possible to the raw real-robot measurements. Therefore, no filtering, smoothing, trimming, or hand-crafted feature extraction was applied before saving the data. The recorded time series were stored in their original sampled form, apart from one necessary physical correction step.
+
+This correction concerned the measured TCP wrench. Although the robot provides the force and torque values at the TCP, these values are expressed with respect to the robot base frame. In order to obtain force signals that are physically meaningful with respect to the current tool orientation, the wrench was transformed after recording using the measured TCP pose of each time step. This transformation was applied sample-wise by constructing a \(6 \times 6\) block rotation matrix from the rotational part of the TCP pose, including the additional \(180^\circ\) rotation used in the robot coordinate conversion. The transformed wrench then replaced the originally recorded wrench values before the sample was written to disk.
+
+Apart from this wrench transformation, the stored dataset remained unchanged. In particular, no derived channels such as force derivatives were saved in the CSV files. Such features may be investigated later during model-side feature analysis, but they are intentionally not part of the raw recorded dataset. This separation ensures that the dataset itself remains a faithful representation of the measured robot signals, while any later feature engineering can be performed transparently during the machine learning stage.
