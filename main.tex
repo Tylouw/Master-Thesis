@@ -1,6 +1,8 @@
 \documentclass{report}
 % \documentclass{article}
 \include{defs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 % generate word count text file wc.tex - This is only applied after compiling the document: i.e. $ pdflatex main.tex
 \immediate\write18{bash wc.sh}
@@ -82,7 +84,7 @@
 
 % bibliography
 \pagebreak
-% \printbibliography[heading=bibintoc
+% \printbibliography[heading=bibintoc]
 % \begin{multicols}{2}[\printbibheading]
 % \printbibliography[heading=none]
 % \end{multicols}

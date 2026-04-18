@@ -16,5 +16,93 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{ur-rtde-api}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1032484f0b650f116fdf0ddad22f1741}{%
+           family={API},
+           familyi={A\bibinitperiod},
+           given={UR\bibnamedelima RTDE},
+           giveni={U\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{1032484f0b650f116fdf0ddad22f1741}
+      \strng{fullhash}{1032484f0b650f116fdf0ddad22f1741}
+      \strng{bibnamehash}{1032484f0b650f116fdf0ddad22f1741}
+      \strng{authorbibnamehash}{1032484f0b650f116fdf0ddad22f1741}
+      \strng{authornamehash}{1032484f0b650f116fdf0ddad22f1741}
+      \strng{authorfullhash}{1032484f0b650f116fdf0ddad22f1741}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{UR RTDE API}
+      \verb{urlraw}
+      \verb https://sdurobotics.gitlab.io/ur_rtde/api/api.html
+      \endverb
+      \verb{url}
+      \verb https://sdurobotics.gitlab.io/ur_rtde/api/api.html
+      \endverb
+    \endentry
+    \entry{ur-rtde-guide}{online}{}
+      \name{author}{1}{}{%
+        {{hash=067e1820a5d7f9737fc0a913dae115fb}{%
+           family={Guide},
+           familyi={G\bibinitperiod},
+           given={UR\bibnamedelima RTDE},
+           giveni={U\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{067e1820a5d7f9737fc0a913dae115fb}
+      \strng{fullhash}{067e1820a5d7f9737fc0a913dae115fb}
+      \strng{bibnamehash}{067e1820a5d7f9737fc0a913dae115fb}
+      \strng{authorbibnamehash}{067e1820a5d7f9737fc0a913dae115fb}
+      \strng{authornamehash}{067e1820a5d7f9737fc0a913dae115fb}
+      \strng{authorfullhash}{067e1820a5d7f9737fc0a913dae115fb}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{UR RTDE Guide}
+      \verb{urlraw}
+      \verb https://docs.universal-robots.com/tutorials/communication-protocol-tutorials/rtde-guide.html
+      \endverb
+      \verb{url}
+      \verb https://docs.universal-robots.com/tutorials/communication-protocol-tutorials/rtde-guide.html
+      \endverb
+    \endentry
+    \entry{ur-force-torque}{online}{}
+      \name{author}{2}{}{%
+        {{hash=2de915d081cac1c9029c01c6b03f3f1c}{%
+           family={Force},
+           familyi={F\bibinitperiod},
+           given={UR},
+           giveni={U\bibinitperiod}}}%
+        {{hash=7176abc027a5abb6526f784e1c43ee84}{%
+           family={Values},
+           familyi={V\bibinitperiod},
+           given={Torque},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \strng{fullhash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \strng{bibnamehash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \strng{authorbibnamehash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \strng{authornamehash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \strng{authorfullhash}{3f21152a5fb4e875f84e12008df2b6b8}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Get Force and Torque Values in Tool Coordinate System}
+      \verb{urlraw}
+      \verb https://www.universal-robots.com/articles/ur/programming/get-force-and-torque-values-in-tool-coordinate-system/
+      \endverb
+      \verb{url}
+      \verb https://www.universal-robots.com/articles/ur/programming/get-force-and-torque-values-in-tool-coordinate-system/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
