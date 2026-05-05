@@ -11,13 +11,11 @@
 	"[latex]": {
 		"editor.wordWrap": "on",
 		"editor.quickSuggestions": {
-			"other": false,
+			"other": true,
 			"comments": false,
-			"strings": false
+			"strings": true
 		},
-		"editor.suggestOnTriggerCharacters": false
+		"editor.suggestOnTriggerCharacters": true
 	},
-	"latex-workshop.intellisense.update.aggressive.enabled": false,
-	"latex-workshop.linting.run": "onSave",
-	"latex-workshop.hover.preview.cursor.enabled": false
+	"scm.diffDecorations": "none"
 }

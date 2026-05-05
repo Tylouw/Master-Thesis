@@ -13,41 +13,33 @@ Let one sequence be represented as a multivariate time series
 \begin{equation}
 \mathbf{X} \in \mathbb{R}^{L \times C},
 \end{equation}
-where \(L\) denotes the sequence length and \(C\) the number of selected input channels. In the implemented network, the batched input tensor is arranged as
+where $L$ denotes the sequence length and $C$ the number of selected input channels. In the implemented network, the batched input tensor is arranged as
 \begin{equation}
 \mathbf{X}_{\text{batch}} \in \mathbb{R}^{B \times L \times C},
 \end{equation}
-with batch size \(B\). For the experiments in this thesis, the sequence length is fixed to \(L=1500\), corresponding to a 3\,s recording at 500\,Hz.
+with batch size $B$. For the experiments in this thesis, the sequence length is fixed to $L=1500$, corresponding to a 3\,s recording at 500\,Hz.
 
-\paragraph{Patch extraction.}
-The first processing step is the patchification of the sequence. A patch length \(P\) and stride \(S\) are defined. In the implementation used here, \(P=128\) and \(S=64\), which means that adjacent patches overlap by 64 time steps. Since the model uses \texttt{pad\_end=True}, the sequence is zero-padded at the end such that an integer number of patches can be extracted. The padded sequence length is
+\paragraph{Patch extraction}
+The first processing step is the patchification of the sequence. A patch length $P$ and stride $S$ are defined. Stride is the non overlapping region between two consecutive patches \cite{nieTimeSeriesWorth2023b}. In the implementation used here, $P=128$ and $S=64$, which means that adjacent patches overlap by 64 time steps. The sequence is zero-padded at the end such that an integer number of patches can be extracted.
+The number of patches is
 \begin{equation}
-L_{\text{pad}}=
-\begin{cases}
-P, & L < P,\\[4pt]
-L, & (L-P)\bmod S = 0,\\[4pt]
-L + \left(S - ((L-P)\bmod S)\right), & \text{otherwise}.
-\end{cases}
-\end{equation}
-The resulting number of patches is then
-\begin{equation}
-N = \frac{L_{\text{pad}}-P}{S}+1.
+N = \Bigl \lfloor \frac{L-P}{S} \Bigr \rfloor +2.
 \end{equation}
 For the sequence length used in this thesis, this gives
 \begin{equation}
 L=1500,\quad P=128,\quad S=64
 \;\Rightarrow\;
-L_{\text{pad}}=1536,\quad N=23.
+\quad N=23.
 \end{equation}
 
 After patchification, the data has the shape
 \begin{equation}
 \mathbf{X}_{\text{patch}} \in \mathbb{R}^{B \times N \times P \times C}.
 \end{equation}
-Thus, each sample is represented by \(N\) overlapping temporal patches, each of length \(P\), over all \(C\) sensor channels.
+Thus, each sample is represented by $N$ overlapping temporal patches, each of length $P$, over all $C$ channels.
 
-\paragraph{Difference to the original PatchTST.}
-At this point, the main deviation from the original PatchTST becomes apparent. Nie et al. process each channel separately and project patches of shape \(P\) into the model dimension \(D\) \cite{nieTimeSeriesWorth2023b}. In contrast, the implementation used here combines all channels within one patch into a single token. Therefore, each patch is reshaped from
+\paragraph{Channel-mixing instead of Channel-independence}
+Nie et al. process each channel separately and project patches of shape $\mathbf{X}_{\text{patch}} \in \mathbb{R}^P$ into the models embedding dimension directly $\mathbf{d}_{\text{model}} \in \mathbb{R}^D$ \cite{nieTimeSeriesWorth2023b}. However, the implementation used here concatenats all channels within one patch into a single token. Therefore, each patch is reshaped from
 \begin{equation}
 \mathbb{R}^{P \times C}
 \;\rightarrow\;
@@ -57,62 +49,52 @@ For the full sequence batch, this yields
 \begin{equation}
 \mathbf{X}_{\text{tok}} \in \mathbb{R}^{B \times N \times (P C)}.
 \end{equation}
-This channel-mixing design allows the token representation to directly capture local cross-channel relations, which is particularly relevant for force/torque and velocity signals that are physically coupled during contact.
+This channel-mixing design allows the token representation to directly capture relations across all channels in one step, which is particularly relevant for force/torque and velocity signals that are physically coupled during contact.
 
-\paragraph{Linear patch embedding.}
-Each flattened patch token is then projected into the Transformer latent space of dimension \(D\) by a learnable linear layer:
 \begin{equation}
-\mathbf{e}_n = \mathbf{W}_{p}\,\mathbf{x}_n + \mathbf{b}_{p},
+\mathbf{e}_n = \mathbf{W}_{\text{emb}}\,\mathbf{x}_n + \mathbf{b}_{\text{emb}},
 \qquad
 \mathbf{x}_n \in \mathbb{R}^{PC},
 \qquad
-\mathbf{e}_n \in \mathbb{R}^{D}.
+\mathbf{e}_n \in \mathbb{R}^{D},
 \end{equation}
+where \(n \in \{1,\dots,N\}\) indexes the patch tokens, \(\mathbf{W}_{\text{emb}} \in \mathbb{R}^{D \times PC}\) is the learnable projection matrix, and \(\mathbf{b}_{\text{emb}} \in \mathbb{R}^{D}\) is the bias vector.
 Stacking all patch embeddings gives
 \begin{equation}
 \mathbf{E} \in \mathbb{R}^{B \times N \times D}.
 \end{equation}
-The value of \(D\) depends on the selected model preset. For example, the implemented presets use \(D=192\) for the force/torque-only model and \(D=384\) for the force/torque plus velocity model.
 
-\paragraph{Positional encoding.}
+\paragraph{Positional encoding}
 Because the Transformer itself is permutation-invariant, positional information must be added explicitly. The implementation uses learned positional embeddings, which are added to the patch embeddings:
 \begin{equation}
 \mathbf{E}_{\text{pos}} = \mathbf{E} + \mathbf{P}_{\text{learned}},
 \qquad
 \mathbf{P}_{\text{learned}} \in \mathbb{R}^{N \times D}.
 \end{equation}
-This preserves the temporal order of the patch sequence. In contrast to the original paper, which also formulates the model with learned additive positional information, the present implementation directly uses a learned embedding layer for patch indices.
+This preserves the temporal order of the patches in a sequence.
 
-\paragraph{Transformer encoder.}
-The embedded patch sequence is then passed through a stack of Transformer encoder layers. Each layer consists of multi-head self-attention followed by a position-wise feed-forward network with residual connections and normalization. Formally, for an input representation \(\mathbf{H}^{(\ell-1)}\), one encoder block computes
-\begin{align}
-\widetilde{\mathbf{H}}^{(\ell)} &= \mathbf{H}^{(\ell-1)} + \operatorname{MHA}\!\left(\mathbf{H}^{(\ell-1)}\right),\\
-\mathbf{H}^{(\ell)} &= \widetilde{\mathbf{H}}^{(\ell)} + \operatorname{FFN}\!\left(\widetilde{\mathbf{H}}^{(\ell)}\right).
-\end{align}
-The self-attention mechanism relates every patch token to every other patch token and therefore models temporal dependencies between local sequence segments instead of individual time steps. This is one of the key conceptual strengths of PatchTST.
+\paragraph{Transformer encoder}
+The embedded patch sequence is then passed through a stack of Transformer encoder layers. Each layer consists of multi-head self-attention followed by a feed-forward network with residual connections and normalization \cite{vaswaniAttentionAllYou2017}.
+The self-attention mechanism relates every patch token to every other patch token and therefore models temporal dependencies between patches.
 
-The implementation used in this thesis employs the standard PyTorch \texttt{TransformerEncoderLayer} with \texttt{batch\_first=True} and \texttt{norm\_first=True}. This is another slight deviation from the original paper, which describes a custom Transformer encoder formulation. The number of layers \(L_{\text{enc}}\), number of attention heads \(H\), and feed-forward dimension \(D_{\text{ff}}\) again depend on the chosen model preset. For the force/torque plus velocity preset, the encoder uses
-\begin{equation}
-D = 384,\qquad H = 8,\qquad L_{\text{enc}} = 3,\qquad D_{\text{ff}} = 512.
-\end{equation}
-
-\paragraph{Sequence aggregation.}
-After the final encoder layer, the latent representation has the shape
+\paragraph{Sequence aggregation}
+After the final transformer encoder layer, the latent representation has the shape
 \begin{equation}
 \mathbf{Z} \in \mathbb{R}^{B \times N \times D}.
 \end{equation}
-The implementation supports either CLS-token pooling or mean pooling. In the experiments of this thesis, mean pooling is used. The sequence representation is therefore obtained as
+Then mean pooling is used over all $N$ patches, so the sequence representation is then obtained as
 \begin{equation}
 \mathbf{h}
 =
-\frac{1}{N}\sum_{n=1}^{N}\mathbf{Z}_{:,n,:}
+\frac{1}{N}\sum_{n=1}^{N}\mathbf{Z}_{\ :\ ,\ n,\ :}
+\qquad
 \in
 \mathbb{R}^{B \times D}.
 \end{equation}
-This means that the information of all patch tokens is aggregated into one global representation vector per sample.
+This means that the information of all patch tokens is aggregated into one global representation vector per sequence in a batch.
 
-\paragraph{Classification head.}
-In the original PatchTST, the pooled or flattened encoder output is mapped to a forecasting horizon \(T\), i.e. to future values of the time series \cite{nieTimeSeriesWorth2023b}. In this thesis, this prediction head is replaced by a classification head. The implemented head consists of layer normalization, a linear projection, a non-linear activation function, dropout, and a final linear output layer:
+\paragraph{Classification head}
+In this work, the original forecasting head is replaced by a classification head. The implemented head consists of layer normalization $operatorname{LN}()$, a linear layer $\mathbf{W}_1$, $\mathbf{b}_1$ from embedding dimension $D$ to $D$, a GELU activation function $\phi()$, dropout, and a final linear output layer $\mathbf{W}_2$, $\mathbf{b}_2$ from embedding dimension $D$ to $1$:
 \begin{equation}
 \mathbf{o}
 =
@@ -122,17 +104,13 @@ In the original PatchTST, the pooled or flattened encoder output is mapped to a 
 \right)
 +\mathbf{b}_2.
 \end{equation}
-For binary classification, the final output is a single logit per sample,
+For binary classification, the final output is a single logit per sequence,
 \begin{equation}
 \mathbf{o} \in \mathbb{R}^{B \times 1},
 \end{equation}
-which is converted into a success probability by the sigmoid function
-\begin{equation}
-\hat{p} = \sigma(\mathbf{o}).
-\end{equation}
 A threshold is then used to assign the final class label.
 
-\paragraph{Dimension flow summary.}
+\paragraph{Dimension flow summary}
 The complete data flow through the adapted model can therefore be summarized as
 \begin{equation}
 \mathbb{R}^{B \times L \times C}
@@ -149,7 +127,7 @@ The complete data flow through the adapted model can therefore be summarized as
 \;\rightarrow\;
 \mathbb{R}^{B \times 1}.
 \end{equation}
-For a concrete example with \(L=1500\), \(P=128\), \(S=64\), and \(C=12\) channels, this becomes
+For a concrete example with $L=1500$, $P=128$, $S=64$, and $C=12$ channels, this becomes
 \begin{equation}
 \mathbb{R}^{B \times 1500 \times 12}
 \;\rightarrow\;
@@ -166,6 +144,13 @@ For a concrete example with \(L=1500\), \(P=128\), \(S=64\), and \(C=12\) channe
 
 Overall, the adapted PatchTST architecture keeps the central idea of patch-wise temporal tokenization from the original forecasting model, but reformulates it into an encoder-only binary classifier for robotic insertion attempts. The most important modifications are the use of channel-mixed patch tokens instead of channel-independent encoding, the omission of the original forecasting head, and the replacement by a global pooling and classification head tailored to success/failure prediction.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/Patch extraction.pdf}
+    \caption{Time series plot of \texttt{big\_rod\_t0.1} from Batch 2 with 480 insertions, showing individual success and failed force curves.}
+    \label{fig:patchtst}
+\end{figure}
+
 \section{Sub-Researchquestions}
 
 \section{Training and evaluation procedure}\label{sec:train_eval}
@@ -175,4 +160,3 @@ Overall, the adapted PatchTST architecture keeps the central idea of patch-wise 
 \section{SQ2 - SQ4 - Benchmark Design}\label{sec:sq2-sq4}
 
 \section{SQ5 - Deviation Analysis}
-kjkjkjkjkjkjkjkjkjkj kdfjkd kdfjij kjdfidf kjdf
