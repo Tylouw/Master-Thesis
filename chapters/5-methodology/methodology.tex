@@ -1,6 +1,6 @@
-\chapter{Methodology}\label{ch:methodology}
+\chapter{Methodology \cite{chatgpt}}\label{ch:methodology}
 %overview of the methodological pipeling
-This chapter explains how the PatchTST architecture works, how it is adapted for classification, what the selected hyperparameters are and how its training and evaluation on the generated insertion dataset is done. Furthermore, five branching subquestions, based on the thesis researchquestion, are defined and their systematic evaluation explained. The subquestions ask what the most informative channels are, how the dataset can be benchmarked using PatchTST and how deviations affect the raw insertion success and the model's classification quality.
+This chapter explains how the PatchTST architecture works, how it is adapted for classification, what the selected hyperparameters are and how its training and evaluation on the generated insertion dataset is done. Then the subquestions defined in Chapter \ref{ch:intro} are revisited and clearly explained how each corresponding experiment is designed and evaluated.
 
 \section{PatchTST}\label{sec:patchtst}
 PatchTST stands for Patch Time Series Transformer and is first introduced by Nie et al. in the paper called "\textit{A Time Series Is Worth 64 Words: Long-term Forecasting with Transformers}" \cite{nieTimeSeriesWorth2023b}. The researchers developed PatchTST for forecasting multivariate time series data, emphasizing channel-independence, for 8 different datasets, including weather data, traffic road occupancies from freeway sensors and hourly electricity consumption over time.
@@ -19,7 +19,7 @@ where $L$ denotes the sequence length and $C$ the number of selected input chann
 \end{equation}
 with batch size $B$. For the experiments in this thesis, the sequence length is fixed to $L=1500$, corresponding to a 3\,s recording at 500\,Hz.
 
-\paragraph{Patch extraction}
+\paragraph{Patch extraction, \figref{fig:patchtst} Step 1}
 The first processing step is the patchification of the sequence. A patch length $P$ and stride $S$ are defined. Stride is the non overlapping region between two consecutive patches \cite{nieTimeSeriesWorth2023b}. In the implementation used here, $P=128$ and $S=64$, which means that adjacent patches overlap by 64 time steps. The sequence is zero-padded at the end such that an integer number of patches can be extracted.
 The number of patches is
 \begin{equation}
@@ -38,7 +38,7 @@ After patchification, the data has the shape
 \end{equation}
 Thus, each sample is represented by $N$ overlapping temporal patches, each of length $P$, over all $C$ channels.
 
-\paragraph{Channel-mixing instead of Channel-independence}
+\paragraph{Channel-mixing instead of Channel-independence, \figref{fig:patchtst} Step 2}
 Nie et al. process each channel separately and project patches of shape $\mathbf{X}_{\text{patch}} \in \mathbb{R}^P$ into the models embedding dimension directly $\mathbf{d}_{\text{model}} \in \mathbb{R}^D$ \cite{nieTimeSeriesWorth2023b}. However, the implementation used here concatenats all channels within one patch into a single token. Therefore, each patch is reshaped from
 \begin{equation}
 \mathbb{R}^{P \times C}
@@ -51,6 +51,8 @@ For the full sequence batch, this yields
 \end{equation}
 This channel-mixing design allows the token representation to directly capture relations across all channels in one step, which is particularly relevant for force/torque and velocity signals that are physically coupled during contact.
 
+\paragraph{Tokenization of patches into tokens, \figref{fig:patchtst} Step 3}
+After that each patch gets projected into the embedding dimension vector, that is the patch token.
 \begin{equation}
 \mathbf{e}_n = \mathbf{W}_{\text{emb}}\,\mathbf{x}_n + \mathbf{b}_{\text{emb}},
 \qquad
@@ -58,13 +60,13 @@ This channel-mixing design allows the token representation to directly capture r
 \qquad
 \mathbf{e}_n \in \mathbb{R}^{D},
 \end{equation}
-where \(n \in \{1,\dots,N\}\) indexes the patch tokens, \(\mathbf{W}_{\text{emb}} \in \mathbb{R}^{D \times PC}\) is the learnable projection matrix, and \(\mathbf{b}_{\text{emb}} \in \mathbb{R}^{D}\) is the bias vector.
+where $n \in \{1,\dots,N\}$ indexes the patch tokens, $\mathbf{W}_{\text{emb}} \in \mathbb{R}^{D \times PC}$ is the learnable projection matrix, and $\mathbf{b}_{\text{emb}} \in \mathbb{R}^{D}$ is the bias vector.
 Stacking all patch embeddings gives
 \begin{equation}
 \mathbf{E} \in \mathbb{R}^{B \times N \times D}.
 \end{equation}
 
-\paragraph{Positional encoding}
+\paragraph{Positional encoding, \figref{fig:patchtst} Step 4}
 Because the Transformer itself is permutation-invariant, positional information must be added explicitly. The implementation uses learned positional embeddings, which are added to the patch embeddings:
 \begin{equation}
 \mathbf{E}_{\text{pos}} = \mathbf{E} + \mathbf{P}_{\text{learned}},
@@ -73,7 +75,7 @@ Because the Transformer itself is permutation-invariant, positional information 
 \end{equation}
 This preserves the temporal order of the patches in a sequence.
 
-\paragraph{Transformer encoder}
+\paragraph{Transformer encoder, \figref{fig:patchtst} Step 5}
 The embedded patch sequence is then passed through a stack of Transformer encoder layers. Each layer consists of multi-head self-attention followed by a feed-forward network with residual connections and normalization \cite{vaswaniAttentionAllYou2017}.
 The self-attention mechanism relates every patch token to every other patch token and therefore models temporal dependencies between patches.
 
@@ -93,7 +95,7 @@ Then mean pooling is used over all $N$ patches, so the sequence representation i
 \end{equation}
 This means that the information of all patch tokens is aggregated into one global representation vector per sequence in a batch.
 
-\paragraph{Classification head}
+\paragraph{Classification head, \figref{fig:patchtst} Step 6}
 In this work, the original forecasting head is replaced by a classification head. The implemented head consists of layer normalization $operatorname{LN}()$, a linear layer $\mathbf{W}_1$, $\mathbf{b}_1$ from embedding dimension $D$ to $D$, a GELU activation function $\phi()$, dropout, and a final linear output layer $\mathbf{W}_2$, $\mathbf{b}_2$ from embedding dimension $D$ to $1$:
 \begin{equation}
 \mathbf{o}
@@ -110,53 +112,428 @@ For binary classification, the final output is a single logit per sequence,
 \end{equation}
 A threshold is then used to assign the final class label.
 
-\paragraph{Dimension flow summary}
-The complete data flow through the adapted model can therefore be summarized as
+\paragraph{Data flow example}
+The implemented model uses these concrete values: $L=1500$, $P=128$, $S=64$, $C=6$ channels and embedding dimension $D=192$, this becomes
 \begin{equation}
-\mathbb{R}^{B \times L \times C}
-\;\rightarrow\;
-\mathbb{R}^{B \times N \times P \times C}
-\;\rightarrow\;
-\mathbb{R}^{B \times N \times (PC)}
-\;\rightarrow\;
-\mathbb{R}^{B \times N \times D}
-\;\rightarrow\;
-\mathbb{R}^{B \times N \times D}
-\;\rightarrow\;
-\mathbb{R}^{B \times D}
-\;\rightarrow\;
-\mathbb{R}^{B \times 1}.
-\end{equation}
-For a concrete example with $L=1500$, $P=128$, $S=64$, and $C=12$ channels, this becomes
-\begin{equation}
-\mathbb{R}^{B \times 1500 \times 12}
-\;\rightarrow\;
-\mathbb{R}^{B \times 23 \times 128 \times 12}
-\;\rightarrow\;
-\mathbb{R}^{B \times 23 \times 1536}
-\;\rightarrow\;
-\mathbb{R}^{B \times 23 \times 384}
-\;\rightarrow\;
-\mathbb{R}^{B \times 384}
-\;\rightarrow\;
+\underset{\text{Input}}{\mathbb{R}^{B \times 1500 \times 6}}
+\underset{\text{Patchification}}{\;\rightarrow\;}
+\mathbb{R}^{B \times 23 \times 128 \times 6}
+\underset{\text{Channel-mixing}}{\;\rightarrow\;}
+\mathbb{R}^{B \times 23 \times 768}
+\underset{\text{Tokenization}}{\;\rightarrow\;}
+\mathbb{R}^{B \times 23 \times 192}
+\underset{\text{Transformer}}{\;\rightarrow\;}
+\mathbb{R}^{B \times 192}
+\underset{\text{Classification head}}{\;\rightarrow\;}
 \mathbb{R}^{B \times 1}.
 \end{equation}
 
-Overall, the adapted PatchTST architecture keeps the central idea of patch-wise temporal tokenization from the original forecasting model, but reformulates it into an encoder-only binary classifier for robotic insertion attempts. The most important modifications are the use of channel-mixed patch tokens instead of channel-independent encoding, the omission of the original forecasting head, and the replacement by a global pooling and classification head tailored to success/failure prediction.
+\paragraph{Hyperparameters}
+The complete list of hyperparameters of the model and training settings can be seen in \tabref{tab:patchtst_hyperparameters}. Two model variants \texttt{Base} and \texttt{Big} were used in the later evaluation, which differ in their capacity, with \texttt{Big} having a bigger embedding dimension and one more transformer encoder layer.
+\begin{table}[htbp]
+    \centering
+    \caption{PatchTST hyperparameters used for the Base and Big model variants.}
+    \label{tab:patchtst_hyperparameters}
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Hyperparameter} & \texttt{Base} & \texttt{Big} \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Model architecture}} \\
+        Sequence length & 1500 & -"- \\
+        Patch length $P$ & 128 & -"- \\
+        Stride $S$ & 64 & -"- \\
+        Embedding dimension $d_{\mathrm{model}}$ & 192 & 384 \\
+        Number of attention heads & 8 & -"- \\
+        Number of encoder layers & 2 & 3 \\
+        Feed-forward dimension $d_{\mathrm{ff}}$ & 512 & -"- \\
+        Dropout & 0.25 & -"- \\
+        Channel-independence & False & -"- \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Training}} \\
+        Batch size & 32 & -"- \\
+        Learning rate & $2 \times 10^{-4}$ & -"- \\
+        Weight decay & $2 \times 10^{-2}$ & -"- \\
+        Maximum epochs & 150 & -"- \\
+        Early stopping patience & 15 & -"- \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Learning-rate scheduler}} \\
+        Scheduler factor & 0.5 & -"- \\
+        Scheduler patience & 6 & -"- \\
+        Minimum learning rate & $10^{-5}$ & -"- \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
-\begin{figure}[H]
+
+
+\begin{figure}[htpb]
     \centering
     \includegraphics[width=1.0\textwidth]{chapters/5-methodology/Patch extraction.pdf}
-    \caption{Time series plot of \texttt{big\_rod\_t0.1} from Batch 2 with 480 insertions, showing individual success and failed force curves.}
+    \caption{Visual representation of the data flow. Step 1: Patchification, Step 2: Channel-mixing, meaning concatenation of patches from all channels, Step 3: Tokenization/Projection of patches into patch tokens, Step 4: Final Tokens = Patch Token + Positional Embedding, Step 5: n\_layers of stacked Transformer Encoders, Step 6: Classification head.}
     \label{fig:patchtst}
 \end{figure}
 
-\section{Sub-Researchquestions}
+\newpage
+
+
+
+
+
+
+
 
 \section{Training and evaluation procedure}\label{sec:train_eval}
+The training and evaluation pipeline used in this thesis follows a fixed procedure across all benchmarks in order to ensure comparability between experiments. Only the input channel selection and the data split strategy are varied depending on the respective sub-research question.
 
-\section{SQ1 - Best channel Study}\label{sec:sq1}
+\subsection{Train, validation, and test splits} \label{subsec:train_val_test_splits}
+First an indexed pool is created, where each sequence in the dataset is indexed by its class label (\texttt{True} or \texttt{False} for success of failed insertion), batch (the batch number in which the sequence got recorded in), domain (the geometry--tolerance combination), and gripper type. Based on this indexed pool, the train, validation, and test sets are constructed. The implementation supports two types of test split strategies. The first split strategy is mixed, test-, validation- and training-set. Here the test set is obtained by randomly holding out a set of sequences from the full dataset according to the configured test ratio. In the second selector-based split strategy, all samples matching a predefined condition, for example a specific geometry--tolerance combination or gripper type, are assigned to the test set and removed entirely from the remaining pool. In both cases, the validation set is then obtained by a second random holdout split from the remaining non-test samples. The default ratios are
+\begin{equation}
+r_{\mathrm{val}} = 0.15,
+\qquad
+r_{\mathrm{test}} = 0.15.
+\end{equation}
+Random split picking is performed with respect to the class label in order to preserve the class distribution of the whole dataset across subsets as closely as possible.
 
-\section{SQ2 - SQ4 - Benchmark Design}\label{sec:sq2-sq4}
+\subsection{Optimization}
+The model is trained as a binary classifier using the binary cross-entropy loss with logits,
+\begin{equation}
+\mathcal{L}_{\mathrm{BCE}} =
+-\frac{1}{B}\sum_{i=1}^{B}
+\left[
+y_i \log \sigma(o_i)
++
+(1-y_i)\log\left(1-\sigma(o_i)\right)
+\right],
+\end{equation}
+where $o_i$ is the raw model logit for sequence $i$, $y_i \in \{0,1\}$ is the ground-truth label, and $\sigma(\cdot)$ denotes the sigmoid function. In the implementation, this is realized by the PyTorch function \texttt{BCEWithLogitsLoss}, which combines the sigmoid transformation and the binary cross-entropy loss in a numerically stable form\cite{BCEWithLogitsLossPyTorch211}. Model parameters are optimized with AdamW.
 
-\section{SQ5 - Deviation Analysis}
+\subsection{Prediction scores and thresholding}
+For each input sequence, the model outputs a single raw logit
+\begin{equation}
+o_i \in \mathbb{R}.
+\end{equation}
+During evaluation, this logit is converted into a probability estimation for insertion success by applying the sigmoid function
+\begin{equation}
+\hat{p}_i = \sigma(o_i) = \frac{1}{1 + e^{-o_i}},
+\qquad \hat{p}_i \in [0,1].
+\end{equation}
+In order to obtain a binary class prediction, the probability is compared to a decision threshold \(\tau\):
+\begin{equation}
+\hat{y}_i =
+\begin{cases}
+1, & \hat{p}_i \ge \tau,\\
+0, & \hat{p}_i < \tau.
+\end{cases}
+\end{equation}
+Thus, the final binary prediction depends not only on the model output, but also on the selected threshold \(\tau\).
+
+For a fixed threshold \(\tau\), the predicted class labels from the validation set are compared to their ground-truth labels, creating the confusion matrix shown in Table~\ref{tab:confusion_matrix_binary}.
+
+\begin{table}[htbp]
+\centering
+\caption{Confusion matrix for binary insertion-success classification.}
+\label{tab:confusion_matrix_binary}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lc|c}
+\toprule
+ & \textbf{Predicted positive} & \textbf{Predicted negative} \\
+\midrule
+\textbf{Actual positive} & \makecell{True positive (TP) \\ Predicted success, was success} & \makecell{False negative (FN)\\ Predicted failure, but was success} \\
+\hline
+\textbf{Actual negative} & \makecell{False positive (FP) \\ Predicted success, but was failure} & \makecell{True negative (TN) \\ Predicted failure, was failure} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+From the confusion matrix, several \textbf{threshold-dependent} performance metrics can be derived. These metrics are listed in Table~\ref{tab:classification_metrics} together with their mathematical definitions and their interpretation.
+
+\begin{table}[htbp]
+\centering
+\caption{Threshold-dependent evaluation metrics used for binary classification.}
+\label{tab:classification_metrics}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{2.8cm} p{4.2cm} p{6.3cm}}
+\toprule
+\textbf{Metric} & \textbf{Definition} & \textbf{Interpretation} \\
+\midrule
+Accuracy &
+\(
+\displaystyle
+\frac{TP+TN}{TP+TN+FP+FN}
+\)
+&
+Overall proportion of correctly classified samples. \\[10pt]
+
+Precision &
+\(
+\displaystyle
+\frac{TP}{TP+FP}
+\)
+&
+Proportion of predicted positive samples that are actually positive. \\[10pt]
+
+Recall / Sensitivity &
+\(
+\displaystyle
+\frac{TP}{TP+FN}
+\)
+&
+Proportion of actual positive samples that are correctly identified. \\[10pt]
+
+Specificity &
+\(
+\displaystyle
+\frac{TN}{TN+FP}
+\)
+&
+Proportion of actual negative samples that are correctly identified. \\[10pt]
+
+\(F_1\)-score &
+\(
+\displaystyle
+\frac{2 \cdot \text{Precision} \cdot \text{Recall}}
+{\text{Precision} + \text{Recall}}
+\)
+&
+Harmonic mean of precision and recall. \\[10pt]
+
+Balanced accuracy &
+\(
+\displaystyle
+\frac{1}{2}
+\left( \text{Recall} + \text{Specificity} \right)
+\)
+&
+Mean of Recall and Specificity; weights positive and negative classes equally. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Among these metrics, balanced accuracy is used as the main threshold-dependent model-selection criterion in this thesis. This choice is motivated by the fact that it evaluates the classification performance balanced on both classes and is therefore less sensitive to class imbalance than plain accuracy.\\
+
+Since the model outputs probabilities rather than final binary decisions, an appropriate threshold \(\tau\) must be selected for the computation of threshold-dependent metrics. Instead of fixing this threshold to \(\tau = 0.5\), the threshold is optimized on the validation set.
+
+That works by defining a range of thresholds, here
+\begin{equation}
+\tau \in \{0.001, 0.002, \dots, 0.999\},
+\label{eq:threshold}
+\end{equation}
+and computing the corresponding binary predictions, confusion matrix, and threshold-dependent metrics for each threshold. Then the threshold that maximizes the validation balanced accuracy is selected as the best threshold for that epoch.
+
+If a test set is selected, the best determined threshold on the validation set is used for the test set. In this way, threshold optimization is performed only on the validation set, while the test set remains unseen during model and threshold selection.
+
+In addition to the previously defined threshold-dependent metrics, one \textbf{threshold-independent} metric is calculated. It is the AUROC value, that stands for the area under the receiver operating characteristic curve and is obtained by using the same threshold range as in \equref{eq:threshold} and plotting for each threshold the true positive rate
+\begin{equation}
+\mathrm{TPR} = \frac{TP}{TP+FN} = \text{Recall}
+\end{equation}
+against the false positive rate
+\begin{equation}
+\mathrm{FPR} = \frac{FP}{FP+TN} = 1 - \text{Specificity}.
+\end{equation}
+The area under this curve is the AUROC. Beyond its geometric interpretation, the AUROC can be understood as the probability that a randomly chosen positive sample receives a higher model score than a randomly chosen negative sample \cite{hanleyMeaningUseArea1982}. Here that means that AUROC measures how well the model distinguishes successful insertions from failed ones, but from a broader view across all thresholds. AUROC is later used for the learning-rate scheduler.
+
+\subsection{Model selection, learning-rate scheduling, and early stopping}
+
+At the end of each training epoch, the current model is evaluated on the validation set. First, the raw logits are converted into probabilities. Second, the threshold sweep described above is performed and the validation balanced accuracy is determined for the best threshold of that epoch. The epoch with the highest validation balanced accuracy is stored as the best model checkpoint.
+
+Thus, the final selected model is not the model from the last training epoch, but the checkpoint that achieves the highest validation balanced accuracy over the full training run.
+
+The learning rate is controlled using PyTorch's \texttt{ReduceLROnPlateau} scheduler based on AUROC. If the AUROC does not improve for a predefined number of epochs ("scheduler patience" in \tabref{tab:patchtst_hyperparameters}), the learning rate is reduced by the scheduler factor in \tabref{tab:patchtst_hyperparameters}. AUROC is used for learning-rate adaptation because it is threshold-independent and thereby captures the model's overall decision performance to influence training on a broader scale. Balanced accuracy is used for final model selection, because when the model is ultimately used for inference with a fixed decision threshold, this threshold must be optimally chosen for the model.
+
+Early stopping is likewise based on the validation balanced accuracy. Training is terminated once the validation balanced accuracy has not improved for 15 consecutive epochs ("Early stopping patience" in \tabref{tab:patchtst_hyperparameters}). Which makes the checkpoint 15 epochs ago the best model. Training is also terminated when the maximum number of epochs is reached ("Maximum Epochs" in \tabref{tab:patchtst_hyperparameters}).
+
+\section{Reporting of Experiments} \label{sec:reporing_of_experiments}
+To reduce the influence of randomness, the benchmark experiments are repeated with multiple seed combinations. Two different random seeds are distinguished. The \textit{model seed} controls the model initialization, whereas the \textit{split seed} controls the randomized train/validation/test sets. For the benchmark experiments, the seed sets
+\begin{equation}
+\mathcal{S}_{\text{train}} = \{42, 69, 420\},
+\qquad
+\mathcal{S}_{\text{split}} = \{42, 69, 420\}
+\qquad\rightarrow
+\mathcal{S}_{\text{seeds}} = \mathcal{S}_{\text{train}} \times \mathcal{S}_{\text{split}}
+\end{equation}
+are combined, resulting in nine runs per experiment. An experiment is a specific model preset trained nine times on the same test set, training and validation sets and model initializations are different, because they depend on the split and model seed, respectively.  The performance is then summarized across these nine runs exemplary in \figref{fig:bm_example}. Each dot is its own training run for one specific seed combination. In this way, different runs (in \figref{fig:bm_example} $x$-axis "Experiment 1" and "Experiment 2") and their specific seed combinations can be diretly compared as well as their mean and standard deviation.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.7\textwidth]{chapters/5-methodology/bm_example.png}
+    \caption{Benchmark/Experiment report example plot. Each dot is its own training run for one specific seed combination, which can be directly compared across different experiments 1 and 2.}
+    \label{fig:bm_example}
+\end{figure}
+
+This design makes it possible to assess not only average performance but also robustness with respect to both data partitioning and stochastic training effects.
+
+\section{SQ1 - Best Channel Study}
+\label{sec:sq1}
+
+\paragraph{SQ1: Which sensor channels or channel groups provide the most informative input for robust insertion-success classification?}
+
+\subsection{Motivation}
+
+The recorded dataset contains several different signal modalities, including force/torque, TCP pose, TCP velocity, joint pose, joint velocity, tool acceleration, per-joint current, and temperature. These channel groups differ strongly in physical meaning and in how directly they describe the insertion process. Since the later benchmark studies should be done with one fixed channel configuration, it is necessary to determine beforehand which channel groups provide the most informative input for the classification task.
+
+To keep the search doable, the study was not designed a full evaluation of all possible channel subsets. Instead, it was structured as a two-stage procedure: first, each channel group was evaluated individually to identify promising signal sources and second, the strongest groups were combined in different ways to determine an effective multi-modal channel configuration.
+
+\subsection{Methods}
+% All training runs in this study had no dedicated test set. The dataset is always split randomly in training and validation sets according to split ratios defined in Section \ref{subsec:train_val_test_splits}.
+\paragraph{Stage 1: Individual channel-group tests}
+In the first stage, each recorded channel group was evaluated individually using the \texttt{Base} PatchTST configuration introduced in \tabref{tab:patchtst_hyperparameters}. The investigated groups were:
+\begin{itemize}
+    \item F/T,
+    \item TCP pose,
+    \item TCP velocity,
+    \item joint pose,
+    \item joint velocity,
+    \item tool acceleration,
+    \item current consumption per joint,
+    \item and temperature per joint.
+\end{itemize}
+
+% The purpose of this stage was to obtain an initial ranking of the channel groups under a common training setup. This screening step is computationally efficient and provides a first indication of which modalities are informative on their own. In particular, it helps distinguish directly interaction-related signals, such as force/torque, from more indirect state-related or actuator-related signals, such as TCP pose or current.
+
+\paragraph{Stage 2: Combination study of the best groups}
+
+Based on the results of the individual tests, the best-performing channel groups were selected and combined in different ways. The main goal of this second stage was to determine whether complementary information from multiple modalities improves classification performance beyond what is achievable with any single group alone.
+
+The combination study focused on the groups that showed the highest validation balanced accuracy in the first stage. These were:
+\begin{itemize}
+    \item F/T,
+    \item TCP pose,
+    \item joint velocity,
+    \item and current.
+\end{itemize}
+
+These groups were then combined in different two-, three-, and four-group configurations. The second stage was evaluated with the larger \texttt{Big} PatchTST configuration, since the combined inputs increase the input dimensionality and may benefit from higher model capacity. The tested combinations are summarized by the result plots and by the channel-combination overview in \figref{fig:channel_combination_overview}.
+
+\paragraph{Training and evaluation protocol}
+
+No dedicated test set was used in this study. Instead, all runs were trained on a training split and compared on the validation split only. This is appropriate because the best channel study serves as an exploratory model-selection step before the actual benchmark experiments.
+
+All configurations were trained repeatedly using the same combinations of model seed and split seed defined in Section \ref{sec:reporing_of_experiments}. The results were compared primarily using validation balanced accuracy. Validation loss is reported as well and provides an additional view on the calibration and stability of the models classifications. The main decision criterion for selecting the final channel configuration was validation balanced accuracy, while validation loss was used to support the interpretation of trade-offs between candidate configurations.
+
+\subsection{Results}
+\label{sec:best_channel_study_results}
+
+\paragraph{Stage 1: Individual channel groups tests}
+
+The results of the individual channel-group tests are shown in \figref{fig:best_channel_single_val_bal_acc} and \figref{fig:best_channel_single_val_loss}.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/Only_bal_acc.png}
+    \caption{Validation balanced accuracy for the individual channel-group tests with the \texttt{Base} model.}
+    \label{fig:best_channel_single_val_bal_acc}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/Only_val_loss.png}
+    \caption{Validation loss for the individual channel-group tests with the \texttt{Base} model.}
+    \label{fig:best_channel_single_val_loss}
+\end{figure}
+
+Several important observations can be made from these results. First, force/torque data provides the best standalone modality and is therefore the main candidate for the later stage 2 combination study. This is physically plausible, F/T describes the contact interaction during insertion most directly. Second, TCP pose and current also achieve comparatively high validation balanced accuracy, despite being more indirect measurements. This indicates that the insertion outcome is not encoded only in direct contact signals, but also in robot state and actuator-related signals. Third, joint velocity performs better than TCP velocity and tool acceleration, making it the more promising dynamic complement. Classification with temperature performs almost random and is therefore not considered further.
+
+To summarize, the individual tests suggested that the most informative single groups are F/T, TCP pose, current, and joint velocity. These groups were therefore selected as the basis for the next stage of the study.
+
+\paragraph{Stage 2: Combination study}
+
+The results of the second-stage combination study are shown in \figref{fig:best_channel_combo_val_bal_acc} and \figref{fig:best_channel_combo_val_loss}. Here, different combinations of the strongest channel groups from Stage 1 were evaluated using the \texttt{Big} model.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/study3_bal_acc.png}
+    \caption{Validation balanced accuracy for the selected channel-group combinations evaluated with the \texttt{Big} model.}
+    \label{fig:best_channel_combo_val_bal_acc}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/study3_val_loss.png}
+    \caption{Validation loss for the selected channel-group combinations evaluated with the \texttt{Big} model.}
+    \label{fig:best_channel_combo_val_loss}
+\end{figure}
+
+The most important result of this second stage is that combining multiple already good and complementary channel groups yields better validation performance than using them individually. In particular, the combination of F/T, current, TCP pose, and joint velocity achieved the best validation balanced accuracy among the tested combinations.
+
+The plots also show that the addition current is particularly valuable. While it is not a direct contact measurement, it consistently improves the multi-modal configurations and therefore contributes relevant information for the classification task. TCP pose likewise provides useful information, which indicates that the robot state contains information correlated with successful and failed insertions. Joint velocity further improves the strongest combinations and appears to be more reliable than TCP velocity, because the validation loss is lower and much less spread.
+
+\paragraph{Channel combination overview}
+
+For completeness, \figref{fig:channel_combination_overview} summarizes the full set of evaluated channel configurations in a compact form. The figure shows for each configuration which channel groups were included and reports the corresponding validation metrics for the available \texttt{Base} and \texttt{Big} model runs.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/5-methodology/channel_matrix_plot.png}
+    \caption{Overview of the evaluated channel configurations. Crosses indicate which channel groups are included in each configuration. The corresponding validation balanced accuracy and validation loss for the available \texttt{Base} and \texttt{Big} runs are shown on the right.}
+    \label{fig:channel_combination_overview}
+\end{figure}
+
+This overview makes the overall progression of the study transparent. It shows the initial single-group screening, the subsequent combination experiments, and the final selected multi-modal configurations in one figure.
+
+\paragraph{Final channel selection}
+
+Based on the two-stage study, the channel configuration selected for the remainder of the thesis consists of the following four groups:
+\begin{itemize}
+    \item F/T,
+    \item TCP pose,
+    \item joint velocity,
+    \item and current.
+\end{itemize}
+
+This selection is motivated primarily by the highest observed validation balanced accuracy in the combination study, supported by competitive validation loss. It therefore represents the best overall trade-off among the tested configurations and is carried forward into the later benchmark studies.
+
+\subsection{Discussion and Conclusion}
+
+The best channel study leads to three main conclusions. First, F/T is the best single channel group, but the best overall results are achieved when it is combined with additional modalities. Successful insertion classification is therefore not encoded in one signal group alone.
+
+Second, current and TCP pose provide substantial additional information, even though they are more indirect than F/T.
+
+Third, the best-performing configuration combines complementary information: contact interaction through F/T, actuator load through current consumption, robot state through TCP pose, and motion dynamics through joint velocity.
+
+Overall, the results show that robust insertion-success classification benefits from multi-modal input. Therefore, the combination of F/T, TCP pose, joint velocity, and current is used in the remainder of the thesis.
+
+\section{SQ2 - Benchmark 1: Test on Mixed Split}
+\label{sec:sq2_mixed_split}
+
+Benchmark 1 implements an in-distribution evaluation with a random mixed split of the dataset. The full data pool is divided into a training, validation, and test subset using the split ratios defined in Section \ref{subsec:train_val_test_splits}. This Benchmark specifically uses the first split strategy as described in the mentioned section.
+
+As a result, the test set contains unseen insertion attempts, but not unseen experimental conditions. This benchmark therefore quantifies the model's performance when training and test data are drawn from the same overall distribution. The evaluated model configurations are the ones selected in the best channel study, and each configuration is trained and evaluated over the full set of seed combinations defined in the common training procedure, as defined in Section \ref{sec:reporing_of_experiments}.
+
+\section{SQ3 - Benchmark 2: Test on Individual Hole}
+\label{sec:sq3_individual_hole}
+
+Benchmark 2 implements a leave-one-hole-out evaluation. In each run, all samples belonging to one hole condition (one specific combination of object geometry and tolerance) are assigned exclusively to the test set, while the remaining data is used to form the training and validation set according to the common split procedure described in Section \ref{subsec:train_val_test_splits}.
+
+Thus, the test set contains unseen insertion attempts from one geometry--tolerance combination that is completely absent from training. This benchmark evaluates whether the classifier transfers to a new hole condition rather than only to new samples from already observed conditions. The evaluated hole conditions correspond to the nine labeled holes shown in \figref{fig:taskboard_holes}, and each benchmark condition is evaluated for the selected model configurations over the full set of seed combinations.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{chapters/5-methodology/bm1_taskboard.png}
+    \caption{Schematic drawing of the insertion taskboard. The nine hole conditions used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific geometry--tolerance combination. 1: \texttt{big\_rod\_t0.1}, 2: \texttt{big\_rod\_t0.2}, 3: \texttt{big\_rod\_t0.3}, 4: \texttt{small\_rod\_t0.1}, 5: \texttt{small\_rod\_t0.2}, 6: \texttt{small\_rod\_t0.3}, 7: \texttt{rect\_rod\_t0.1}, 8: \texttt{rect\_rod\_t0.2}, 9: \texttt{rect\_rod\_t0.3}}
+    \label{fig:taskboard_holes}
+\end{figure}
+
+\section{SQ4 -- Benchmark 3: Test on Held-Out Group}
+\label{sec:sq4_held_out_group}
+
+Benchmark 3 evaluates generalization under broader distribution shifts by holding out entire groups of samples from training and validation and using them exclusively for testing. These groups are defined along three different axes: object geometry (\texttt{big\_rod}, \texttt{small\_rod}, \texttt{rect\_rod}) over all tolerance levels, tolerance level (\(0.1\), \(0.2\), \(0.3\)) over all geometries, and gripper types (\texttt{Round}, \texttt{Rect}, \texttt{Flat}).
+
+For each benchmark condition, all samples belonging to the selected held-out group are assigned to the test set, while the remaining data is split into training and validation sets according to the common procedure described in Section \ref{subsec:train_val_test_splits}. The resulting test set therefore represents a broader unseen condition than in the leave-one-hole-out setting.
+
+The held-out geometry and held-out tolerance conditions are shown in \figref{fig:heldout_groups}, while the gripper-based split is evaluated in the same way.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{chapters/5-methodology/bm2_taskboard.png}
+    \caption{Held-out group conditions used in Benchmark 3 for geometry-based and tolerance-based distribution shifts. In each case, all samples belonging to the highlighted group are assigned to the test set. 1: \texttt{big\_rod\_t0.*}, 2: \texttt{small\_rod\_t0.*}, 3: \texttt{rect\_rod\_t0.*}, 4: \texttt{*\_rod\_t0.1}, 5: \texttt{*\_rod\_t0.2}, 6: \texttt{*\_rod\_t0.3}}
+    \label{fig:heldout_groups}
+\end{figure}
+
+\section{SQ5 - Deviation Analysis I}
+\paragraph{SQ5: How do different combinations of deviations during insertion affect the raw success/fail rate?}
+The fifth subquestion focuses on the physical insertion process rather than the classifier. During data collection, the insertion attempts were executed with planned deviations. The saved metadata to each insertion allow the dataset to be analyzed with respect to the conditions under which insertions are physically more likely to succeed or fail.
+
+\section{SQ6 - Deviation Analysis II}
+\paragraph{SQ6: How do different combinations of deviations affect the classification success rate of the trained model?}
+The sixth subquestion uses the same deviation metadata, but analyzes the classifier instead of the physical insertion outcome. The goal is to identify whether certain combinations of deviations are associated with a higher probability of misclassification, essentially confusing the model. This provides additional insight into the consistency of the recorded time series signals. Conditions that frequently lead to physical failure but are classified correctly indicate predictable failure cases. In contrast, conditions with increased misclassification rates may correspond to ambiguous, inconsistent, or weakly distinguishable signal patterns.

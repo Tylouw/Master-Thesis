@@ -4,4 +4,31 @@
 
 \section{Problem Description}\label{sec:intro-problem-description}
 
+\section{Sub-Research Questions}\label{sec:sub_research_questions}
+The following sub-research questions are derived from two perspectives. First, the trained model is evaluated as a time series classifier for insertion success. Second, the dataset itself is investigated to analyze which deviation combinations cause physical insertion failure and misclassification from the time series classifier. Together, the subquestions define the structure of the experiments in Chapter \ref{ch:methodology} and their evaluation in Chapter~\ref{ch:results} and discussion in Chapter \ref{ch:discussion}.
+
+\subsection{SQ1 - Best channel Study}
+\paragraph{SQ1: Which sensor channels or channel groups provide the most informative input for robust insertion-success classification?}
+The first subquestion concerns the information content of the recorded sensor channels. Since the dataset contains multiple recorded robot modalities, such as force/torque signals, TCP/Joint velocity signals and accelerations, the goal is to assess which combination of channel groups provide the most information for robust classification.
+
+\subsection{SQ2 - Benchmark 1, Test on Mixed Split}
+\paragraph{SQ2: How well does the model classify unseen insertion attempts drawn from the same data distribution as the training data?}
+The second subquestion and first benchmark evaluates the basic learnability of the classifier under an in-distribution setting. In this benchmark, the dataset is randomly split into training, validation, and test subsets such that samples from the same overall distribution can appear in all subsets. This benchmark therefore serves as the control group for the following generalization experiments.
+
+\subsection{SQ3 - Benchmark 2, Test on Individual Hole}
+\paragraph{SQ3: How well does the model generalize to unseen geometry--tolerance combinations?}
+The third subquestion and second benchmark evaluates generalization to unseen holes in the insertion taskboard. Each hole has its own specific combination of object geometry and tolerance. All samples belonging to one geometry--tolerance combination are excluded from the training and validation data and used only for the test-set.
+
+\subsection{SQ4 - Benchmark 3, Test on Held-out Group}
+\paragraph{SQ4: How well does the model generalize to larger distribution shifts, such as unseen geometries, unseen tolerances, or unseen gripper conditions?}
+The fourth subquestion and third benchmark uses an entire group of samples for the test-set. These groups correspond to 3 different object geometries, 3 different tolerance levels and 3 different gripper types. This creates a much harder generalization challenge, because the model must classify samples from groups whos insertion behavior can differ strongly from the training-set.
+
+\subsection{SQ5 - Deviation Analysis I}
+\paragraph{SQ5: How do different combinations of deviations during insertion affect the raw success/fail rate?}
+The fifth subquestion focuses on the physical insertion process rather than the classifier. During data collection, the insertion attempts were executed with planned deviations. The saved metadata to each insertion allow the dataset to be analyzed with respect to the conditions under which insertions are physically more likely to succeed or fail.
+
+\subsection{SQ6 - Deviation Analysis II}
+\paragraph{SQ6: How do different combinations of deviations affect the classification success rate of the trained model?}
+The sixth subquestion uses the same deviation metadata to identify whether certain combinations of deviations are associated with a higher probability of misclassification, essentially confusing the model. This provides additional insight into the consistency of the recorded time series signals.
+
 \section{Thesis Overview}\label{sec:intro-thesis-overview}
