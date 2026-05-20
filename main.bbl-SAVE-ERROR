@@ -19,6 +19,2365 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{chatgpt}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0523b13262b12c215d8009938f5c14f1}{%
+           family={{OpenAI}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{fullhash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{bibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorbibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ChatGPT has been used to refine language and transitions.}
+      \verb{urlraw}
+      \verb https://chat.openai.com/
+      \endverb
+      \verb{url}
+      \verb https://chat.openai.com/
+      \endverb
+    \endentry
+    \entry{xuCompareContactModelbased2019}{online}{}
+      \name{author}{4}{}{%
+        {{hash=107cdbc1053b5baff69de9dcfdbc5c0e}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4e700fa7327ebc79f972c3f5faf2665d}{%
+           family={Hou},
+           familyi={H\bibinitperiod},
+           given={Zhimin},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=15d3c26ace4489d65320a919d2c1b350}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Zhi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=66826096c5c6e4513bd5403b6a308c00}{%
+           family={Qiao},
+           familyi={Q\bibinitperiod},
+           given={Hong},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ddef41e584ce7ce370336e73182f8a1}
+      \strng{fullhash}{62c01626d6ce10a27cca09c4be42b066}
+      \strng{bibnamehash}{9ddef41e584ce7ce370336e73182f8a1}
+      \strng{authorbibnamehash}{9ddef41e584ce7ce370336e73182f8a1}
+      \strng{authornamehash}{9ddef41e584ce7ce370336e73182f8a1}
+      \strng{authorfullhash}{62c01626d6ce10a27cca09c4be42b066}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In this paper, we present an overview of robotic peg-in-hole assembly and analyze two main strategies: contact model-based and contact model-free strategies. More specifically, we first introduce the contact model control approaches, including contact state recognition and compliant control two steps. Additionally, we focus on a comprehensive analysis of the whole robotic assembly system. Second, without the contact state recognition process, we decompose the contact model-free learning algorithms into two main subfields: learning from demonstrations and learning from environments (mainly based on reinforcement learning). For each subfield, we survey the landmark studies and ongoing research to compare the different categories. We hope to strengthen the relation between these two research communities by revealing the underlying links. Ultimately, the remaining challenges and open questions in the field of robotic peg-in-hole assembly community is discussed. The promising directions and potential future work are also considered.}
+      \field{day}{10}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{4}
+      \field{pubstate}{prepublished}
+      \field{shorttitle}{Compare {{Contact Model-based Control}} and {{Contact Model-free Learning}}}
+      \field{title}{Compare {{Contact Model-based Control}} and {{Contact Model-free Learning}}: {{A Survey}} of {{Robotic Peg-in-hole Assembly Strategies}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1904.05240
+      \endverb
+      \verb{eprint}
+      \verb 1904.05240
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/UERRHZDH/Xu et al. - 2019 - Compare Contact Model-based Control and Contact Model-free Learning A Survey of Robotic Peg-in-hole.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/USK8RWRW/1904.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1904.05240
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1904.05240
+      \endverb
+      \keyw{Computer Science - Robotics}
+    \endentry
+    \entry{tangAutonomousAlignmentPeg2016}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=9695fee81fdee6b8c9bccbe95fc5cffc}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Te},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7985ff9a22c35e0059f076c74708c532}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Hsien-Chung},
+           giveni={H\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=26500c0e7c5f37a79d71416c4c641ba2}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=806b7b139b26e4aca289d208af150f24}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Wenjie},
+           giveni={W\bibinitperiod}}}%
+        {{hash=84b66ce2b6f9f8530dd504fc63a4cc64}{%
+           family={Tomizuka},
+           familyi={T\bibinitperiod},
+           given={Masayoshi},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{3fff46b09140a4f6804c28f9afcce32d}
+      \strng{fullhash}{816ddb9d6bbb786ae21b50cb78a8bcb3}
+      \strng{bibnamehash}{3fff46b09140a4f6804c28f9afcce32d}
+      \strng{authorbibnamehash}{3fff46b09140a4f6804c28f9afcce32d}
+      \strng{authornamehash}{3fff46b09140a4f6804c28f9afcce32d}
+      \strng{authorfullhash}{816ddb9d6bbb786ae21b50cb78a8bcb3}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In the past years, many methods have been developed for robotic peg-hole-insertion to automate the assembly process. However, many of them are based on the assumption that the peg and hole are well aligned before insertion starts. In practice, if there is a large pose(position/orientation) misalignment, the peg and hole may suffer from a three-point contact condition where the traditional assembly methods cannot work. To deal with this problem, this paper proposes an autonomous alignment method by force/torque measurement before insertion phase. A three-point contact model is built up and the pose misalignment between the peg and hole is estimated by force and geometric analysis. With the estimated values, the robot can autonomously correct the misalignment before applying traditional assembly methods to perform insertions. A series of experiments on a FANUC industrial robot and a H7h7 tolerance peg-hole testbed validate the effectiveness of the proposed method. Experimental results show that the robot is able to perform peg-hole-insertion from three-point contact conditions with 96\% success rate.}
+      \field{booktitle}{2016 {{IEEE International Conference}} on {{Automation Science}} and {{Engineering}} ({{CASE}})}
+      \field{eventtitle}{2016 {{IEEE International Conference}} on {{Automation Science}} and {{Engineering}} ({{CASE}})}
+      \field{issn}{2161-8089}
+      \field{month}{8}
+      \field{title}{Autonomous Alignment of Peg and Hole by Force/Torque Measurement for Robotic Assembly}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{162\bibrangedash 167}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/COASE.2016.7743375
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/INSHN3F7/Tang et al. - 2016 - Autonomous alignment of peg and hole by forcetorque measurement for robotic assembly.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/M87T49JG/7743375.html
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/7743375
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/7743375
+      \endverb
+      \keyw{Force,Force measurement,Friction,Iron,Sensors,Service robots}
+    \endentry
+    \entry{raibertHybridPositionForce1981b}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f8fa00d47f138edf1ae6e872dda1f5cf}{%
+           family={Raibert},
+           familyi={R\bibinitperiod},
+           given={M.\bibnamedelimi H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=034cfb15ee75f092386ec542a476ba0c}{%
+           family={Craig},
+           familyi={C\bibinitperiod},
+           given={J.\bibnamedelimi J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{0a96f44e88673edd4655fc2f70230435}
+      \strng{fullhash}{0a96f44e88673edd4655fc2f70230435}
+      \strng{bibnamehash}{0a96f44e88673edd4655fc2f70230435}
+      \strng{authorbibnamehash}{0a96f44e88673edd4655fc2f70230435}
+      \strng{authornamehash}{0a96f44e88673edd4655fc2f70230435}
+      \strng{authorfullhash}{0a96f44e88673edd4655fc2f70230435}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A new conceptually simple approach to controlling compliant motions of a robot manipulator is presented. The “hybrid” technique described combines force and torque information with positional data to satisfy simultaneous position and force trajectory constraints specified in a convenient task related coordinate system. Analysis, simulation, and experiments are used to evaluate the controller’s ability to execute trajectories using feedback from a force sensing wrist and from position sensors found in the manipulator joints. The results show that the method achieves stable, accurate control of force and position trajectories for a variety of test conditions.}
+      \field{day}{1}
+      \field{issn}{0022-0434, 1528-9028}
+      \field{journaltitle}{Journal of Dynamic Systems, Measurement, and Control}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{2}
+      \field{title}{Hybrid {{Position}}/{{Force Control}} of {{Manipulators}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{103}
+      \field{year}{1981}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{126\bibrangedash 133}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1115/1.3139652
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/TWECMRYW/Raibert and Craig - 1981 - Hybrid PositionForce Control of Manipulators.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://asmedigitalcollection.asme.org/dynamicsystems/article/103/2/126/400298/Hybrid-PositionForce-Control-of-Manipulators
+      \endverb
+      \verb{url}
+      \verb https://asmedigitalcollection.asme.org/dynamicsystems/article/103/2/126/400298/Hybrid-PositionForce-Control-of-Manipulators
+      \endverb
+    \endentry
+    \entry{whitneyHistoricalPerspectiveState1987}{article}{}
+      \name{author}{1}{}{%
+        {{hash=81a74d7092d7b0786053a905b18b58b0}{%
+           family={Whitney},
+           familyi={W\bibinitperiod},
+           given={Daniel\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Thousand Oaks, CA}%
+      }
+      \list{publisher}{1}{%
+        {SAGE Publications}%
+      }
+      \strng{namehash}{81a74d7092d7b0786053a905b18b58b0}
+      \strng{fullhash}{81a74d7092d7b0786053a905b18b58b0}
+      \strng{bibnamehash}{81a74d7092d7b0786053a905b18b58b0}
+      \strng{authorbibnamehash}{81a74d7092d7b0786053a905b18b58b0}
+      \strng{authornamehash}{81a74d7092d7b0786053a905b18b58b0}
+      \strng{authorfullhash}{81a74d7092d7b0786053a905b18b58b0}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper combines histarical lineage, assessment of the state of the art, and discussion of unsolved problems in robot force control. The difference between continuous and logic branching strategies is described. The development of various impedance strategies and hybrid methods is traced and com pared. The problem of stability is discussed, and remedies are related to higher strategy issues.}
+      \field{issn}{0278-3649}
+      \field{journaltitle}{The International Journal of Robotics Research}
+      \field{langid}{english}
+      \field{number}{1}
+      \field{title}{Historical {{Perspective}} and {{State}} of the {{Art}} in {{Robot Force Control}}}
+      \field{volume}{6}
+      \field{year}{1987}
+      \field{dateera}{ce}
+      \field{pages}{3\bibrangedash 14}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1177/027836498700600101
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/VYTU24IU/Historical Perspective and State of the Art in Robot Force Control.pdf
+      \endverb
+      \keyw{Applied sciences,Computer science; control theory; systems,Control theory. Systems,Exact sciences and technology,force control,history,Robotics,robots,stability}
+    \endentry
+    \entry{feiContactJammingAnalysis2004b}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f7c95930167d665c05157f51aa9ab065}{%
+           family={Fei},
+           familyi={F\bibinitperiod},
+           given={Yanqiong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0b180b104b426e226115e5cd55bd7a02}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Xifang},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{fullhash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{bibnamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authorbibnamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authornamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authorfullhash}{6db62ab2f9abb83940a588116f6453e7}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{For a three dimensional multiple peg-in-hole mechanism, robot assembly is a complex process. In this paper, the force/moment and jamming analysis of the three dimensional dual peg-in-hole mechanism is presented. First, contact states of the three dimensional dual-peg are enumerated. Second, the contact forces are described by the screw theory in three dimensions. The force/moment equations for static equilibrium states of three dimensional dual-peg insertions are derived. Third, the jamming diagrams are obtained. Based on the analysis, an experiment of a dual peg-in-hole assembly is presented. The results verify that the analysis above is effective.}
+      \field{issn}{0094114X}
+      \field{journaltitle}{Mechanism and Machine Theory}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{5}
+      \field{shortjournal}{Mechanism and Machine Theory}
+      \field{title}{Contact and Jamming Analysis for Three Dimensional Dual Peg-in-Hole Mechanism}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{39}
+      \field{year}{2004}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{477\bibrangedash 499}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1016/j.mechmachtheory.2003.11.003
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/XPZ6WPZG/Fei and Zhao - 2004 - Contact and jamming analysis for three dimensional dual peg-in-hole mechanism.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
+      \endverb
+    \endentry
+    \entry{wangContactForceTorque2018}{inproceedings}{}
+      \name{author}{8}{}{%
+        {{hash=7040b0ee84aa8faa71784490465f931b}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yuchen},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=c26cc02bbb5db725a2c79cb200894d76}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Peng},
+           giveni={P\bibinitperiod}}}%
+        {{hash=60e88591d316b99e9f136edb8aead89f}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Changchun},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2f0ecaa27f3cd324d19cf681ce7f8170}{%
+           family={Hao},
+           familyi={H\bibinitperiod},
+           given={Gaoming},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6bb794ffe56d06776f1249e200d09b31}{%
+           family={Xiong},
+           familyi={X\bibinitperiod},
+           given={Zhao},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=9ce383f83b3bddaafaf38b118576c9af}{%
+           family={Quan},
+           familyi={Q\bibinitperiod},
+           given={Xusong},
+           giveni={X\bibinitperiod}}}%
+        {{hash=73fa61db6f4b7e931d42104e52afc472}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Xiaodong},
+           giveni={X\bibinitperiod}}}%
+        {{hash=db85f26846fb1b1b9b88725d22163177}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Hai},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{930d3cc0209be89dba28c6e48752903b}
+      \strng{fullhash}{72fe5b508f3d9e2c40bbf9113b8957aa}
+      \strng{bibnamehash}{930d3cc0209be89dba28c6e48752903b}
+      \strng{authorbibnamehash}{930d3cc0209be89dba28c6e48752903b}
+      \strng{authornamehash}{930d3cc0209be89dba28c6e48752903b}
+      \strng{authorfullhash}{72fe5b508f3d9e2c40bbf9113b8957aa}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Large length-diameter ratio peg-in-hole assembly is a hard and significant issue in modern industry. The prediction and control of the contact force/torque play a crucial part in flexible assembly. They ensure that the contact force/torque data are within limits in assembly process, which can prevent jam and protect devices. In this paper, we propose a novel contact force/torque prediction and analysis model to solve the large length-diameter ratio peg-in-hole assembly problem in which the contact states are difficult to be obtained. Firstly, we establish a new force/torque prediction model with measured data to obtain the precision actual contact force/torque which is critical for assembly control. Then, a new contact analysis model for large length-diameter ratio peg-in-hole assembly is built to estimate the assembly contact states. At last, based on the proposed contact force/torque prediction and analysis model, we design a robot pose adjustment strategy for large length-diameter ratio peg-in-hole assembly. Experiment results demonstrate that the proposed model can meet the demands of large length-diameter ratio peg-in-hole assembly. The predicted error rates of force/torque are lower than 1 \% and the mean force/torque in assembly process are lower than 5 N / 0.5 N.m by our model.}
+      \field{booktitle}{2018 {{IEEE International Conference}} on {{Robotics}} and {{Biomimetics}} ({{ROBIO}})}
+      \field{eventtitle}{2018 {{IEEE International Conference}} on {{Robotics}} and {{Biomimetics}} ({{ROBIO}})}
+      \field{month}{12}
+      \field{title}{Contact {{Force}}/{{Torque Prediction}} and {{Analysis Model}} for {{Large Length-diameter Ratio Peg-in-hole Assembly}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{2285\bibrangedash 2290}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ROBIO.2018.8665115
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/V26UQX94/Wang et al. - 2018 - Contact ForceTorque Prediction and Analysis Model for Large Length-diameter Ratio Peg-in-hole Assem.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/8665115
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/8665115
+      \endverb
+      \keyw{Biomimetics,Conferences,Robots}
+    \endentry
+    \entry{beltran-hernandezLearningForceControl2020}{article}{}
+      \name{author}{7}{}{%
+        {{hash=727286965439e681c101bcbad0a624be}{%
+           family={Beltran-Hernandez},
+           familyi={B\bibinithyphendelim H\bibinitperiod},
+           given={Cristian\bibnamedelima Camilo},
+           giveni={C\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=c3eacfc0fd158c41a53a85a84d6c9bf3}{%
+           family={Petit},
+           familyi={P\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+        {{hash=09416757a553a3be1346e377e537affe}{%
+           family={Ramirez-Alpizar},
+           familyi={R\bibinithyphendelim A\bibinitperiod},
+           given={Ixchel\bibnamedelima Georgina},
+           giveni={I\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=4b6db3ad5d3b5535ed993408161acaac}{%
+           family={Nishi},
+           familyi={N\bibinitperiod},
+           given={Takayuki},
+           giveni={T\bibinitperiod}}}%
+        {{hash=38e61858903065dbc1c3b9786c90b85c}{%
+           family={Kikuchi},
+           familyi={K\bibinitperiod},
+           given={Shinichi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=471b5d739f888830e8ae6a398f24fd45}{%
+           family={Matsubara},
+           familyi={M\bibinitperiod},
+           given={Takamitsu},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d745a060a2fb50258544d992d12ae018}{%
+           family={Harada},
+           familyi={H\bibinitperiod},
+           given={Kensuke},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Piscataway}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{b26a8e83c273db2244b6021aedb8b9f0}
+      \strng{fullhash}{43a3bd87843ef1983c6576502591d7cc}
+      \strng{bibnamehash}{b26a8e83c273db2244b6021aedb8b9f0}
+      \strng{authorbibnamehash}{b26a8e83c273db2244b6021aedb8b9f0}
+      \strng{authornamehash}{b26a8e83c273db2244b6021aedb8b9f0}
+      \strng{authorfullhash}{43a3bd87843ef1983c6576502591d7cc}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Reinforcement Learning (RL) methods have been proven successful in solving manipulation tasks autonomously. However, RL is still not widely adopted on real robotic systems because working with real hardware entails additional challenges, especially when using rigid position-controlled manipulators. These challenges include the need for a robust controller to avoid undesired behavior, that risk damaging the robot and its environment, and constant supervision from a human operator. The main contributions of this work are, first, we proposed a learning-based force control framework combining RL techniques with traditional force control. Within said control scheme, we implemented two different conventional approaches to achieve force control with position-controlled robots; one is a modified parallel position/force control, and the other is an admittance control. Secondly, we empirically study both control schemes when used as the action space of the RL agent. Thirdly, we developed a fail-safe mechanism for safely training an RL agent on manipulation tasks using a real rigid robot manipulator. The proposed methods are validated both on simulation and a real robot with an UR3 e-series robotic arm.}
+      \field{issn}{2377-3766}
+      \field{journaltitle}{IEEE robotics and automation letters}
+      \field{langid}{english}
+      \field{number}{4}
+      \field{title}{Learning {{Force Control}} for {{Contact-Rich Manipulation Tasks With Rigid Position-Controlled Robots}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{5}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{5709\bibrangedash 5716}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/LRA.2020.3010739
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/E3BHGSQY/Beltran-Hernandez et al. - 2020 - Learning Force Control for Contact-Rich Manipulation Tasks With Rigid Position-Controlled Robots.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/9145608
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/9145608
+      \endverb
+      \keyw{compliance and impedance control,Electrical impedance,Force,Force control,industrial robots,Learning,Manipulators,Reinforcement learning,Robot arms,Robot control,Robots,Robust control,Service robots,Task analysis,Trajectory}
+    \endentry
+    \entry{dietrichContactModelsAssembly2010}{inproceedings}{}
+      \name{author}{7}{}{%
+        {{hash=92938148c46442defe8e2fa14690639c}{%
+           family={Dietrich},
+           familyi={D\bibinitperiod},
+           given={Franz},
+           giveni={F\bibinitperiod}}}%
+        {{hash=bf8e72f59b124bd3ca30718267774361}{%
+           family={Buchholz},
+           familyi={B\bibinitperiod},
+           given={Dirk},
+           giveni={D\bibinitperiod}}}%
+        {{hash=7d12c219428ec0fc2719ebe839bfd4c7}{%
+           family={Wobbe},
+           familyi={W\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=306c476c8a9fd789dac4f71f4ffc2808}{%
+           family={Sowinski},
+           familyi={S\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=e6d6c993d36a33244901d4cf004c87a0}{%
+           family={Raatz},
+           familyi={R\bibinitperiod},
+           given={Annika},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a327614f64f4b4bdf35b8ee3ebbba34c}{%
+           family={Schumacher},
+           familyi={S\bibinitperiod},
+           given={Walter},
+           giveni={W\bibinitperiod}}}%
+        {{hash=0d9fba7b1baa69bb007b29c51ad2533f}{%
+           family={Wahl},
+           familyi={W\bibinitperiod},
+           given={Friedrich\bibnamedelima M.},
+           giveni={F\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2d3587372630e6a8111699d9068a3f3}
+      \strng{fullhash}{bbb7790d28b2bd2353073f41cdd9197a}
+      \strng{bibnamehash}{c2d3587372630e6a8111699d9068a3f3}
+      \strng{authorbibnamehash}{c2d3587372630e6a8111699d9068a3f3}
+      \strng{authornamehash}{c2d3587372630e6a8111699d9068a3f3}
+      \strng{authorfullhash}{bbb7790d28b2bd2353073f41cdd9197a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Force guided assembly is attractive but the implementation is challenging when uncertainties are present. In these cases, contact models that guide the assembly process are attractive. This article elaborates the usage of static contact models, which map displacements to force-torque vectors of particular contact situations (force-torque map). This model, a map of discrete points, contains force and torque values that correspond to position errors. The inversion of this map, using forces and torques measured from an assembly attempt, yields correction movements in order to accomplish the assembly iteratively. A hypothesis stating the dependency of the model's quality on its injectivity is investigated. This aspect is studied thoroughly in so-called redundancy maps, which reveal regions of considerable ambiguity of the model. Experimental results are presented, which validate the hypothesis about the dependency of the convergence of the assembly process on the ambiguity of the initial position. In addition to the peg-in-hole problem, which has become a standard scenario to validate force guided assembly, the scope of this article also covers force guided assembly of more complex parts. Here, the analysis gives evidence to believe that it is unlikely that the implementation convergences acceptably, which is validated by experimental results.}
+      \field{booktitle}{2010 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}}
+      \field{eventtitle}{2010 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}}
+      \field{issn}{2153-0866}
+      \field{month}{10}
+      \field{shorttitle}{On Contact Models for Assembly Tasks}
+      \field{title}{On Contact Models for Assembly Tasks: {{Experimental}} Investigation beyond the Peg-in-Hole Problem on the Example of Force-Torque Maps}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{2313\bibrangedash 2318}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/IROS.2010.5652704
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/2ZL6ZWV3/Dietrich et al. - 2010 - On contact models for assembly tasks Experimental investigation beyond the peg-in-hole problem on t.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/5652704
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/5652704
+      \endverb
+      \keyw{Assembly,Force,Force measurement,Redundancy,Robots,Sensors,Torque}
+    \endentry
+    \entry{abdullahForceTorqueData2015}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f14b14b1834f1de7d130ffb585c8a3d8}{%
+           family={Abdullah},
+           familyi={A\bibinitperiod},
+           given={Mustafa\bibnamedelima Waad},
+           giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=e67fe80cdca92aef676c7dc57f1726a0}{%
+           family={Roth},
+           familyi={R\bibinitperiod},
+           given={Hubert},
+           giveni={H\bibinitperiod}}}%
+        {{hash=6bc2f7c3ce4062b44583e2d3c46a410d}{%
+           family={Weyrich},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=08e2ce67137cb78fa63238e0581141a4}{%
+           family={Wahrburg},
+           familyi={W\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1d8df1ab3ecb78a0be182e2b77a0c389}{%
+           family={Pluemworasawat},
+           familyi={P\bibinitperiod},
+           given={Padipat},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {EDP Sciences}%
+      }
+      \strng{namehash}{02c88953b451be96640e4e5922b096f1}
+      \strng{fullhash}{52d7bc64fd38559001e291ebaa30b019}
+      \strng{bibnamehash}{02c88953b451be96640e4e5922b096f1}
+      \strng{authorbibnamehash}{02c88953b451be96640e4e5922b096f1}
+      \strng{authornamehash}{02c88953b451be96640e4e5922b096f1}
+      \strng{authorfullhash}{52d7bc64fd38559001e291ebaa30b019}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents an approach for estimating contact positions of peg-in-hole assembling application using data models created from Force/Torque sensor inputs. The assembling task is carried by an industrial robot where the F/T sensor is mounted between the robot and the gripper to measure six values of forces and torques during the contact between the peg and the hole. The search approach to estimate the current position of the contact point is implemented based on human like intuitive behavior by maneuvering the peg on the hole's edge. Different models were created and evaluated using experiments results acquired from pervious assembling attempts. Assembling steps, data analysis and models results are presented in this research.}
+      \field{issn}{2261-236X}
+      \field{journaltitle}{MATEC Web of Conferences}
+      \field{langid}{english}
+      \field{shortjournal}{MATEC Web of Conferences}
+      \field{title}{Force/{{Torque Data Modeling}} for {{Contact Position Estimation}} in {{Peg-in-Hole Assembling Application}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{28}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{04003}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1051/matecconf/20152804003
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/Y5ZF2P6Q/Abdullah et al. - 2015 - ForceTorque Data Modeling for Contact Position Estimation in Peg-in-Hole Assembling Application.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.matec-conferences.org/articles/matecconf/abs/2015/09/matecconf_icame2015_04003/matecconf_icame2015_04003.html
+      \endverb
+      \verb{url}
+      \verb https://www.matec-conferences.org/articles/matecconf/abs/2015/09/matecconf_icame2015_04003/matecconf_icame2015_04003.html
+      \endverb
+    \endentry
+    \entry{jasimContactstateMonitoringForceguided2014}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3c9569dcb3c54e03d006fad70f45c007}{%
+           family={Jasim},
+           familyi={J\bibinitperiod},
+           given={Ibrahim\bibnamedelima F.},
+           giveni={I\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=0267aaa04123e633959575d37af4e9e3}{%
+           family={Plapper},
+           familyi={P\bibinitperiod},
+           given={Peter\bibnamedelima W.},
+           giveni={P\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a23262695d167c6329c799fba7d1955}
+      \strng{fullhash}{3a23262695d167c6329c799fba7d1955}
+      \strng{bibnamehash}{3a23262695d167c6329c799fba7d1955}
+      \strng{authorbibnamehash}{3a23262695d167c6329c799fba7d1955}
+      \strng{authornamehash}{3a23262695d167c6329c799fba7d1955}
+      \strng{authorfullhash}{3a23262695d167c6329c799fba7d1955}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article addresses the problem of contact-state (CS) monitoring for peg-in-hole force-controlled robotic assembly tasks. In order to perform such a monitoring target, the wrench (Cartesian forces and torques) and pose (Cartesian position and orientation) signals of the manipulated object are firstly captured for different CS’s of the object (peg) with respect to the environment including the hole. The captured signals are employed in building a model (a recognizer) for each CS, and in the framework of pattern classification, the CS monitoring would be addressed. It will be shown that the captured signals are nonstationary, i.e., they have non-normal distribution that would result in performance degradation if using the available monitoring approaches. In this article, the concept of the Gaussian mixtures models (GMM) is used in building the likelihood of each signal and the expectation maximization (EM) algorithm is employed in finding the GMM parameters. The use of the GMM would accommodate the signals nonstationary behavior and the EM algorithm would guarantee the estimation of the optimal parameters set of the GMM for each signal, and hence the modeling accuracy would be significantly enhanced. In order to see the performance of the suggested CS monitoring scheme, we installed a test stand that is composed of a KUKA lightweight robot (LWR) doing peg-in-hole tasks. Two experiments are considered; in the first experiment, we use the EM-GMM in monitoring a typical peg-in-hole robotic assembly process, and in the second experiment, we consider the robotic assembly of camshaft caps assembly of an automotive powertrain and use the EM-GMM in monitoring its CS’s. For both experiments, the excellent monitoring performance will be shown. Furthermore, we compare the performance of the EM-GMM with that obtained when using available CS monitoring approaches. Classification success rate (CSR) and computational time will be considered as comparison indices, and the EM-GMM will be shown to have a superior CSR performance with reduced a computational time.}
+      \field{day}{1}
+      \field{issn}{1433-3015}
+      \field{journaltitle}{The International Journal of Advanced Manufacturing Technology}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{number}{5}
+      \field{shortjournal}{Int J Adv Manuf Technol}
+      \field{title}{Contact-State Monitoring of Force-Guided Robotic Assembly Tasks Using Expectation Maximization-Based {{Gaussian}} Mixtures Models}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{73}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{623\bibrangedash 633}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1007/s00170-014-5803-x
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/RSZKTBJ6/Jasim and Plapper - 2014 - Contact-state monitoring of force-guided robotic assembly tasks using expectation maximization-based.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00170-014-5803-x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00170-014-5803-x
+      \endverb
+      \keyw{Assembly monitoring,Expectation maximization,Gaussian mixtures,Peg-in-hole,Robotic assembly}
+    \endentry
+    \entry{magistrisExperimentalForceTorqueDataset2018}{online}{}
+      \name{author}{6}{}{%
+        {{hash=e24ced7cd7f175d41f5cabc0cbd353e0}{%
+           family={Magistris},
+           familyi={M\bibinitperiod},
+           given={Giovanni\bibnamedelima De},
+           giveni={G\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=2243d9d1ba8878627ab7772e4f1fd7a8}{%
+           family={Munawar},
+           familyi={M\bibinitperiod},
+           given={Asim},
+           giveni={A\bibinitperiod}}}%
+        {{hash=358853e095f25aec87388635d0e5b614}{%
+           family={Pham},
+           familyi={P\bibinitperiod},
+           given={Tu-Hoa},
+           giveni={T\bibinithyphendelim H\bibinitperiod}}}%
+        {{hash=402866ae4c97e7698375298f231d8b66}{%
+           family={Inoue},
+           familyi={I\bibinitperiod},
+           given={Tadanobu},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f75f21d314d7cb77f5336257ebfcbab2}{%
+           family={Vinayavekhin},
+           familyi={V\bibinitperiod},
+           given={Phongtharin},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8abf2c0fc326ed84d9d97278755ed91a}{%
+           family={Tachibana},
+           familyi={T\bibinitperiod},
+           given={Ryuki},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{2b5302aeab2d4cfae4d10b6e8e7121ef}
+      \strng{fullhash}{ae454a5dd440ec8b1a82ea4a1aa7a0b7}
+      \strng{bibnamehash}{2b5302aeab2d4cfae4d10b6e8e7121ef}
+      \strng{authorbibnamehash}{2b5302aeab2d4cfae4d10b6e8e7121ef}
+      \strng{authornamehash}{2b5302aeab2d4cfae4d10b6e8e7121ef}
+      \strng{authorfullhash}{ae454a5dd440ec8b1a82ea4a1aa7a0b7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The accurate modeling of real-world systems and physical interactions is a common challenge towards the resolution of robotics tasks. Machine learning approaches have demonstrated significant results in the modeling of complex systems (e.g., articulated robot structures, cable stretch, fluid dynamics), or to learn robotics tasks (e.g., grasping, reaching) from raw sensor measurements without explicit programming, using reinforcement learning. However, a common bottleneck in machine learning techniques resides in the availability of suitable data. While many vision-based datasets have been released in the recent years, ones involving physical interactions, of particular interest for the robotic community, have been scarcer. In this paper, we present a public dataset on peg-in-hole insertion tasks containing force-torque and pose information for multiple variations of convex-shaped pegs. We demonstrate how this dataset can be used to train a robot to insert polyhedral pegs into holes using only 6-axis force/torque sensor measurements as inputs, as well as other tasks involving contact such as shape recognition.}
+      \field{day}{25}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{7}
+      \field{pubstate}{prepublished}
+      \field{title}{Experimental {{Force-Torque Dataset}} for {{Robot Learning}} of {{Multi-Shape Insertion}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1807.06749
+      \endverb
+      \verb{eprint}
+      \verb 1807.06749
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/VG4BRRQM/Magistris et al. - 2018 - Experimental Force-Torque Dataset for Robot Learning of Multi-Shape Insertion.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/ANAK9F4Q/1807.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1807.06749
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1807.06749
+      \endverb
+      \keyw{Computer Science - Robotics}
+    \endentry
+    \entry{liMultiaxisForceTorque2025}{article}{}
+      \name{author}{2}{}{%
+        {{hash=101e32cd0694b05af0fc9a24a39a90ea}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Shuhan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d8a44f222dcff3677fa90c172678f126}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Jinli},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \strng{fullhash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \strng{bibnamehash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \strng{authorbibnamehash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \strng{authornamehash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \strng{authorfullhash}{7219b73ff57db5eac53e7b8fb252dcf9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The recent advancement of artificial intelligence (AI), especially the Large Language Model and multimodal robot learning, promoted robotics development. The force/torque sensor is one of the essential components of robotics application since it is used to give the force feedback under operation. With accurate force measurement, robots can perform delicate manipulation control and safe interaction with humans. This review article provides a comprehensive examination of force/torque sensor technologies. It highlights an in-depth analysis of sensing principles and calibration principles. In addition, the integration of the force/torque sensor and its fusion with other sensors for disturbance observer and collision detection is discussed. Some practical applications of force/torque sensors in robotics are thoroughly reviewed, illustrating their pivotal role in enhancing the functionality and interaction of robots in industrial automation, medical assistance, humanoid robotics, teleoperation, and embodied AI. Finally, the article explores future sensor development directions.}
+      \field{issn}{1558-1748}
+      \field{journaltitle}{IEEE Sensors Journal}
+      \field{month}{2}
+      \field{number}{3}
+      \field{shorttitle}{Multiaxis {{Force}}/{{Torque Sensor Technologies}}}
+      \field{title}{Multiaxis {{Force}}/{{Torque Sensor Technologies}}: {{Design Principles}} and {{Robotic Force Control Applications}}: {{A Review}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{25}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{4055\bibrangedash 4069}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/JSEN.2024.3495507
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/8MJEGRFU/Li and Xu - 2025 - Multiaxis ForceTorque Sensor Technologies Design Principles and Robotic Force Control Applications.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/10755023/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/10755023/
+      \endverb
+      \keyw{Capacitance,contact detection,embodied artificial intelligence (AI),Force,force control,force/torque sensors,humanoid robots,Light emitting diodes,magnetic,Magnetic sensors,optical,Optical sensors,Robot sensing systems,Robots,sensor calibration,sensor fusion,Sensor fusion,Sensors,strain gauge,Strain measurement,teleoperation,Temperature sensors}
+    \endentry
+    \entry{jinContactPoseIdentification2021a}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=44313657392ec19e14eba60b70d0ed32}{%
+           family={Jin},
+           familyi={J\bibinitperiod},
+           given={Shiyu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=8e2b81a8949ff37c63cc78acb52cf78d}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Xinghao},
+           giveni={X\bibinitperiod}}}%
+        {{hash=6e970a3ebd5f5da053803b54c52402a9}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Changhao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=84b66ce2b6f9f8530dd504fc63a4cc64}{%
+           family={Tomizuka},
+           familyi={T\bibinitperiod},
+           given={Masayoshi},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{4750a8d3fe660a6a9f7b79b33dbdf39c}
+      \strng{fullhash}{b31a31dd7314b1b266009fbbcd14e080}
+      \strng{bibnamehash}{4750a8d3fe660a6a9f7b79b33dbdf39c}
+      \strng{authorbibnamehash}{4750a8d3fe660a6a9f7b79b33dbdf39c}
+      \strng{authornamehash}{4750a8d3fe660a6a9f7b79b33dbdf39c}
+      \strng{authorfullhash}{b31a31dd7314b1b266009fbbcd14e080}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Peg-in-hole assembly is a challenging contact-rich manipulation task. There is no general solution to identify the relative position and orientation between the peg and the hole. In this paper, we propose a novel method to classify the contact poses based on a sequence of contact measurements. When the peg contacts the hole with pose uncertainties, a tilt-then-rotate strategy is applied, and the contacts are measured as a group of patterns to encode the contact pose. A convolutional neural network (CNN) is trained to classify the contact poses according to the patterns. In the end, an admittance controller guides the peg towards the error direction and finishes the peg-in-hole assembly. Simulations and experiments are provided to show that the proposed method can be applied to the peg-in-hole assembly of different geometries. We also demonstrate the ability to alleviate the sim-to-real gap.}
+      \field{booktitle}{2021 {{American Control Conference}} ({{ACC}})}
+      \field{eventtitle}{2021 {{American Control Conference}} ({{ACC}})}
+      \field{issn}{2378-5861}
+      \field{month}{5}
+      \field{title}{Contact {{Pose Identification}} for {{Peg-in-Hole Assembly}} under {{Uncertainties}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{48\bibrangedash 53}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.23919/ACC50511.2021.9482981
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/6K92ITRP/Jin et al. - 2021 - Contact Pose Identification for Peg-in-Hole Assembly under Uncertainties.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/9482981/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/9482981/
+      \endverb
+      \keyw{Admittance,Convolutional neural networks,Geometry,Measurement uncertainty,Task analysis,Uncertainty}
+    \endentry
+    \entry{chanEffectsForceTorqueTactile2019}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=4cbc870606d55b3c2dc3b52150a312a8}{%
+           family={Chan},
+           familyi={C\bibinitperiod},
+           given={Yukyu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0c37bb069a2fcd6934e3c63ab8385513}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Hungchen},
+           giveni={H\bibinitperiod}}}%
+        {{hash=3d11fb297f0ea46128dcabfb3b40d256}{%
+           family={Khurshid},
+           familyi={K\bibinitperiod},
+           given={Rebecca\bibnamedelima P.},
+           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{777b44c9ec27943a4c00721f1149a97b}
+      \strng{fullhash}{777b44c9ec27943a4c00721f1149a97b}
+      \strng{bibnamehash}{777b44c9ec27943a4c00721f1149a97b}
+      \strng{authorbibnamehash}{777b44c9ec27943a4c00721f1149a97b}
+      \strng{authornamehash}{777b44c9ec27943a4c00721f1149a97b}
+      \strng{authorfullhash}{777b44c9ec27943a4c00721f1149a97b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We investigate which haptic sensing modalities, or combination of haptic sensing modalities, best enable a robot to determine whether it successfully completed a manipulation task. In this paper, we consider haptic sensing modalities obtained from a wrist-mounted force-torque sensor and three types of fingertip sensors: a pair of FlexiForce force-sensing resistors, a pair of NumaTac sensors, and a pair of BioTac sensors. For each type of fingertip sensor, we simultaneously record force-torque and fingertip tactile data as the robot attempted to complete two manipulation tasks-a picking task and a scooping task-two-hundred times each. We leverage the resulting dataset to train and test a classification method using forty-one different haptic feature combinations, obtained from exhaustive combinations of individual modalities of the force-torque sensor and fingertip sensors. Our results show that the classification method's ability to distinguish between successful and unsuccessful task attempts depends on both the type of manipulation task and the subset of haptic modalities used to train and test the classification method.}
+      \field{booktitle}{2019 {{IEEE World Haptics Conference}} ({{WHC}})}
+      \field{eventtitle}{2019 {{IEEE World Haptics Conference}} ({{WHC}})}
+      \field{month}{7}
+      \field{title}{Effects of {{Force-Torque}} and {{Tactile Haptic Modalities}} on {{Classifying}} the {{Success}} of {{Robot Manipulation Tasks}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{586\bibrangedash 591}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/WHC.2019.8816131
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/Q66LWXP5/Chan et al. - 2019 - Effects of Force-Torque and Tactile Haptic Modalities on Classifying the Success of Robot Manipulati.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/8816131
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/8816131
+      \endverb
+      \keyw{Biosensors,Haptic interfaces,Hidden Markov models,Picture archiving and communication systems,Robot sensing systems,Task analysis}
+    \endentry
+    \entry{sliwowskiREASSEMBLEMultimodalDataset2025}{article}{}
+      \name{author}{6}{}{%
+        {{hash=e117d80692e2846dff324dbdbcf59e7d}{%
+           family={Sliwowski},
+           familyi={S\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ecd874fc9f2f9128388e5f7bf0faff6f}{%
+           family={Jadav},
+           familyi={J\bibinitperiod},
+           given={Shail},
+           giveni={S\bibinitperiod}}}%
+        {{hash=27ffd098d9d13722b76ce0719d391ede}{%
+           family={Stanovcic},
+           familyi={S\bibinitperiod},
+           given={Sergej},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c0941ab6f4c2d408a84439827fba928c}{%
+           family={Orbik},
+           familyi={O\bibinitperiod},
+           given={Jedrzej},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c5c4eff0d710307ecdb52855c49c2d05}{%
+           family={Heidersberger},
+           familyi={H\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d1e4c7f0d417c795107b9fe13e30a424}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Dongheui},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {cs.RO - arXiv}%
+      }
+      \strng{namehash}{be50338caa249890731329405cd1dfb4}
+      \strng{fullhash}{2df26529b7c0de8f975a8dad9d9168ec}
+      \strng{bibnamehash}{be50338caa249890731329405cd1dfb4}
+      \strng{authorbibnamehash}{be50338caa249890731329405cd1dfb4}
+      \strng{authornamehash}{be50338caa249890731329405cd1dfb4}
+      \strng{authorfullhash}{2df26529b7c0de8f975a8dad9d9168ec}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Robotic manipulation remains a core challenge in robotics, particularly for contact-rich tasks such as industrial assembly and disassembly. Existing datasets have significantly advanced learning in manipulation but are primarily focused on simpler tasks like object rearrangement, falling short of capturing the complexity and physical dynamics involved in assembly and disassembly. To bridge this gap, we present REASSEMBLE (Robotic assEmbly disASSEMBLy datasEt), a new dataset designed specifically for contact-rich manipulation tasks. Built around the NIST Assembly Task Board 1 benchmark, REASSEMBLE includes four actions (pick, insert, remove, and place) involving 17 objects. The dataset contains 4,551 demonstrations, of which 4,035 were successful, spanning a total of 781 minutes. Our dataset features multi-modal sensor data, including event cameras, force-torque sensors, microphones, and multi-view RGB cameras. This diverse dataset supports research in areas such as learning contact-rich manipulation, task condition identification, action segmentation, and task inversion learning. The REASSEMBLE will be a valuable resource for advancing robotic manipulation in complex, real-world scenarios. The dataset is publicly available on our project website: https://tuwien-asl.github.io/REASSEMBLE\_page/.}
+      \field{day}{7}
+      \field{month}{2}
+      \field{shorttitle}{{{REASSEMBLE}}}
+      \field{title}{{{REASSEMBLE}}: {{A Multimodal Dataset}} for {{Contact-rich Robotic Assembly}} and {{Disassembly}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/IRWUYGXJ/Sliwowski et al. - 2025 - REASSEMBLE A Multimodal Dataset for Contact-rich Robotic Assembly and Disassembly.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://papers.cool/arxiv/2502.05086
+      \endverb
+      \verb{url}
+      \verb https://papers.cool/arxiv/2502.05086
+      \endverb
+    \endentry
+    \entry{fangRH20TComprehensiveRobotic2024}{inproceedings}{}
+      \name{author}{8}{}{%
+        {{hash=55e92fab30c8f36b42b5a22a82fa8325}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Hao-Shu},
+           giveni={H\bibinithyphendelim S\bibinitperiod}}}%
+        {{hash=47973408dba24d38ad680d11de2f2b48}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Hongjie},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ad52a0b280d59ad55758931726f2ad67}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Zhenyu},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=802dd3796c775b261894747198e1d293}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Jirong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=47f64381ad069e88d82016d4c642356d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Chenxi},
+           giveni={C\bibinitperiod}}}%
+        {{hash=27a780ee716960d6d3ff67e599656086}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Junbo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=206abd76a89cd0cd8468d04aea669f74}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Haoyi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=0c7325e4c4968d1bba992545190bee4f}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Cewu},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Yokohama, Japan}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{c05837aaf35187c0e15ef291734ece9c}
+      \strng{fullhash}{5b8b497bd8ff7d0dd174ea6191696332}
+      \strng{bibnamehash}{c05837aaf35187c0e15ef291734ece9c}
+      \strng{authorbibnamehash}{c05837aaf35187c0e15ef291734ece9c}
+      \strng{authornamehash}{c05837aaf35187c0e15ef291734ece9c}
+      \strng{authorfullhash}{5b8b497bd8ff7d0dd174ea6191696332}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{A key challenge for robotic manipulation in open domains is how to acquire diverse and generalizable skills for robots. Recent progress in one-shot imitation learning and robotic foundation models have shown promise in transferring trained policies to new tasks based on demonstrations. This feature is attractive for enabling robots to acquire new skills and improve their manipulative ability. However, due to limitations in the training dataset, the current focus of the community has mainly been on simple cases, such as push or pick-place tasks, relying solely on visual guidance. In reality, there are many complex skills, some of which may even require both visual and tactile perception to solve. This paper aims to unlock the potential for an agent to generalize to hundreds of real-world skills with multi-modal perception. To achieve this, we have collected a dataset comprising over 110,000 contact-rich robot manipulation sequences across diverse skills, contexts, robots, and camera viewpoints, all collected in the real world. Each sequence in the dataset includes visual, force, audio, and action information. Moreover, we also provide a corresponding human demonstration video and a language description for each robot sequence. We have invested significant efforts in calibrating all the sensors and ensuring a high-quality dataset. The dataset is made publicly available on our website: rh20t.github.io.}
+      \field{booktitle}{2024 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})}
+      \field{day}{13}
+      \field{eventtitle}{2024 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})}
+      \field{isbn}{979-8-3503-8457-4}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{shorttitle}{{{RH20T}}}
+      \field{title}{{{RH20T}}: {{A Comprehensive Robotic Dataset}} for {{Learning Diverse Skills}} in {{One-Shot}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{653\bibrangedash 660}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICRA57147.2024.10611615
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/ESXGFK9L/Fang et al. - 2024 - RH20T A Comprehensive Robotic Dataset for Learning Diverse Skills in One-Shot.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/10611615/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/10611615/
+      \endverb
+    \endentry
+    \entry{thankarajThatSoundsRight2023}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=5a665924cf831ad743ede25481a08d13}{%
+           family={Thankaraj},
+           familyi={T\bibinitperiod},
+           given={Abitha},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9d4b78f1220fe5cab8395d811fc9c5b2}{%
+           family={Pinto},
+           familyi={P\bibinitperiod},
+           given={Lerrel},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \strng{fullhash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \strng{bibnamehash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \strng{authorbibnamehash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \strng{authornamehash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \strng{authorfullhash}{e4b2707e2988d36baa3e3b1b352dfdcb}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Learning to produce contact-rich, dynamic behaviors from raw sensory data has been a longstanding challenge in robotics. Prominent approaches primarily focus on using visual and tactile sensing. However, pure vision often fails to capture high-frequency interaction, while current tactile sensors can be too delicate for large-scale data collection. In this work, we propose a data-centric approach to dynamic manipulation that uses an often ignored source of information – sound. We first collect a dataset of 25k interaction-sound pairs across five dynamic tasks using contact microphones. Then, given this data, we leverage self-supervised learning to accelerate behavior prediction from sound. Our experiments indicate that this self-supervised ‘pretraining’ is crucial to achieving high performance, with a 34.534.534.5\% lower MSE than plain supervised learning and a 54.354.354.3\% lower MSE over visual training. Importantly, we find that when asked to generate desired sound profiles, online rollouts of our models on a UR10 robot can produce dynamic behavior that achieves an average of 11.511.511.5\% improvement over supervised learning on audio similarity metrics. Videos and audio data are best seen on our project website: aurl-anon.github.io}
+      \field{booktitle}{Proceedings of {{The}} 7th {{Conference}} on {{Robot Learning}}}
+      \field{day}{2}
+      \field{eventtitle}{Conference on {{Robot Learning}}}
+      \field{issn}{2640-3498}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{shorttitle}{That {{Sounds Right}}}
+      \field{title}{That {{Sounds Right}}: {{Auditory Self-Supervision}} for {{Dynamic Robot Manipulation}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1036\bibrangedash 1049}
+      \range{pages}{14}
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/NQ2RRGAS/Thankaraj and Pinto - 2023 - That Sounds Right Auditory Self-Supervision for Dynamic Robot Manipulation.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://proceedings.mlr.press/v229/thankaraj23a.html
+      \endverb
+      \verb{url}
+      \verb https://proceedings.mlr.press/v229/thankaraj23a.html
+      \endverb
+    \endentry
+    \entry{mejiaHearingTouchAudioVisual2024b}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=e14880e93fe51ab3ec1fc8b73ef6c9a1}{%
+           family={Mejia},
+           familyi={M\bibinitperiod},
+           given={Jared},
+           giveni={J\bibinitperiod}}}%
+        {{hash=88230feea8197dd78fc57ae98919da14}{%
+           family={Dean},
+           familyi={D\bibinitperiod},
+           given={Victoria},
+           giveni={V\bibinitperiod}}}%
+        {{hash=d6433892704f95fdaf3b3169d1c21d4b}{%
+           family={Hellebrekers},
+           familyi={H\bibinitperiod},
+           given={Tess},
+           giveni={T\bibinitperiod}}}%
+        {{hash=83dd9d464c9f0ea982254939a7f021d8}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Abhinav},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6cd6ebee331516bc18ad9b267787c810}
+      \strng{fullhash}{85341878b2cd35561193a38f76f8f1b0}
+      \strng{bibnamehash}{6cd6ebee331516bc18ad9b267787c810}
+      \strng{authorbibnamehash}{6cd6ebee331516bc18ad9b267787c810}
+      \strng{authornamehash}{6cd6ebee331516bc18ad9b267787c810}
+      \strng{authorfullhash}{85341878b2cd35561193a38f76f8f1b0}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Although pre-training on a large amount of data is beneficial for robot learning, current paradigms only perform large-scale pretraining for visual representations, whereas representations for other modalities are trained from scratch. In contrast to the abundance of visual data, it is unclear what relevant internet-scale data may be used for pretraining other modalities such as tactile sensing. Such pretraining becomes increasingly crucial in the low-data regimes common in robotics applications. In this paper, we address this gap by using contact microphones as an alternative tactile sensor. Our key insight is that contact microphones capture inherently audio-based information, allowing us to leverage large-scale audio-visual pretraining to obtain representations that boost the performance of robotic manipulation. To the best of our knowledge, our method is the first approach leveraging large-scale multisensory pre-training for robotic manipulation. For supplementary information including videos of real robot experiments, please see https://sites.google.com/view/hearing-touch.}
+      \field{booktitle}{2024 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})}
+      \field{eventtitle}{2024 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})}
+      \field{month}{5}
+      \field{shorttitle}{Hearing {{Touch}}}
+      \field{title}{Hearing {{Touch}}: {{Audio-Visual Pretraining}} for {{Contact-Rich Manipulation}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{6912\bibrangedash 6919}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICRA57147.2024.10611305
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/8G6UV4U6/Mejia et al. - 2024 - Hearing Touch Audio-Visual Pretraining for Contact-Rich Manipulation.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/10611305
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/10611305
+      \endverb
+      \keyw{Robot learning,Robot sensing systems,Safety,Soft sensors,Tactile sensors,Task analysis,Visualization}
+    \endentry
+    \entry{fawazDeepLearningTime2019}{article}{}
+      \name{author}{5}{}{%
+        {{hash=5f9dec053cfbccb13e3ca0397ac2af91}{%
+           family={Fawaz},
+           familyi={F\bibinitperiod},
+           given={Hassan\bibnamedelima Ismail},
+           giveni={H\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=fcc574d00402a54e3441aab7924f60c6}{%
+           family={Forestier},
+           familyi={F\bibinitperiod},
+           given={Germain},
+           giveni={G\bibinitperiod}}}%
+        {{hash=cc9d8ad55a0e41f6e52142507ae4cf56}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d350ee2220fd81c99504110da25de7df}{%
+           family={Idoumghar},
+           familyi={I\bibinitperiod},
+           given={Lhassane},
+           giveni={L\bibinitperiod}}}%
+        {{hash=21dbd9122c32e8e4069154f2e2820244}{%
+           family={Muller},
+           familyi={M\bibinitperiod},
+           given={Pierre\bibnamedelima Alain},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{f54ac6f1960e0d0ef4e14cc93f837f1d}
+      \strng{fullhash}{85293f0bbf04d51a994aaf3654ac01b2}
+      \strng{bibnamehash}{f54ac6f1960e0d0ef4e14cc93f837f1d}
+      \strng{authorbibnamehash}{f54ac6f1960e0d0ef4e14cc93f837f1d}
+      \strng{authornamehash}{f54ac6f1960e0d0ef4e14cc93f837f1d}
+      \strng{authorfullhash}{85293f0bbf04d51a994aaf3654ac01b2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{1}
+      \field{issn}{1384-5810}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{number}{4}
+      \field{shorttitle}{Deep Learning for {{Time Series Classification}}}
+      \field{title}{Deep Learning for {{Time Series Classification}}: A Review}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{33}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{917\bibrangedash 963}
+      \range{pages}{47}
+      \verb{doi}
+      \verb 10.1007/s10618-019-00619-1
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/TNSYF54M/Fawaz et al. - 2019 - Deep learning for Time Series Classification a review.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/7T9ZQHJC/deep-learning-for-time-series-classification-a-review.html
+      \endverb
+      \verb{urlraw}
+      \verb https://research.monash.edu/en/publications/deep-learning-for-time-series-classification-a-review/
+      \endverb
+      \verb{url}
+      \verb https://research.monash.edu/en/publications/deep-learning-for-time-series-classification-a-review/
+      \endverb
+    \endentry
+    \entry{faouziTimeSeriesClassification2024}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5fa0def8b83dd494fbd31bea4f1b1616}{%
+           family={Faouzi},
+           familyi={F\bibinitperiod},
+           given={Johann},
+           giveni={J\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=e878cfeeb20201f0de6ed0139ad767ce}{%
+           family={Rocha},
+           familyi={R\bibinitperiod},
+           given={Jorge},
+           giveni={J\bibinitperiod}}}%
+        {{hash=caba34cac2c2d5e62b8117c6bba5ff4c}{%
+           family={Oliveira},
+           familyi={O\bibinitperiod},
+           given={Sandra},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d18edfe5b6916e9137e6099cd8bc6413}{%
+           family={Viana},
+           familyi={V\bibinitperiod},
+           given={Cláudia},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{fullhash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{bibnamehash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{authorbibnamehash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{authornamehash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{authorfullhash}{5fa0def8b83dd494fbd31bea4f1b1616}
+      \strng{editorbibnamehash}{d998f49fd705760f8d7c09e4d742ef01}
+      \strng{editornamehash}{d998f49fd705760f8d7c09e4d742ef01}
+      \strng{editorfullhash}{d998f49fd705760f8d7c09e4d742ef01}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Time series classification is a subfield of machine learning with numerous real-life applications. Due to the temporal structure of the input data, standard machine learning algorithms are usually not well suited to work on raw time series. Over the last decades, many algorithms have been proposed to improve the predictive performance and the scalability of state-of-the-art models. Many approaches have been investigated, ranging from deriving new metrics to developing bag-of-words models to imaging time series to artificial neural networks. In this review, we present in detail the major contributions made to this field and mention their most prominent extensions. We dedicate a section to each category of algorithms, with an intuitive introduction on the general approach, detailed theoretical descriptions and explicit illustrations of the major contributions, and mentions of their most prominent extensions. At last, we dedicate a section to publicly available resources, namely data sets and open-source software, for time series classification. A particular emphasis is made on enumerating the availability of the mentioned algorithms in the most popular libraries. The combination of theoretical and practical contents provided in this review will help the readers to easily get started on their own work on time series classification, whether it be theoretical or practical.}
+      \field{booktitle}{Time {{Series Analysis}} - {{Recent Advances}}, {{New Perspectives}} and {{Applications}}}
+      \field{shorttitle}{Time {{Series Classification}}}
+      \field{title}{Time {{Series Classification}}: {{A}} Review of {{Algorithms}} and {{Implementations}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{298}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.5772/intechopen.1004810
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/QJT4V8VJ/Faouzi - 2024 - Time Series Classification A review of Algorithms and Implementations.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://inria.hal.science/hal-03558165
+      \endverb
+      \verb{url}
+      \verb https://inria.hal.science/hal-03558165
+      \endverb
+      \keyw{Classification,Data sets,Machine learning,Open-source software,Time series}
+    \endentry
+    \entry{bagnallUEAMultivariateTime2018}{online}{}
+      \name{author}{8}{}{%
+        {{hash=c7fb166325e9c0da61ccc1e704db8c97}{%
+           family={Bagnall},
+           familyi={B\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c405e0c94297ac37d92350e926e0dc02}{%
+           family={Dau},
+           familyi={D\bibinitperiod},
+           given={Hoang\bibnamedelima Anh},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=cce1a4357cd0cf6d918ed2ffdf45e9ba}{%
+           family={Lines},
+           familyi={L\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3b228e35fa98f0031675a74c51c732aa}{%
+           family={Flynn},
+           familyi={F\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=581e715de8729458ae55138a0c645fb3}{%
+           family={Large},
+           familyi={L\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c3c365fc76bc8eff92a263c901e471c0}{%
+           family={Bostrom},
+           familyi={B\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=dcfb090842adcb2756ab23c51c79ae3a}{%
+           family={Southam},
+           familyi={S\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1164ac6d1586ceeb53e02cf48b555413}{%
+           family={Keogh},
+           familyi={K\bibinitperiod},
+           given={Eamonn},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{fullhash}{a1b7b8e886d4ae6e67b2c8af7e13aebc}
+      \strng{bibnamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authorbibnamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authornamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authorfullhash}{a1b7b8e886d4ae6e67b2c8af7e13aebc}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In 2002, the UCR time series classification archive was first released with sixteen datasets. It gradually expanded, until 2015 when it increased in size from 45 datasets to 85 datasets. In October 2018 more datasets were added, bringing the total to 128. The new archive contains a wide range of problems, including variable length series, but it still only contains univariate time series classification problems. One of the motivations for introducing the archive was to encourage researchers to perform a more rigorous evaluation of newly proposed time series classification (TSC) algorithms. It has worked: most recent research into TSC uses all 85 datasets to evaluate algorithmic advances. Research into multivariate time series classification, where more than one series are associated with each class label, is in a position where univariate TSC research was a decade ago. Algorithms are evaluated using very few datasets and claims of improvement are not based on statistical comparisons. We aim to address this problem by forming the first iteration of the MTSC archive, to be hosted at the website www.timeseriesclassification.com. Like the univariate archive, this formulation was a collaborative effort between researchers at the University of East Anglia (UEA) and the University of California, Riverside (UCR). The 2018 vintage consists of 30 datasets with a wide range of cases, dimensions and series lengths. For this first iteration of the archive we format all data to be of equal length, include no series with missing data and provide train/test splits.}
+      \field{day}{31}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{10}
+      \field{pubstate}{prepublished}
+      \field{title}{The {{UEA}} Multivariate Time Series Classification Archive, 2018}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1811.00075
+      \endverb
+      \verb{eprint}
+      \verb 1811.00075
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/3PDT8CRX/Bagnall et al. - 2018 - The UEA multivariate time series classification archive, 2018.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/DS2NUURQ/1811.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1811.00075
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1811.00075
+      \endverb
+      \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
+    \entry{ruizGreatMultivariateTime2021}{article}{}
+      \name{author}{5}{}{%
+        {{hash=722c7a8d9fd0fb31782457a6c6bf2ad1}{%
+           family={Ruiz},
+           familyi={R\bibinitperiod},
+           given={Alejandro\bibnamedelima Pasos},
+           giveni={A\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=3b228e35fa98f0031675a74c51c732aa}{%
+           family={Flynn},
+           familyi={F\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=581e715de8729458ae55138a0c645fb3}{%
+           family={Large},
+           familyi={L\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=43a883a23c3291f7fbe9b6b871e257ee}{%
+           family={Middlehurst},
+           familyi={M\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c7fb166325e9c0da61ccc1e704db8c97}{%
+           family={Bagnall},
+           familyi={B\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{da0e6e486f50c3bb927c402f23b13a0e}
+      \strng{fullhash}{dad5a23f7f434b2da823f37f4f88ca76}
+      \strng{bibnamehash}{da0e6e486f50c3bb927c402f23b13a0e}
+      \strng{authorbibnamehash}{da0e6e486f50c3bb927c402f23b13a0e}
+      \strng{authornamehash}{da0e6e486f50c3bb927c402f23b13a0e}
+      \strng{authorfullhash}{dad5a23f7f434b2da823f37f4f88ca76}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Time Series Classification (TSC) involves building predictive models for a discrete target variable from ordered, real valued, attributes. Over recent years, a new set of TSC algorithms have been developed which have made significant improvement over the previous state of the art. The main focus has been on univariate TSC, i.e. the problem where each case has a single series and a class label. In reality, it is more common to encounter multivariate TSC (MTSC) problems where the time series for a single case has multiple dimensions. Despite this, much less consideration has been given to MTSC than the univariate case. The UCR archive has provided a valuable resource for univariate TSC, and the lack of a standard set of test problems may explain why there has been less focus on MTSC. The UEA archive of 30 MTSC problems released in 2018 has made comparison of algorithms easier. We review recently proposed bespoke MTSC algorithms based on deep learning, shapelets and bag of words approaches. If an algorithm cannot naturally handle multivariate data, the simplest approach to adapt a univariate classifier to MTSC is to ensemble it over the multivariate dimensions. We compare the bespoke algorithms to these dimension independent approaches on the 26 of the 30 MTSC archive problems where the data are all of equal length. We demonstrate that four classifiers are significantly more accurate than the benchmark dynamic time warping algorithm and that one of these recently proposed classifiers, ROCKET, achieves significant improvement on the archive datasets in at least an order of magnitude less time than the other three.}
+      \field{day}{1}
+      \field{issn}{1573-756X}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{number}{2}
+      \field{shortjournal}{Data Min Knowl Disc}
+      \field{shorttitle}{The Great Multivariate Time Series Classification Bake Off}
+      \field{title}{The Great Multivariate Time Series Classification Bake off: A Review and Experimental Evaluation of Recent Algorithmic Advances}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{35}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{401\bibrangedash 449}
+      \range{pages}{49}
+      \verb{doi}
+      \verb 10.1007/s10618-020-00727-3
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/WBERJX5F/Ruiz et al. - 2021 - The great multivariate time series classification bake off a review and experimental evaluation of.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10618-020-00727-3
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10618-020-00727-3
+      \endverb
+      \keyw{Evaluating classifiers,Multivariate time series,Time series classification,UEA archive}
+    \endentry
+    \entry{bagnallGreatTimeSeries2017}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c7fb166325e9c0da61ccc1e704db8c97}{%
+           family={Bagnall},
+           familyi={B\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cce1a4357cd0cf6d918ed2ffdf45e9ba}{%
+           family={Lines},
+           familyi={L\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c3c365fc76bc8eff92a263c901e471c0}{%
+           family={Bostrom},
+           familyi={B\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=581e715de8729458ae55138a0c645fb3}{%
+           family={Large},
+           familyi={L\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1164ac6d1586ceeb53e02cf48b555413}{%
+           family={Keogh},
+           familyi={K\bibinitperiod},
+           given={Eamonn},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{fullhash}{415dcbac10985466adbed8c520f70fb6}
+      \strng{bibnamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authorbibnamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authornamehash}{01a104cb3f37bbc47ac3f5c0cb2a5794}
+      \strng{authorfullhash}{415dcbac10985466adbed8c520f70fb6}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In the last 5~years there have been a large number of new time series classification algorithms proposed in the literature. These algorithms have been evaluated on subsets of the 47 data sets in the University of California, Riverside time series classification archive. The archive has recently been expanded to 85 data sets, over half of which have been donated by researchers at the University of East Anglia. Aspects of previous evaluations have made comparisons between algorithms difficult. For example, several different programming languages have been used, experiments involved a single train/test split and some used normalised data whilst others did not. The relaunch of the archive provides a timely opportunity to thoroughly evaluate algorithms on a larger number of datasets. We have implemented 18 recently proposed algorithms in a common Java framework and compared them against two standard benchmark classifiers (and each other) by performing 100 resampling experiments on each of the 85 datasets. We use these results to test several hypotheses relating to whether the algorithms are significantly more accurate than the benchmarks and each other. Our results indicate that only nine of these algorithms are significantly more accurate than both benchmarks and that one classifier, the collective of transformation ensembles, is significantly more accurate than all of the others. All of our experiments and results are reproducible: we release all of our code, results and experimental details and we hope these experiments form the basis for more robust testing of new algorithms in the future.}
+      \field{day}{1}
+      \field{issn}{1573-756X}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{3}
+      \field{shortjournal}{Data Min Knowl Disc}
+      \field{shorttitle}{The Great Time Series Classification Bake Off}
+      \field{title}{The Great Time Series Classification Bake off: A Review and Experimental Evaluation of Recent Algorithmic Advances}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{31}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{606\bibrangedash 660}
+      \range{pages}{55}
+      \verb{doi}
+      \verb 10.1007/s10618-016-0483-9
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/SS2YVDWC/Bagnall et al. - 2017 - The great time series classification bake off a review and experimental evaluation of recent algori.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10618-016-0483-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10618-016-0483-9
+      \endverb
+      \keyw{Elastic distance measures,Shapelets,Time series classification,Time series similarity}
+    \endentry
+    \entry{dempsterROCKETExceptionallyFast2020}{article}{}
+      \name{author}{3}{}{%
+        {{hash=dfc3014a7042700e9c020d83338c6f87}{%
+           family={Dempster},
+           familyi={D\bibinitperiod},
+           given={Angus},
+           giveni={A\bibinitperiod}}}%
+        {{hash=270fff17f2b0edbcb28e6c8dc2d70c64}{%
+           family={Petitjean},
+           familyi={P\bibinitperiod},
+           given={François},
+           giveni={F\bibinitperiod}}}%
+        {{hash=021b501817a8d003c9b230aaed364b70}{%
+           family={Webb},
+           familyi={W\bibinitperiod},
+           given={Geoffrey\bibnamedelima I.},
+           giveni={G\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{74c7b40b5471381aeefe001e3197f8a1}
+      \strng{fullhash}{74c7b40b5471381aeefe001e3197f8a1}
+      \strng{bibnamehash}{74c7b40b5471381aeefe001e3197f8a1}
+      \strng{authorbibnamehash}{74c7b40b5471381aeefe001e3197f8a1}
+      \strng{authornamehash}{74c7b40b5471381aeefe001e3197f8a1}
+      \strng{authorfullhash}{74c7b40b5471381aeefe001e3197f8a1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Most methods for time series classification that attain state-of-the-art accuracy have high computational complexity, requiring significant training time even for smaller datasets, and are intractable for larger datasets. Additionally, many existing methods focus on a single type of feature such as shape or frequency. Building on the recent success of convolutional neural networks for time series classification, we show that simple linear classifiers using random convolutional kernels achieve state-of-the-art accuracy with a fraction of the computational expense of existing methods. Using this method, it is possible to train and test a classifier on all 85 ‘bake off’ datasets in the UCR archive in \$\${$<\backslash$},2\textbackslash,\textbackslash hbox \{h\}\$\$, and it is possible to train a classifier on a large dataset of more than one million time series in approximately 1~h.}
+      \field{day}{1}
+      \field{issn}{1573-756X}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{5}
+      \field{shortjournal}{Data Min Knowl Disc}
+      \field{shorttitle}{{{ROCKET}}}
+      \field{title}{{{ROCKET}}: Exceptionally Fast and Accurate Time Series Classification Using Random Convolutional Kernels}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{34}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1454\bibrangedash 1495}
+      \range{pages}{42}
+      \verb{doi}
+      \verb 10.1007/s10618-020-00701-z
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/V2SL4XYJ/Dempster et al. - 2020 - ROCKET exceptionally fast and accurate time series classification using random convolutional kernel.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10618-020-00701-z
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10618-020-00701-z
+      \endverb
+      \keyw{Convolution,Random,Scalable,Time series classification}
+    \endentry
+    \entry{ismailfawazInceptionTimeFindingAlexNet2020}{article}{}
+      \name{author}{10}{}{%
+        {{hash=685ec3b02f9aa64c2818d70b3d5734b9}{%
+           family={Ismail\bibnamedelima Fawaz},
+           familyi={I\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Hassan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=899df7e3e43e3177538b45c86bd9f037}{%
+           family={Lucas},
+           familyi={L\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=fcc574d00402a54e3441aab7924f60c6}{%
+           family={Forestier},
+           familyi={F\bibinitperiod},
+           given={Germain},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6e5afdd66f3d52c264c03e3b5c510701}{%
+           family={Pelletier},
+           familyi={P\bibinitperiod},
+           given={Charlotte},
+           giveni={C\bibinitperiod}}}%
+        {{hash=4948e91023afddce3c621dd38f00be19}{%
+           family={Schmidt},
+           familyi={S\bibinitperiod},
+           given={Daniel\bibnamedelima F.},
+           giveni={D\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=cc9d8ad55a0e41f6e52142507ae4cf56}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=021b501817a8d003c9b230aaed364b70}{%
+           family={Webb},
+           familyi={W\bibinitperiod},
+           given={Geoffrey\bibnamedelima I.},
+           giveni={G\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=d350ee2220fd81c99504110da25de7df}{%
+           family={Idoumghar},
+           familyi={I\bibinitperiod},
+           given={Lhassane},
+           giveni={L\bibinitperiod}}}%
+        {{hash=cf881384e0d7c8971ea9353d846fdaba}{%
+           family={Muller},
+           familyi={M\bibinitperiod},
+           given={Pierre-Alain},
+           giveni={P\bibinithyphendelim A\bibinitperiod}}}%
+        {{hash=270fff17f2b0edbcb28e6c8dc2d70c64}{%
+           family={Petitjean},
+           familyi={P\bibinitperiod},
+           given={François},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{600a51263e6c504495944b2577cb9915}
+      \strng{fullhash}{8d4d6fb863a53d9aceacc943491fe90f}
+      \strng{bibnamehash}{600a51263e6c504495944b2577cb9915}
+      \strng{authorbibnamehash}{600a51263e6c504495944b2577cb9915}
+      \strng{authornamehash}{600a51263e6c504495944b2577cb9915}
+      \strng{authorfullhash}{8d4d6fb863a53d9aceacc943491fe90f}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper brings deep learning at the forefront of research into time series classification (TSC). TSC is the area of machine learning tasked with the categorization (or labelling) of time series. The last few decades of work in this area have led to significant progress in the accuracy of classifiers, with the state of the art now represented by the HIVE-COTE algorithm. While extremely accurate, HIVE-COTE cannot be applied to many real-world datasets because of its high training time complexity in \$\$O(N\textasciicircum 2\textbackslash cdot T\textasciicircum 4)\$\$for a dataset with N time series of length T. For example, it takes HIVE-COTE more than 8 days to learn from a small dataset with \$\$N=1500\$\$time series of short length \$\$T=46\$\$. Meanwhile deep learning has received enormous attention because of its high accuracy and scalability. Recent approaches to deep learning for TSC have been scalable, but less accurate than HIVE-COTE. We introduce InceptionTime—an ensemble of deep Convolutional Neural Network models, inspired by the Inception-v4 architecture. Our experiments show that InceptionTime is on par with HIVE-COTE in terms of accuracy while being much more scalable: not only can it learn from 1500 time series in one hour but it can also learn from 8M time series in 13 h, a quantity of data that is fully out of reach of HIVE-COTE.}
+      \field{day}{1}
+      \field{issn}{1573-756X}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{number}{6}
+      \field{shortjournal}{Data Min Knowl Disc}
+      \field{shorttitle}{{{InceptionTime}}}
+      \field{title}{{{InceptionTime}}: {{Finding AlexNet}} for Time Series Classification}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{34}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1936\bibrangedash 1962}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1007/s10618-020-00710-y
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/CXULIX4Z/Ismail Fawaz et al. - 2020 - InceptionTime Finding AlexNet for time series classification.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10618-020-00710-y
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10618-020-00710-y
+      \endverb
+      \keyw{Deep learning,Inception,Scalable model,Time series classification}
+    \endentry
+    \entry{middlehurstHIVECOTE20New2021}{article}{}
+      \name{author}{6}{}{%
+        {{hash=43a883a23c3291f7fbe9b6b871e257ee}{%
+           family={Middlehurst},
+           familyi={M\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=581e715de8729458ae55138a0c645fb3}{%
+           family={Large},
+           familyi={L\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3b228e35fa98f0031675a74c51c732aa}{%
+           family={Flynn},
+           familyi={F\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cce1a4357cd0cf6d918ed2ffdf45e9ba}{%
+           family={Lines},
+           familyi={L\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c3c365fc76bc8eff92a263c901e471c0}{%
+           family={Bostrom},
+           familyi={B\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c7fb166325e9c0da61ccc1e704db8c97}{%
+           family={Bagnall},
+           familyi={B\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c521295e95ac03fbf28453e2e0f60f81}
+      \strng{fullhash}{45befaade0efa708591a1016c9d06a9c}
+      \strng{bibnamehash}{c521295e95ac03fbf28453e2e0f60f81}
+      \strng{authorbibnamehash}{c521295e95ac03fbf28453e2e0f60f81}
+      \strng{authornamehash}{c521295e95ac03fbf28453e2e0f60f81}
+      \strng{authorfullhash}{45befaade0efa708591a1016c9d06a9c}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The Hierarchical Vote Collective of Transformation-based Ensembles (HIVE-COTE) is a heterogeneous meta ensemble for time series classification. HIVE-COTE forms its ensemble from classifiers of multiple domains, including phase-independent shapelets, bag-of-words based dictionaries and phase-dependent intervals. Since it was first proposed in 2016, the algorithm has remained state of the art for accuracy on the UCR time series classification archive. Over time it has been incrementally updated, culminating in its current state, HIVE-COTE 1.0. During this time a number of algorithms have been proposed which match the accuracy of HIVE-COTE. We propose comprehensive changes to the HIVE-COTE algorithm which significantly improve its accuracy and usability, presenting this upgrade as HIVE-COTE 2.0. We introduce two novel classifiers, the Temporal Dictionary Ensemble and Diverse Representation Canonical Interval Forest, which replace existing ensemble members. Additionally, we introduce the Arsenal, an ensemble of ROCKET classifiers as a new HIVE-COTE 2.0 constituent. We demonstrate that HIVE-COTE 2.0 is significantly more accurate on average than the current state of the art on 112 univariate UCR archive datasets and 26 multivariate UEA archive datasets.}
+      \field{day}{1}
+      \field{issn}{1573-0565}
+      \field{journaltitle}{Machine Learning}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{11}
+      \field{shortjournal}{Mach Learn}
+      \field{shorttitle}{{{HIVE-COTE}} 2.0}
+      \field{title}{{{HIVE-COTE}} 2.0: A New Meta Ensemble for Time Series Classification}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{110}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{3211\bibrangedash 3243}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1007/s10994-021-06057-9
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/XY5JNA6G/Middlehurst et al. - 2021 - HIVE-COTE 2.0 a new meta ensemble for time series classification.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10994-021-06057-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10994-021-06057-9
+      \endverb
+      \keyw{Heterogeneous ensembles,HIVE-COTE,Multivariate time series,Time series classification}
+    \endentry
+    \entry{szegedyGoingDeeperConvolutions2014}{online}{}
+      \name{author}{9}{}{%
+        {{hash=ed568d9c3bb059e6bf22899fbf170f86}{%
+           family={Szegedy},
+           familyi={S\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c0e0d23e2d09e45e6f51cc2bcea6d9f9}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=9fce03efe6b3331a1b93ed2e7c0da9d5}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Yangqing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=15f5333df96deaf51c72d065bded37d8}{%
+           family={Sermanet},
+           familyi={S\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+        {{hash=698ee61a2f3fa29734204496d2d36aef}{%
+           family={Reed},
+           familyi={R\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c1826f3465579186aff299a9b0e16ed7}{%
+           family={Anguelov},
+           familyi={A\bibinitperiod},
+           given={Dragomir},
+           giveni={D\bibinitperiod}}}%
+        {{hash=8bbc4c5d96f205bada839e74e0202146}{%
+           family={Erhan},
+           familyi={E\bibinitperiod},
+           given={Dumitru},
+           giveni={D\bibinitperiod}}}%
+        {{hash=8051922e7bd286f884bfbd1023ef62f5}{%
+           family={Vanhoucke},
+           familyi={V\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod}}}%
+        {{hash=aa04c4d6213a1e867b1650e298cb2668}{%
+           family={Rabinovich},
+           familyi={R\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{80f8e6bfc3aff3e75b2807a6f6962740}
+      \strng{fullhash}{64fbaf3c8a6b53523f74f0087b58e7e6}
+      \strng{bibnamehash}{80f8e6bfc3aff3e75b2807a6f6962740}
+      \strng{authorbibnamehash}{80f8e6bfc3aff3e75b2807a6f6962740}
+      \strng{authornamehash}{80f8e6bfc3aff3e75b2807a6f6962740}
+      \strng{authorfullhash}{64fbaf3c8a6b53523f74f0087b58e7e6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We propose a deep convolutional neural network architecture codenamed "Inception", which was responsible for setting the new state of the art for classification and detection in the ImageNet Large-Scale Visual Recognition Challenge 2014 (ILSVRC 2014). The main hallmark of this architecture is the improved utilization of the computing resources inside the network. This was achieved by a carefully crafted design that allows for increasing the depth and width of the network while keeping the computational budget constant. To optimize quality, the architectural decisions were based on the Hebbian principle and the intuition of multi-scale processing. One particular incarnation used in our submission for ILSVRC 2014 is called GoogLeNet, a 22 layers deep network, the quality of which is assessed in the context of classification and detection.}
+      \field{day}{17}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{9}
+      \field{pubstate}{prepublished}
+      \field{title}{Going {{Deeper}} with {{Convolutions}}}
+      \field{urlday}{1}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1409.4842
+      \endverb
+      \verb{eprint}
+      \verb 1409.4842
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/EU57P2JF/Szegedy et al. - 2014 - Going Deeper with Convolutions.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/S8KKWUWV/1409.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1409.4842
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1409.4842
+      \endverb
+      \keyw{Computer Science - Computer Vision and Pattern Recognition}
+    \endentry
+    \entry{nieTimeSeriesWorth2023b}{online}{}
+      \name{author}{4}{}{%
+        {{hash=a15355c8729e3c717f7be125dfd1c99b}{%
+           family={Nie},
+           familyi={N\bibinitperiod},
+           given={Yuqi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=612f9b83cb994f945e67dd85173670ad}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Nam\bibnamedelima H.},
+           giveni={N\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=ff7e34b128e92cb56236e7b7c679c2d3}{%
+           family={Sinthong},
+           familyi={S\bibinitperiod},
+           given={Phanwadee},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c7a827c9952f35ee3dc2aa45280bf4a6}{%
+           family={Kalagnanam},
+           familyi={K\bibinitperiod},
+           given={Jayant},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{3d1c620805148cd1766b8bf51af48276}
+      \strng{fullhash}{16c26622d4dcecc6081b44b436223d1b}
+      \strng{bibnamehash}{3d1c620805148cd1766b8bf51af48276}
+      \strng{authorbibnamehash}{3d1c620805148cd1766b8bf51af48276}
+      \strng{authornamehash}{3d1c620805148cd1766b8bf51af48276}
+      \strng{authorfullhash}{16c26622d4dcecc6081b44b436223d1b}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{We propose an efficient design of Transformer-based models for multivariate time series forecasting and self-supervised representation learning. It is based on two key components: (i) segmentation of time series into subseries-level patches which are served as input tokens to Transformer; (ii) channel-independence where each channel contains a single univariate time series that shares the same embedding and Transformer weights across all the series. Patching design naturally has three-fold benefit: local semantic information is retained in the embedding; computation and memory usage of the attention maps are quadratically reduced given the same look-back window; and the model can attend longer history. Our channel-independent patch time series Transformer (PatchTST) can improve the long-term forecasting accuracy significantly when compared with that of SOTA Transformer-based models. We also apply our model to self-supervised pre-training tasks and attain excellent fine-tuning performance, which outperforms supervised training on large datasets. Transferring of masked pre-trained representation on one dataset to others also produces SOTA forecasting accuracy. Code is available at: https://github.com/yuqinie98/PatchTST.}
+      \field{day}{5}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{3}
+      \field{pubstate}{prepublished}
+      \field{shorttitle}{A {{Time Series}} Is {{Worth}} 64 {{Words}}}
+      \field{title}{A {{Time Series}} Is {{Worth}} 64 {{Words}}: {{Long-term Forecasting}} with {{Transformers}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2211.14730
+      \endverb
+      \verb{eprint}
+      \verb 2211.14730
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/8Y87L5VT/Nie et al. - 2023 - A Time Series is Worth 64 Words Long-term Forecasting with Transformers.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/CR8JD8Y4/2211.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2211.14730
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2211.14730
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence,Computer Science - Machine Learning}
+    \endentry
+    \entry{vaswaniAttentionAllYou2017}{inproceedings}{}
+      \name{author}{8}{}{%
+        {{hash=7f28e84700536646dd6620a0db07ad09}{%
+           family={Vaswani},
+           familyi={V\bibinitperiod},
+           given={Ashish},
+           giveni={A\bibinitperiod}}}%
+        {{hash=62efade83d70f0323fe248755e6c90c5}{%
+           family={Shazeer},
+           familyi={S\bibinitperiod},
+           given={Noam},
+           giveni={N\bibinitperiod}}}%
+        {{hash=06649ebab1ea5cac0250746a19764975}{%
+           family={Parmar},
+           familyi={P\bibinitperiod},
+           given={Niki},
+           giveni={N\bibinitperiod}}}%
+        {{hash=831027ee0ebf22375e2a86afc1881909}{%
+           family={Uszkoreit},
+           familyi={U\bibinitperiod},
+           given={Jakob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2fd2982e30ebcec93ec1cf76e0d797fd}{%
+           family={Jones},
+           familyi={J\bibinitperiod},
+           given={Llion},
+           giveni={L\bibinitperiod}}}%
+        {{hash=27b07e4eacbf4ef7a1438e3badb7dd8d}{%
+           family={Gomez},
+           familyi={G\bibinitperiod},
+           given={Aidan\bibnamedelima N},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{useprefix=false,hash=540fcd72e1fa4bbed46604f4e6cff817}{%
+           family={Kaiser},
+           familyi={K\bibinitperiod},
+           given={Ł},
+           giveni={Ł\bibinitperiod},
+           prefix={ukasz},
+           prefixi={u\bibinitperiod}}}%
+        {{hash=95595a0fefb86187cbc36e551017d332}{%
+           family={Polosukhin},
+           familyi={P\bibinitperiod},
+           given={Illia},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{fullhash}{cb26e47f6b8133865271fc8483132297}
+      \strng{bibnamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authorbibnamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authornamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authorfullhash}{cb26e47f6b8133865271fc8483132297}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in {{Neural Information Processing Systems}}}
+      \field{title}{Attention Is {{All}} You {{Need}}}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{30}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/CXC2S83K/Vaswani et al. - 2017 - Attention is All you Need.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+      \endverb
+      \verb{url}
+      \verb https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+      \endverb
+    \endentry
+    \entry{liuGatedTransformerNetworks2021}{online}{}
+      \name{author}{7}{}{%
+        {{hash=b36aaf423ea0ff34103cd2f06296baea}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Minghao},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e477fc913638f69dea1cc6643338b316}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Shengqi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2eebe9bcff663d57eb49edc43dfee6a4}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Siyuan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1c1d22bf7e875a78958271734e77923b}{%
+           family={Jiao},
+           familyi={J\bibinitperiod},
+           given={Jiahui},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1001d44cb550c38c90c9ba2cf9e3480d}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yizhou},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9fa8325a15ae3a3bc1f22d85e84a4d09}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zhiguang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=156f3afeea913531eceb7377f750f143}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{e37105e1d30d6f0979f89b736ba5cae9}
+      \strng{fullhash}{3f6b65f8b48b192219d6b3e2f8577af6}
+      \strng{bibnamehash}{e37105e1d30d6f0979f89b736ba5cae9}
+      \strng{authorbibnamehash}{e37105e1d30d6f0979f89b736ba5cae9}
+      \strng{authornamehash}{e37105e1d30d6f0979f89b736ba5cae9}
+      \strng{authorfullhash}{3f6b65f8b48b192219d6b3e2f8577af6}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Deep learning model (primarily convolutional networks and LSTM) for time series classification has been studied broadly by the community with the wide applications in different domains like healthcare, finance, industrial engineering and IoT. Meanwhile, Transformer Networks recently achieved frontier performance on various natural language processing and computer vision tasks. In this work, we explored a simple extension of the current Transformer Networks with gating, named Gated Transformer Networks (GTN) for the multivariate time series classification problem. With the gating that merges two towers of Transformer which model the channel-wise and step-wise correlations respectively, we show how GTN is naturally and effectively suitable for the multivariate time series classification task. We conduct comprehensive experiments on thirteen dataset with full ablation study. Our results show that GTN is able to achieve competing results with current state-of-the-art deep learning models. We also explored the attention map for the natural interpretability of GTN on time series modeling. Our preliminary results provide a strong baseline for the Transformer Networks on multivariate time series classification task and grounds the foundation for future research.}
+      \field{day}{26}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{3}
+      \field{pubstate}{prepublished}
+      \field{title}{Gated {{Transformer Networks}} for {{Multivariate Time Series Classification}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2103.14438
+      \endverb
+      \verb{eprint}
+      \verb 2103.14438
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/CE4ZAYEZ/Liu et al. - 2021 - Gated Transformer Networks for Multivariate Time Series Classification.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/WSCETH5N/2103.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2103.14438
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2103.14438
+      \endverb
+      \keyw{Computer Science - Machine Learning}
+    \endentry
+    \entry{yanLearningbasedContactStatus2021}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=2c23c0fed7a8fd5646e626d329348680}{%
+           family={Yan},
+           familyi={Y\bibinitperiod},
+           given={Chaojie},
+           giveni={C\bibinitperiod}}}%
+        {{hash=aaf4818e3816b53809f264b2c1b2ecae}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7c9c65a430efc048afd1a515521c6c7a}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Qiuguo},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{9404633f657b51ee7dab87f8ee80cbde}
+      \strng{fullhash}{9404633f657b51ee7dab87f8ee80cbde}
+      \strng{bibnamehash}{9404633f657b51ee7dab87f8ee80cbde}
+      \strng{authorbibnamehash}{9404633f657b51ee7dab87f8ee80cbde}
+      \strng{authornamehash}{9404633f657b51ee7dab87f8ee80cbde}
+      \strng{authorfullhash}{9404633f657b51ee7dab87f8ee80cbde}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Opening a lock without vision sensors remains a challenge for robots. Inspired by the ability of a human to open a lock through touch and intuition, a peg-in-hole assembly method for recognizing the relative position and inclination angle of a hole is proposed. We use supervised learning to generate a contact-state model to judge the relative contact state and introduce force control strategies that ensure stable and safe interaction with the environment. Adaptive impedance control is adopted to ensure the stability of the alignment and insertion process. The proposed method is not restricted by the object shape. The system can learn an effective classification model with a small volume of force and torque data and predict the relative contact state of a peg and hole. The proposed method is verified in an experiment in which a bicycle lock is opened at different inclination angles. The proposed method has potential application in the field of industrial assembly.}
+      \field{booktitle}{2021 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}} ({{IROS}})}
+      \field{eventtitle}{2021 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}} ({{IROS}})}
+      \field{issn}{2153-0866}
+      \field{month}{9}
+      \field{title}{Learning-Based {{Contact Status Recognition}} for {{Peg-in-Hole Assembly}}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{6003\bibrangedash 6009}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/IROS51168.2021.9636147
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/MBUQSXZ9/Yan et al. - 2021 - Learning-based Contact Status Recognition for Peg-in-Hole Assembly.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/9636147
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/9636147
+      \endverb
+      \keyw{Adaptation models,Data models,Force,Stability analysis,Support vector machines,Torque,Vision sensors}
+    \endentry
+    \entry{shenLearningbasedRobotAssembly2025}{article}{}
+      \name{author}{5}{}{%
+        {{hash=fa48e80c04adf95dac847d07419caeea}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Zhifei},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=401d9d6a4740c2cb8ee085f99d1f779a}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Zhiyong},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=f9facd65e13649c53a86581cb26da85b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jingwang},
+           giveni={J\bibinitperiod}}}%
+        {{hash=aaf4818e3816b53809f264b2c1b2ecae}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7c9c65a430efc048afd1a515521c6c7a}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Qiuguo},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{d5aba5c704fc4bd3fb8ea4f7a3855741}
+      \strng{fullhash}{fd1387e602ee80fd972b6481cf8d07b7}
+      \strng{bibnamehash}{d5aba5c704fc4bd3fb8ea4f7a3855741}
+      \strng{authorbibnamehash}{d5aba5c704fc4bd3fb8ea4f7a3855741}
+      \strng{authornamehash}{d5aba5c704fc4bd3fb8ea4f7a3855741}
+      \strng{authorfullhash}{fd1387e602ee80fd972b6481cf8d07b7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a novel method for learning force-aware robot assembly skills, specifically targeting the peg insertion task on inclined hole. For the peg insertion task involving inclined holes, we employ one-dimensional convolutional networks (1DCNN) and gated recurrent units (GRU) to extract features from the time-series force information during the assembly process, thereby identifying different contact states between the peg and the hole. Subsequent to the identification of contact states, corresponding pose adjustments are executed, and overall smooth interaction is ensured through admittance control. The assembly process is dynamically adjusted using a state machine to fine-tune admittance control parameters and seamlessly switch the assembly state. Through the utilization of dual-arm clamping, we conduct key unlocking experiments on bases inclined at varying degrees. Our results demonstrate that the proposed method significantly improves the accuracy and success rate of state recognition compared to previous methods.}
+      \field{day}{1}
+      \field{issn}{2667-3797}
+      \field{journaltitle}{Biomimetic Intelligence and Robotics}
+      \field{month}{3}
+      \field{number}{1}
+      \field{shortjournal}{Biomimetic Intelligence and Robotics}
+      \field{title}{Learning-Based Robot Assembly Method for Peg Insertion Tasks on Inclined Hole Using Time-Series Force Information}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{5}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{100209}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.birob.2024.100209
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/ZJL69QQ7/Shen et al. - 2025 - Learning-based robot assembly method for peg insertion tasks on inclined hole using time-series forc.pdf;/home/tilo/snap/zotero-snap/common/Zotero/storage/B9K8E5C9/S2667379724000676.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2667379724000676
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2667379724000676
+      \endverb
+      \keyw{Contact state,Dual-arm,Force information,Manipulator assembly,Peg insertion}
+    \endentry
+    \entry{xiongDeepLearningbasedHolefinding2026}{article}{}
+      \name{author}{4}{}{%
+        {{hash=4b81091516f603d68bfaebd1311eb433}{%
+           family={Xiong},
+           familyi={X\bibinitperiod},
+           given={Jiaming},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c5a7aefdcbfaee77f0a55e247610f28b}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Haibin},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ac5bcf5c34fc30dd75b77797b42d3454}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Jiahao},
+           giveni={J\bibinitperiod}}}%
+        {{hash=700c5e0bb72126fd71161b560ed1d445}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Zihao},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c04caf74c6b865b28a1b5dc3432f7ed}
+      \strng{fullhash}{492f9ed106a99293d3ca157e6e4d0992}
+      \strng{bibnamehash}{9c04caf74c6b865b28a1b5dc3432f7ed}
+      \strng{authorbibnamehash}{9c04caf74c6b865b28a1b5dc3432f7ed}
+      \strng{authornamehash}{9c04caf74c6b865b28a1b5dc3432f7ed}
+      \strng{authorfullhash}{492f9ed106a99293d3ca157e6e4d0992}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{To address the nonlinear contact problem during the hole-finding phase of robotic peg-in-hole assembly on flexible support platforms, which significantly~affects~hole-centering accuracy, this study proposes a deviation prediction method based on time-series force perception, optimized through the Chinese Pangolin Optimizer–Convolutional Neural Network-Bidirectional Long Short-Term Memory (CPO-CNN-BiLSTM). This method utilizes CNN and BiLSTM to extract contact force features and capture bidirectional temporal dependencies, while the CPO is introduced to optimize key network parameters, thereby constructing a prediction model for relative hole center deviation. Comparative experiments were conducted on two flexible support platforms with different stiffness coefficients. The results demonstrate that the proposed method outperforms four reference architecture models (CNN, LSTM, BiLSTM, and CNN-BiLSTM) in terms of performance metrics, exhibiting superior generalization capability and stability. Furthermore, in hole-finding experiments under both stiffness conditions, a success rate of 91.7\% was achieved, validating the method’s applicability within a certain flexibility range. The findings provide a feasible technical solution for force perception and deviation compensation in flexible assembly environments.}
+      \field{day}{6}
+      \field{issn}{1806-3691}
+      \field{journaltitle}{Journal of the Brazilian Society of Mechanical Sciences and Engineering}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{number}{2}
+      \field{shortjournal}{J Braz. Soc. Mech. Sci. Eng.}
+      \field{title}{Deep Learning-Based Hole-Finding for Robotic Peg-in-Hole Assembly with Time-Series Force Data on Flexible Support Platform}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{48}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{92}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1007/s40430-025-06059-x
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/CZTJDJ5F/Xiong et al. - 2026 - Deep learning-based hole-finding for robotic peg-in-hole assembly with time-series force data on fle.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s40430-025-06059-x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s40430-025-06059-x
+      \endverb
+      \keyw{CPO-CNN-BiLSTM,Flexible support platform,Robotic peg-in-hole assembly,Time-series force}
+    \endentry
+    \entry{AssemblyPerformanceMetrics2018}{article}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{abstract}{SummaryNew technologies in the areas of robotic arms and end-effectors have the potential to accelerat}
+      \field{annotation}{Last Modified: 2025-01-15T09:58-05:00}
+      \field{journaltitle}{NIST}
+      \field{langid}{english}
+      \field{title}{Assembly {{Performance Metrics}} and {{Test Methods}}}
+      \field{urlday}{2}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/WW6CQ3B3/assembly.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nist.gov/el/intelligent-systems-division-73500/robotic-grasping-and-manipulation-assembly/assembly
+      \endverb
+      \verb{url}
+      \verb https://www.nist.gov/el/intelligent-systems-division-73500/robotic-grasping-and-manipulation-assembly/assembly
+      \endverb
+      \warn{\item article entry 'AssemblyPerformanceMetrics2018' (chapters/2-background_and_related_works/bg.bib): Invalid format '2018-05-23T12:13-04:00' of date field 'date' - ignoring}
+    \endentry
+    \entry{heoFurnitureBenchReproducibleRealworld2025a}{article}{}
+      \name{author}{4}{}{%
+        {{hash=71083205a67de56f45f661f2f9e09f7a}{%
+           family={Heo},
+           familyi={H\bibinitperiod},
+           given={Minho},
+           giveni={M\bibinitperiod}}}%
+        {{hash=88725c77ed18921a79a57636feb23792}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Youngwoon},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f8b06c1501c2163e85f0ac95ac313fc2}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Doohyun},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5556915c40a404e6fa83816576929682}{%
+           family={Lim},
+           familyi={L\bibinitperiod},
+           given={Joseph\bibnamedelima J},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{f654f3ec14b6f755b3d0f01299ac5bd9}
+      \strng{fullhash}{31dffe24b960d6948f19e71249a3d789}
+      \strng{bibnamehash}{f654f3ec14b6f755b3d0f01299ac5bd9}
+      \strng{authorbibnamehash}{f654f3ec14b6f755b3d0f01299ac5bd9}
+      \strng{authornamehash}{f654f3ec14b6f755b3d0f01299ac5bd9}
+      \strng{authorfullhash}{31dffe24b960d6948f19e71249a3d789}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Reinforcement learning (RL), imitation learning (IL), and task and motion planning (TAMP) have demonstrated impressive performance across various robotic manipulation tasks. However, these approaches have been limited to learning simple behaviors in current real-world manipulation benchmarks, such as pushing or pick-and-place. To enable more complex, long-horizon behaviors of an autonomous robot, we propose to focus on real-world furniture assembly, a complex, longhorizon robotic manipulation task that requires addressing many current robotic manipulation challenges. We present FurnitureBench, a reproducible real-world furniture assembly benchmark aimed at providing a low barrier for entry and being easily reproducible, so that researchers across the world can reliably test their algorithms and compare them against prior work. For ease of use, we provide 200+ hours of pre-collected data (5000+ demonstrations), 3D printable furniture models, a robotic environment setup guide, and systematic task initialization. Furthermore, we provide FurnitureSim, a fast and realistic simulator of FurnitureBench. We benchmark the performance of offline RL, IL, and offline-to-online RL algorithms on our assembly tasks and demonstrate the need to improve such algorithms to be able to solve our tasks in the real world, providing ample opportunities for future research.}
+      \field{issn}{0278-3649, 1741-3176}
+      \field{journaltitle}{The International Journal of Robotics Research}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{10--11}
+      \field{shortjournal}{The International Journal of Robotics Research}
+      \field{shorttitle}{{{FurnitureBench}}}
+      \field{title}{{{FurnitureBench}}: {{Reproducible}} Real-World Benchmark for Long-Horizon Complex Manipulation}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{44}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1863\bibrangedash 1891}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1177/02783649241304789
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/WL4CRTUF/Heo et al. - 2025 - FurnitureBench Reproducible real-world benchmark for long-horizon complex manipulation.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.sagepub.com/doi/10.1177/02783649241304789
+      \endverb
+      \verb{url}
+      \verb https://journals.sagepub.com/doi/10.1177/02783649241304789
+      \endverb
+    \endentry
     \entry{ur-rtde-api}{online}{}
       \name{author}{1}{}{%
         {{hash=1032484f0b650f116fdf0ddad22f1741}{%
@@ -33,8 +2392,8 @@
       \strng{authorbibnamehash}{1032484f0b650f116fdf0ddad22f1741}
       \strng{authornamehash}{1032484f0b650f116fdf0ddad22f1741}
       \strng{authorfullhash}{1032484f0b650f116fdf0ddad22f1741}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{UR RTDE API}
@@ -59,8 +2418,8 @@
       \strng{authorbibnamehash}{067e1820a5d7f9737fc0a913dae115fb}
       \strng{authornamehash}{067e1820a5d7f9737fc0a913dae115fb}
       \strng{authorfullhash}{067e1820a5d7f9737fc0a913dae115fb}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{UR RTDE Guide}
@@ -90,8 +2449,8 @@
       \strng{authorbibnamehash}{3f21152a5fb4e875f84e12008df2b6b8}
       \strng{authornamehash}{3f21152a5fb4e875f84e12008df2b6b8}
       \strng{authorfullhash}{3f21152a5fb4e875f84e12008df2b6b8}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Get Force and Torque Values in Tool Coordinate System}
@@ -100,6 +2459,78 @@
       \endverb
       \verb{url}
       \verb https://www.universal-robots.com/articles/ur/programming/get-force-and-torque-values-in-tool-coordinate-system/
+      \endverb
+    \endentry
+    \entry{BCEWithLogitsLossPyTorch211}{online}{}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{{{BCEWithLogitsLoss}} — {{PyTorch}} 2.11 Documentation}
+      \field{urlday}{7}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/MAE3HCDN/torch.nn.BCEWithLogitsLoss.html
+      \endverb
+      \verb{urlraw}
+      \verb https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html
+      \endverb
+      \verb{url}
+      \verb https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html
+      \endverb
+    \endentry
+    \entry{hanleyMeaningUseArea1982}{article}{}
+      \name{author}{2}{}{%
+        {{hash=209713a04f81c48d0ddead573f67bafa}{%
+           family={Hanley},
+           familyi={H\bibinitperiod},
+           given={J\bibnamedelima A},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=70fb7ed874c0c6a5cc6eb1c1fbbb7c34}{%
+           family={McNeil},
+           familyi={M\bibinitperiod},
+           given={B\bibnamedelima J},
+           giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \strng{fullhash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \strng{bibnamehash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \strng{authorbibnamehash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \strng{authornamehash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \strng{authorfullhash}{7280b21e28e6b42a8e6ad31edc3f6b98}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0033-8419, 1527-1315}
+      \field{journaltitle}{Radiology}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{number}{1}
+      \field{shortjournal}{Radiology}
+      \field{title}{The Meaning and Use of the Area under a Receiver Operating Characteristic ({{ROC}}) Curve.}
+      \field{urlday}{8}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{volume}{143}
+      \field{year}{1982}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{29\bibrangedash 36}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1148/radiology.143.1.7063747
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/HIC32C4T/Hanley and McNeil - 1982 - The meaning and use of the area under a receiver operating characteristic (ROC) curve..pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://pubs.rsna.org/doi/10.1148/radiology.143.1.7063747
+      \endverb
+      \verb{url}
+      \verb http://pubs.rsna.org/doi/10.1148/radiology.143.1.7063747
       \endverb
     \endentry
   \enddatalist

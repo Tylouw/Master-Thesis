@@ -20,7 +20,7 @@ The second subquestion and first benchmark evaluates the basic learnability of t
 The third subquestion and second benchmark evaluates generalization to unseen holes in the insertion taskboard. Each hole has its own specific combination of object geometry and tolerance. All samples belonging to one geometry--tolerance combination are excluded from the training and validation data and used only for the test-set.
 
 \subsection{SQ4 - Benchmark 3, Test on Held-out Group}
-\paragraph{SQ4: How well does the model generalize to larger distribution shifts, such as unseen geometries, unseen tolerances, or unseen gripper conditions?}
+\paragraph{SQ4: How well does the model generalize to unseen geometries, unseen tolerances, or unseen gripper conditions?}
 The fourth subquestion and third benchmark uses an entire group of samples for the test-set. These groups correspond to 3 different object geometries, 3 different tolerance levels and 3 different gripper types. This creates a much harder generalization challenge, because the model must classify samples from groups whos insertion behavior can differ strongly from the training-set.
 
 \subsection{SQ5 - Deviation Analysis I}

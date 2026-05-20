@@ -190,10 +190,19 @@ The function \texttt{create\_plan()} generats this schedule before the recording
 
 \figref{fig:batch2_example} shows exemplary the result of applying more diversity to the dataset for Batch 2 and Batch 3.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{chapters/4-dataset_construction_and_labeling/SF_batch_2_big_rod_t01.pdf}
-    \caption{Time series plot of \texttt{big\_rod\_t0.1} from Batch 2 with 480 insertions, showing individual success and failed force curves.}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/SF_batch_2_big_rod_t01_fz_success.pdf}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/SF_batch_2_big_rod_t01_fz_fail.pdf}
+        \caption{}
+    \end{subfigure}
+    \caption{Time series plots of \texttt{big\_rod\_t0.1} from Batch 2 with 480 insertions, showing individual success (a) and failed (b) force curves.}
     \label{fig:batch2_example}
 \end{figure}
 
@@ -221,7 +230,7 @@ Another important design choice concerned the sequence timing. Once a success or
 
 \section{Success and Failure Labeling}\label{sec:dataset_labeling}
 
-The labeling procedure was performed online during data collection. No manual post-hoc annotation of successful and failed insertions was required. The mechanical principle of success detection has already been explained in Chapter~\ref{ch:rob_setup}. From the software perspective, an insertion attempt was labelled as successful when the measured load-cell value exceeded a threshold of 30\,000 during the insertion process. Once this threshold was reached, the motion was stopped and the current sequence was marked as a successful insertion.
+The labeling procedure was performed online during data collection. No manual post-hoc annotation of successful and failed insertions was required. The mechanical principle of success detection has already been explained in Chapter~\ref{ch:rob_setup}. From the software perspective, an insertion attempt was labelled as successful when the measured load-cell value exceeded a threshold of 30\,000 during the insertion process. The threshold is compared to the raw load-cell output, which has an arbitrary range and scaling without calibration. Once this threshold was reached, the motion was stopped and the current sequence was marked as a successful insertion.
 
 All remaining attempts were labelled as failures. In order to preserve additional information about the failure mode, three different failure reasons were stored in the metadata. The first failure condition is a timeout. This occurred when no successful insertion has been detected before the predefined sequence length of \SI{3.0}{\second} has elapsed. The second failure condition is a stall or jam. This was detected when the absolute TCP velocity in insertion direction fell below \SI{0.002}{\meter\per\second} while the absolute force in $z$-direction exceeded \SI{15}{\newton} for more than \SI{0.25}{\second}. The third failure condition is an exceeded force limit. In this case, if the measured force in insertion direction became larger than the force limit defined for the current trial, the insertions label is marked as failure due to force limit reached. Especially for this case recording continued until the fixed sequence length of \SI{3}{\second} is reached. Depending on the plan item, this threshold was set to \SI{30}{\newton}, \SI{40}{\newton}, or \SI{50}{\newton}.
 
@@ -278,32 +287,37 @@ Besides the recorded time series, a JSON metadata file was stored for each inser
     \centering
     \caption{Metadata stored for each recorded insertion attempt.}
     \label{tab:recorded_metadata}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
         \hline
-        Metadata field & Description \\
+        Metadata field & Description & Data type \\
         \hline
-        \texttt{saved\_at} & timestamp of file creation \\
-        \texttt{sample\_rate\_Hz} & sampling rate \\
-        \texttt{num\_samples} & number of recorded time steps \\
-        \texttt{sequence\_length\_s} & saved sequence length \\
-        \texttt{plan\_item.grasp\_height} & selected grasp height \\
-        \texttt{plan\_item.approach\_height} & selected approach height \\
-        \texttt{plan\_item.force\_level} & selected insertion force level \\
-        \texttt{plan\_item.force\_limit} & selected abort force threshold \\
-        \texttt{plan\_item.record\_offset} & temporal offset of recording start \\
-        \texttt{plan\_item.deviation} & Cartesian positional deviation \\
-        \texttt{plan\_item.tilt} & angular deviation in tool $x$- and $y$-axes \\
-        \texttt{successful\_insertion} & binary success label \\
-        \texttt{failure\_reason} & timeout, stall/jam, or force limit \\
-        \texttt{rod\_type} & rod type (\texttt{big}, \texttt{small} or \texttt{rect}) \\
-        \texttt{tolerance} & tolerance level of the current hole ($0.1$, $0.2$ or $0.3$) \\
-        \texttt{batch} & from which batch the insertion came (\texttt{batch\_1}, \texttt{batch\_2} or \texttt{batch\_3}) \\
-        \texttt{rod\_geometry} & its physical geometry type (\texttt{round} or \text{rect}) \\
-        \texttt{gripper\_type} & the gripper used (\texttt{round}, \texttt{rect} or \texttt{flat})\\
-        \texttt{holderPose\_Up}, \texttt{holderPose\_Down} & grasping poses \\
-        \texttt{insertionPose} & insertion pose without deviation \\
-        \texttt{cycle\_time\_s} & measured cycle duration \\
-        \texttt{hash\_number} & this insertions unique hash \\
+        \texttt{saved\_at} & timestamp of file creation & \texttt{datetime.now().isoformat()} \\
+        \texttt{sample\_rate\_Hz} & sampling rate & \texttt{float} \\
+        \texttt{num\_samples} & number of recorded time steps & \texttt{int} \\
+        \texttt{sequence\_length\_s} & saved sequence length & \texttt{float} \\
+        \hline
+        \texttt{plan\_item.grasp\_height} & selected grasp height & \texttt{float} \\
+        \texttt{plan\_item.approach\_height} & selected approach height & \texttt{float} \\
+        \texttt{plan\_item.force\_level} & selected insertion force level & \texttt{float} \\
+        \texttt{plan\_item.force\_limit} & selected abort force threshold & \texttt{float} \\
+        \texttt{plan\_item.record\_offset} & temporal offset of recording start & \texttt{float} \\
+        \texttt{plan\_item.deviation} & Cartesian positional deviation in $x,y$ & [\texttt{float}, \texttt{float}]  \\
+        \texttt{plan\_item.tilt} & angular deviation in tool $x$- and $y$-axes & [\texttt{float}, \texttt{float}] \\
+        \hline
+        \texttt{successful\_insertion} & binary success label & \texttt{boolean} \\
+        \texttt{failure\_reason} & timeout, stall/jam, or force limit & \texttt{string} \\
+        \hline
+        \texttt{rod\_type} & rod type (\texttt{big}, \texttt{small} or \texttt{rect}) & \texttt{string} \\
+        \texttt{tolerance} & \makecell[l]{tolerance level of the current hole\\($0.1$, $0.2$ or $0.3$)} & \texttt{float} \\
+        \texttt{batch} & \makecell[l]{from which batch the insertion came\\(\texttt{batch\_1}, \texttt{batch\_2} or \texttt{batch\_3})} & \texttt{string} \\
+        \texttt{rod\_geometry} & its physical geometry type (\texttt{round} or \text{rect}) & \texttt{string} \\
+        \texttt{gripper\_type} & the gripper used (\texttt{round}, \texttt{rect} or \texttt{flat}) & \texttt{string}\\
+        \hline
+        \texttt{holderPose\_Up}, \texttt{holderPose\_Down} & grasping poses & \texttt{ndarray [6]} \\
+        \texttt{insertionPose} & insertion pose without deviation & \texttt{ndarray [6]} \\
+        \hline
+        \texttt{cycle\_time\_s} & measured cycle duration & \texttt{float} \\
+        \texttt{hash\_number} & this insertions unique hash & \texttt{string} \\
         \hline
     \end{tabular}
 \end{table}
