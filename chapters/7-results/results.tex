@@ -1,1 +1,319 @@
-\chapter{Results}\label{ch:results}
+\chapter{Results}
+\label{chap:results}
+This chapter presents the main results and findings from all experiments defined in the previous Chapter \ref{ch:experiments}. First a short revisit of the results from the Best Channel Study is given, as the best channels are used in the further experiments.
+
+The main results of this thesis begin with the three Benchmarks, to test the PatchTST classifiers ability to generalize to unseen dataset domains. Benchmark 1 assigns the testset over all domains, Benchmark 2 to specific \texttt{rod\_type + tolerance} domains and Benchmark 3 assigns the testset individually to all domain-attributes for a broader held-out testset.
+
+After the Benchmark results follow the results from the Deviation Analysis I and II, which aim to investigate how certain deviations applied to the insertions, affect physical success outcome, and which deviations produce ambiguous insertion signals that confuse the models ability to classify correctly.
+
+In the end a summary of the main findings is given.
+
+
+
+\section{Best Channel Study}
+\label{sec:results_best_channel}
+The Best Channel Study was conducted as a standalone study as the first Experiment in Section \ref{sec:exp1_best_channel_study} with its own Motivation, Methods, Results, Discussion and Conclusion.
+The recorded dataset contains these signal modalities: force/torque, TCP pose, TCP velocity, joint pose, joint velocity, tool acceleration, per-joint current consumption, and temperature readings per joint.
+
+Stage 1 evaluated each individual channel group with the \texttt{Base} PatchTST model and selected force/torque, TCP pose, joint velocity and current consumption as the strongest signals based on validation balanced accuracy. Refer to \figref{fig:best_channel_single_val_bal_acc} and \figref{fig:best_channel_single_val_loss} in Section \ref{sec:best_channel_study_results} for the detailed comparison.
+
+Stage 2 combined the selected channel groups in all $4\times4=16$ possible ways, with training being done with the \texttt{Big} PatchTST model, in order to better represent the higher dimensional and information rich data in latent space. All $16$ tested channel combinations are shown in an odered binary counting pattern in \figref{fig:results_BCS_comparison}. Light blue highlighted rows mark the single channel groups. \tabref{tab:best_channels_in_detail} shows the validation balanced accuracy from the selected best channels individually and as a combined group.
+
+The best channel study shows that FT is the strongest individual channel group based on mean validation balanced accuracy in \tabref{tab:best_channels_in_detail}, but that the highest performance is obtained when FT is combined with additional robot-state modalities. In particular, current, TCP pose, and joint velocity provide complementary information about actuator load, geometric state, and motion dynamics. Based on these results, the combination of F/T, TCP pose, joint velocity, and current is used for the following benchmark experiments.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/7-results/best_channel_study/channel_matrix_plot.png}
+    \caption{All combinations of the selected best channels evaluated with the \texttt{Big} model on validation balanced accuracy and validation loss across the 9 training run seed combinations. Rows highlighted in light blue mark the single channel groups.}
+    \label{fig:results_BCS_comparison}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Best channels selected with detailed view on validation balanced accuracy across the 9 training runs. ms: model seed, ss: split seed.}
+    \label{tab:best_channels_in_detail}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Channel} & \textbf{Mean $\pm$ std} & \textbf{Min (ms, ss)} & \textbf{Max (ms, ss)}\\
+        \midrule
+
+        \texttt{FT} & 0.8859 $\pm$ 0.0075 & 0.8716 (420,69) & 0.8930 (420,420)\\
+        \texttt{TCP\_POS} & 0.8854 $\pm$ 0.0053 & 0.8782 (42,42) & 0.8932 (69,69) \\
+        \texttt{JOINT\_VEL} & 0.8535 $\pm$ 0.0083 & 0.8447 (420,42) & 0.8667 (69,69) \\
+        \texttt{CURRENT} & 0.8792 $\pm$ 0.0125 & 0.8607 (69,69) & 0.8974 (420,42) \\
+        \texttt{FT} + \texttt{TCP\_POS} + \texttt{JOINT\_VEL} + \texttt{CURRENT} & 0.9139 $\pm$ 0.0047 & 0.9081 (420,69) & 0.9227 (420,42)\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\newpage
+\section{Benchmark 1: Test on Mixed Split}
+\label{sec:results_benchmark1}
+Benchmark 1 evaluates the selected channel configuration under an in-distribution split, where the test samples are unseen insertion attempts but originate from the same overall experimental domain as the training data. This testset is evaluated on the
+\begin{itemize}
+    \item Base config: \texttt{Base} PatchTST model with \texttt{FT} as the only input data and
+    \item Big config: \texttt{Big} PatchTST model with the best channels \texttt{FT + TCP\_POS + JOINT\_VEL + CURRENT} as input data.
+\end{itemize}
+
+The test balanced accuracy (TBA) in \figref{fig:bm1_test_result} (a) is high for both model variants. The Base config reaches a mean TBA of 0.8617, while the Big config reaches 0.8909 (\tabref{tab:bm1_bal_acc_detail}). Across the evaluated seed combinations, the Big config achieves higher balanced accuracy in all runs.
+
+The test loss in \figref{fig:bm1_test_result} (b) shows a different pattern. The Base config has a lower mean test loss and a smaller spread across seeds, while the Big config shows a higher mean loss and larger variability. Thus, Benchmark 1 shows a clear advantage of the Big config in test balanced accuracy, but not in test loss.
+
+The number of sequences and class balance of the training, validation and test split is shown in \tabref{tab:bm1_data_split}.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/7-results/bm1/bm1_bal_acc.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/7-results/bm1/bm1_test_loss.png}
+        \caption{}
+    \end{subfigure}
+    \caption{Benchmark 1 results. (a) Test balanced accuracy with direct comparison of the Base config consisting of the \texttt{Base} PatchTST model on \texttt{FT} only and the Big config with the \texttt{Big} PatchTST model on the best channels.}
+    \label{fig:bm1_test_result}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Test balanced accuracy detailed results of Benchmark 1.}
+    \label{tab:bm1_bal_acc_detail}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Domain} & \textbf{Mean $\pm$ std} & \textbf{Min (ms, ss)} & \textbf{Max (ms, ss)}\\
+        \midrule
+
+        \texttt{Base BM1} & 0.8617 $\pm$ 0.0130 & 0.8410 (420, 42) & 0.8768 (42, 69)\\
+        \texttt{Big BM1} & 0.8909 $\pm$ 0.0066 & 0.8816 (420, 420) & 0.9004 (420, 69) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Exact Train, Validation, Test splits with class balance for Benchmark 1.}
+    \label{tab:bm1_data_split}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Training (pos, neg)} & \textbf{Validation (pos, neg)} & \textbf{Test (pos, neg)}\\
+        \midrule
+
+        5852 (3173, 2679) & 1033 (560, 473) & 1215 (659, 556)\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Benchmark 2: Test on Individual Hole}
+\label{sec:results_benchmark2}
+
+Benchmark 2 evaluates the model on unseen hole domains. The exact train, validation, and test splits are listed in \tabref{tab:bm2_data_split}, with each held-out domain containing either 820 ($820 = 100 + 360 + 360$) or 1060 ($1060 = 100 + 480 + 480$) test samples with both classes represented.
+
+The detailed test balanced accuracy values are reported in \tabref{tab:bm2_bal_acc_detail} and visualized in \figref{fig:bm2_test_bal_acc_result}. Both configs reach balanced accuracies above 0.80 for most held-out domains. The Big config achieves higher mean balanced accuracy than the Base config in all evaluated domains. The highest results are obtained for \texttt{BM2\_small\_3}, \texttt{BM2\_rect\_2}, and \texttt{BM2\_rect\_3}, while \texttt{BM2\_rect\_1} is the only domain with a clearly lower balanced accuracy.
+
+The test loss values in \figref{fig:bm2_test_loss_result} also identify \texttt{BM2\_rect\_1} as the most difficult held-out domain. This domain shows the highest loss values and the largest spread across seeds, especially for the Big config. For the remaining domains, the loss values are lower and less spread.
+
+Overall, Benchmark 2 shows that the Big config performs best in terms of balanced accuracy, but that performance varies noticeably between the individual held-out hole domains.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm2/bm2_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm2_test_bal_acc_result}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm2/bm2_test_loss.png}
+    \caption{Test loss of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm2_test_loss_result}
+\end{figure}
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Test balanced accuracy detailed results of Benchmark 2. Rows in bold show the highest test balanced accuracy, while underlined rows show the lowest test balanced accuracy.}
+    \label{tab:bm2_bal_acc_detail}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Domain} & \textbf{Mean $\pm$ std} & \textbf{Min (ms, ss)} & \textbf{Max (ms, ss)}\\
+        \midrule 
+
+        \texttt{Base BM2\_big\_1} & \underline{0.8169} $\pm$ \underline{0.0139} & \underline{0.7889 (420, 69)} & \underline{0.8344 (42, 42)}\\
+        \texttt{Big BM2\_big\_1} & 0.8406 $\pm$ 0.0124 & 0.8209 (42, 420) & 0.8573 (420, 42) \\
+        \texttt{Base BM2\_big\_2} & 0.8190 $\pm$ 0.0090 & 0.8062 (42, 42) & 0.8336 (420, 42)\\
+        \texttt{Big BM2\_big\_2} & 0.8558 $\pm$ 0.0151 & 0.8381 (69, 42) & 0.8739 (42, 42) \\
+        \texttt{Base BM2\_big\_3} & 0.8345 $\pm$ 0.0062 & 0.8270 (420, 42) & 0.8469 (420, 69)\\
+        \texttt{Big BM2\_big\_3} & 0.8601 $\pm$ 0.0097 & 0.8435 (42, 69) & 0.8749 (420, 420) \\
+        \midrule
+        \texttt{Base BM2\_small\_1} & 0.8272 $\pm$ 0.0131 & 0.8034 (420, 69) & 0.8446 (69, 420)\\
+        \texttt{Big BM2\_small\_1} & 0.8509 $\pm$ 0.004 & 0.8442 (42, 42) & 0.8588 (69, 69) \\
+        \texttt{Base BM2\_small\_2} & 0.8308 $\pm$ 0.0178 & 0.7850 (420, 69) & 0.8458 (42, 420)\\
+        \texttt{Big BM2\_small\_2} & 0.8664 $\pm$ 0.0077 & 0.8499 (42, 420) & 0.8774 (69, 42) \\
+        \texttt{Base BM2\_small\_3} & 0.8643 $\pm$ 0.0136 & 0.8502 (42, 69) & 0.8942 (69, 69)\\
+        \texttt{Big BM2\_small\_3} & \textbf{0.8988} $\pm$ \textbf{0.0100} & \textbf{0.8872 (42, 42)} & \textbf{0.9184 (42, 69)} \\
+        \midrule
+        \texttt{Base BM2\_rect\_1} & \underline{0.6986} $\pm$ \underline{0.0148} & \underline{0.6779 (69, 69)} & \underline{0.7246 (420, 42)}\\
+        \texttt{Big BM2\_rect\_1} & 0.7094 $\pm$ 0.0219 & 0.6789 (42, 42) & 0.7391 (69, 42) \\
+        \texttt{Base BM2\_rect\_2} & 0.8427 $\pm$ 0.0097 & 0.8214 (69, 42) & 0.8532 (42, 42)\\
+        \texttt{Big BM2\_rect\_2} & \textbf{0.8874} $\pm$ \textbf{0.0141} & \textbf{0.8661 (420, 69)} & \textbf{0.9076 (69, 42)} \\
+        \texttt{Base BM2\_rect\_3} & 0.8310 $\pm$ 0.0092 & 0.8132 (69, 69) & 0.8427 (420, 69)\\
+        \texttt{Big BM2\_rect\_3} & \textbf{0.8824} $\pm$ \textbf{0.0071} & \textbf{0.8695 (69, 420)} & \textbf{0.8951 (69, 42)} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Exact Train, Validation, Test splits with class balance for Benchmark 2.}
+    \label{tab:bm2_data_split}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Domain} & \textbf{Training (pos, neg)} & \textbf{Validation (pos, neg)} & \textbf{Test (pos, neg)}\\
+        \midrule
+
+        \texttt{BM2\_big\_1} & 5984 (3254, 2730) & 1056 (574, 482) & 1060 (564, 496)\\
+        \texttt{BM2\_big\_2} & 6188 (3350, 2838) & 1092 (591, 501) & 820 (451, 369)\\
+        \texttt{BM2\_big\_3} & 6188 (3365, 2823) & 1092 (594, 498) &  820 (433, 387)\\
+        
+        \texttt{BM2\_small\_1} & 5984 (3199, 2785) & 1056 (565, 491) & 1060 (628, 432)\\
+        \texttt{BM2\_small\_2} & 6188 (3296, 2892) & 1092 (582, 510) & 820 (514, 306)\\
+        \texttt{BM2\_small\_3} & 6188 (3397, 2791) & 1092 (600, 492) & 820 (395, 425)\\
+
+        \texttt{BM2\_rect\_1} & 5984 (3290, 2694) & 1056 (581, 475) & 1060 (521, 539)\\
+        \texttt{BM2\_rect\_2} & 6188 (3343, 2845) & 1092 (590, 502) & 820 (459, 361)\\
+        \texttt{BM2\_rect\_3} & 6188 (3370, 2818) & 1092 (595, 497) & 820 (427, 393)\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Benchmark 3: Test on Held-Out Group}
+\label{sec:results_benchmark3}
+
+Benchmark 3 evaluates generalization to held-out domain groups. The exact train, validation, and test splits are listed in \tabref{tab:bm3_data_split}. Depending on the held-out domain, the test sets contain between 900 and 3600 samples, with both success and failure samples represented in all cases.
+
+The detailed test balanced accuracy results are reported in \tabref{tab:bm3_bal_acc_detail}. Across all held-out domain groups, the Big config achieves a higher mean TBA than the Base config. For \texttt{BM3\_batch\_1} however, this difference is small, but more significant for other domains, especially for the rectangular rod and gripper domains.
+
+The results for the held-out \texttt{batch} domains are shown in \figref{fig:bm3_batch_test_bal_acc}, there the test balanced accuracy is lower than for most other domain groups. The Big config reaches mean balanced accuracies of 0.6781, 0.7083, and 0.7691 for \texttt{BM3\_batch\_1}, \texttt{BM3\_batch\_2}, and \texttt{BM3\_batch\_3}, respectively. The largest seed-dependent spread is observed for \texttt{BM3\_batch\_1}.
+
+For the held-out \texttt{rod\_type} domains the results in \figref{fig:bm3_rod_type_test_bal_acc} show that the Big config reaches similar results for \texttt{BM3\_big} and \texttt{BM3\_small}, with mean balanced accuracies of 0.8246 and 0.8265. The held-out \texttt{BM3\_rect} domain has lower mean TBA than the other rod domains, however the improvement of the Big config over the Base config of $0.7507 - 0.6834 = 0.0673$ mean TBA points is the highest in the entire Benchmark.
+
+The highest TBA results of Benchmark 3, in \figref{fig:bm3_tolerance_test_bal_acc}, are obtained by the held-out tolerance domains. The Big config reaches a mean TBA of 0.7980 for \texttt{BM3\_tol\_1}, 0.8698 for \texttt{BM3\_tol\_2}, with 0.8798 for \texttt{BM3\_tol\_3} being the highest mean TBA achieved in the entire Benchmark. These domains also show comparatively small standard deviations across seed combinations.
+
+The results for the held-out \texttt{gripper\_type} domains in \figref{fig:bm3_gripper_type_test_bal_acc} show that the Big config reaches mean TBAs of 0.7735 for \texttt{BM3\_round}, 0.7122 for \texttt{BM3\_rect\_gripper}, and 0.7691 for \texttt{BM3\_flat}. The rectangular gripper condition is therefore the lowest-performing gripper-domain result, with \texttt{BM3\_rect\_gripper} on Base config achieving the lowest mean TBA in the entire Benchmark.
+
+The summarized Big config results in \figref{fig:bm3_all_domains_test_bal_acc} show the same ordering across domain groups. The highest test balanced accuracies are obtained for the held-out \texttt{tolerance} domains, followed by the \texttt{big} and \texttt{small} \texttt{rod\_type} domains. The lowest results occur in the held-out \texttt{batch} domains and in the \texttt{BM3\_rect\_gripper} domain. The corresponding test loss plots are provided in \appref{app:bm3_loss}; they show higher loss values for the lower-performing domains, especially in the \texttt{batch} and \texttt{BM3\_rect\_gripper} cases.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm3/bm3_batch_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm3_batch_test_bal_acc}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm3/bm3_rod_type_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm3_rod_type_test_bal_acc}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm3/bm3_tolerance_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm3_tolerance_test_bal_acc}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm3/bm3_gripper_type_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm3_gripper_type_test_bal_acc}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{chapters/7-results/bm3/bm3_all_domains_test_bal_acc.png}
+    \caption{Test balanced accuracy of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
+    \label{fig:bm3_all_domains_test_bal_acc}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Test balanced accuracy detailed results of Benchmark 3.}
+    \label{tab:bm3_bal_acc_detail}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Domain} & \textbf{Mean $\pm$ std} & \textbf{Min (ms, ss)} & \textbf{Max (ms, ss)}\\
+        \midrule
+
+        \texttt{Base BM3\_batch\_1} & \underline{0.6754} $\pm$ \underline{0.0350} & \underline{0.6168 (420, 420)} & \underline{0.7211 (69, 42)}\\
+        \texttt{Big BM3\_batch\_1} & 0.6781 $\pm$ 0.0490 & 0.5930 (69, 420) & 0.7703 (69, 42) \\
+        \texttt{Base BM3\_batch\_2} & 0.6848 $\pm$ 0.0100 & 0.6692 (420, 69) & 0.7033 (42, 42)\\
+        \texttt{Big BM3\_batch\_2} & 0.7083 $\pm$ 0.0070 & 0.6959 (42, 42) & 0.7183 (42, 69) \\
+        \texttt{Base BM3\_batch\_3} & 0.7112 $\pm$ 0.0086 & 0.6968 (420, 69) & 0.7261 (69, 42)\\
+        \texttt{Big BM3\_batch\_3} & \textbf{0.7691} $\pm$ \textbf{0.0133} & \textbf{0.7545 (42, 69)} & \textbf{0.7911 (42, 420)} \\
+        \midrule
+        \texttt{Base BM3\_big} & 0.7884 $\pm$ 0.0062 & 0.7817 (420, 69) & 0.7985 (69, 42)\\
+        \texttt{Big BM3\_big} & 0.8246 $\pm$ 0.0087 & 0.8151 (42, 42) & 0.8407 (69, 69) \\
+        \texttt{Base BM3\_small} & 0.8056 $\pm$ 0.0128 & 0.7867 (69, 42) & 0.8202 (69, 420)\\
+        \texttt{Big BM3\_small} & \textbf{0.8265} $\pm$ \textbf{0.0109} & \textbf{0.8049 (42, 42)} & \textbf{0.8415 (69, 69)} \\
+        \texttt{Base BM3\_rect} & \underline{0.6834} $\pm$ \underline{0.0074} & \underline{0.6714 (69, 69)} & \underline{0.6937 (42, 42)}\\
+        \texttt{Big BM3\_rect} & 0.7507 $\pm$ 0.0169 & 0.7210 (69, 69) & 0.7753 (69, 42) \\
+        \midrule
+        \texttt{Base BM3\_tol\_1} & \underline{0.7733} $\pm$ \underline{0.0090} & \underline{0.7587 (69, 42)} & \underline{0.7858 (420, 42)}\\
+        \texttt{Big BM3\_tol\_1} & 0.7980 $\pm$ 0.0088 & 0.7856 (42, 42) & 0.8116 (420, 69) \\
+        \texttt{Base BM3\_tol\_2} & 0.8228 $\pm$ 0.0065 & 0.8130 (42, 69) & 0.8338 (69, 69)\\
+        \texttt{Big BM3\_tol\_2} & 0.8698 $\pm$ 0.0046 & 0.8633 (69, 42) & 0.8759 (42, 69) \\
+        \texttt{Base BM3\_tol\_3} & 0.8335 $\pm$ 0.0076 & 0.8227 (420, 69) & 0.8492 (42, 69)\\
+        \texttt{Big BM3\_tol\_3} & \textbf{0.8798} $\pm$ \textbf{0.0062} & \textbf{0.8720 (69, 420)} & \textbf{0.8909 (420, 69)} \\
+        \midrule
+        \texttt{Base BM3\_round} & 0.7280 $\pm$ 0.0119 & 0.7047 (69, 42) & 0.7437 (42, 42)\\
+        \texttt{Big BM3\_round} & \textbf{0.7735} $\pm$ \textbf{0.0121} & \textbf{0.7501 (69, 420)} & \textbf{0.7908 (420, 420)} \\
+        \texttt{Base BM3\_rect\_gripper} & \underline{0.6709} $\pm$ \underline{0.0131} & \underline{0.6494 (69, 420)} & \underline{0.6861 (42, 42)}\\
+        \texttt{Big BM3\_rect\_gripper} & 0.7122 $\pm$ 0.0197 & 0.6833 (69, 69) & 0.7430 (42, 69) \\
+        \texttt{Base BM3\_flat} & 0.7112 $\pm$ 0.0086 & 0.6968 (420, 69) & 0.7261 (69, 42)\\
+        \texttt{Big BM3\_flat} & 0.7691 $\pm$ 0.0133 & 0.7545 (42, 69) & 0.7911 (42, 420) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Exact Train, Validation, Test splits with class balance for Benchmark 3.}
+    \label{tab:bm3_data_split}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Domain} & \textbf{Training (pos, neg)} & \textbf{Validation (pos, neg)} & \textbf{Test (pos, neg)}\\
+        \midrule
+
+        \texttt{BM3\_batch\_1} & 6120 (3322, 2798) & 1080 (586, 494) & 900 (484, 416) \\
+        \texttt{BM3\_batch\_2} & 3825 (2054, 1771) & 675 (362, 313) & 3600 (1976, 1624) \\
+        \texttt{BM3\_batch\_3} & 3825 (2091, 1734) & 675 (369, 306) & 3600 (1932, 1668) \\
+
+        \texttt{BM3\_big} & 4590 (2502, 2088) & 810 (442, 368) & 2700 (1448, 1252) \\
+        \texttt{BM3\_small} & 4590 (2427, 2163) & 810 (428, 382) & 2700 (1537, 1163) \\
+        \texttt{BM3\_rect} & 4590 (2537, 2053) & 810 (448, 362) & 2700 (1407, 1293) \\
+
+        \texttt{BM3\_tol\_1} & 4182 (2277, 1905) & 738 (402, 336) & 3180 (1713, 1467) \\
+        \texttt{BM3\_tol\_2} & 4794 (2523, 2271) & 846 (445, 401) & 2460 (1424, 1036) \\
+        \texttt{BM3\_tol\_3} & 4794 (2666, 2128) & 846 (471, 375) & 2460 (1255, 1205) \\
+
+        \texttt{BM3\_round} & 4335 (2313, 2022) & 765 (408, 357) & 3000 (1671, 1329) \\
+        \texttt{BM3\_rect} & 5610 (3063, 2547) & 990 (540, 450) & 1500 (789, 711) \\
+        \texttt{BM3\_flat} & 3825 (2091, 1734) & 675 (369, 306) & 3600 (1932, 1668) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Deviation Analysis I: Physical Success Rate}
+\label{subsec:results_deviation_analysis_1}
+
+\section{Deviation Analysis II: Model Confusion}
+\label{subsec:results_deviation_analysis_2}
+
+\section{Summary of Main Findings}
+\label{sec:results_summary}

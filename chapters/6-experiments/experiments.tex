@@ -1,5 +1,51 @@
 \chapter{Experiments} \label{ch:experiments}
-\section{Reporting of Experiments} \label{sec:reporing_of_experiments}
+\section{Domain Definition and Reporting of Experiments} \label{sec:reporing_of_experiments}
+\paragraph{Domain Definition}
+For the later Benchmarks and Deviation Analysis the recorded dataset must be split into subsets that are then used for further testing. To be able to clearly index the dataset to create different subsets a domain is defined as a unique combination of attributes:
+
+\texttt{domain = batch + rod\_type + tolerance + gripper\_type}.
+
+Each Attribute can have the following values (\tabref{tab:domain_attributes}):
+
+\begin{table}[htbp]
+    \centering
+    \caption{Attributes with their associated values, that define a domain.}
+    \label{tab:domain_attributes}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Attribute} & \textbf{Value}\\
+        \midrule
+
+        \texttt{batch} & \texttt{None}, \texttt{batch\_1}, \texttt{batch\_2}, \texttt{batch\_3}\\
+        \texttt{rod\_type} & \texttt{None}, \texttt{big\_rod}, \texttt{small\_rod}, \texttt{rect\_rod}\\
+        \texttt{tolerance} & \texttt{None}, \texttt{0.1}, \texttt{0.2}, \texttt{0.3}\\
+        \texttt{gripper\_type} & \texttt{None}, \texttt{round}, \texttt{rect}, \texttt{flat}\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+If for example all attributes are set to \texttt{None}, essentially all attributes are selected, which means the whole dataset is indexed.
+But if for instance \texttt{rod\_type = small\_rod} and \texttt{batch = batch\_3}, then the selected subset contains only sequences coming from \texttt{small\_rod} and \texttt{batch\_3}, across all tolerances and all gripper types. 
+However the \texttt{gripper\_type} attribute cannot be freely selected, because it is dependent on \texttt{batch} and \texttt{rod\_type}, according to \tabref{tab:gripper_type_exception}. This is due to the way the dataset was recorded.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Attributes with their associated values, that define a domain.}
+    \label{tab:gripper_type_exception}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{\texttt{gripper\_type}} & \textbf{Available \texttt{batch}} & \textbf{Available \texttt{rod\_type}}\\
+        \midrule
+
+        \texttt{round} & \texttt{batch\_1}, \texttt{batch\_2} & \texttt{big\_rod}, \text{small\_rod}\\
+        \texttt{rect} & \texttt{batch\_1}, \texttt{batch\_2} & \text{rect\_rod}\\
+        \texttt{flat} & \texttt{batch\_3} & All rod types available\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\paragraph{Reporting of Experiments}
+
 To reduce the influence of randomness, the benchmark experiments are repeated with multiple seed combinations. Two different random seeds are distinguished. The \textit{model seed} controls the model initialization, whereas the \textit{split seed} controls the randomized train/validation/test sets. For the benchmark experiments, the seed sets
 \begin{equation}
 \mathcal{S}_{\text{train}} = \{42, 69, 420\},
@@ -20,9 +66,7 @@ are combined, resulting in nine runs per experiment. An experiment is a specific
 This design makes it possible to assess not only average performance but also robustness with respect to both data partitioning and stochastic training effects.
 
 \section{Experiment 1: Best Channel Study}
-\label{sec:sq1}
-
-% \paragraph{SQ1: Which sensor channels or channel groups provide the most informative input for robust insertion-success classification?}
+\label{sec:exp1_best_channel_study}
 
 \subsection{Motivation}
 
@@ -35,14 +79,14 @@ To keep the search doable, the study was not designed a full evaluation of all p
 \paragraph{Stage 1: Individual channel-group tests}
 In the first stage, each recorded channel group was evaluated individually using the \texttt{Base} PatchTST configuration introduced in \tabref{tab:patchtst_hyperparameters}. The investigated groups were:
 \begin{itemize}
-    \item F/T,
-    \item TCP pose,
-    \item TCP velocity,
-    \item joint pose,
-    \item joint velocity,
-    \item tool acceleration,
-    \item current consumption per joint,
-    \item and temperature per joint.
+    \item F/T (\texttt{FT}),
+    \item TCP pose (\texttt{TCP\_POS}),
+    \item TCP velocity (\texttt{TCP\_VEL}),
+    \item Joint pose (\texttt{JOINT\_POS}),
+    \item Joint velocity (\texttt{JOINT\_VEL}),
+    \item Tool acceleration from internal accelerometer (\texttt{TOOL\_ACC}),
+    \item Current consumption per joint (\texttt{CURRENT}),
+    \item Temperature per joint (\texttt{TEMP}).
 \end{itemize}
 
 % The purpose of this stage was to obtain an initial ranking of the channel groups under a common training setup. This screening step is computationally efficient and provides a first indication of which modalities are informative on their own. In particular, it helps distinguish directly interaction-related signals, such as force/torque, from more indirect state-related or actuator-related signals, such as TCP pose or current.
@@ -55,11 +99,11 @@ The combination study focused on the groups that showed the highest validation b
 \begin{itemize}
     \item F/T,
     \item TCP pose,
-    \item joint velocity,
-    \item and current.
+    \item Joint velocity,
+    \item Current consumption.
 \end{itemize}
 
-These groups were then ccombined in all $4\times4=16$ possible ways, resulting in two-, three-, and four-group configurations. The second stage was evaluated with the larger \texttt{Big} PatchTST configuration, since the combined inputs increase the input dimensionality and may benefit from higher model capacity. The tested combinations are summarized by the result plots and by the channel-combination overview in \figref{fig:channel_combination_overview}.
+These groups were then combined in all $4\times4=16$ possible ways, resulting in two-, three-, and four-group configurations. The second stage was evaluated with the larger \texttt{Big} PatchTST configuration, since the combined inputs increase the input dimensionality and may benefit from higher model capacity. The tested combinations are summarized by the result plots and by the channel-combination overview in \figref{fig:channel_combination_overview}.
 
 \paragraph{Training and evaluation protocol}
 
@@ -163,43 +207,116 @@ Third, the best-performing configuration combines complementary information: con
 
 Overall, the results show that robust insertion-success classification benefits from multi-modal input. Therefore, the combination of F/T, TCP pose, joint velocity, and current is used in the remainder of the thesis.
 
+
+
+
+
+
+
 \section{Experiment 2: PatchTST Benchmark Evaluation}
 \subsection{Benchmark 1: Test on Mixed Split}
 \label{sec:sq2_mixed_split}
 
-Benchmark 1 implements an in-distribution evaluation with a random mixed split of the dataset. The full data pool is divided into a training, validation, and test subset using the split ratios defined in Section \ref{subsec:train_val_test_splits}. This Benchmark specifically uses the first split strategy as described in the mentioned section.
+Benchmark 1 implements an in-distribution evaluation with a random mixed split of the dataset. The full data pool is divided into a training, validation subsets, with the testset drawn from the domain \texttt{BM1} defined in \tabref{tab:bm1_domains} using the split ratios defined in Section \ref{subsec:train_val_test_splits}. This Benchmark specifically uses the first split strategy as described in the mentioned section.
 
-As a result, the test set contains unseen insertion attempts, but not unseen experimental conditions. This benchmark therefore quantifies the model's performance when training and test data are drawn from the same overall distribution. The evaluated model configurations are the ones selected in the best channel study, and each configuration is trained and evaluated over the full set of seed combinations defined in the common training procedure, as defined in Section \ref{sec:reporing_of_experiments}.
+As a result, the test set contains unseen insertion attempts, but not unseen experimental conditions. This benchmark therefore quantifies the model's performance when training and test data are drawn from the same overall distribution. The evaluated model configurations are the ones selected in the best channel study, and each configuration is trained and evaluated over the full set of seed combinations defined in the common training procedure in Section \ref{sec:reporing_of_experiments}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Benchmark 1 Domains.}
+    \label{tab:bm1_domains}
+    \begin{tabular}{lllll}
+        \toprule
+        \textbf{Domain} & \textbf{\texttt{batch}} & \textbf{\texttt{rod\_type}} & \textbf{\texttt{tolerance}} & \textbf{\texttt{gripper\_type}} \\
+        \midrule
+        \texttt{BM1} & \texttt{None} & \texttt{None} & \texttt{None} & \texttt{None}\\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \subsection{Benchmark 2: Test on Individual Hole}
 \label{sec:sq3_individual_hole}
 
-Benchmark 2 implements a leave-one-hole-out evaluation. In each run, all samples belonging to one hole condition (one specific combination of object geometry and tolerance) are assigned exclusively to the test set, while the remaining data is used to form the training and validation set according to the common split procedure described in Section \ref{subsec:train_val_test_splits}.
+Benchmark 2 implements a leave-one-hole-out evaluation. In each run, all samples belonging to one domain from \texttt{BM2\_Hole\_1} to \texttt{BM2\_Hole\_9}, as defined in \tabref{tab:bm2_domains}, are assigned exclusively to the test set. The remaining data is used to form the training and validation set according to the common split procedure described in Section \ref{subsec:train_val_test_splits}.
 
-Thus, the test set contains unseen insertion attempts from one geometry--tolerance combination that is completely absent from training. This benchmark evaluates whether the classifier transfers to a new hole condition rather than only to new samples from already observed conditions. The evaluated hole conditions correspond to the nine labeled holes shown in \figref{fig:taskboard_holes}, and each benchmark condition is evaluated for the selected model configurations over the full set of seed combinations.
+Thus, the test set contains unseen insertion attempts from one domain that is completely absent from training. This benchmark evaluates whether the classifier generalizes to a new hole domains rather than only to new samples from already observed insertions. The evaluated hole domains are corresponding to the nine labeled holes shown in \figref{fig:taskboard_holes}, and each benchmark domain is evaluated for the selected model configurations over the full set of seed combinations.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Benchmark 2 Domains.}
+    \label{tab:bm2_domains}
+    \begin{tabular}{lllll}
+        \toprule
+        \textbf{Domain} & \textbf{\texttt{batch}} & \textbf{\texttt{rod\_type}} & \textbf{\texttt{tolerance}} & \textbf{\texttt{gripper\_type}} \\
+        \midrule
+        \texttt{BM2\_big\_1} & \texttt{None} & \texttt{big\_rod} & \texttt{0.1} & \texttt{None}\\
+        \texttt{BM2\_big\_2} & \texttt{None} & \texttt{big\_rod} & \texttt{0.2} & \texttt{None}\\
+        \texttt{BM2\_big\_3} & \texttt{None} & \texttt{big\_rod} & \texttt{0.3} & \texttt{None}\\
+
+        \texttt{BM2\_small\_1} & \texttt{None} & \texttt{small\_rod} & \texttt{0.1} & \texttt{None}\\
+        \texttt{BM2\_small\_2} & \texttt{None} & \texttt{small\_rod} & \texttt{0.2} & \texttt{None}\\
+        \texttt{BM2\_small\_3} & \texttt{None} & \texttt{small\_rod} & \texttt{0.3} & \texttt{None}\\
+
+        \texttt{BM2\_rect\_1} & \texttt{None} & \texttt{rect\_rod} & \texttt{0.1} & \texttt{None}\\
+        \texttt{BM2\_rect\_2} & \texttt{None} & \texttt{rect\_rod} & \texttt{0.2} & \texttt{None}\\
+        \texttt{BM2\_rect\_3} & \texttt{None} & \texttt{rect\_rod} & \texttt{0.3} & \texttt{None}\\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{chapters/6-experiments/bm1_taskboard.png}
-    \caption{Schematic drawing of the insertion taskboard. The nine hole conditions used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific geometry--tolerance combination. 1: \texttt{big\_rod\_t0.1}, 2: \texttt{big\_rod\_t0.2}, 3: \texttt{big\_rod\_t0.3}, 4: \texttt{small\_rod\_t0.1}, 5: \texttt{small\_rod\_t0.2}, 6: \texttt{small\_rod\_t0.3}, 7: \texttt{rect\_rod\_t0.1}, 8: \texttt{rect\_rod\_t0.2}, 9: \texttt{rect\_rod\_t0.3}}
+    \caption{Schematic drawing of the insertion taskboard. The nine hole domains used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific domain, defined in \tabref{tab:bm2_domains}. 1: \texttt{BM2\_Hole\_1} $\dots$ 9: \texttt{BM2\_Hole\_9}.}
     \label{fig:taskboard_holes}
 \end{figure}
 
 \subsection{Benchmark 3: Test on Held-Out Group}
 \label{sec:sq4_held_out_group}
 
-Benchmark 3 evaluates generalization under broader distribution shifts by holding out entire groups of samples from training and validation and using them exclusively for testing. These groups are defined along three different axes: object geometry (\texttt{big\_rod}, \texttt{small\_rod}, \texttt{rect\_rod}) over all tolerance levels, tolerance level (\(0.1\), \(0.2\), \(0.3\)) over all geometries, and gripper types (\texttt{Round}, \texttt{Rect}, \texttt{Flat}).
+Benchmark 3 evaluates generalization under broader distribution shifts by holding out entire groups of samples from training and validation and using them exclusively for testing. These group domains are defined in \tabref{tab:bm3_domains}.
 
-For each benchmark condition, all samples belonging to the selected held-out group are assigned to the test set, while the remaining data is split into training and validation sets according to the common procedure described in Section \ref{subsec:train_val_test_splits}. The resulting test set therefore represents a broader unseen condition than in the leave-one-hole-out setting.
+For each benchmark domain, all samples belonging to the selected domain group are assigned to the test set, while the remaining data is split into training and validation sets according to the common procedure described in Section \ref{subsec:train_val_test_splits}.
 
-The held-out geometry and held-out tolerance conditions are shown in \figref{fig:heldout_groups}, while the gripper-based split is evaluated in the same way.
+The held-out rod and held-out tolerance domains are shown in \figref{fig:heldout_groups}, while the gripper- and batch-based splits are evaluated in the same way.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Benchmark 3 Domains.}
+    \label{tab:bm3_domains}
+    \begin{tabular}{lllll}
+        \toprule
+        \textbf{Domain} & \textbf{\texttt{batch}} & \textbf{\texttt{rod\_type}} & \textbf{\texttt{tolerance}} & \textbf{\texttt{gripper\_type}} \\
+        \midrule
+
+        \texttt{BM3\_batch\_1} & \texttt{batch\_1} & \texttt{None} & \texttt{None} & \texttt{None}\\
+        \texttt{BM3\_batch\_2} & \texttt{batch\_2} & \texttt{None} & \texttt{None} & \texttt{None}\\
+        \texttt{BM3\_batch\_3} & \texttt{batch\_3} & \texttt{None} & \texttt{None} & \texttt{None}\\
+
+        \texttt{BM3\_big} & \texttt{None} & \texttt{big\_rod} & \texttt{None} & \texttt{None}\\
+        \texttt{BM3\_small} & \texttt{None} & \texttt{small\_rod} & \texttt{None} & \texttt{None}\\
+        \texttt{BM3\_rect} & \texttt{None} & \texttt{rect\_rod} & \texttt{None} & \texttt{None}\\
+
+        \texttt{BM3\_tol\_1} & \texttt{None} & \texttt{None} & \texttt{0.1} & \texttt{None}\\
+        \texttt{BM3\_tol\_2} & \texttt{None} & \texttt{None} & \texttt{0.2} & \texttt{None}\\
+        \texttt{BM3\_tol\_3} & \texttt{None} & \texttt{None} & \texttt{0.3} & \texttt{None}\\
+
+        \texttt{BM3\_round} & \texttt{None} & \texttt{None} & \texttt{None} & \texttt{round}\\
+        \texttt{BM3\_rect\_gripper} & \texttt{None} & \texttt{None} & \texttt{None} & \texttt{rect}\\
+        \texttt{BM3\_flat} & \texttt{None} & \texttt{None} & \texttt{None} & \texttt{flat}\\
+        
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{chapters/6-experiments/bm2_taskboard.png}
-    \caption{Held-out group conditions used in Benchmark 3 for geometry-based and tolerance-based distribution shifts. In each case, all samples belonging to the highlighted group are assigned to the test set. 1: \texttt{big\_rod\_t0.*}, 2: \texttt{small\_rod\_t0.*}, 3: \texttt{rect\_rod\_t0.*}, 4: \texttt{*\_rod\_t0.1}, 5: \texttt{*\_rod\_t0.2}, 6: \texttt{*\_rod\_t0.3}}
+    \caption{Held-out group domains used in Benchmark 3. In each case, all sequences belonging to the highlighted group are assigned to the test set. 1: \texttt{BM3\_rod\_geometry\_1} $\dots$ 3: \texttt{BM3\_rod\_geometry\_3}, 4: \texttt{BM3\_tolerance\_1} $\dots$ 6: \texttt{BM3\_tolerance\_3}}
     \label{fig:heldout_groups}
 \end{figure}
+
+\newpage
 
 \section{Experiment 3: Deviation Analysis}
 
@@ -389,50 +506,9 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
 % Define radius, tilt magnitude, direction sectors, force groups, record offset groups.
 % Define domain = batch + rod_type + tolerance + gripper_type.
 % Explain global vs domain-controlled reporting.
-\newpage
+
 The same way the dataset's metadata is grouped by deviations and combined deviations, the dataset's sequences can be grouped by domains and combined domains. A domain is defined as a unique combination of attributes:
 
-\texttt{domain = batch + rod\_type + tolerance + gripper\_type}.
-
-Each Attribute can have the following values (\tabref{tab:domain_attributes}):
-
-\begin{table}[htbp]
-    \centering
-    \caption{Attributes with their associated values, that define a domain.}
-    \label{tab:domain_attributes}
-    \begin{tabular}{ll}
-        \toprule
-        \textbf{Attribute} & \textbf{Value}\\
-        \midrule
-
-        \texttt{batch} & \texttt{None}, \texttt{batch\_1}, \texttt{batch\_2}, \texttt{batch\_3}\\
-        \texttt{rod\_type} & \texttt{None}, \texttt{big\_rod}, \texttt{small\_rod}, \texttt{rect\_rod}\\
-        \texttt{tolerance} & \texttt{None}, \texttt{0.1}, \texttt{0.2}, \texttt{0.3}\\
-        \texttt{gripper\_type} & \texttt{None}, \texttt{round}, \texttt{rect}, \texttt{flat}\\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-This way the dataset can be clearly indexed to create different subsets which are then used for further testing.
-If for example all attributes are set to \texttt{None}, essentially all are selected, which means the whole dataset is indexed.
-But if for instance \texttt{rod\_type = small\_rod}, \texttt{batch = batch\_3}, then the selected subset contains only sequences from \texttt{small\_rod} and \texttt{batch\_3}, across all tolerances and all gripper types. 
-However the \texttt{gripper\_type} attribute cannot be freely selected, because it is dependent on \texttt{batch} and \texttt{rod\_type}, according to \tabref{tab:gripper_type_exception}. This is due to the way the dataset was recorded.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Attributes with their associated values, that define a domain.}
-    \label{tab:gripper_type_exception}
-    \begin{tabular}{lll}
-        \toprule
-        \textbf{\texttt{gripper\_type}} & \textbf{Available \texttt{batch}} & \textbf{Available \texttt{rod\_type}}\\
-        \midrule
-
-        \texttt{round} & \texttt{batch\_1}, \texttt{batch\_2} & \texttt{big\_rod}, \text{small\_rod}\\
-        \texttt{rect} & \texttt{batch\_1}, \texttt{batch\_2} & \text{rect\_rod}\\
-        \texttt{flat} & \texttt{batch\_3} & All rod types available\\
-        \bottomrule
-    \end{tabular}
-\end{table}
 
 To summarize, the deviation group and the domain are two different ways to index the metadata and select a specific subset of the whole dataset. The deviation group concentrates on how the rod was inserted, what deviations were present. These settings changed with each consecutive insertion attempt. Whereas the domain selects a subset based on the physical properties and experimental configuration, such as rod type, batch, tolerance, and gripper type. These settings change after each recording session.
 
