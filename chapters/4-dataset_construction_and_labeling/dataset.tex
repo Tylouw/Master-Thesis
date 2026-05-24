@@ -294,21 +294,21 @@ Besides the recorded time series, a JSON metadata file was stored for each inser
         \texttt{saved\_at} & timestamp of file creation & \texttt{datetime.now().isoformat()} \\
         \texttt{sample\_rate\_Hz} & sampling rate & \texttt{float} \\
         \texttt{num\_samples} & number of recorded time steps & \texttt{int} \\
-        \texttt{sequence\_length\_s} & saved sequence length & \texttt{float} \\
+        \texttt{sequence\_length\_s} & saved sequence length [s] & \texttt{float} \\
         \hline
-        \texttt{plan\_item.grasp\_height} & selected grasp height & \texttt{float} \\
-        \texttt{plan\_item.approach\_height} & selected approach height & \texttt{float} \\
-        \texttt{plan\_item.force\_level} & selected insertion force level & \texttt{float} \\
-        \texttt{plan\_item.force\_limit} & selected abort force threshold & \texttt{float} \\
-        \texttt{plan\_item.record\_offset} & temporal offset of recording start & \texttt{float} \\
-        \texttt{plan\_item.deviation} & Cartesian positional deviation in $x,y$ & [\texttt{float}, \texttt{float}]  \\
-        \texttt{plan\_item.tilt} & angular deviation in tool $x$- and $y$-axes & [\texttt{float}, \texttt{float}] \\
+        \texttt{plan\_item.grasp\_height} & selected grasp height [mm] & \texttt{float} \\
+        \texttt{plan\_item.approach\_height} & selected approach height [mm] & \texttt{float} \\
+        \texttt{plan\_item.force\_level} & selected insertion force level [N] & \texttt{float} \\
+        \texttt{plan\_item.force\_limit} & selected abort force threshold [N] & \texttt{float} \\
+        \texttt{plan\_item.record\_offset} & temporal offset of recording start [s] & \texttt{float} \\
+        \texttt{plan\_item.deviation} & Cartesian positional deviation in $x,y$ [m] & [\texttt{float}, \texttt{float}]  \\
+        \texttt{plan\_item.tilt} & angular deviation in tool $x$- and $y$-axes [rad] & [\texttt{float}, \texttt{float}] \\
         \hline
         \texttt{successful\_insertion} & binary success label & \texttt{boolean} \\
         \texttt{failure\_reason} & timeout, stall/jam, or force limit & \texttt{string} \\
         \hline
         \texttt{rod\_type} & rod type (\texttt{big}, \texttt{small} or \texttt{rect}) & \texttt{string} \\
-        \texttt{tolerance} & \makecell[l]{tolerance level of the current hole\\($0.1$, $0.2$ or $0.3$)} & \texttt{float} \\
+        \texttt{tolerance} & \makecell[l]{tolerance level of the current hole\\($0.1$, $0.2$ or $0.3$) [mm]} & \texttt{float} \\
         \texttt{batch} & \makecell[l]{from which batch the insertion came\\(\texttt{batch\_1}, \texttt{batch\_2} or \texttt{batch\_3})} & \texttt{string} \\
         \texttt{rod\_geometry} & its physical geometry type (\texttt{round} or \text{rect}) & \texttt{string} \\
         \texttt{gripper\_type} & the gripper used (\texttt{round}, \texttt{rect} or \texttt{flat}) & \texttt{string}\\
@@ -316,7 +316,7 @@ Besides the recorded time series, a JSON metadata file was stored for each inser
         \texttt{holderPose\_Up}, \texttt{holderPose\_Down} & grasping poses & \texttt{ndarray [6]} \\
         \texttt{insertionPose} & insertion pose without deviation & \texttt{ndarray [6]} \\
         \hline
-        \texttt{cycle\_time\_s} & measured cycle duration & \texttt{float} \\
+        \texttt{cycle\_time\_s} & measured cycle duration [s] & \texttt{float} \\
         \texttt{hash\_number} & this insertions unique hash & \texttt{string} \\
         \hline
     \end{tabular}

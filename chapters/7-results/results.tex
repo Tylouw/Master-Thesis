@@ -312,6 +312,139 @@ The summarized Big config results in \figref{fig:bm3_all_domains_test_bal_acc} s
 \section{Deviation Analysis I: Physical Success Rate}
 \label{subsec:results_deviation_analysis_1}
 
+The first part of Deviation Analysis I evaluates the physical success rate across the complete dataset. This corresponds to the domain selection in which all domain attributes are set to \texttt{None}, meaning the whole dataset is selected. The purpose of doing a global investigation first, is to identify deviation groups that show consistent trends or systematic differences in success rate. These isolated deviation groups are then taken further to a more detailed domain-specific analysis in the next Subsection \ref{subsec:da1_domain_investigation}.
+
+\subsection{Global Investigation Across the Full Dataset}
+\label{subsec:da1_global_screening}
+
+\figref{fig:da1_physical_position_tilt_global} shows the physical success rate for the individual position-offset and tilt levels. The position-offset groups alone show only low variation, with success rates between 0.52 and 0.58. In contrast, the tilt groups show a noticeable trend. Insertions without relevant tilt reach a success rate of 0.81, while moderate tilt reduces the success rate to 0.62 and large tilt further reduces it to 0.47. This indicates that angular misalignment is a more informative deviation parameter than the radial position offset alone.
+
+The combined position--tilt groups in \figref{fig:da1_physical_position_over_tilt_global} support this interpretation. For each position-offset level, the success rate decreases as the tilt magnitude increases. No-offset insertions decrease from 0.89 for no tilt to 0.47 for large tilt, moderate-offset insertions decrease from 0.87 to 0.45, and large-offset insertions decrease from 0.68 to 0.48. The position offset therefore does not explain the success rate independently of tilt. Instead, the tilt magnitude appears to be the dominant factor in the global dataset, while the effect of position offset becomes more relevant when considered together with tilt.
+
+The offset-direction groups in \figref{fig:da1_physical_offset_direction_global} show a smaller but still visible directional asymmetry. The positive $x$ direction has the highest success rate at 0.61, while the negative $x$ direction has the lowest success rate at 0.48. The $y$ directions lie between these values. This suggests that the insertion process may contain a setup-specific directional bias. However, because the differences are smaller than for the tilt groups, the direction effect is mainly treated as a secondary candidate for further investigation.
+
+The force-related groups show a stronger effect. \figref{fig:da1_physical_force_level_and_limit_global} shows that the success rate generally decreases for high commanded force levels, especially for \texttt{F35} and \texttt{F40}. The force limit alone is less directly interpretable, because its effect depends on the commanded force level. This becomes clear in \figref{fig:da1_physical_force_interaction_global}, where the combination of force level and force limit produces large differences in success rate. In particular, combinations where the difference between force limit and commanded force is close to zero or negative show very low success rates. This is expected, because the force limit is then likely to be reached before the insertion can be completed. Therefore, the force interaction is more informative than force level or force limit considered separately.
+
+The record offset in \figref{fig:da1_physical_record_offset_global} shows a gradual increase in success rate from the early to the late recording windows. This group is reported for completeness, but it is not interpreted as a physical cause of insertion success or failure. The record offset changes the temporal position of the recorded signal window and is therefore more relevant for the later model-confusion analysis.
+
+Finally, \figref{fig:da1_physical_grasp_approach_height_global} shows that grasp height and approach height have comparatively weak global effects. The grasp height differs slightly between 0 mm and 7 mm, while the three approach-height levels show almost identical success rates. These parameters are therefore not selected as primary candidates for the domain-specific follow-up analysis.
+
+The sample counts and class balances for all global deviation groups are listed in \tabref{tab:da1_class_split_global}. The table shows that the deviation groups are not equally sized. This is especially visible for the tilt groups, where the large-tilt group contains substantially more samples than the no-tilt group. This imbalance is a consequence of the recorded deviation design and is considered when interpreting the success-rate plots. \figref{fig:da1_sankey_tilt} visualizes this split exemplarily for the tilt groups and shows how the complete dataset is divided into tilt levels and physical insertion outcomes.
+
+Overall, the global screening identifies tilt magnitude and force interaction as the most relevant deviation groups for further investigation. Offset direction is also considered because it indicates a possible directional asymmetry. In contrast, grasp height and approach height show only weak global effects and are therefore not investigated in detail in the following domain-specific analysis.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_position_tilt_global.png}
+    \caption{Global physical success rate for position-offset levels and tilt levels.}
+    \label{fig:da1_physical_position_tilt_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_position_over_tilt_global.png}
+    \caption{Global physical success rate for combined position--tilt groups.}
+    \label{fig:da1_physical_position_over_tilt_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_offset_direction_global.png}
+    \caption{Global physical success rate for offset-direction groups.}
+    \label{fig:da1_physical_offset_direction_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_force_level_and_limit_global.png}
+    \caption{Global physical success rate for force level and force limit.}
+    \label{fig:da1_physical_force_level_and_limit_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_record_offset_global.png}
+    \caption{Global physical success rate for record-offset groups.}
+    \label{fig:da1_physical_record_offset_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_grasp_approach_height_global.png}
+    \caption{Global physical success rate for grasp height and approach height.}
+    \label{fig:da1_physical_grasp_approach_height_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_force_interaction_global.png}
+    \caption{Global physical success rate for force-interaction groups. The label \texttt{D} denotes the difference between force limit and commanded force level.}
+    \label{fig:da1_physical_force_interaction_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{chapters/7-results/DA1/global/sankey_tilt.png}
+    \caption{Example Sankey diagram showing the split of the complete dataset into tilt groups and physical insertion outcomes.}
+    \label{fig:da1_sankey_tilt}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Sample counts and class balance for the global deviation groups used in Deviation Analysis I.}
+    \label{tab:da1_class_split_global}
+    \begin{tabular}{l lll lll}
+        \toprule
+        \textbf{Deviation group} & \textbf{LV} & \textbf{\#} & \textbf{(pos, neg)} & \textbf{LV} & \textbf{\#} & \textbf{(pos, neg)}\\
+        \midrule
+
+        \texttt{position} & N.O. & 3150 & (1688, 1462) & M.O. & 2484 & (1429, 1055) \\
+        & L.O. & 2466 & (1275, 1191) \\
+        \midrule
+        \texttt{tilt} & N.T. & 736 & (594, 142) & M.T. & 2329 & (1443, 886) \\
+        & L.T. & 5035 & (2355, 2680) \\
+        \midrule
+        \texttt{offset\_direction} & C & 3150 & (1688, 1462) & pos x & 1328 & (813, 515) \\
+        & neg x & 1146 & (545, 601) & pos y & 1319 & (749, 570) \\
+        & neg y & 1157 & (597, 560) \\
+        \midrule
+        \texttt{force\_level} & F15 & 1180 & (682, 498) & F20 & 1220 & (895, 325) \\
+        & F25 & 2100 & (1211, 889)  & F30 & 1211& (724, 487) \\
+        & F35 & 1200 & (505, 695) & F40 & 1189 & (375, 814) \\
+        \midrule
+        \texttt{force\_limit} & L30 & 2448 & (1019, 1429) & L40 & 3276 & (2023, 1253) \\
+        & L50 & 2376 & (1350, 1026) \\
+        \midrule
+        \texttt{record\_offset} & early & 1440 & (690, 750) & 0 & 2340 & (1240, 1100) \\
+        & mid & 1440 & (811, 629) & late & 2880 & (1651, 1229) \\
+        \midrule
+        \texttt{grasp\_height} & 0 mm & 4500 & (2342, 2158) & 7 mm & 3600 & (2050, 1550) \\
+        \midrule
+        \texttt{approach\_height} & -5 mm & 3649 & (1982, 1667) & 0 mm & 900 & (484, 416) \\
+        & 2 mm & 3551 & (1926, 1625) \\
+        \midrule
+        \texttt{position\_tilt} & N.O. / N.T. & 218 & (193, 25) & N.O. / M.T. & 866 & (523, 343) \\
+        & N.O. / L.T. & 2066 & (972, 1094) & M.O. / N.T. & 265 & (230, 35) \\
+        & M.O. / M.T. & 1087 & (690, 397) & M.O. / L.T. & 1132 & (509, 623) \\
+        & L.O. / N.T. & 253 & (171, 82) & L.O. / M.T. & 376 & (230, 146) \\
+        & L.O. / L.T. & 1837 & (874, 963) \\
+        \midrule
+        \texttt{force\_interaction} & F15 / L30 / D15 & 401 & (237, 164) & F15 / L40 / D25 & 389 & (271, 118) \\
+        & F15 / L50 / D35 & 390 & (174, 216) & F20 / L30 / D10 & 415 & (340, 75) \\
+        & F20 / L40 / D20 & 403 & (330, 73) & F20 / L50 / D30 & 402 & (225, 177) \\
+        & F25 / L30 / D5 & 408 & (256, 152) & F25 / L40 / D15 & 1296 & (769, 527) \\
+        & F25 / L50 / D25 & 396 & (186, 210) & F30 / L30 / D0 & 411 & (110, 301) \\
+        & F30 / L40 / D10 & 400 & (346, 54) & F30 / L50 / D20 & 400 & (268, 132) \\
+        & F35 / L30 / D-5 & 408 & (64,344) & F35 / L40 / D5 & 396 & (230, 166) \\
+        & F35 / L50 / D15 & 396 & (211, 185) & F40 / L30 / D-10 & 405 & (12,393) \\
+        & F40 / L40 / D0 & 392 & (77, 315) & F40 / L50 / D10 & 392 & (286, 106) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Domain specific Investigation of Deviation Groups}
+\label{subsec:da1_domain_investigation}
+
 \section{Deviation Analysis II: Model Confusion}
 \label{subsec:results_deviation_analysis_2}
 

@@ -322,7 +322,7 @@ The held-out rod and held-out tolerance domains are shown in \figref{fig:heldout
 
 \subsection{Motivation}
 The dataset recorded in this thesis is not only useful for training a classifier, but the saved metadata alongside each sequence holds valuable information as well, which is useful for further experiments. In particular does each metadata-file hold the information about the exact deviations applied during insertion. This allows the dataset to be analyzed in two ways.
-First, as the physical success-rate of insertions is dependent on the applied deviations and its magnitude, the goal is to asses which set of deviations, and in particular which level (magnitude), cause more insertion failures than other settings.
+First, as the physical success-rate of insertions is dependent on the applied deviations and their magnitude or level, the goal is to asses which set of deviations, and in particular which level (magnitude), cause more insertion failures than other settings.
 But insertion-failure does not imply that the classification model fails to classify the label, for example if the failed insertion produces a clear failure signature, the classifier may be more likely to assign the label "failed insertion" to it. Conversely, a deviation can be physically successful but still produce ambiguous/confusing signal patterns for the classifier. Therefore, the analysis is separated into a physical success-rate analysis and a model-confusion analysis.
 
 \subsection{Deviation Grouping and Domains}
@@ -332,7 +332,7 @@ But insertion-failure does not imply that the classification model fails to clas
     \label{tab:deviation_parameters}
     \begin{tabular}{lll}
         \toprule
-        \textbf{Parameter} & \textbf{Level} & \textbf{Interpretation} \\
+        \textbf{Deviation} & \textbf{Level} & \textbf{Interpretation} \\
         \midrule
         Position offset & radial offset in $x,y$-axis & translational misalignment \\
         Tilt & angular deviation around $x,y$-axis & orientational misalignment \\
@@ -346,7 +346,9 @@ But insertion-failure does not imply that the classification model fails to clas
 \end{table}
 
 \tabref{tab:deviation_parameters} shows the available deviation parameters that were applied to the insertions. The exact pattern, how each deviation level got selected for one insertion and how they differ across the recorded batches 1, 2 and 3, are described in detail in the previous Section \ref{sec:dataset_collection}.
-In order to more easily report the deviations, the levels of each deviation parameter are combined together in semantic meaningful groups. However, before the following calculations are necessary.
+In order to more easily report the deviations, the levels of each deviation parameter are combined together in semantic meaningful groups. Because the position offset and tilt are continuous deviations, rather than discrete levels like the Force level, thresholds were selected to assign insertions into semantically meaningful bins.
+
+Before however, the following calculations are necessary.
 
 The position deviation is represented by the Cartesian offsets $\Delta x$ and $\Delta y$ in the insertion plane. These come directly from the \texttt{plan\_item.deviation.x/y} entries in the metadata json file. For the analysis, these values are converted to polar coordinates with radius $r$ and angle $\varphi$ according to
 
@@ -357,13 +359,16 @@ The position deviation is represented by the Cartesian offsets $\Delta x$ and $\
     \label{eq:polar_coordinates}
 \end{equation}
 
-The tilt deviation is represented by the angular deviation angles $\theta_x$ and $\theta_y$ around the $x,y$-axis. Its magnitude is computed as
+The tilt deviation is represented by the angular deviation angles $\theta_x$ and $\theta_y$ around the $x,y$-axis. They come directly from the \texttt{plan\_item.tilt.x/y} entries in the metadata json file. Its magnitude is computed as
 
 \begin{equation}
     \theta = \sqrt{\theta_x^2 + \theta_y^2}.
     \label{eq:tilt_mag}
 \end{equation}
 
+To support the selected thresholds, the distributions of the computed position offset radius $r$ and tilt magnitude $\theta$ are shown in \figref{fig:deviation_threshold_distributions}. The values are sorted in ascending order to visualize how the samples are distributed over the continuous deviation range and where the selected thresholds divide the dataset. The thresholds are not chosen to create equally sized groups, but to form semantically meaningful deviation levels. For the position offset, $r < 0.05~\mathrm{mm}$ is treated as no relevant offset, $0.05~\mathrm{mm} \leq r < 0.25~\mathrm{mm}$ as moderate offset, and $r \geq 0.25~\mathrm{mm}$ as large offset. For the tilt magnitude, $\theta < 0.5^\circ$ is treated as no relevant tilt, $0.5^\circ \leq \theta < 4.0^\circ$ as moderate tilt, and $\theta \geq 4.0^\circ$ as large tilt.
+
+% The resulting group sizes are therefore not expected to be balanced. This is particularly visible for the tilt magnitude, where only a smaller part of the dataset belongs to the no-tilt group. This imbalance reflects the recorded deviation design and is considered in the later analysis by reporting the number of samples per group and by using balanced accuracy for the model-based evaluation.
 
 The following groups in \tabref{tab:deviation_group_definitions} are used for the physical deviation analysis and the model-confusion analysis. Some of these groups are further combined in \tabref{tab:deviation_group_combinations_definitions}, to provide a more in-depth view on the data.
 
@@ -405,7 +410,7 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
         \midrule
 
         \texttt{force\_level} 
-        & Commanded insertion force level.
+        & Commanded insertion force level in Newton.
         & \texttt{F15}, \texttt{F20}, \texttt{F25}, \texttt{F30}, \texttt{F35}, \texttt{F40} \\
 
         \midrule
@@ -503,19 +508,31 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
     \end{tabular}
 \end{table}
 
-% Define radius, tilt magnitude, direction sectors, force groups, record offset groups.
-% Define domain = batch + rod_type + tolerance + gripper_type.
-% Explain global vs domain-controlled reporting.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{chapters/6-experiments/sorted_radius_mm_distribution.png}
+        \caption{Sorted distribution of position offset radius $r$.}
+        % \label{fig:sorted_radius_distribution}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.99\textwidth]{chapters/6-experiments/sorted_tilt_mag_deg_distribution.png}
+        \caption{Sorted distribution of tilt magnitude $\theta$.}
+        % \label{fig:sorted_tilt_distribution}
+    \end{subfigure}
 
-The same way the dataset's metadata is grouped by deviations and combined deviations, the dataset's sequences can be grouped by domains and combined domains. A domain is defined as a unique combination of attributes:
-
+    \caption{Sorted distributions of the continuous position and tilt deviations used for defining the deviation groups. Dashed lines indicate the thresholds used to assign samples to the no, moderate, and large deviation levels.}
+    \label{fig:deviation_threshold_distributions}
+\end{figure}
 
 To summarize, the deviation group and the domain are two different ways to index the metadata and select a specific subset of the whole dataset. The deviation group concentrates on how the rod was inserted, what deviations were present. These settings changed with each consecutive insertion attempt. Whereas the domain selects a subset based on the physical properties and experimental configuration, such as rod type, batch, tolerance, and gripper type. These settings change after each recording session.
 
 \subsection{Deviation Analysis I: Physical Success Rate}
 \label{sec:deviation_analysis_physical}
 
-The first part of the deviation analysis investigates how the physical insertion outcome is distributed across the deviation groups defined above. This analysis is based only on the metadata files and does not use any model predictions. For each selected domain subset of the dataset, the number of successful and failed insertions for each deviation group within the selected domain is counted. The physical success rate is then computed for each deviation group as
+The first part of the deviation analysis investigates how the physical insertion outcome is distributed across the deviation groups defined in \tabref{tab:deviation_group_definitions} and \tabref{tab:deviation_group_combinations_definitions}. This analysis is based only on the metadata files and does not use any model predictions. For each selected domain subset of the dataset, the number of successful and failed insertions for each deviation group within the selected domain is counted. The physical success rate is then computed for each deviation group as
 
 \begin{equation}
     r_\mathrm{success}
@@ -525,7 +542,7 @@ The first part of the deviation analysis investigates how the physical insertion
     \label{eq:physical_success_rate}
 \end{equation}
 
-The analysis is first performed on the complete dataset, with all domain attributes set to \texttt{None}. Thus, no restriction is applied to \texttt{batch}, \texttt{rod\_type}, \texttt{tolerance}, or \texttt{gripper\_type}. This global analysis provides a first overview of which deviation groups are generally associated with more successful or failed insertions.
+The analysis is first performed on the complete dataset, with all domain attributes are set to \texttt{None}. Thus, no restriction is applied to \texttt{batch}, \texttt{rod\_type}, \texttt{tolerance}, or \texttt{gripper\_type}. This global analysis provides a first overview of which deviation groups are generally associated with more successful or failed insertions.
 
 Afterwards, the same analysis is repeated for domain-specific subsets. These subsets are created by fixing one or multiple domain attributes, for example a specific hole domain such as \texttt{rect\_rod} with tolerance \texttt{0.1}, or a broader domain such as all samples with \texttt{tolerance = 0.2}. This allows the physical success rate of a deviation group to be evaluated not only globally, but also in relation to specific rods, tolerances, grippers, or batches. This is important because the dataset is not a fully balanced experiment and because the deviation design differs between batches.
 

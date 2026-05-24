@@ -19,7 +19,7 @@
 	},
 	"scm.diffDecorations": "none",
 	"scm.countBadge": "off",
-	"git.enabled": false,
+	"git.enabled": true,
 	"git.autorefresh": false,
 	"git.autofetch": false,
 	"git.decorations.enabled": false,
