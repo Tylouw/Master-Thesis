@@ -423,10 +423,9 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
 
         \texttt{record\_offset} 
         & Temporal shift of the recorded signal window. This is not a physical insertion deviation, but changes which part of the insertion process is first visible to the model.
-        & \texttt{early\_negative}: $-0.21 \leq t < -0.14~\mathrm{s}$ \newline
-          \texttt{0}: $-0.01 \leq t < 0.01~\mathrm{s}$ \newline
-          \texttt{mid}: $0.19 \leq t < 0.31~\mathrm{s}$ \newline
-          \texttt{late}: $0.49 \leq t < 0.91~\mathrm{s}$ \\
+        & \texttt{ROE} (Record Offset Early): $t < 0.1~\mathrm{s}$ \newline
+          \texttt{ROM} (Record Offset Mid): $0.1 \leq t < 0.7~\mathrm{s}$ \newline
+          \texttt{ROL} (Record Offset Late): $0.7 \leq t~\mathrm{s}$ \\
 
         \midrule
 
@@ -496,13 +495,13 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
         \midrule
 
         \texttt{force\_interaction} 
-        & Combination of commanded force level and force limit. This group is used because the effect of the force limit depends on the commanded force. The difference of these forces is labeled with a \texttt{D}.
-        & (\texttt{F15,L30,D15}),(\texttt{F15,L40,D25}),(\texttt{F15,L50,D35}),\newline
-        (\texttt{F20,L30,D10}),(\texttt{F20,L40,D20}),(\texttt{F20,L50,D30}),\newline
-        (\texttt{F25,L30,D5}),(\texttt{F25,L40,D15}),(\texttt{F25,L50,D25}),\newline
-        (\texttt{F30,L30,D0}),(\texttt{F30,L40,D10}),(\texttt{F30,L50,D20}),\newline
-        (\texttt{F35,L30,D-5}),(\texttt{F35,L40,D5}),(\texttt{F35,L50,D15}),\newline
-        (\texttt{F40,L30,D-10}),(\texttt{F40,L40,D0}),(\texttt{F40,L50,D10}),\\
+        & Combination of force level and force limit. This group is used because the effect of the force limit depends on the force level.
+        & (\texttt{F15 / L30}), (\texttt{F15 / L40}), (\texttt{F15 / L50}),\newline
+        (\texttt{F20 / L300}), (\texttt{F20 / L40}), (\texttt{F20 / L50}),\newline
+        (\texttt{F25 / L30}), (\texttt{F25 / L40}), (\texttt{F25 / L50}),\newline
+        (\texttt{F30 / L30}), (\texttt{F30 / L40}), (\texttt{F30 / L50}),\newline
+        (\texttt{F35 / L30}), (\texttt{F35 / L40}), (\texttt{F35 / L50}),\newline
+        (\texttt{F40 / L30}), (\texttt{F40 / L40}), (\texttt{F40 / L50})\\
 
         \bottomrule
     \end{tabular}
