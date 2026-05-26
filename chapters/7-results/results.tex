@@ -1,4 +1,4 @@
-\chapter{Results}
+\chapter{Results and Discussion}
 \label{chap:results}
 This chapter presents the main results and findings from all experiments defined in the previous Chapter \ref{ch:experiments}. First a short revisit of the results from the Best Channel Study is given, as the best channels are used in the further experiments.
 
@@ -385,14 +385,14 @@ Overall, the global screening identifies tilt magnitude and force interaction as
     \begin{minipage}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.99\linewidth]{chapters/7-results/DA1/global/physical_F_L_NT_NO_global.png}
-        \caption{Physical success rate for force level and force limit under no tilt and no offset. Missing bars indicate that no samples were available for the corresponding force-limit level in this conditioned subset.}
+        \caption{Physical success rate for force level and force limit under no tilt and no offset. Missing bars indicate that no samples were available for the corresponding force-limit level in this subset.}
         \label{fig:da1_physical_force_no_tilt_no_offset}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.99\linewidth]{chapters/7-results/DA1/global/physical_position_over_tilt_F40_L30_global.png}
-        \caption{Physical success rate of position--tilt groups for the force interaction \texttt{F40/L30}. Missing bars indicate unavailable deviation combinations in this conditioned subset.}
+        \caption{Physical success rate of position--tilt groups for the force interaction \texttt{F40/L30}. Missing bars indicate unavailable deviation combinations in this subset.}
         \label{fig:da1_physical_position_tilt_f40_l30}
     \end{minipage}
 \end{figure}
@@ -413,21 +413,6 @@ Overall, the global screening identifies tilt magnitude and force interaction as
         \label{fig:da1_physical_grasp_approach_height_global}
     \end{minipage}    
 \end{figure}
-
-
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/global/physical_F_L_NT_NO_global.png}
-%     \caption{Physical success rate for force level and force limit under no tilt and no offset. Missing bars indicate that no samples were available for the corresponding force-limit level in this conditioned subset.}
-%     \label{fig:da1_physical_force_no_tilt_no_offset}
-% \end{figure}
-
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_position_over_tilt_F40_L30_global.png}
-%     \caption{Physical success rate of position--tilt groups for the force interaction \texttt{F40/L30}. Missing bars indicate unavailable deviation combinations in this conditioned subset.}
-%     \label{fig:da1_physical_position_tilt_f40_l30}
-% \end{figure}
 
 \begin{figure}[htbp]
     \centering
@@ -505,6 +490,131 @@ Overall, the global screening identifies tilt magnitude and force interaction as
 
 \subsection{Domain specific Investigation of Deviation Groups}
 \label{subsec:da1_domain_investigation}
+
+The global investigation identified tilt magnitude, offset direction, and force interaction as the most informative deviation groups for the physical success-rate analysis. These groups are therefore investigated further on selected dataset domains. The purpose of this second part is to determine whether the global effects are consistent across hole configurations, or whether they are caused by specific rod--tolerance combinations, gripper configurations, or batch-dependent recording conditions.
+
+The analysis is focused on the hole domains, defined by the combination of \texttt{rod\_type} and \texttt{tolerance}. Additional focused investigations are then performed for domains that show particularly strong or unexpected behavior.
+
+\subsubsection{Hole-Domain Screening}
+\label{subsubsec:da1_hole_domain_screening}
+
+\figref{fig:da1_domain_position_tilt_holes} shows the physical success rate of the individual position-offset and tilt groups across the nine hole domains. The domain-specific view confirms the global observation that tilt is more impactful than position offset alone. Across most hole domains, the no-tilt group has the highest success rate, while large tilt causes the success rate to drop. 8 out of 9 hole domains follow the consisten trend:
+
+\begin{equation}
+    \text{SR}(\texttt{N.T.}) > \text{SR}(\texttt{M.T.}) > \text{SR}(\texttt{L.T.})
+    \qquad
+    \text{SR}() := \texttt{Success Rate()}.
+    \label{eq:tilt_trend}
+\end{equation}
+\texttt{small\_rod\_t0.2} is the only case where $\text{SR}(\texttt{M.T.}) < \text{SR}(\texttt{L.T.})$.
+
+In contrast, the position-offset groups do not show the same consistent decline of success rate. No offset is not always clearly superior to moderate or large offset, which indicates that positional offset magnitude alone is not sufficient to explain the physical outcome.
+
+The combined position--tilt groups in \figref{fig:da1_domain_position_over_tilt_holes} provide a more detailed view of this effect. The highest success rates occur mostly in groups where no-tilt is involved, especially for the no-offset with no-tilt case. However, the effect is not identical in all hole domains. Some combinations are missing due to the deterministic structure of the deviation planner, and some domains show local patterns that differ from the global trend. In particular, \texttt{small\_rod\_t0.3} shows no samples for \texttt{M.O. / N.T.} and a very low success rate for \texttt{M.O. / L.T.}. 
+
+\figref{fig:da1_domain_offset_direction_holes} shows the hole domain specific view on the success rate of the five offset-directions. The domain \texttt{small\_rod\_t0.3} shows unexpected behavior, where offsets in the negative $x$ and negative $y$ directions are associated with much lower success rates than offsets in the positive directions. This could reveal a directional bias or asymmetry in the robotic setup. If the targeted insertion pose without deviations applied, is slightly shifted relative to the ground truth hole center, repeated deviations in one direction can show different behavior than deviations in the opposite direction.
+
+Because of these two anomalies regarding \texttt{small\_rod\_t0.3}, this domain is further investigated in Section \ref{subsubsec:da1_small_rod_t03_directional_bias}.
+
+The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes} shows particularly stronger variation across hole domains. The combination \texttt{F40 / L30} remains one of the least successful settings across several hole domains, which is consistent with the global result in \figref{fig:da1_physical_force_interaction_global}. This setting combines the highest commanded force level with the lowest force limit, so the force limit is likely to be reached before the insertion can be completed. At the same time, the heatmap shows that the force interaction global pattern does not apply to all hole domains. The \texttt{rect\_rod\_t0.1} domain in particular shows extreme differences, with some force interactions leading to almost complete success (\texttt{F20 / L40}) with direclty adjacent force interactions leading to almost complete failure (\texttt{F20 / L50}). This motivated the second focused investigation of \texttt{rect\_rod\_t0.1} in Subsection \ref{subsubsec:da1_rect_rod_t01_force_modes}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_hole_domains_position_and_tilt.png}
+    \caption{Physical success rate of position-offset and tilt groups across all hole domains.}
+    \label{fig:da1_domain_position_tilt_holes}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_hole_domains_position_over_tilt.png}
+    \caption{Physical success rate of combined position--tilt groups across all hole domains.}
+    \label{fig:da1_domain_position_over_tilt_holes}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_hole_domains_offset_direction.png}
+    \caption{Physical success rate of offset-direction groups across all hole domains.}
+    \label{fig:da1_domain_offset_direction_holes}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_hole_domains_force_interaction.png}
+    \caption{Physical success rate of force-interaction groups across hole domains.}
+    \label{fig:da1_domain_force_interaction_holes}
+\end{figure}
+
+For the focused investigations, the heatmap tiles are extended with additional failure-mode information. This comes from the metadata entry \texttt{failure\_reason} in \tabref{tab:recorded_metadata} and its description in Section \ref{sec:dataset_labeling}. Besides the success rate, each tile reports the number of samples $n$ and the distribution of failure reasons. The abbreviation \texttt{T} denotes the count of timeouts, \texttt{F} denotes the count of force-limit reached failures, and \texttt{S} counts the amounf of stall/jam failures. These failure modes allow the success rate to be interpreted more precisely, because a failed insertion can result from different physical mechanisms.
+
+\subsubsection{Directional Bias in \texttt{small\_rod\_t0.3}}
+\label{subsubsec:da1_small_rod_t03_directional_bias}
+
+The offset-direction result for \texttt{small\_rod\_t0.3} is investigated in more detail in \figref{fig:da1_small_rod_t03_offset_direction_batch}. The first recorded \texttt{batch\_1} shows a more uniform distribution of offset directions. This is not the case for the later batches, where the asymmetry becomes apparent. This is consistent with the data collection procedure, where in \texttt{batch\_1}, position and orientation deviations were applied more randomly, which can produce individual outliers but does not repeatedly test the same deviation direction with the same offset magnitude. In \texttt{batch\_2} and \texttt{batch\_3}, the deviation planner generated more structured and repeated deviations, so a systematic positional bias becomes more visible.
+
+The distinction between gripper types must be interpreted carefully here. The \texttt{flat} gripper only occurs in \texttt{batch\_3}, while the \texttt{round} gripper is essentially a weighted average of \texttt{batch\_2} and \texttt{batch\_3}. Therefore, the apparent gripper effect is partly coupled with the batch structure and should not be interpreted independently.
+
+\figref{fig:da1_small_rod_t03_offset_direction_detailed} focuses on the negative $x$ and negative $y$ directions and separates them by offset and tilt magnitude, not combined. Since centered samples are assigned to the centered group \texttt{C}, no-offset cases are not shown for the directional groups. For the negative $x$ direction, the success rate decreases with increasing offset magnitude, which is consistent with the fact that large positional deviations cause make failures more likely. Counterintuitively however, does the no-tilt group in the negative $x$ direction show 0\% success rate. One possible explanation is that, for this specific hole domain and direction, if a tilted rod hits the edge of the hole it can guide itself into the opening, while an untilted rod may hit the top surface of the taskboard more directly and stalls completely. Since for this domain the tolerance is the largest level (\texttt{t0.3}), after a possible self-alignment, the robot can successfully continue the insertion under moderate or large tilt.
+
+The failure-cause annotations support the interpretation that the negative-direction failures are not caused by a single mechanism alone. The failures include force-limit terminations, timeouts, and stall/jam detections. This suggests that the directional bias changes the contact situation in several ways. From a practical perspective, this result is useful, because it suggests a possible correction of the physical insertion setup. Because repeated failures occur mainly for negative $x$ and negative $y$ offsets, the starting pose of an insertion without deviations applied could be shifted slightly in the opposite direction, towards the true hole center, to improve insertion reliability.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_small_rod_t0.3_batch_gripper_domains_offset_direction.png}
+    \caption{Physical success rate of offset-direction groups for \texttt{small\_rod\_t0.3}, separated by batch and gripper domains.}
+    \label{fig:da1_small_rod_t03_offset_direction_batch}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_small_rod_t0.3_domains_offset_direction_3.png}
+    \caption{Detailed physical success rate of negative offset directions for \texttt{small\_rod\_t0.3}, separated by offset magnitude and tilt magnitude. Tile annotations include sample counts and failure reasons. N.O. not inlcluded, because the are not associated with a direction, they lie in group \texttt{C}.}
+    \label{fig:da1_small_rod_t03_offset_direction_detailed}
+\end{figure}
+
+
+
+\subsubsection{Failure-Mode Analysis for \texttt{rect\_rod\_t0.1}}
+\label{subsubsec:da1_rect_rod_t01_force_modes}
+
+The hole-domain investigation also identified \texttt{rect\_rod\_t0.1} as an unusual case for the force-interaction groups. This domain is analyzed in more detail in \figref{fig:da1_rect_rod_t01_force_interaction_failure_modes}. The plot separates all insertions from the \texttt{rect\_rod\_t0.1} domain in the \texttt{rect\_gripper} and \texttt{flat\_gripper} domains. This separation also reflects the batch structure, where the rectangular gripper was used in \texttt{batch\_1} and \texttt{batch\_2}, while the flat gripper was exclusively used in \texttt{batch\_3}. Therefore, the observations made, are also gripper- and batch-dependent.
+
+The failure-cause annotations explain the extreme variation seen in the global force-interaction heatmap. Force interactions with a small or negative force difference, such as \texttt{F30/L30}, \texttt{F35/L30}, \texttt{F40/L30}, and \texttt{F40/L40}, fail mainly due to the force limit exceeded. This is expected, because if the insertion force is close to or above the allowed force limit, the insertion is terminate before it can be completed. These cases support the interpretation that the difference between force limit and force level is a deciding factor of whether or not the insertion succeeds.
+
+However, increasing the force limit does not automatically make the insertion successful. Several force interactions with a positive (positive and far from zero) force difference still show low success rates, but their dominant failure cause changes. Instead of force-limit termination, the failures are mainly caused by stall/jam, visible for \texttt{F20 / L50}, \texttt{F25 / L50}, \texttt{F30 / L50} and \texttt{F35 / L50}. This indicates that a higher force limit can prevent early timeout termination, but can also allow the system to continue pushing further into a stall or jam. In particular, force limit and stall/jam failure occur in opposite ways, when there are a lot of force limit caused failures, the stall/jam caused failure rate is very low, effectively zero, and vise-versa. The only exception is for \texttt{F25 / L30}. Therefore, force-limit failures and stall/jam failures must be interpreted as different physical mechanisms.
+
+Low commanded force levels show another failure mechanism. In some \texttt{F15} cases, a notable number of failures are timeouts. This is consistent with the interpretation that the insertion velocity slows down with lower force levels and the insertion may not finish within the 3s sequence window.
+
+Therefore the force difference is a crucial metric to explain failures caused by force limit versus failures caused by Stall/jam. Especially low forces however can fail because the insertion velocity is too slow, reaching a timeout.
+
+% One initially surprising observation is the strong difference between \texttt{F20/L40} and \texttt{F20/L50}. This should not be interpreted as an isolated negative effect caused only by the 50 N force limit. The additional position--tilt split in \figref{fig:da1_rect_rod_t01_position_tilt_force_check} is restricted to \texttt{F20} over all force limits. It shows that the force-interaction groups are not paired with identical geometric deviation conditions. Instead, the deterministic deviation planner couples force settings with position and tilt deviations. In this case, the low success rate of \texttt{F20/L50} is better explained by its association with unfavorable tilt and offset conditions than by the force limit alone.
+
+This focused investigation shows why the force-interaction results must be interpreted carefully. The global heatmap correctly identifies force interaction as an important deviation group, but the underlying failure modes and coupled deviations determine whether a low success rate is caused by force-limit termination, timeout, or stall/jam.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_rect_rod_t0.1_domains_force_interaction_4.png}
+    \caption{Detailed physical success rate of force-interaction groups for \texttt{rect\_rod\_t0.1}. Tile annotations include sample counts and failure reasons.}
+    \label{fig:da1_rect_rod_t01_force_interaction_failure_modes}
+\end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.95\linewidth]{chapters/7-results/DA1/domain/physical_rect_rod_t0.1_domains_force_level_6.png}
+%     \caption{Detailed physical success rate of combined position--tilt groups for selected force levels in \texttt{rect\_rod\_t0.1}. This plot is used to inspect whether force-interaction differences are coupled to geometric deviations.}
+%     \label{fig:da1_rect_rod_t01_position_tilt_force_check}
+% \end{figure}
+
+% \subsubsection{Summary of Deviation Analysis I}
+
+% The physical success-rate analysis shows that tilt magnitude and force interaction are the most informative global deviation groups. Tilt is associated with a clear reduction in success rate, while radial position offset alone is less systematic. The combined position--tilt analysis confirms that position offset becomes more meaningful when interpreted together with tilt.
+
+% The domain-specific analysis refines this result. Across hole domains, the no-tilt groups are generally more successful than large-tilt groups, but individual hole domains show additional behavior that is hidden in the global plots. The \texttt{small\_rod\_t0.3} domain reveals a directional bias, where negative $x$ and negative $y$ offsets are substantially less successful than positive directions. This suggests a correctable offset in the nominal insertion pose and demonstrates that the metadata analysis can also be used to diagnose the physical robotic setup.
+
+% The \texttt{rect\_rod\_t0.1} investigation shows that force-interaction effects are strongly influenced by failure mode and deterministic coupling in the deviation planner. Low or negative force differences often produce force-limit failures, low commanded force can lead to timeouts, and high limits can allow stall/jam failures. Therefore, force interaction is physically meaningful, but individual force-interaction cells cannot always be interpreted independently from the associated position and tilt deviations.
+
+% Overall, Deviation Analysis I shows that the dataset contains meaningful physical structure beyond the binary success label. The analysis identifies which deviations are associated with insertion failures and reveals domain-specific effects that can guide improvements of the physical insertion process. These results also provide the basis for Deviation Analysis II, where the same deviation groups are analyzed with respect to model confusion rather than physical success rate.
 
 \section{Deviation Analysis II: Model Confusion}
 \label{subsec:results_deviation_analysis_2}

@@ -105,7 +105,7 @@ Then mean pooling is used over all $N$ patches, so the sequence representation i
 This means that the information of all patch tokens is aggregated into one global representation vector per sequence in a batch.
 
 \paragraph{Classification head, \figref{fig:patchtst} Step 6}
-In this work, the original forecasting head is replaced by a classification head. The implemented head consists of layer normalization $operatorname{LN}()$, a linear layer $\mathbf{W}_1$, $\mathbf{b}_1$ from embedding dimension $D$ to $D$, a GELU activation function $\phi()$, dropout, and a final linear output layer $\mathbf{W}_2$, $\mathbf{b}_2$ from embedding dimension $D$ to $1$:
+In this work, the original forecasting head is replaced by a classification head. The implemented head consists of layer normalization $\operatorname{LN}()$, a linear layer $\mathbf{W}_1$, $\mathbf{b}_1$ from embedding dimension $D$ to $D$, a GELU activation function $\phi()$, dropout, and a final linear output layer $\mathbf{W}_2$, $\mathbf{b}_2$ from embedding dimension $D$ to $1$:
 \begin{equation}
 \mathbf{o}
 =
