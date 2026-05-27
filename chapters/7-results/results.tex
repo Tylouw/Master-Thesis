@@ -376,7 +376,7 @@ Overall, the global screening identifies tilt magnitude and force interaction as
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\linewidth]{chapters/7-results/DA1/global/physical_force_interaction_global.png}
-    \caption{Global physical success rate for force-interaction groups. The label \texttt{D} denotes the difference between force limit and commanded force level.}
+    \caption{Global physical success rate for force-interaction groups.}
     \label{fig:da1_physical_force_interaction_global}
 \end{figure}
 
@@ -510,13 +510,13 @@ The analysis is focused on the hole domains, defined by the combination of \text
 
 In contrast, the position-offset groups do not show the same consistent decline of success rate. No offset is not always clearly superior to moderate or large offset, which indicates that positional offset magnitude alone is not sufficient to explain the physical outcome.
 
-The combined position--tilt groups in \figref{fig:da1_domain_position_over_tilt_holes} provide a more detailed view of this effect. The highest success rates occur mostly in groups where no-tilt is involved, especially for the no-offset with no-tilt case. However, the effect is not identical in all hole domains. Some combinations are missing due to the deterministic structure of the deviation planner, and some domains show local patterns that differ from the global trend. In particular, \texttt{small\_rod\_t0.3} shows no samples for \texttt{M.O. / N.T.} and a very low success rate for \texttt{M.O. / L.T.}. 
+The combined position--tilt groups in \figref{fig:da1_domain_position_over_tilt_holes} provide a more detailed view of this effect. The highest success rates occur mostly in groups where no-tilt is involved, especially for the no-offset with no-tilt case. However, the effect is not identical in all hole domains. Some combinations are missing due to the deterministic structure of the deviation planner, and some domains show local patterns that differ from the global trend. In particular, \texttt{small\_rod\_t0.3} shows no samples for \texttt{M.O./N.T.} and a very low success rate for \texttt{M.O./L.T.}. 
 
 \figref{fig:da1_domain_offset_direction_holes} shows the hole domain specific view on the success rate of the five offset-directions. The domain \texttt{small\_rod\_t0.3} shows unexpected behavior, where offsets in the negative $x$ and negative $y$ directions are associated with much lower success rates than offsets in the positive directions. This could reveal a directional bias or asymmetry in the robotic setup. If the targeted insertion pose without deviations applied, is slightly shifted relative to the ground truth hole center, repeated deviations in one direction can show different behavior than deviations in the opposite direction.
 
 Because of these two anomalies regarding \texttt{small\_rod\_t0.3}, this domain is further investigated in Section \ref{subsubsec:da1_small_rod_t03_directional_bias}.
 
-The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes} shows particularly stronger variation across hole domains. The combination \texttt{F40 / L30} remains one of the least successful settings across several hole domains, which is consistent with the global result in \figref{fig:da1_physical_force_interaction_global}. This setting combines the highest commanded force level with the lowest force limit, so the force limit is likely to be reached before the insertion can be completed. At the same time, the heatmap shows that the force interaction global pattern does not apply to all hole domains. The \texttt{rect\_rod\_t0.1} domain in particular shows extreme differences, with some force interactions leading to almost complete success (\texttt{F20 / L40}) with direclty adjacent force interactions leading to almost complete failure (\texttt{F20 / L50}). This motivated the second focused investigation of \texttt{rect\_rod\_t0.1} in Subsection \ref{subsubsec:da1_rect_rod_t01_force_modes}.
+The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes} shows particularly stronger variation across hole domains. The combination \texttt{F40/L30} remains one of the least successful settings across several hole domains, which is consistent with the global result in \figref{fig:da1_physical_force_interaction_global}. This setting combines the highest commanded force level with the lowest force limit, so the force limit is likely to be reached before the insertion can be completed. At the same time, the heatmap shows that the force interaction global pattern does not apply to all hole domains. The \texttt{rect\_rod\_t0.1} domain in particular shows extreme differences, with some force interactions leading to almost complete success (\texttt{F20/L40}) with direclty adjacent force interactions leading to almost complete failure (\texttt{F20/L50}). This motivated the second focused investigation of \texttt{rect\_rod\_t0.1} in Subsection \ref{subsubsec:da1_rect_rod_t01_force_modes}.
 
 \begin{figure}[htbp]
     \centering
@@ -582,7 +582,7 @@ The hole-domain investigation also identified \texttt{rect\_rod\_t0.1} as an unu
 
 The failure-cause annotations explain the extreme variation seen in the global force-interaction heatmap. Force interactions with a small or negative force difference, such as \texttt{F30/L30}, \texttt{F35/L30}, \texttt{F40/L30}, and \texttt{F40/L40}, fail mainly due to the force limit exceeded. This is expected, because if the insertion force is close to or above the allowed force limit, the insertion is terminate before it can be completed. These cases support the interpretation that the difference between force limit and force level is a deciding factor of whether or not the insertion succeeds.
 
-However, increasing the force limit does not automatically make the insertion successful. Several force interactions with a positive (positive and far from zero) force difference still show low success rates, but their dominant failure cause changes. Instead of force-limit termination, the failures are mainly caused by stall/jam, visible for \texttt{F20 / L50}, \texttt{F25 / L50}, \texttt{F30 / L50} and \texttt{F35 / L50}. This indicates that a higher force limit can prevent early timeout termination, but can also allow the system to continue pushing further into a stall or jam. In particular, force limit and stall/jam failure occur in opposite ways, when there are a lot of force limit caused failures, the stall/jam caused failure rate is very low, effectively zero, and vise-versa. The only exception is for \texttt{F25 / L30}. Therefore, force-limit failures and stall/jam failures must be interpreted as different physical mechanisms.
+However, increasing the force limit does not automatically make the insertion successful. Several force interactions with a positive (positive and far from zero) force difference still show low success rates, but their dominant failure cause changes. Instead of force-limit termination, the failures are mainly caused by stall/jam, visible for \texttt{F20/L50}, \texttt{F25/L50}, \texttt{F30/L50} and \texttt{F35/L50}. This indicates that a higher force limit can prevent early timeout termination, but can also allow the system to continue pushing further into a stall or jam. In particular, force limit and stall/jam failure occur in opposite ways, when there are a lot of force limit caused failures, the stall/jam caused failure rate is very low, effectively zero, and vise-versa. The only exception is for \texttt{F25/L30}. Therefore, force-limit failures and stall/jam failures must be interpreted as different physical mechanisms.
 
 Low commanded force levels show another failure mechanism. In some \texttt{F15} cases, a notable number of failures are timeouts. This is consistent with the interpretation that the insertion velocity slows down with lower force levels and the insertion may not finish within the 3s sequence window.
 
@@ -618,6 +618,159 @@ This focused investigation shows why the force-interaction results must be inter
 
 \section{Deviation Analysis II: Model Confusion}
 \label{subsec:results_deviation_analysis_2}
+
+The second part of the deviation analysis evaluates whether specific deviation groups lead to systematic classification errors. The analysis is performed with the PatchTST \texttt{Big} model using the best channel configuration. The model is trained nine times with the same seed combinations used throughout the benchmark experiments. For each run, the mixed data split is 5852 samples for training, 1033 samples for validation and 1215 (659 successful, 556 failed) samples for the test set. Across the nine runs, this produces $1215\times 9 = 10935$ test prediction records.
+
+The plots in this section report the mean and standard deviation of the corresponding metric over the nine runs. This means that the 10935 prediction records are first divided by their queried deviation group, then further divided into nine groups corresponding to the nine training runs, where in each of these groups the model metrics are computed and are averaged. This conceptual split pipeline is visualized in the sankey plot in \figref{fig:da2_sankey}.
+
+The global investigation follows the same deviation groups as Deviation Analysis I. This allows the physical success-rate results to be compared directly with the model-confusion results. The main metric is balanced accuracy, because the deviation groups can have very different success/failure ratios. The binary cross-entropy loss is used as an additional indicator for poor probability estimates, while the false-positive and false-negative rates are used to interpret the direction of the classification errors.
+
+\subsection{Global Screening Across the Mixed Test Set}
+\label{subsec:da2_global_screening}
+
+\figref{fig:da2_model_position_tilt_global} and \figref{fig:da2_model_position_over_tilt_global} show the position offset and tilt magnitude side by side and combined, respectively. Here they do not follow the same trend as they did for physical success rate in \figref{fig:da1_physical_position_tilt_global} and \figref{fig:da1_physical_position_over_tilt_global}. In Deviation Analysis I, large tilt was associated with a clear decrease in physical success rate. In the current model-confusion analysis, however, the large-tilt groups still achieve balanced accuracies around 0.86 to 0.90. This indicates that large tilt produces more physical failures, but these failures are often still recognizable from the signal patterns and therefore are not necessarily difficult for the model to classify.
+
+The lowest balanced accuracies within the combined position--tilt groups occur for \texttt{N.O./N.T.} and \texttt{M.O./N.T.}. These groups have really high insertion success rates (\figref{fig:da1_physical_position_over_tilt_global}), but that also means that rare failed insertions in these groups are harder for the model to detect, because of the big class imbalance. This is visible in the false-positive rates listed in \tabref{tab:da2_global_selected_groups}, where \texttt{N.O./N.T.} and \texttt{M.O./N.T.} show comparatively high false-positive rates of around 0.4. In this case, false positive means that a failed insertion is predicted as successful. Thus, the lower balanced accuracy is not caused by generally difficult deviations, but by rare failure cases that are not enough for the model to recognize them.
+
+The offset-direction groups in \figref{fig:da2_model_offset_direction_global} show no strong global model-confusion pattern. While Deviation Analysis I showed that offset direction can reveal domain-specific robotic setup asymmetries, the global model balanced accuracy is relatively uniform across the offset directions. This suggests that offset direction is not a major global source of model confusion.
+
+The force-related results are more informative. \figref{fig:da2_model_force_level_and_limit_global} shows that low and medium force levels, especially \texttt{F15} and \texttt{F25}, are classified with high balanced accuracy, which when comparing with physical success rate in \figref{fig:da1_physical_force_level_and_limit_global} shows the same trend as for the \texttt{N.O./N.T.} and \texttt{M.O./N.T.} cases, only in the opposite direction. Meaning, an unpreferable physical success rate of close to 50\%  provides a favorable class split for the model to train on.
+
+The force limit alone is less informative, because the effect depends on the commanded force level. Therefore, the force-interaction groups in \figref{fig:da2_model_force_interaction_global} and \figref{fig:da2_model_loss_force_interaction_global} provide the clearest view. The lowest balanced accuracy occurs for \texttt{F40/L30}, with $0.467 \pm 0.019$. This group is physically almost always a failure, with only 15 successful insertions among 543 prediction records. The false-negative rate is 1.0, meaning that all rare successful insertions in this group are predicted as failures. This does not mean that the model fails to recognize the dominant failures \texttt{F40/L30}. The opposite is the case, where the few successful exceptions are not recognized by the model. This is a case where the group is physically very difficult and where the class distribution itself makes the rare positive class hard to identify.
+
+Other force-interaction groups show a different kind of model confusion. In particular, \texttt{F30/L30} and \texttt{F40/L40} have both low balanced accuracy and the highest binary cross-entropy losses. The group \texttt{F30/L30} reaches only $0.619 \pm 0.102$ balanced accuracy with a loss of $1.878 \pm 0.640$, while \texttt{F40/L40} reaches $0.568 \pm 0.066$ balanced accuracy with a loss of $1.735 \pm 0.566$. A high loss means that the model often assigns high confidence to the wrong class, or gives low probability to the true class, which is penalized more strongly than an uncertain prediction near the decision boundary. Thus, the issue is not only that some samples fall on the wrong side of the threshold, but that the predicted probabilities themselves are mostly wrong. This indicates genuinely ambiguous or inconsistent signal patterns for the model.
+
+Within several force levels, increasing the force limit improves the model performance. For example, the balanced accuracy increases from \texttt{F30/L30} to \texttt{F30/L50}, and from \texttt{F40/L30} to \texttt{F40/L50}. This is consistent with the interpretation from Deviation Analysis I: when the commanded force is close to or above the force limit, the insertion behavior is dominated by early termination (force limit reached) or unusual contact dynamics. This produces signal patterns that are less consistent for the classifier.
+
+The record-offset groups in \figref{fig:da2_model_record_offset_global} are very uniform. The early-offset group (\texttt{ROE}) has the highest balanced accuracy, but the mid (\texttt{ROM}), and late (\texttt{ROL}) groups remain in a similar range. This suggests that the classifier is not strongly dependent on one exact temporal recording-window position. Since record offset is not a physical insertion deviation, this is mainly a model-side result: the tested recording-window shifts do not create a severe global model-confusion effect.
+
+Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach height 0 mm (\texttt{AH0}) reaches a very high balanced accuracy of $0.985 \pm 0.008$. This result should be interpreted carefully, because batch 1 was exclusively recorded with approach height 0 mm and grasp height 0 mm as well. It is therefore not interpreted as an isolated effect of approach height. Instead, it is treated as a candidate for domain-specific inspection if required.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\linewidth]{chapters/7-results/DA2/global/model_position_and_tilt.png}
+        \caption{Global model test balanced accuracy for position-offset levels and tilt levels.}
+        \label{fig:da2_model_position_tilt_global}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\linewidth]{chapters/7-results/DA2/global/model_position_over_tilt.png}
+        \caption{Global model test balanced accuracy for combined position--tilt groups.}
+        \label{fig:da2_model_position_over_tilt_global}
+    \end{minipage}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_offset_direction.png}
+        \caption{Global model test balanced accuracy for offset-direction groups.}
+        \label{fig:da2_model_offset_direction_global}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_force_level_and_limit.png}
+        \caption{Global model balanced accuracy for force level and force limit.}
+        \label{fig:da2_model_force_level_and_limit_global}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_force_interaction.png}
+    \caption{Global model test balanced accuracy for force-interaction groups.}
+    \label{fig:da2_model_force_interaction_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_loss_force_interaction.png}
+    \caption{Global binary cross-entropy loss for force-interaction groups.}
+    \label{fig:da2_model_loss_force_interaction_global}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_record_offset.png}
+        \caption{Global model test balanced accuracy for record-offset groups.}
+        \label{fig:da2_model_record_offset_global}
+    % \end{minipage}
+        \vspace{3.0cm}
+    % \begin{minipage}[t]{0.45\textwidth}
+        % \centering
+        \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/model_grasp_approach_height.png}
+        \caption{Global model test balanced accuracy for grasp-height and approach-height groups.}
+        \label{fig:da2_model_grasp_approach_height_global}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{chapters/7-results/DA2/global/sankey.png}
+        \caption{Sankey plot of the splitting pipeline to compute the queried mean metric. First all prediction records get split into the queried deviation groups, which each containing the predictions among the 9 training runs. Inside the seed groups the metrics: Balanced Accuracy, BCE Loss, False Positive Rate and False Negative Rate are computed. The visualized pattern is: "Seed:(model seed, split seed), True:(\#successful insertions, \#failed insertions), Pred:(TP, TN)". TP and TN come from the confusion matrix, FP, FN are not listed.}
+        \label{fig:da2_sankey}
+    \end{minipage}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Selected global model-confusion results. The sample counts and class splits are accumulated across all nine test evaluations. The "Pred." Prediction entry defines pos = TP + TN, neg = FP + FN.}
+    \label{tab:da2_global_selected_groups}
+    \scriptsize
+    \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{lllllllll}
+        \toprule
+        \textbf{Deviation Group} &
+        \textbf{\#} &
+        \textbf{True (pos, neg)} &
+        \textbf{Pred. (pos, neg)} &
+        \textbf{Bal. acc.} &
+        \textbf{Loss} &
+        \textbf{FPR} &
+        \textbf{FNR} \\
+        \midrule
+        \texttt{position\_tilt}\\
+        \texttt{N.O./N.T.} & 267 & (237, 30) & (238, 29) & 0.835 $\pm$ 0.088 & 0.461 & 0.389 & 0.045 \\
+        \texttt{M.O./N.T.} & 378 & (321, 57) & (323, 55) & 0.762 $\pm$ 0.152 & 0.599 & 0.417 & 0.060 \\
+        \texttt{N.O./L.T.} & 2781 & (1317, 1464) & (1328, 1453) & 0.864 $\pm$ 0.015 & 0.682 & 0.133 & 0.139 \\
+        \texttt{M.O./L.T.} & 1653 & (744, 909) & (741, 912) & 0.894 $\pm$ 0.021 & 0.576 & 0.093 & 0.118 \\
+        \texttt{L.O./L.T.} & 2316 & (1122, 1194) & (1082, 1234) & 0.897 $\pm$ 0.020 & 0.470 & 0.082 & 0.124 \\
+        \midrule
+        \texttt{force\_interaction} \\
+        \texttt{F15/L30} & 588 & (363, 225) & (361, 227) & 0.980 $\pm$ 0.010 & 0.108 & 0.020 & 0.019 \\
+        \texttt{F15/L40} & 489 & (351, 138) & (336, 153) & 0.974 $\pm$ 0.009 & 0.203 & 0.007 & 0.046 \\
+        \texttt{F25/L40} & 1842 & (1089, 753) & (1095, 747) & 0.976 $\pm$ 0.011 & 0.106 & 0.032 & 0.016 \\
+        \texttt{F30/L30} & 564 & (111, 453) & (211, 353) & 0.619 $\pm$ 0.102 & 1.878 & 0.323 & 0.439 \\
+        \texttt{F30/L40} & 576 & (513, 63) & (428, 148) & 0.783 $\pm$ 0.096 & 1.148 & 0.238 & 0.196 \\
+        \texttt{F30/L50} & 594 & (414, 180) & (371, 223) & 0.918 $\pm$ 0.022 & 0.395 & 0.041 & 0.123 \\
+        \texttt{F35/L40} & 498 & (309, 189) & (301, 197) & 0.788 $\pm$ 0.034 & 1.270 & 0.245 & 0.178 \\
+        \texttt{F40/L30} & 543 & (15, 528) & (35, 508) & 0.467 $\pm$ 0.019 & 0.568 & 0.067 & 1.000 \\
+        \texttt{F40/L40} & 537 & (84, 453) & (126, 411) & 0.568 $\pm$ 0.066 & 1.735 & 0.211 & 0.653 \\
+        \texttt{F40/L50} & 507 & (366, 141) & (286, 221) & 0.815 $\pm$ 0.062 & 0.902 & 0.106 & 0.263 \\
+        \midrule
+        \texttt{record\_offset} \\
+        \texttt{ROE} & 5193 & (2721, 2472) & (2659, 2534) & 0.897 $\pm$ 0.009 & 0.556 & 0.0959 & 0.110 \\
+        \texttt{ROM} & 1797 & (996, 801) & (975, 822) & 0.887 $\pm$ 0.017 & 0.527 & 0.112 & 0.113 \\
+        \texttt{ROE} & 3945 & (2214, 1731) & (2200, 1745) & 0.883 $\pm$ 0.018 & 0.623 & 0.129 & 0.106 \\
+        \midrule
+        \texttt{approach\_height} \\
+        \texttt{AH0} & 1284 & (705, 579) & (712, 572) & 0.985 $\pm$ 0.008 & 0.081 & 0.022 & 0.008 \\
+        \bottomrule
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+
+
+Overall, the global model confusion analysis shows that the final model using the best channels is comparatively robust across most geometric deviation groups. This differs from the physical success-rate analysis, where large tilt clearly caused more insertion failures. The main global model confusion patterns are instead found in force interaction groups. In particular, force settings with a small or negative difference between force limit and force level produce either rare successful exceptions that are missed by the model, as in \texttt{F40/L30}, or genuinely ambiguous signal patterns, as in \texttt{F30/L30} and \texttt{F40/L40} are difficult to classify. Furthermore some cases showed consistent patterns between physical success rate and balanced accuracy, where a success rate close to 50\%, inherently means a fairly balanced class split, which is favorable for the model to train on. On the other hand a physically favorable insertion success rates of around 100\%, or the other unfavorable extreme case of around 0\% success rate, inherently causes class imbalance that in turn biases the model to one extreme case.
+
+The record-offset groups do not show a severe performance collapse, indicating that the model is reasonably robust to the tested temporal recording-window shifts.
 
 \section{Summary of Main Findings}
 \label{sec:results_summary}
