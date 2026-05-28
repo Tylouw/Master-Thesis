@@ -1,0 +1,29 @@
+\chapter{Conclusion and Future Work}\label{ch:conclusion}
+% Therefore the force difference is a crucial metric to explain failures caused by force limit versus failures caused by Stall/jam. Especially low forces however can fail because the insertion velocity is too slow, reaching a timeout.
+
+% when physical success is at around 0.5, its good for the model because of class balance. when either physical success rate is extreme, close to 1.0 or 0.0, a class imbalance is given, which is not good for the model
+
+\section{Conclusion}
+\label{sec}
+
+
+
+This thesis investigated robotic insertion-success classification using a real-world dataset collected with an industrial robot under varying insertion geometries, tolerances, gripper configurations, and process deviations. The main contribution is therefore not only the application of a time-series classification model, but the construction and analysis of a structured robotic insertion dataset. The model was primarily used as an analysis tool to evaluate how much information is contained in the recorded robot signals, how well insertion outcomes can be classified under different train-test splits, and which physical conditions are difficult for both the insertion process and the classifier.
+
+The dataset consists of 8100 insertion attempts recorded over three batches. Each attempt was stored as a multivariate time series with 48 robot signals sampled at 500 Hz over a fixed sequence length of 3 s. In addition to the sensor data, each sample includes metadata describing the corresponding rod type, tolerance, gripper type, recording batch, applied position offset, applied tilt, insertion force level, force limit, record offset, binary success label, and failure reason. This metadata proved essential because it enabled analysis beyond global classification metrics and allowed the dataset to be studied with respect to its physical and domain-specific properties.
+
+The channel study showed that insertion-success classification is not encoded in a single signal modality. Force/torque signals were the best individual modality, but the best performance was achieved by combining force/torque with TCP pose, joint velocity and current consumption. This indicates that robust classification benefits from diverse sensor information and confirms that the dataset contains meaningful multi-modal structure related to the insertion process.
+
+The benchmark experiments demonstrated that classification difficulty strongly depends on the train-test split and the underlying domain shift. Benchmark 1 provided an in-distribution reference case and achieved the strongest overall performance, but this should not be interpreted as proof of generalization. Benchmarks 2 and 3 showed that the model generalized reasonably well across many unseen domains, especially between round geometries and tolerance variations, while rectangular geometries, rectangular grippers, and batch-level splits were more difficult. In particular, tight rectangular tolerances represented the most challenging domains. These results show that the dataset contains both transferable patterns and domain-specific effects that limit generalization.
+
+The deviation analyses provided the clearest insight into the physical structure of the dataset. Deviation Analysis I showed that insertion success is mainly influenced by tilt magnitude and the interaction between insertion force level and force limit. Increasing tilt consistently reduced physical success, indicating that angular misalignment is more critical than the tested position offsets. The force-related analysis further showed that the relevant quantity is the difference between commanded force level and force limit. Small or negative differences strongly reduced success rates and produced different failure mechanisms such as force-limit failures, jams, or timeouts.
+
+The metadata-based analysis also revealed local effects that would not be visible from global metrics alone. For example, the \texttt{small\_rod\_t0.3} domain showed directional asymmetries where negative offsets were less successful than positive ones, suggesting a bias in the nominal insertion pose. This demonstrates that the dataset is useful not only for training classifiers, but also for diagnosing weaknesses or asymmetries in the robotic setup itself.
+
+Deviation Analysis II showed that physical difficulty and classification difficulty are related, but not identical. Large tilt reduced physical success rates, yet these groups often remained relatively easy to classify because they produced distinctive signal patterns. In contrast, force-interaction groups such as \texttt{F30/L30} and \texttt{F40/L40} caused both low balanced accuracy and high loss, indicating genuinely ambiguous or inconsistent dataset regions. A further important finding was that local physical success rates directly influence class balance. Physically easy or physically impossible groups create highly imbalanced local datasets, which can increase false positives or false negatives even when the physical behavior itself is consistent.
+
+Overall, the thesis shows that the recorded insertion dataset contains rich and learnable structure, but that this structure is not uniform across all domains and deviation groups. Multi-modal robot signals enable reliable insertion-success classification under favorable and moderately shifted conditions, while rectangular contact geometries, batch-level shifts, unfavorable force interactions, and locally imbalanced groups reveal clear limits of generalization. The central insight is therefore not simply that insertion success can be classified, but that combining time-series classification with metadata-based analysis makes it possible to identify which parts of a robotic insertion dataset are physically difficult, difficult to classify, and where these two notions differ.
+
+
+\section{Limitations}
+\section{Future Work}

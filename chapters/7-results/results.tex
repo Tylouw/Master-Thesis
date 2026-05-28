@@ -9,7 +9,7 @@ After the Benchmark results follow the results from the Deviation Analysis I and
 In the end a summary of the main findings is given.
 
 
-
+% MARK: Best Channel Study
 \section{Best Channel Study}
 \label{sec:results_best_channel}
 The Best Channel Study was conducted as a standalone study as the first Experiment in Section \ref{sec:exp1_best_channel_study} with its own Motivation, Methods, Results, Discussion and Conclusion.
@@ -48,6 +48,7 @@ The best channel study shows that FT is the strongest individual channel group b
 
 
 \newpage
+% MARK: BM1
 \section{Benchmark 1: Test on Mixed Split}
 \label{sec:results_benchmark1}
 Benchmark 1 evaluates the selected channel configuration under an in-distribution split, where the test samples are unseen insertion attempts but originate from the same overall experimental domain as the training data. This testset is evaluated on the
@@ -109,6 +110,7 @@ For Benchmark 1, the main conclusion is therefore that the Big config provides t
 \end{table}
 \newpage
 
+% MARK: BM2
 \section{Benchmark 2: Test on Individual Hole}
 \label{sec:results_benchmark2}
 
@@ -201,6 +203,7 @@ Overall, Benchmark 2 shows that the model can generalize to most individual unse
 
 \newpage
 
+% MARK: BM3
 \section{Benchmark 3: Test on Held-Out Group}
 \label{sec:results_benchmark3}
 
@@ -322,7 +325,7 @@ Overall, Benchmark 3 shows that group-level generalization is substantially more
 \end{table}
 
 \newpage
-
+% MARK:DA1 Physical Success
 \section{Deviation Analysis I: Physical Success Rate}
 \label{subsec:results_deviation_analysis_1}
 
@@ -503,7 +506,7 @@ Overall, the global screening identifies tilt magnitude and force interaction as
 \end{table}
 
 \newpage
-
+% MARK: DA1 Domain
 \subsection{Domain specific Investigation of Deviation Groups}
 \label{subsec:da1_domain_investigation}
 
@@ -626,6 +629,7 @@ The investigation of \texttt{rect\_rod\_t0.1} shows that failed insertions come 
 
 Overall, Deviation Analysis I concludes that tilt magnitude and force interaction are the strongest global factors affecting physical success rate, while offset direction can reveal a robotic setup-specific positional bias for selected domains. These results show that the metadata is not only useful for grouping the dataset, but also to explain physically difficult deviations affecting the insertion process.
 
+% MARK: DA2 Model Confusion
 \section{Deviation Analysis II: Model Confusion}
 \label{subsec:results_deviation_analysis_2}
 
@@ -792,6 +796,7 @@ Overall, the global model confusion analysis shows that the final model using th
 
 The record-offset groups do not show a severe performance collapse, indicating that the model is reasonably robust to the tested temporal recording-window shifts.
 
+% MARK: DA2 Domain
 \subsection{Domain-Specific Follow-Up Analysis}
 \label{subsec:da2_domain_specific}
 
