@@ -65,6 +65,25 @@ are combined, resulting in nine runs per experiment. An experiment is a specific
 
 This design makes it possible to assess not only average performance but also robustness with respect to both data partitioning and stochastic training effects.
 
+
+\figref{fig:exp_vis} shows visually how the experiments are conducted, what domains and channels are used. Red arrows indicate that all domains are used, meaning the whole dataset. Experiment 1 starts with the Best Channel Study, which uses the whole dataset and asses the best channels below. The FT channel is used as input for the PatchTST Base model, forming the Base config for the later Benchmarks. The best channels are used with the Big PatchTST model to form the Big Config.
+Experiment 2 defines the benchmarks:
+Benchmark 1 uses a mixed split from the whole dataset as the test set and evaluates it on the Base and Big config.
+Benchmark 2 uses exclusively the \texttt{rod\_type}-\texttt{tolerance} combinations as the test set.
+Benchmark 3 uses all domains individually as the test set.
+
+Experiment 3 is the Deviation Analysis (DA).
+DA1 Physical Success asses how the deviations applied during insertions affect the success rate on a global scale, by using the whole dataset, followed by a domain specific analysis using individual or combined domains.
+DA2 Model Confusion asses how the deviations affect classification performance. The input data is here the prediction records coming from Benchmark 1, ran on the Big config. Then the affect of deviations on a global scale and later on a specific domain scale, are analyzed.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.9\textwidth]{chapters/6-experiments/Experiments_figure.png}
+    \caption{Visualzation of experiments conducted.}
+    \label{fig:exp_vis}
+\end{figure}
+\newpage
+
 \section{Experiment 1: Best Channel Study}
 \label{sec:exp1_best_channel_study}
 
@@ -270,7 +289,7 @@ Thus, the test set contains unseen insertion attempts from one domain that is co
     \caption{Schematic drawing of the insertion taskboard. The nine hole domains used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific domain, defined in \tabref{tab:bm2_domains}. 1: \texttt{BM2\_Hole\_1} $\dots$ 9: \texttt{BM2\_Hole\_9}.}
     \label{fig:taskboard_holes}
 \end{figure}
-
+\newpage
 \subsection{Benchmark 3: Test on Held-Out Group}
 \label{sec:sq4_held_out_group}
 
@@ -325,7 +344,7 @@ The dataset recorded in this thesis is not only useful for training a classifier
 First, as the physical success-rate of insertions is dependent on the applied deviations and their magnitude or level, the goal is to asses which set of deviations, and in particular which level (magnitude), cause more insertion failures than other settings.
 But insertion-failure does not imply that the classification model fails to classify the label, for example if the failed insertion produces a clear failure signature, the classifier may be more likely to assign the label "failed insertion" to it. Conversely, a deviation can be physically successful but still produce ambiguous/confusing signal patterns for the classifier. Therefore, the analysis is separated into a physical success-rate analysis and a model-confusion analysis.
 
-\subsection{Deviation Grouping and Domains}
+\subsection{Deviation Grouping}
 \begin{table}[htbp]
     \centering
     \caption{Deviation parameters available in the dataset.}
