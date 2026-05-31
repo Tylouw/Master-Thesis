@@ -13,13 +13,6 @@ The experimental setup is built around a UR5e robotic manipulator equipped with 
     \label{fig:setup_overview}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    % \includegraphics[width=0.9\textwidth]{[PATH_TO_SETUP_SCHEMATIC]}
-    \caption{Schematic representation of the main hardware components and their arrangement.}
-    \label{fig:setup_schematic}
-\end{figure}
-
 For the experiments the UR5e robot was selected due to its ease of use, broad availability combined with sufficient accuracy to achieve repeatable cartesian motion to perform the insertions. Since the robot itself is not the subject of investigation in this work, only its functional role within the setup is considered here. Similarly, the Robotiq Hand-E gripper is used to reliably grasp and release the insertion rods and furthermore allow different shapes of rods to be grasped due to interchangeable and fully customizable fingers. Different finger configurations were designed to ensure safe grasping of the respective rod types while also allowing little play to generate diverse training data. The specific rod and finger geometries are described in Section~\ref{sec:rods-fingers}.
 
 The robot interacts with a custom taskboard mounted next to it. The taskboard contains the respective insertion holes with a movable loadcell underneath to detect successful insertions, which enables automated success detection during data acquisition. The taskboard design is described in Section~\ref{sec:taskboard}, while the loadcell-based success detection system is presented in Section~\ref{sec:loadcell}.

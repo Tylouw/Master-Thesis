@@ -19,30 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{chatgpt}{online}{}
-      \name{author}{1}{}{%
-        {{hash=0523b13262b12c215d8009938f5c14f1}{%
-           family={{OpenAI}},
-           familyi={O\bibinitperiod}}}%
-      }
-      \strng{namehash}{0523b13262b12c215d8009938f5c14f1}
-      \strng{fullhash}{0523b13262b12c215d8009938f5c14f1}
-      \strng{bibnamehash}{0523b13262b12c215d8009938f5c14f1}
-      \strng{authorbibnamehash}{0523b13262b12c215d8009938f5c14f1}
-      \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
-      \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ChatGPT has been used to refine language and transitions.}
-      \verb{urlraw}
-      \verb https://chat.openai.com/
-      \endverb
-      \verb{url}
-      \verb https://chat.openai.com/
-      \endverb
-    \endentry
     \entry{xuCompareContactModelbased2019}{online}{}
       \name{author}{4}{}{%
         {{hash=107cdbc1053b5baff69de9dcfdbc5c0e}{%
@@ -72,8 +48,8 @@
       \strng{authorbibnamehash}{9ddef41e584ce7ce370336e73182f8a1}
       \strng{authornamehash}{9ddef41e584ce7ce370336e73182f8a1}
       \strng{authorfullhash}{62c01626d6ce10a27cca09c4be42b066}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{In this paper, we present an overview of robotic peg-in-hole assembly and analyze two main strategies: contact model-based and contact model-free strategies. More specifically, we first introduce the contact model control approaches, including contact state recognition and compliant control two steps. Additionally, we focus on a comprehensive analysis of the whole robotic assembly system. Second, without the contact state recognition process, we decompose the contact model-free learning algorithms into two main subfields: learning from demonstrations and learning from environments (mainly based on reinforcement learning). For each subfield, we survey the landmark studies and ongoing research to compare the different categories. We hope to strengthen the relation between these two research communities by revealing the underlying links. Ultimately, the remaining challenges and open questions in the field of robotic peg-in-hole assembly community is discussed. The promising directions and potential future work are also considered.}
@@ -141,8 +117,8 @@
       \strng{authorbibnamehash}{3fff46b09140a4f6804c28f9afcce32d}
       \strng{authornamehash}{3fff46b09140a4f6804c28f9afcce32d}
       \strng{authorfullhash}{816ddb9d6bbb786ae21b50cb78a8bcb3}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{In the past years, many methods have been developed for robotic peg-hole-insertion to automate the assembly process. However, many of them are based on the assumption that the peg and hole are well aligned before insertion starts. In practice, if there is a large pose(position/orientation) misalignment, the peg and hole may suffer from a three-point contact condition where the traditional assembly methods cannot work. To deal with this problem, this paper proposes an autonomous alignment method by force/torque measurement before insertion phase. A three-point contact model is built up and the pose misalignment between the peg and hole is estimated by force and geometric analysis. With the estimated values, the robot can autonomously correct the misalignment before applying traditional assembly methods to perform insertions. A series of experiments on a FANUC industrial robot and a H7h7 tolerance peg-hole testbed validate the effectiveness of the proposed method. Experimental results show that the robot is able to perform peg-hole-insertion from three-point contact conditions with 96\% success rate.}
@@ -173,6 +149,83 @@
       \endverb
       \keyw{Force,Force measurement,Friction,Iron,Sensors,Service robots}
     \endentry
+    \entry{feiContactJammingAnalysis2004b}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f7c95930167d665c05157f51aa9ab065}{%
+           family={Fei},
+           familyi={F\bibinitperiod},
+           given={Yanqiong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0b180b104b426e226115e5cd55bd7a02}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Xifang},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{fullhash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{bibnamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authorbibnamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authornamehash}{6db62ab2f9abb83940a588116f6453e7}
+      \strng{authorfullhash}{6db62ab2f9abb83940a588116f6453e7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{For a three dimensional multiple peg-in-hole mechanism, robot assembly is a complex process. In this paper, the force/moment and jamming analysis of the three dimensional dual peg-in-hole mechanism is presented. First, contact states of the three dimensional dual-peg are enumerated. Second, the contact forces are described by the screw theory in three dimensions. The force/moment equations for static equilibrium states of three dimensional dual-peg insertions are derived. Third, the jamming diagrams are obtained. Based on the analysis, an experiment of a dual peg-in-hole assembly is presented. The results verify that the analysis above is effective.}
+      \field{issn}{0094114X}
+      \field{journaltitle}{Mechanism and Machine Theory}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{5}
+      \field{shortjournal}{Mechanism and Machine Theory}
+      \field{title}{Contact and Jamming Analysis for Three Dimensional Dual Peg-in-Hole Mechanism}
+      \field{urlday}{28}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{39}
+      \field{year}{2004}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{477\bibrangedash 499}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1016/j.mechmachtheory.2003.11.003
+      \endverb
+      \verb{file}
+      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/XPZ6WPZG/Fei and Zhao - 2004 - Contact and jamming analysis for three dimensional dual peg-in-hole mechanism.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
+      \endverb
+    \endentry
+    \entry{chatgpt}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0523b13262b12c215d8009938f5c14f1}{%
+           family={{OpenAI}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{fullhash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{bibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorbibnamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
+      \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ChatGPT has been used to refine language and transitions.}
+      \verb{urlraw}
+      \verb https://chat.openai.com/
+      \endverb
+      \verb{url}
+      \verb https://chat.openai.com/
+      \endverb
+    \endentry
     \entry{raibertHybridPositionForce1981b}{article}{}
       \name{author}{2}{}{%
         {{hash=f8fa00d47f138edf1ae6e872dda1f5cf}{%
@@ -192,8 +245,8 @@
       \strng{authorbibnamehash}{0a96f44e88673edd4655fc2f70230435}
       \strng{authornamehash}{0a96f44e88673edd4655fc2f70230435}
       \strng{authorfullhash}{0a96f44e88673edd4655fc2f70230435}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{A new conceptually simple approach to controlling compliant motions of a robot manipulator is presented. The “hybrid” technique described combines force and torque information with positional data to satisfy simultaneous position and force trajectory constraints specified in a convenient task related coordinate system. Analysis, simulation, and experiments are used to evaluate the controller’s ability to execute trajectories using feedback from a force sensing wrist and from position sensors found in the manipulator joints. The results show that the method achieves stable, accurate control of force and position trajectories for a variety of test conditions.}
@@ -246,8 +299,8 @@
       \strng{authorbibnamehash}{81a74d7092d7b0786053a905b18b58b0}
       \strng{authornamehash}{81a74d7092d7b0786053a905b18b58b0}
       \strng{authorfullhash}{81a74d7092d7b0786053a905b18b58b0}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper combines histarical lineage, assessment of the state of the art, and discussion of unsolved problems in robot force control. The difference between continuous and logic branching strategies is described. The development of various impedance strategies and hybrid methods is traced and com pared. The problem of stability is discussed, and remedies are related to higher strategy issues.}
@@ -268,59 +321,6 @@
       \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/VYTU24IU/Historical Perspective and State of the Art in Robot Force Control.pdf
       \endverb
       \keyw{Applied sciences,Computer science; control theory; systems,Control theory. Systems,Exact sciences and technology,force control,history,Robotics,robots,stability}
-    \endentry
-    \entry{feiContactJammingAnalysis2004b}{article}{}
-      \name{author}{2}{}{%
-        {{hash=f7c95930167d665c05157f51aa9ab065}{%
-           family={Fei},
-           familyi={F\bibinitperiod},
-           given={Yanqiong},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=0b180b104b426e226115e5cd55bd7a02}{%
-           family={Zhao},
-           familyi={Z\bibinitperiod},
-           given={Xifang},
-           giveni={X\bibinitperiod}}}%
-      }
-      \strng{namehash}{6db62ab2f9abb83940a588116f6453e7}
-      \strng{fullhash}{6db62ab2f9abb83940a588116f6453e7}
-      \strng{bibnamehash}{6db62ab2f9abb83940a588116f6453e7}
-      \strng{authorbibnamehash}{6db62ab2f9abb83940a588116f6453e7}
-      \strng{authornamehash}{6db62ab2f9abb83940a588116f6453e7}
-      \strng{authorfullhash}{6db62ab2f9abb83940a588116f6453e7}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{For a three dimensional multiple peg-in-hole mechanism, robot assembly is a complex process. In this paper, the force/moment and jamming analysis of the three dimensional dual peg-in-hole mechanism is presented. First, contact states of the three dimensional dual-peg are enumerated. Second, the contact forces are described by the screw theory in three dimensions. The force/moment equations for static equilibrium states of three dimensional dual-peg insertions are derived. Third, the jamming diagrams are obtained. Based on the analysis, an experiment of a dual peg-in-hole assembly is presented. The results verify that the analysis above is effective.}
-      \field{issn}{0094114X}
-      \field{journaltitle}{Mechanism and Machine Theory}
-      \field{langid}{english}
-      \field{month}{5}
-      \field{number}{5}
-      \field{shortjournal}{Mechanism and Machine Theory}
-      \field{title}{Contact and Jamming Analysis for Three Dimensional Dual Peg-in-Hole Mechanism}
-      \field{urlday}{28}
-      \field{urlmonth}{4}
-      \field{urlyear}{2026}
-      \field{volume}{39}
-      \field{year}{2004}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{477\bibrangedash 499}
-      \range{pages}{23}
-      \verb{doi}
-      \verb 10.1016/j.mechmachtheory.2003.11.003
-      \endverb
-      \verb{file}
-      \verb /home/tilo/snap/zotero-snap/common/Zotero/storage/XPZ6WPZG/Fei and Zhao - 2004 - Contact and jamming analysis for three dimensional dual peg-in-hole mechanism.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
-      \endverb
-      \verb{url}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0094114X03001496
-      \endverb
     \endentry
     \entry{wangContactForceTorque2018}{inproceedings}{}
       \name{author}{8}{}{%
@@ -897,8 +897,8 @@
       \strng{authorbibnamehash}{777b44c9ec27943a4c00721f1149a97b}
       \strng{authornamehash}{777b44c9ec27943a4c00721f1149a97b}
       \strng{authorfullhash}{777b44c9ec27943a4c00721f1149a97b}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We investigate which haptic sensing modalities, or combination of haptic sensing modalities, best enable a robot to determine whether it successfully completed a manipulation task. In this paper, we consider haptic sensing modalities obtained from a wrist-mounted force-torque sensor and three types of fingertip sensors: a pair of FlexiForce force-sensing resistors, a pair of NumaTac sensors, and a pair of BioTac sensors. For each type of fingertip sensor, we simultaneously record force-torque and fingertip tactile data as the robot attempted to complete two manipulation tasks-a picking task and a scooping task-two-hundred times each. We leverage the resulting dataset to train and test a classification method using forty-one different haptic feature combinations, obtained from exhaustive combinations of individual modalities of the force-torque sensor and fingertip sensors. Our results show that the classification method's ability to distinguish between successful and unsuccessful task attempts depends on both the type of manipulation task and the subset of haptic modalities used to train and test the classification method.}
@@ -1910,8 +1910,8 @@
       \strng{authorbibnamehash}{3d1c620805148cd1766b8bf51af48276}
       \strng{authornamehash}{3d1c620805148cd1766b8bf51af48276}
       \strng{authorfullhash}{16c26622d4dcecc6081b44b436223d1b}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{We propose an efficient design of Transformer-based models for multivariate time series forecasting and self-supervised representation learning. It is based on two key components: (i) segmentation of time series into subseries-level patches which are served as input tokens to Transformer; (ii) channel-independence where each channel contains a single univariate time series that shares the same embedding and Transformer weights across all the series. Patching design naturally has three-fold benefit: local semantic information is retained in the embedding; computation and memory usage of the attention maps are quadratically reduced given the same look-back window; and the model can attend longer history. Our channel-independent patch time series Transformer (PatchTST) can improve the long-term forecasting accuracy significantly when compared with that of SOTA Transformer-based models. We also apply our model to self-supervised pre-training tasks and attain excellent fine-tuning performance, which outperforms supervised training on large datasets. Transferring of masked pre-trained representation on one dataset to others also produces SOTA forecasting accuracy. Code is available at: https://github.com/yuqinie98/PatchTST.}
@@ -2124,8 +2124,8 @@
       \strng{authorbibnamehash}{9404633f657b51ee7dab87f8ee80cbde}
       \strng{authornamehash}{9404633f657b51ee7dab87f8ee80cbde}
       \strng{authorfullhash}{9404633f657b51ee7dab87f8ee80cbde}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Opening a lock without vision sensors remains a challenge for robots. Inspired by the ability of a human to open a lock through touch and intuition, a peg-in-hole assembly method for recognizing the relative position and inclination angle of a hole is proposed. We use supervised learning to generate a contact-state model to judge the relative contact state and introduce force control strategies that ensure stable and safe interaction with the environment. Adaptive impedance control is adopted to ensure the stability of the alignment and insertion process. The proposed method is not restricted by the object shape. The system can learn an effective classification model with a small volume of force and torque data and predict the relative contact state of a peg and hole. The proposed method is verified in an experiment in which a bicycle lock is opened at different inclination angles. The proposed method has potential application in the field of industrial assembly.}

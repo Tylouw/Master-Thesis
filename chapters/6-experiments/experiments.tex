@@ -451,13 +451,16 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
 
         \texttt{grasp\_height} 
         & Height offset used during grasping.
-        & \texttt{0}, \texttt{7}\\
+        & \texttt{GH0}: Grasp height 0 mm\\
+        \texttt{GH7}: Grasp height 7 mm\\
 
         \midrule
 
         \texttt{approach\_height} 
         & Height offset used during the approach motion before insertion.
-        & \texttt{-5}, \texttt{0}, \texttt{2}\\
+        & \texttt{AH-5}: Approach height -5 mm\\
+        \texttt{AH0}: Approach height 0 mm\\
+        \texttt{AH2}: Approach height 2 mm\\
 
         \bottomrule
     \end{tabular}
@@ -508,20 +511,20 @@ The following groups in \tabref{tab:deviation_group_definitions} are used for th
 
         \texttt{position\_tilt} 
         & Combination of the position-offset level and the tilt-magnitude level.
-        & (\texttt{N.O. / N.T.}), (\texttt{N.O. / M.T.}), (\texttt{N.O. / L.T.}),\newline
-        (\texttt{M.O. / N.T.}), (\texttt{M.O. / M.T.}), (\texttt{M.O. / L.T.}),\newline
-        (\texttt{L.O. / N.T.}), (\texttt{L.O. / M.T.}), (\texttt{L.O. / L.T.})\\
+        & (\texttt{N.O./N.T.}), (\texttt{N.O./M.T.}), (\texttt{N.O./L.T.}),\newline
+        (\texttt{M.O./N.T.}), (\texttt{M.O./M.T.}), (\texttt{M.O./L.T.}),\newline
+        (\texttt{L.O./N.T.}), (\texttt{L.O./M.T.}), (\texttt{L.O./L.T.})\\
 
         \midrule
 
         \texttt{force\_interaction} 
         & Combination of force level and force limit. This group is used because the effect of the force limit depends on the force level.
-        & (\texttt{F15 / L30}), (\texttt{F15 / L40}), (\texttt{F15 / L50}),\newline
-        (\texttt{F20 / L300}), (\texttt{F20 / L40}), (\texttt{F20 / L50}),\newline
-        (\texttt{F25 / L30}), (\texttt{F25 / L40}), (\texttt{F25 / L50}),\newline
-        (\texttt{F30 / L30}), (\texttt{F30 / L40}), (\texttt{F30 / L50}),\newline
-        (\texttt{F35 / L30}), (\texttt{F35 / L40}), (\texttt{F35 / L50}),\newline
-        (\texttt{F40 / L30}), (\texttt{F40 / L40}), (\texttt{F40 / L50})\\
+        & (\texttt{F15/L30}), (\texttt{F15/L40}), (\texttt{F15/L50}),\newline
+        (\texttt{F20/L30}), (\texttt{F20/L40}), (\texttt{F20/L50}),\newline
+        (\texttt{F25/L30}), (\texttt{F25/L40}), (\texttt{F25/L50}),\newline
+        (\texttt{F30/L30}), (\texttt{F30/L40}), (\texttt{F30/L50}),\newline
+        (\texttt{F35/L30}), (\texttt{F35/L40}), (\texttt{F35/L50}),\newline
+        (\texttt{F40/L30}), (\texttt{F40/L40}), (\texttt{F40/L50})\\
 
         \bottomrule
     \end{tabular}
