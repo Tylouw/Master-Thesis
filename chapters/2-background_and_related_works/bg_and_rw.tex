@@ -1,4 +1,7 @@
-\chapter{Background and Related Works \cite{chatgpt}} \label{ch:state-of-the-art}
+\chapter{Background and Related Works} \label{ch:state-of-the-art}
+This chapter introduces the background and related works relevant to the dataset and time series classification approach used in this thesis. It first presents the technical foundations in Section \ref{sec:tech_foundations}, starting with robotic insertions being a contact-rich manipulation problem and motivates multivariate time series classification as a supervised task, based on sequential sensor data.
+
+The chapter then reviews related time series classification methods in Section \ref{sec:tsc}, including HIVE-COTE 2.0, ROCKET, InceptionTime, and PatchTST, before discussing related robotic insertion and assembly datasets in Section \ref{sec:related_datasets}. Finally, it positions this thesis within the existing literature.
 
 \section{Technical Foundations}\label{sec:tech_foundations}
 
@@ -20,7 +23,7 @@ This sequential view is also reflected in the design of recent robotic datasets.
 
 In this thesis, each insertion attempt is therefore represented as a multivariate time series. Each sensor channel describes one aspect of the robot or process state, while the whole sequence describes how these values evolve during the insertion attempt. The temporal evolution of one sequence is then used to distinguish successful from failed insertions.
 
-\subsection{Formulation as a multivariate time series classification (MTSC) problem}
+\subsection{Multivariate Time Series Classification (MTSC)}
 
 Time series classification describes the task of assigning a discrete label to an ordered sequence of measurements \cite{fawazDeepLearningTime2019,faouziTimeSeriesClassification2024}. In the multivariate case, each sequence contains several synchronized channels rather than a single signal \cite{bagnallUEAMultivariateTime2018,ruizGreatMultivariateTime2021}. A recorded insertion attempt can therefore be represented as a sequence $X \in \mathbb{R}^{T \times C}$, where $T$ denotes the number of time steps and $C$ the number of sensor channels. The corresponding class label $y$ describes the outcome of the trial, for example successful or failed insertion.
 
@@ -28,9 +31,9 @@ This formulation is suitable for robotic insertions, because the relevant inform
 
 % The classification perspective also provides a structured way to evaluate generalization. Standard benchmark archives and large-scale comparative studies emphasize the importance of clearly defined train, validation and test splits and comparable evaluation procedures \cite{dauUCRTimeSeries2019,bagnallUEAMultivariateTime2018,ruizGreatMultivariateTime2021}. In robotic insertion, trials can additionally be grouped by experimental factors such as geometry, tolerance, gripper configuration, or imposed deviations. In this thesis, such group-based splits are used to test whether a model has learned general signal patterns of successful and failed insertions, or whether its performance depends strongly on conditions already seen during training.
 
-In this thesis, the insertion data is therefore treated as a supervised multivariate time series classification problem. Each trial is represented by synchronized sensor channels over a fixed observation window, and the classifier is trained to predict the binary insertion outcome. This formulation connects the physical insertion process to established time series classification methods and provides the basis for the benchmark design used in the following chapters.
+In this thesis, the insertion data is therefore treated as a supervised multivariate time series classification problem. Each trial is represented by synchronized sensor channels over a fixed length window, and the classifier is trained to predict the binary insertion outcome. This formulation connects the physical insertion process to established time series classification methods and provides the basis for the benchmark design used in the following chapters.
 
-\section{Related work on time series classification}
+\section{Related work on time series classification} \label{sec:tsc}
 
 Time series classification has been studied with a wide range of methods, including distance-based classifiers, feature-based methods, ensembles, convolutional neural networks, and transformer-based models \cite{bagnallGreatTimeSeries2017,faouziTimeSeriesClassification2024}. Comparative benchmark studies have shown that no single representation is optimal for all datasets, which motivated methods that combine different views of the same time series \cite{bagnallGreatTimeSeries2017}. Such views may include, for example, raw whole-series, informative intervals (for example mean, std, slope of intervals), local shapelets (characteristic patterns), or dictionary-based pattern (bag-of-words) \cite{bagnallGreatTimeSeries2017}. Later work also showed that deep learning and randomized convolutional transformations can achieve highly competitive performance while reducing the need for manually designed features \cite{fawazDeepLearningTime2019,dempsterROCKETExceptionallyFast2020,ismailfawazInceptionTimeFindingAlexNet2020}.
 
@@ -61,7 +64,7 @@ Transformer-based methods for multivariate time series classification were alrea
 
 The original PatchTST work focuses primarily on long-term forecasting and self-supervised representation learning rather than classical time series classification. Nevertheless, its architectural ideas are very relevant for classification tasks with long multivariate sequences. In the context of robotic insertion, patching can summarize local events such as contact transients or short force responses, while the transformer can relate how these events evolve over a full insertion. This makes the model attractive for insertion force/torque data, where relevant information is often distributed across local temporal intervals rather than isolated single samples. In this thesis, PatchTST is therefore not used for forecasting but adapted for binary sequence classification. The original forecasting head is replaced by a binary classification head, because the objective is to assign one success or failure label to the complete trial. In addition, the original channel-independent design is not adopted without further consideration. This aspect is particularly interesting because the force/torque and other robotic signal channels can be interpreted either as separate time series channels or as parts of one mechanically coupled insertion signal. For this reason, the role of channel interaction is treated as an explicit modeling question and will be investigated further in the benchmark. For these reasons, PatchTST is used in this thesis as the main model architecture for classifying successful and failed insertion attempts from multivariate sensor time series.
 
-\section{Related robotic insertion and assembly datasets}
+\section{Related robotic insertion and assembly datasets} \label{sec:related_datasets}
 
 In the following, related datasets are presented and their differences explained in task scope, sensing modalities, label structure, and intended use relative to the dataset created in this thesis. The related datasets can be divided into insertion-specific dataset, sequence-based insertion recognition and classification work, and broader contact-rich assembly and manipulation datasets.
 
@@ -71,7 +74,7 @@ The closest insertion-specific reference is the experimental force/torque datase
 
 \subsection{Sequence-based insertion recognition and classification work}
 
-Several works are closely related to insertion datasets even when their main contribution is a recognition method rather than a benchmark. Jasim and Plapper record wrench and pose trajectories for different contact states in force-guided peg-in-hole assembly and use these signals to recognize the current contact condition \cite{jasimContactstateMonitoringForceguided2014}. Jin et al. classify contact poses from a sequence of contact measurements in order to infer the relative pose between peg and hole under uncertainty \cite{jinContactPoseIdentification2021a}. Similarly, Abdullah et al. model force/torque data for contact position estimation during peg-in-hole assembly \cite{abdullahForceTorqueData2015}. Yan et al. propose a supervised contact-state recognition model based on force and torque data, coupled with adaptive impedance control for peg-in-hole assembly at different inclination angles (\figref{fig:related_works}(b)) \cite{yanLearningbasedContactStatus2021}. More recent work also uses time series force information for contact-state identification in inclined-hole insertion \cite{shenLearningbasedRobotAssembly2025} and for hole-finding or deviation prediction on flexible support platforms (\figref{fig:related_works} (c)) \cite{xiongDeepLearningbasedHolefinding2026}.
+Several works are closely related to insertion datasets even when their main contribution is a recognition method rather than a benchmark. Jasim and Plapper record wrench and pose trajectories for different contact states in force-guided peg-in-hole assembly and use these signals to recognize the current contact condition \cite{jasimContactstateMonitoringForceguided2014}. Jin et al. classify contact poses from a sequence of contact measurements in order to infer the relative pose between peg and hole under uncertainty \cite{jinContactPoseIdentification2021a}. Similarly, Abdullah et al. model force/torque data for contact position estimation during peg-in-hole assembly \cite{abdullahForceTorqueData2015}. Yan et al. propose a supervised contact-state recognition model based on force and torque data, coupled with adaptive impedance control for peg-in-hole assembly at different inclination angles (\figref{fig:related_works}(c)) \cite{yanLearningbasedContactStatus2021}. More recent work also uses time series force information for contact-state identification in inclined-hole insertion \cite{shenLearningbasedRobotAssembly2025} and for hole-finding or deviation prediction on flexible support platforms (\figref{fig:related_works} (b)) \cite{xiongDeepLearningbasedHolefinding2026}.
 
 These studies show that insertion-related force and pose trajectories contain characteristic information that can be used for classification. At the same time, their task formulation differs from the one used in this thesis. Most of them aim to recognize intermediate contact states, contact poses, or deviation-related quantities to support alignment and control \cite{jasimContactstateMonitoringForceguided2014,jinContactPoseIdentification2021a,abdullahForceTorqueData2015,yanLearningbasedContactStatus2021,shenLearningbasedRobotAssembly2025,xiongDeepLearningbasedHolefinding2026}. In contrast, the dataset in this thesis is designed around complete insertion trials under defined deviations and assigns an outcome label to each attempt. This produces a benchmark setting that is closer to trial-level success/failure classification than to online contact-state estimation.
 
@@ -89,41 +92,84 @@ FurnitureBench (\figref{fig:related_works} (f)) is another important assembly be
 
 The reviewed works show that robotic assembly data serve different purposes. Some studies focus on contact-state or contact-pose recognition during insertion \cite{jasimContactstateMonitoringForceguided2014,jinContactPoseIdentification2021a,yanLearningbasedContactStatus2021}. Others provide broader multimodal datasets for manipulation, assembly, or policy learning \cite{sliwowskiREASSEMBLEMultimodalDataset2025,fangRH20TComprehensiveRobotic2024,heoFurnitureBenchReproducibleRealworld2025a}. The dataset developed in this thesis is positioned between these directions. It is smaller than large-scale manipulation datasets, but more directly structured around trial-level insertion outcome classification from multivariate sensor time series.
 
-The contribution of this thesis is therefore not only a new set of insertion trials, but a dataset and benchmark structure for supervised multivariate time series classification in contact-rich robotic insertion. By recording complete insertion attempts with synchronized sensor channels and controlled experimental factors, the dataset supports both outcome classification and analysis of generalization across task variations. This distinguishes it from broader manipulation datasets and from insertion studies focused mainly on control, alignment, or intermediate contact-state recognition.
+The contribution of this thesis is therefore not only a new set of insertion trials, but a dataset and benchmark structure for supervised multivariate time series classification in contact-rich robotic insertion. By recording complete insertion attempts with synchronized sensor channels and controlled experimental factors, the dataset supports outcome classification, analysis of generalization across task variations and metadata investigations. This distinguishes it from broader manipulation datasets and from insertion studies focused mainly on control, alignment, or intermediate contact-state recognition.
 
+
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/magistris.png}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/xiong.png}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/yan_et_al.png}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/reassemble.png}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/rh20t.png}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/furniturebench.png}
+%         \caption{}
+%     \end{subfigure}
+%     \caption{Overview of selected related works. (a) Force/Torque Dataset, Magistris et al., 2018 \cite{magistrisExperimentalForceTorqueDataset2018}; (b) Hole finding, Xiong et al., 2026 \cite{xiongDeepLearningbasedHolefinding2026}; (c) Contact Status Recognition, Yan et al., 2021 \cite{yanLearningbasedContactStatus2021}; (d) REASSEMBLE, Sliwowski et al., 2025 \cite{sliwowskiREASSEMBLEMultimodalDataset2025}; (e) RH20T, Fang et al., 2024 \cite{fangRH20TComprehensiveRobotic2024}; (f) FurnitureBench, Heo et al., 2025 \cite{heoFurnitureBenchReproducibleRealworld2025a}}
+%     \label{fig:related_works}
+% \end{figure}
 
 \begin{figure}[htbp]
     \centering
+
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/magistris.png}
-        \caption{}
+        \caption{Force/torque-based multi-shape insertion setup with a robot arm, gripper, peg, hole fixture, and different convex peg-hole geometries \cite{magistrisExperimentalForceTorqueDataset2018}.}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/yan_et_al.png}
-        \caption{}
-    \end{subfigure}
+    \hfill
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/xiong.png}
-        \caption{}
+        \caption{Hole-finding setup with an industrial robot, force/torque sensor, cylindrical peg, and spring-supported hole platform for studying insertion under compliance \cite{xiongDeepLearningbasedHolefinding2026}.}
     \end{subfigure}
+
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/yan_et_al.png}
+        \caption{Peg-in-hole setup with force/torque sensing for contact-status recognition and adaptive assembly under different hole inclinations \cite{yanLearningbasedContactStatus2021}.}
+    \end{subfigure}
+    \hfill
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/reassemble.png}
-        \caption{}
+        \caption{REASSEMBLE multimodal assembly setup with robot proprioception, force/torque sensing, event camera, RGB camera, and microphone data \cite{sliwowskiREASSEMBLEMultimodalDataset2025}.}
     \end{subfigure}
+
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/rh20t.png}
-        \caption{}
+        \caption{RH20T dataset overview showing large-scale robot and human demonstrations with visual, force, audio, and action modalities for contact-rich manipulation \cite{fangRH20TComprehensiveRobotic2024}.}
     \end{subfigure}
+    \hfill
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{chapters/2-background_and_related_works/furniturebench.png}
-        \caption{}
+        \caption{FurnitureBench benchmark with 3D-printable furniture parts and long-horizon robotic assembly tasks involving alignment, insertion, and manipulation skills \cite{heoFurnitureBenchReproducibleRealworld2025a}.}
     \end{subfigure}
-    \caption{Overview of selected related works. (a) Force/Torque Dataset, Magistris et al., 2018 \cite{magistrisExperimentalForceTorqueDataset2018}; (b) Contact Status Recognition, Yan et al., 2021 \cite{yanLearningbasedContactStatus2021}; (c) Hole finding, Xiong et al., 2026 \cite{xiongDeepLearningbasedHolefinding2026}; (d) REASSEMBLE, Sliwowski et al., 2025 \cite{sliwowskiREASSEMBLEMultimodalDataset2025}; (e) RH20T, Fang et al., 2024 \cite{fangRH20TComprehensiveRobotic2024}; (f) FurnitureBench, Heo et al., 2025 \cite{heoFurnitureBenchReproducibleRealworld2025a}}
+
+    \caption{Overview of selected related works on robotic insertion, contact-rich assembly, and multimodal manipulation datasets.}
     \label{fig:related_works}
 \end{figure}

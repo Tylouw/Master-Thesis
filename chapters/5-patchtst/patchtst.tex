@@ -1,6 +1,6 @@
 \chapter{PatchTST-Based Time-Series Classification}\label{ch:methodology}
 %overview of the methodological pipeling
-This chapter explains how the PatchTST architecture works, how it is adapted for classification, what the selected hyperparameters are and how its training and evaluation on the generated insertion dataset is done. Then the subquestions defined in Chapter \ref{ch:intro} are revisited and clearly explained how each corresponding experiment is designed and evaluated.
+This chapter explains in Section \ref{sec:patchtst} how the PatchTST architecture works, how it is adapted for classification and what the selected hyperparameters are. Then follows in Section \ref{sec:train_eval} the training and evaluation procedure for PatchTST.
 
 \section{PatchTST}\label{sec:patchtst}
 PatchTST stands for Patch Time Series Transformer and is first introduced by Nie et al. in the paper called "\textit{A Time Series Is Worth 64 Words: Long-term Forecasting with Transformers}" \cite{nieTimeSeriesWorth2023b}. The researchers developed PatchTST for forecasting multivariate time series data, emphasizing channel-independence, for 8 different datasets, including weather data, traffic road occupancies from freeway sensors and hourly electricity consumption over time.
@@ -12,7 +12,7 @@ The following \figref{fig:patchtst} shows the adapted architecture and how the d
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.95\textwidth]{chapters/5-patchtst/Patch extraction.pdf}
-    \caption{Visual representation of the data flow. Step 1: Patchification, Step 2: Channel-mixing, meaning concatenation of patches from all channels, Step 3: Tokenization/Projection of patches into patch tokens, Step 4: Final Tokens = Patch Token + Positional Embedding, Step 5: n\_layers of stacked Transformer Encoders, Step 6: Classification head.}
+    \caption{Visual representation of the data flow in the adapted PatchTST architecture. The variables $P, C, S$ denote the patch length $P$, the number of used input channels $C$ and the stride step size $S$. Step 1: Patchification, Step 2: Channel-mixing, meaning concatenation of patches from all channels, Step 3: Tokenization/Projection of patches into patch tokens, Step 4: Final Tokens = Patch Token + Positional Embedding, Step 5: n\_layers of stacked Transformer Encoders, Step 6: Classification head.}
     \label{fig:patchtst}
 \end{figure}
 \newpage

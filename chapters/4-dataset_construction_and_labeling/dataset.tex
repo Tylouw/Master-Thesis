@@ -1,6 +1,6 @@
 \chapter{Dataset Construction and Labeling}\label{ch:dataset}
 
-This chapter describes how the dataset used in this thesis was generated, labelled, and stored. Since the performance of the classification models depends strongly on the diversity and quality of the recorded insertion attempts, the dataset generation was treated as a central methodological part of the work.
+This chapter describes in the first Section \ref{sec:dataset_collection} how the dataset used in this thesis was generated, followed by the labeling process in Section \ref{sec:dataset_labeling}, and its composition and storage in Section \ref{sec:dataset_composition}. The last Section \ref{sec:dataset_preprocessing} describes any preprocessing steps made before using the dataset.
 
 \section{Data Collection Procedure}\label{sec:dataset_collection}
 
@@ -240,7 +240,7 @@ For each recorded insertion attempt, 48 robot signals were sampled at \SI{500}{\
 
 The sample index $n$ denotes the running insertion number, while the session index $m$ denotes the recording session. The session number was increased whenever a recording run was interrupted and later resumed, for example after changing settings or taking a break. This was particularly useful for the longer systematic recordings, because it allowed the collection process to resume from the current point in the plan without overwriting existing files. Furthermore has each file pair its own unique 12 digit hash number, so filenames in the training data do not duplicate, as for example the first insertion of one recording session always starts with \texttt{sample\_1\_session\_1\_}.
 
-Each CSV file is approximately \SI{770}{\kilo\byte} in size and stores the full recorded multivariate time series. The recorded signals are summarized in \tabref{tab:recorded_signals} with exemplary plots from all signals for a successful insertion in \figref{fig:all_signals_success} and failed insertion in \figref{fig:all_signals_fail}.
+Each CSV file is approximately \SI{770}{\kilo\byte} in size and stores the full recorded multivariate time series. The recorded signals are summarized in \tabref{tab:recorded_signals}.
 
 \begin{table}[htbp]
     \centering
@@ -267,19 +267,6 @@ Each CSV file is approximately \SI{770}{\kilo\byte} in size and stores the full 
     \end{tabular}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/sample_1_session_1_122843870717.pdf}
-    \caption{Combined plot showing all signals for the one successful insertion of \texttt{big\_rod\_t0.1} in Batch 1.}
-    \label{fig:all_signals_success}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/sample_5_session_1_555163244816.pdf}
-    \caption{Combined plot showing all signals for the one failed insertion of \texttt{big\_rod\_t0.1} in Batch 1.}
-    \label{fig:all_signals_fail}
-\end{figure}
 
 Besides the recorded time series, a JSON metadata file was stored for each insertion. This metadata links the recorded sequence to its generation context and label. In particular, it contains the time of recording, storage location, corresponding CSV file, sampling configuration, sequence length, the complete plan item (applied deviations) of the current trial, the binary success label, the failure reason if applicable, the rod type used (insertion task), the tolerance level, the relevant robot poses, and the measured cycle time. An overview is given in Table~\ref{tab:recorded_metadata}.
 
@@ -364,6 +351,74 @@ Class balance was not enforced perfectly, but an approximately balanced distribu
         \bottomrule
     \end{tabular}
     \end{adjustbox}
+\end{table}
+
+Exemplary plots from all signals for a successful insertion are shown in \figref{fig:all_signals_success} and failed insertion in \figref{fig:all_signals_fail}. To each of these samples the corresponding metadata entries from the \texttt{.json} files are shown in \tabref{tab:example_sample_metadata}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/sample_1_session_1_122843870717.pdf}
+    \caption{Combined plot showing all signals for the one successful insertion of \texttt{big\_rod\_t0.1} in Batch 1. The exact location of this file in the dataset is: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_1\_session\_1\_122843870717.csv}. The corresponding metadata from the \texttt{.json} file to this sample is listed in \tabref{tab:example_sample_metadata}.}
+    \label{fig:all_signals_success}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/sample_5_session_1_555163244816.pdf}
+    \caption{Combined plot showing all signals for the one failed insertion of \texttt{big\_rod\_t0.1} in Batch 1. The exact location of this file in the dataset is: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_5\_session\_1\_555163244816.csv}. The corresponding metadata from the \texttt{.json} file to this sample is listed in \tabref{tab:example_sample_metadata}.}
+    \label{fig:all_signals_fail}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Exact metadata entries of the successful and failed insertion examples. Location of the successful sample in the dataset: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_1\_session\_1\_122843870717.json}. Its time series are shown in \figref{fig:all_signals_success}. Location of the failed sample in the dataset: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_5\_session\_1\_555163244816.json}. Its time series are shown in \figref{fig:all_signals_fail}. The \texttt{cycle\_time\_s} is \texttt{null} because in the first recording batch the cycle time was not yet tracked.}
+    \label{tab:example_sample_metadata}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{lll}
+        \hline
+        Metadata entry & Successful sample & Failed sample \\
+        \hline
+        \texttt{saved\_at} & \texttt{2026-02-28T15:52:04.924537} & \texttt{2026-02-28T15:52:49.924472} \\
+        \texttt{sample\_rate\_Hz} & \texttt{500.0} & \texttt{500.0} \\
+        \texttt{num\_samples} & \texttt{1500} & \texttt{1500} \\
+        \texttt{sequence\_length\_s} & \texttt{3.0} & \texttt{3.0} \\
+        \hline
+        \texttt{plan\_item.grasp\_height} & \texttt{0.0} & \texttt{0.0} \\
+        \texttt{plan\_item.approach\_height} & \texttt{0.0} & \texttt{0.0} \\
+        \texttt{plan\_item.force\_level} & \texttt{25.0} & \texttt{25.0} \\
+        \texttt{plan\_item.force\_limit} & \texttt{40} & \texttt{40} \\
+        \texttt{plan\_item.record\_offset} & \texttt{0.0} & \texttt{0.0} \\
+        \texttt{plan\_item.deviation} &
+        \makecell[l]{\texttt{[0.0001268201,}\\\texttt{-0.0001343308]}} &
+        \makecell[l]{\texttt{[0.0001530398,}\\\texttt{-0.0000742263]}} \\
+        \texttt{plan\_item.tilt} &
+        \makecell[l]{\texttt{[-0.0133161209,}\\\texttt{0.0163388744]}} &
+        \makecell[l]{\texttt{[-0.0057144027,}\\\texttt{0.0447258773]}} \\
+        \hline
+        \texttt{successful\_insertion} & \texttt{true} & \texttt{false} \\
+        \texttt{failure\_reason} & \texttt{null} & \texttt{Force limit} \\
+        \hline
+        \texttt{rod\_type} & \texttt{big\_rod} & \texttt{big\_rod} \\
+        \texttt{tolerance} & \texttt{0.1} & \texttt{0.1} \\
+        \texttt{batch} & \texttt{batch\_1} & \texttt{batch\_1} \\
+        \texttt{rod\_geometry} & \texttt{round} & \texttt{round} \\
+        \texttt{gripper\_type} & \texttt{gripper\_round} & \texttt{gripper\_round} \\
+        \hline
+        \texttt{holderPose\_Up} &
+        \makecell[l]{\texttt{[-0.37373, -0.32883,}\\\texttt{0.060000006, 3.079,}\\\texttt{-0.625, 0.0]}} &
+        \makecell[l]{\texttt{[-0.37373, -0.32883,}\\\texttt{0.060000006, 3.079,}\\\texttt{-0.625, 0.0]}} \\
+        \texttt{holderPose\_Down} &
+        \makecell[l]{\texttt{[-0.37373, -0.32883,}\\\texttt{-0.024999994, 3.079,}\\\texttt{-0.625, 0.0]}} &
+        \makecell[l]{\texttt{[-0.37373, -0.32883,}\\\texttt{-0.024999994, 3.079,}\\\texttt{-0.625, 0.0]}} \\
+        \texttt{insertionPose} &
+        \makecell[l]{\texttt{[-0.5492, -0.349,}\\\texttt{0.060000006, 3.079,}\\\texttt{-0.625, 0.0]}} &
+        \makecell[l]{\texttt{[-0.5492, -0.349,}\\\texttt{0.060000006, 3.079,}\\\texttt{-0.625, 0.0]}} \\
+        \hline
+        \texttt{cycle\_time\_s} & \texttt{null} & \texttt{null} \\
+        \texttt{hash\_number} & \texttt{122843870717} & \texttt{555163244816} \\
+        \hline
+    \end{tabular}
 \end{table}
 
 \newpage

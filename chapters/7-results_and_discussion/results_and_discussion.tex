@@ -1,10 +1,10 @@
 \chapter{Results and Discussion}
 \label{ch:results}
-This chapter presents the main results and findings from all experiments defined in the previous Chapter \ref{ch:experiments}. First a short revisit of the results from the Best Channel Study is given, as the best channels are used in the further experiments.
+This chapter presents the main results and findings from all experiments defined in the previous Chapter \ref{ch:experiments}. First a short revisit of the results from the Best Channel Study is given in Section \ref{sec:results_best_channel}, as the best channels are used in the further experiments.
 
-The main results of this thesis begin with the three Benchmarks, to test the PatchTST classifiers ability to generalize to unseen dataset domains. Benchmark 1 assigns the testset over all domains, Benchmark 2 to specific \texttt{rod\_type + tolerance} domains and Benchmark 3 assigns the testset individually to all domain-attributes for a broader held-out testset.
+The main results and their discussion of this thesis begin in Sections \ref{sec:results_benchmark1} to \ref{sec:results_benchmark3} with the three Benchmarks, to test the PatchTST classifiers ability to generalize to unseen dataset domains. Benchmark 1 assigns the testset over all domains, Benchmark 2 to specific \texttt{rod\_type + tolerance} domains and Benchmark 3 assigns the testset individually to all domain-attributes for a broader held-out testset.
 
-After the Benchmark results follow the results from the Deviation Analysis I and II, which aim to investigate how certain deviations applied to the insertions, affect physical success outcome, and which deviations produce ambiguous insertion signals that confuse the models ability to classify correctly.
+After the Benchmark results follow the results and discussion from the Deviation Analysis I and II in Sections \ref{sec:results_deviation_analysis_1} and \ref{sec:results_deviation_analysis_2}, which aim to investigate how certain deviations applied to the insertions, affect physical success outcome, and which deviations produce ambiguous insertion signals that confuse the models ability to classify correctly.
 
 In the end a summary of the main findings is given.
 
@@ -116,19 +116,6 @@ For Benchmark 1, the main conclusion is therefore that the Big config provides t
 
 Benchmark 2 evaluates the model on individual held-out hole domains. In contrast to Benchmark 1, the test samples are not drawn from a mixed split over the same overall distribution, but from one complete hole domain, containing each a unique rod type and tolerance level, that is excluded from training and validation data. The benchmark therefore tests whether the model can transfer the learned classification behavior to a hole domain that was not observed during training. The exact train, validation, and test splits are listed in \tabref{tab:bm2_data_split}. Each held-out domain contains either 820 ($820 = 100 + 360 + 360$) or 1060 ($1060 = 100 + 480 + 480$) test samples, with both classes represented.
 
-The detailed TBA values are reported in \tabref{tab:bm2_bal_acc_detail} and visualized in \figref{fig:bm2_test_bal_acc_result}. Both configs reach balanced accuracies above 0.80 for most held-out domains. The Big config achieves a higher mean balanced accuracy than the Base config in all evaluated domains. This shows that the increased model capacity in combination with the selected best channel inputs, is not only beneficial in the mixed split of Benchmark 1, but also improves classification performance to unseen individual hole domains. However, the improvement is not equally strong for all domains. For most domains, the Big config improves the mean TBA by roughly 0.02 to 0.05 points, while the improvement for \texttt{BM2\_rect\_1} is much smaller.
-
-The best results are obtained for \texttt{BM2\_small\_3}, \texttt{BM2\_rect\_2}, and \texttt{BM2\_rect\_3}. In these domains, the Big config reaches mean TBA's close to or above 0.88, with \texttt{BM2\_small\_3} reaching the highest value of 0.8988. These results indicate that several individual hole domains can be classified reliably even when they are completely excluded from the training data. Therefore, the model does not only memorize individual hole conditions, but learns valuable patterns that prove to be useful under moderate domain shifts.
-
-The clear exception is \texttt{BM2\_rect\_1}. Both configs perform much worse on this domain than on all other held-out domains, with mean TBA's of 0.6986 for the Base config and 0.7094 for the Big config. \texttt{BM2\_rect\_1} appears to represent a domain-specific shift in which the success and failure patterns are much more different from the remaining domains used for training and validation. The class balance of the test set is also balanced, differing by only 18 samples, so the reduced performance cannot be explained by an unbalanced class distribution alone.
-
-A broader trend across the held-out domains is that tighter tolerances reduce the TBA. This can be seen for all rod types, where the first tolerance level generally leads to lower balanced accuracy than the looser tolerance levels. However, this effect is not equally strong for all geometries. For the round hole cases, represented by the \texttt{big} and \texttt{small} rod domains, the tighter tolerance of corresponding holes reduces performance but much more gradually than for rectangular holes. In fact, the tightest tolerance of the rectangular holes, \texttt{BM2\_rect\_1}, behaves fundamentally differently from \texttt{BM2\_rect\_2} and \texttt{BM2\_rect\_3}. This indicates that tight tolerances in rectangular holes generate signal patterns that differ much more from the remaining tolerance levels than tight tolerances in round holes. The rectangular geometry therefore appears to create a more severe domain shift when combined with the tightest tolerance. In addition, the \texttt{small} rod domains are generally easier to classify than the \texttt{big} rod domains, with especially good performance for \texttt{BM2\_small\_3}.
-
-The test loss values in \figref{fig:bm2_test_loss_result} support the interpretation of \texttt{BM2\_rect\_1} as the most difficult held-out domain. It shows the highest loss values and the largest spread across seeds, especially for the Big config. However, the loss does not show the same consistent tolerance-dependent trend as the balanced accuracy does. This indicates that tighter tolerances mainly reduce the final classification performance, while the loss is more affected by individual difficult domains and by the confidence of wrong predictions.
-
-Overall, Benchmark 2 shows that the model can generalize to most individual unseen hole domains with good test balanced accuracy. The Big config is preferable when classification performance is evaluated by balanced accuracy, because it improves the mean predictions in every domain. However, the results also show that generalization is very much domain-dependent. Tighter tolerances generally reduce balanced accuracy, but this effect is much more visible for rectangular holes than for round holes. The tightest rectangular domain, \texttt{BM2\_rect\_1}, therefore reveals a clear limitation of generalization and indicates that some combinations of geometry and tolerance introduce much stronger domain shifts than others. Benchmark 2 therefore provides a more realistic reference than Benchmark 1 and motivates the group-level generalization analysis in Benchmark 3.
-
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\linewidth]{chapters/7-results_and_discussion/bm2/bm2_test_bal_acc.png}
@@ -142,6 +129,18 @@ Overall, Benchmark 2 shows that the model can generalize to most individual unse
     \caption{Test loss of all of all hole domains specified in \tabref{tab:bm2_domains} evaluated on both the Base and Big config.}
     \label{fig:bm2_test_loss_result}
 \end{figure}
+
+The detailed TBA values are reported in \tabref{tab:bm2_bal_acc_detail} and visualized in \figref{fig:bm2_test_bal_acc_result}. Both configs reach balanced accuracies above 0.80 for most held-out domains. The Big config achieves a higher mean balanced accuracy than the Base config in all evaluated domains. This shows that the increased model capacity in combination with the selected best channel inputs, is not only beneficial in the mixed split of Benchmark 1, but also improves classification performance to unseen individual hole domains. However, the improvement is not equally strong for all domains. For most domains, the Big config improves the mean TBA by roughly 0.02 to 0.05 points, while the improvement for \texttt{BM2\_rect\_1} is much smaller.
+
+The best results are obtained for \texttt{BM2\_small\_3}, \texttt{BM2\_rect\_2}, and \texttt{BM2\_rect\_3}. In these domains, the Big config reaches mean TBA's close to or above 0.88, with \texttt{BM2\_small\_3} reaching the highest value of 0.8988. These results indicate that several individual hole domains can be classified reliably even when they are completely excluded from the training data. Therefore, the model does not only memorize individual hole conditions, but learns valuable patterns that prove to be useful under moderate domain shifts.
+
+The clear exception is \texttt{BM2\_rect\_1}. Both configs perform much worse on this domain than on all other held-out domains, with mean TBA's of 0.6986 for the Base config and 0.7094 for the Big config. \texttt{BM2\_rect\_1} appears to represent a domain-specific shift in which the success and failure patterns are much more different from the remaining domains used for training and validation. The class balance of the test set is also balanced, differing by only 18 samples, so the reduced performance cannot be explained by an unbalanced class distribution alone.
+
+A broader trend across the held-out domains is that tighter tolerances reduce the TBA. This can be seen for all rod types, where the first tolerance level generally leads to lower balanced accuracy than the looser tolerance levels. However, this effect is not equally strong for all geometries. For the round hole cases, represented by the \texttt{big} and \texttt{small} rod domains, the tighter tolerance of corresponding holes reduces performance but much more gradually than for rectangular holes. In fact, the tightest tolerance of the rectangular holes, \texttt{BM2\_rect\_1}, behaves fundamentally differently from \texttt{BM2\_rect\_2} and \texttt{BM2\_rect\_3}. This indicates that tight tolerances in rectangular holes generate signal patterns that differ much more from the remaining tolerance levels than tight tolerances in round holes. The rectangular geometry therefore appears to create a more severe domain shift when combined with the tightest tolerance. In addition, the \texttt{small} rod domains are generally easier to classify than the \texttt{big} rod domains, with especially good performance for \texttt{BM2\_small\_3}.
+
+The test loss values in \figref{fig:bm2_test_loss_result} support the interpretation of \texttt{BM2\_rect\_1} as the most difficult held-out domain. It shows the highest loss values and the largest spread across seeds, especially for the Big config. However, the loss does not show the same consistent tolerance-dependent trend as the balanced accuracy does. This indicates that tighter tolerances mainly reduce the final classification performance, while the loss is more affected by individual difficult domains and by the confidence of wrong predictions.
+
+Overall, Benchmark 2 shows that the model can generalize to most individual unseen hole domains with good test balanced accuracy. The Big config is preferable when classification performance is evaluated by balanced accuracy, because it improves the mean predictions in every domain. However, the results also show that generalization is very much domain-dependent. Tighter tolerances generally reduce balanced accuracy, but this effect is much more visible for rectangular holes than for round holes. The tightest rectangular domain, \texttt{BM2\_rect\_1}, therefore reveals a clear limitation of generalization and indicates that some combinations of geometry and tolerance introduce much stronger domain shifts than others. Benchmark 2 therefore provides a more realistic reference than Benchmark 1 and motivates the group-level generalization analysis in Benchmark 3.
 
 
 \begin{table}[htbp]
@@ -209,18 +208,6 @@ Overall, Benchmark 2 shows that the model can generalize to most individual unse
 
 Benchmark 3 evaluates generalization to held-out domain groups. The held-out groups correspond to complete batches, rod types, tolerance levels, or gripper types. The exact train, validation, and test splits are listed in \tabref{tab:bm3_data_split}. Depending on the held-out domain, the test sets contain between 900 and 3600 samples, and being balanced more unevenly, with however bigger classes over all than for Benchmark 2. The biggest class imbalance has the \texttt{BM3\_tol\_2} class with a difference of 388 samples. The detailed test balanced accuracy results are reported in \tabref{tab:bm3_bal_acc_detail}.
 
-The results for the held-out \texttt{batch} domains are shown in \figref{fig:bm3_batch_test_bal_acc}. These domains produce some of the lowest test balanced accuracies in Benchmark 3. The Big config reaches mean balanced accuracies of 0.6781, 0.7083, and 0.7691 for \texttt{BM3\_batch\_1}, \texttt{BM3\_batch\_2}, and \texttt{BM3\_batch\_3}, respectively. The largest seed-dependent spread is observed for \texttt{BM3\_batch\_1}. This indicates that the batch split introduces a particularly difficult domain shift. In contrast to a single hole condition, a batch can contain several coupled changes, such as differences in execution, setup state, or sample composition. In particular, Batch 1 was recorded only with position offset and tilt, that got randomly sampled. Whereas in Batches 2 and 3 deviations got applied deterministically with six more deviation groups, instead of two. Also with entire batches being held-out as test data, the training data size becomes much smaller, which can cause overfitting to the training data that would result in worse test results. For held-out Batches 2 and 3 the training data size of each 3825 samples is the lowest in the entire benchmark, their mean balanced accuracies are higher than for batch 1. This contradiction could be explained due to the fact that batches 2 and 3 have the same deviation planner design, that produces more similar insertion conditions than compared to batch 1. The low balanced accuracies therefore suggest that the model is sensitive to batch-specific execution and deviation design that are not fully transferable across batches.
-
-For the held-out \texttt{rod\_type} domains, the results in \figref{fig:bm3_rod_type_test_bal_acc} show that the Big config reaches similar performance for \texttt{BM3\_big} and \texttt{BM3\_small}, with mean balanced accuracies of 0.8246 and 0.8265. The small rod type is therefore at least as easy to classify as the big rod type, which is consistent with the results from Benchmark 2, where the small rod almost always scored slightly better than the big rod. In contrast, the held-out \texttt{BM3\_rect} domain is clearly harder, with a mean TBA of 0.7507 for the Big config. At the same time, the improvement of the Big config over the Base config is largest in the entire benchmark, with an increase of $0.7507 - 0.6834 = 0.0673$. This shows that the larger model makes use of the additional capacity and channels to improve classification of the rectangular rod domain, but it cannot fully close the gap to the round rod domains. The rectangular geometry therefore introduces a bigger change in the signal patterns than the difference between the big and small round rods.
-
-The results for the held-out \texttt{gripper\_type} domains in \figref{fig:bm3_gripper_type_test_bal_acc} show mean TBAs of 0.7735 for \texttt{BM3\_round}, 0.7122 for \texttt{BM3\_rect\_gripper}, and 0.7691 for \texttt{BM3\_flat} with the Big config. The rectangular gripper condition is therefore the most difficult gripper-domain split. The Base config on \texttt{BM3\_rect\_gripper} also achieves the lowest mean TBA of the entire benchmark. This result shows that the gripper type is not only a secondary experimental condition, but can strongly influence the recorded time-series patterns. In particular, the rectangular gripper appears to change the interaction dynamics in a way that is difficult to infer from the remaining gripper conditions. This is similar to the rectangular rod-type result and the rectangular rod on tolerance level 0.1, from benchmark 2. This only strengthens the result that rectangular contact geometries create stronger domain shifts than the corresponding round or flat cases.
-
-The highest TBA results of Benchmark 3 are obtained for the held-out tolerance domains, shown in \figref{fig:bm3_tolerance_test_bal_acc}. The Big config reaches mean TBAs of 0.7980 for \texttt{BM3\_tol\_1}, 0.8698 for \texttt{BM3\_tol\_2}, and 0.8798 for \texttt{BM3\_tol\_3}, which is the highest TBA in the entire benchmark. These domains also show comparatively small standard deviations across seed combinations. The results indicate that tolerance-level generalization is easier than batch, rectangular rod, or rectangular gripper. However, the tightest tolerance, \texttt{BM3\_tol\_1}, is clearly lower than \texttt{BM3\_tol\_2} and \texttt{BM3\_tol\_3}. This is consistent with the Benchmark 2 results, where tighter tolerances generally reduced balanced accuracy. The effect is therefore visible both at the individual-hole level and at the group level. At the same time, the looser tolerance domains generalize well, which suggests that the model can transfer between tolerance conditions when the resulting signal patterns remain similar enough.
-
-The summarized Big config results in \figref{fig:bm3_all_domains_test_bal_acc} show the overall ordering across the held-out groups. The best generalization is obtained for the held-out tolerance domains, especially \texttt{BM3\_tol\_2} and \texttt{BM3\_tol\_3}. The held-out \texttt{big} and \texttt{small} rod-type domains form the next best performance group. Lower results are obtained for the batch domains, the rectangular rod domain, and the rectangular gripper domain. The corresponding test loss plots are provided in \appref{app:bm3_loss}. They support the same interpretation: the lower-performing domains generally show higher loss values and larger seed-dependent variation. This indicates that the difficult domains are not only affected by threshold selection, but also by less reliable model confidence.
-
-Overall, Benchmark 3 shows that group-level generalization is substantially more difficult than the mixed split in Benchmark 1 and the individual-hole split in Benchmark 2. The Big config is consistently preferable in terms of balanced accuracy, but the improvement depends on the held-out group. The model generalizes best across tolerance levels, although the tightest tolerance remains more difficult. Generalization to the big and small round rod types is also comparatively strong, while rectangular rod and rectangular gripper domains are clearly harder. The weakest results occur for batch-level generalization and for rectangular contact conditions in general. Benchmark 3 therefore identifies the main limitations when generalizing to entire unseen deviation groups (batch 1 vs. batch 2 and 3) and to big geometric shifts (round vs. rectangular). It can however transfer well across tolerance changes and minor geometric shifts (big round rod vs. small round rod).
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\linewidth]{chapters/7-results_and_discussion/bm3/bm3_batch_test_bal_acc.png}
@@ -255,6 +242,18 @@ Overall, Benchmark 3 shows that group-level generalization is substantially more
     \caption{Summary of the Big config test balanced accuracy across all held-out domain groups in Benchmark 3. Colored points show the individual seed combinations, while the black markers show the mean and standard deviation.}
     \label{fig:bm3_all_domains_test_bal_acc}
 \end{figure}
+
+The results for the held-out \texttt{batch} domains are shown in \figref{fig:bm3_batch_test_bal_acc}. These domains produce some of the lowest test balanced accuracies in Benchmark 3. The Big config reaches mean balanced accuracies of 0.6781, 0.7083, and 0.7691 for \texttt{BM3\_batch\_1}, \texttt{BM3\_batch\_2}, and \texttt{BM3\_batch\_3}, respectively. The largest seed-dependent spread is observed for \texttt{BM3\_batch\_1}. This indicates that the batch split introduces a particularly difficult domain shift. In contrast to a single hole condition, a batch can contain several coupled changes, such as differences in execution, setup state, or sample composition. In particular, Batch 1 was recorded only with position offset and tilt, that got randomly sampled. Whereas in Batches 2 and 3 deviations got applied deterministically with six more deviation groups, instead of two. Also with entire batches being held-out as test data, the training data size becomes much smaller, which can cause overfitting to the training data that would result in worse test results. For held-out Batches 2 and 3 the training data size of each 3825 samples is the lowest in the entire benchmark, their mean balanced accuracies are higher than for batch 1. This contradiction could be explained due to the fact that batches 2 and 3 have the same deviation planner design, that produces more similar insertion conditions than compared to batch 1. The low balanced accuracies therefore suggest that the model is sensitive to batch-specific execution and deviation design that are not fully transferable across batches.
+
+For the held-out \texttt{rod\_type} domains, the results in \figref{fig:bm3_rod_type_test_bal_acc} show that the Big config reaches similar performance for \texttt{BM3\_big} and \texttt{BM3\_small}, with mean balanced accuracies of 0.8246 and 0.8265. The small rod type is therefore at least as easy to classify as the big rod type, which is consistent with the results from Benchmark 2, where the small rod almost always scored slightly better than the big rod. In contrast, the held-out \texttt{BM3\_rect} domain is clearly harder, with a mean TBA of 0.7507 for the Big config. At the same time, the improvement of the Big config over the Base config is largest in the entire benchmark, with an increase of $0.7507 - 0.6834 = 0.0673$. This shows that the larger model makes use of the additional capacity and channels to improve classification of the rectangular rod domain, but it cannot fully close the gap to the round rod domains. The rectangular geometry therefore introduces a bigger change in the signal patterns than the difference between the big and small round rods.
+
+The results for the held-out \texttt{gripper\_type} domains in \figref{fig:bm3_gripper_type_test_bal_acc} show mean TBAs of 0.7735 for \texttt{BM3\_round}, 0.7122 for \texttt{BM3\_rect\_gripper}, and 0.7691 for \texttt{BM3\_flat} with the Big config. The rectangular gripper condition is therefore the most difficult gripper-domain split. The Base config on \texttt{BM3\_rect\_gripper} also achieves the lowest mean TBA of the entire benchmark. This result shows that the gripper type is not only a secondary experimental condition, but can strongly influence the recorded time-series patterns. In particular, the rectangular gripper appears to change the interaction dynamics in a way that is difficult to infer from the remaining gripper conditions. This is similar to the rectangular rod-type result and the rectangular rod on tolerance level 0.1, from benchmark 2. This only strengthens the result that rectangular contact geometries create stronger domain shifts than the corresponding round or flat cases.
+
+The highest TBA results of Benchmark 3 are obtained for the held-out tolerance domains, shown in \figref{fig:bm3_tolerance_test_bal_acc}. The Big config reaches mean TBAs of 0.7980 for \texttt{BM3\_tol\_1}, 0.8698 for \texttt{BM3\_tol\_2}, and 0.8798 for \texttt{BM3\_tol\_3}, which is the highest TBA in the entire benchmark. These domains also show comparatively small standard deviations across seed combinations. The results indicate that tolerance-level generalization is easier than batch, rectangular rod, or rectangular gripper. However, the tightest tolerance, \texttt{BM3\_tol\_1}, is clearly lower than \texttt{BM3\_tol\_2} and \texttt{BM3\_tol\_3}. This is consistent with the Benchmark 2 results, where tighter tolerances generally reduced balanced accuracy. The effect is therefore visible both at the individual-hole level and at the group level. At the same time, the looser tolerance domains generalize well, which suggests that the model can transfer between tolerance conditions when the resulting signal patterns remain similar enough.
+
+The summarized Big config results in \figref{fig:bm3_all_domains_test_bal_acc} show the overall ordering across the held-out groups. The best generalization is obtained for the held-out tolerance domains, especially \texttt{BM3\_tol\_2} and \texttt{BM3\_tol\_3}. The held-out \texttt{big} and \texttt{small} rod-type domains form the next best performance group. Lower results are obtained for the batch domains, the rectangular rod domain, and the rectangular gripper domain. The corresponding test loss plots are provided in \appref{app:bm3_loss}. They support the same interpretation: the lower-performing domains generally show higher loss values and larger seed-dependent variation. This indicates that the difficult domains are not only affected by threshold selection, but also by less reliable model confidence.
+
+Overall, Benchmark 3 shows that group-level generalization is substantially more difficult than the mixed split in Benchmark 1 and the individual-hole split in Benchmark 2. The Big config is consistently preferable in terms of balanced accuracy, but the improvement depends on the held-out group. The model generalizes best across tolerance levels, although the tightest tolerance remains more difficult. Generalization to the big and small round rod types is also comparatively strong, while rectangular rod and rectangular gripper domains are clearly harder. The weakest results occur for batch-level generalization and for rectangular contact conditions in general. Benchmark 3 therefore identifies the main limitations when generalizing to entire unseen deviation groups (batch 1 vs. batch 2 and 3) and to big geometric shifts (round vs. rectangular). It can however transfer well across tolerance changes and minor geometric shifts (big round rod vs. small round rod).
 
 \begin{table}[htbp]
     \centering
@@ -327,33 +326,12 @@ Overall, Benchmark 3 shows that group-level generalization is substantially more
 \newpage
 % MARK:DA1 Physical Success
 \section{Deviation Analysis I: Physical Success Rate}
-\label{subsec:results_deviation_analysis_1}
+\label{sec:results_deviation_analysis_1}
 
 The first part of Deviation Analysis I evaluates the physical success rate across the complete dataset. This corresponds to the domain selection in which all domain attributes are set to \texttt{None}, meaning the whole dataset is selected. The purpose of doing a global investigation first, is to identify deviation groups that show consistent trends or systematic differences in success rate. These isolated deviation groups are then taken further to a more detailed domain-specific analysis in the next Subsection \ref{subsec:da1_domain_investigation}.
 
 \subsection{Global Investigation Across the Full Dataset}
 \label{subsec:da1_global_screening}
-
-\figref{fig:da1_physical_position_tilt_global} shows the physical success rate for the individual position-offset and tilt levels. The position-offset groups alone show only low variation, with success rates between 0.52 and 0.58. In contrast, the tilt groups show a noticeable trend. Insertions without relevant tilt reach a success rate of 0.81, while moderate tilt reduces the success rate to 0.62 and large tilt further reduces it to 0.47. This indicates that angular misalignment is a more informative deviation parameter than the radial position offset alone.
-
-The combined position--tilt groups in \figref{fig:da1_physical_position_over_tilt_global} support this interpretation. For each position-offset level, the success rate decreases as the tilt magnitude increases. No-offset insertions decrease from 0.89 for no tilt to 0.47 for large tilt, moderate-offset insertions decrease from 0.87 to 0.45, and large-offset insertions decrease from 0.68 to 0.48. The position offset therefore does not explain the success rate independently of tilt. Instead, the tilt magnitude appears to be the dominant factor in the global dataset, while the effect of position offset becomes more relevant when considered together with tilt.
-
-The offset-direction groups in \figref{fig:da1_physical_offset_direction_global} show a smaller but still visible directional asymmetry. The positive $x$ direction has the highest success rate at 0.61, while the negative $x$ direction has the lowest success rate at 0.48. The $y$ directions lie between these values. This suggests that the insertion process may contain a setup-specific directional bias.
-% However, because the differences are smaller than for the tilt groups, the direction effect is mainly treated as a secondary candidate for further investigation.
-
-The force-related groups show a stronger effect. \figref{fig:da1_physical_force_level_and_limit_global} shows that the success rate generally decreases for high commanded force levels, especially for \texttt{F35} and \texttt{F40}. The force limit alone is less directly interpretable, because its effect depends on the force level. This becomes clear in \figref{fig:da1_physical_force_interaction_global}, where the combination of force level and force limit produces large differences in success rate. In particular, combinations where the difference between force level and force limit ($L - F$ in \figref{fig:da1_physical_force_interaction_global}) is close to zero or negative show very low success rates. Therefore, the force interaction is more informative than force level or force limit considered separately.
-
-To further investigate the force interaction, two subsets are shown in \figref{fig:da1_physical_force_no_tilt_no_offset} and \figref{fig:da1_physical_position_tilt_f40_l30}. The first subset in \figref{fig:da1_physical_force_no_tilt_no_offset} considers only insertions without relevant position offset and without relevant tilt. Due to limitations of the deviation planner explained in Section \ref{sec:dataset_collection}, the force limits \texttt{L30} and \texttt{L50} were not recorded with no tilt and no offset, which means that all force levels (\texttt{F15 - F40}) had the force limit \texttt{L40} during insertions. In this specific subset,the force interaction levels \texttt{F15/L40}, \texttt{F20/L40}, \texttt{F25/L40}, and \texttt{F30/L40} reach a physical success rate of 1.0. This indicates that, in the absence of relevant translational and angular misalignment, several force settings are sufficient for reliable insertion. However, the success rate decreases for higher force levels, especially for \texttt{F40}.
-
-The opposite case is shown in \figref{fig:da1_physical_position_tilt_f40_l30}, where the force interaction is fixed to \texttt{F40/L30}, resulting in a force difference of $30 - 40 = -10$N. Across the available position--tilt groups, the physical success rate remains close to zero. This confirms that the low success rate of \texttt{F40/L30} is not caused by a single position--tilt group alone, but is a generally unfavorable force interaction in the recorded dataset. This result supports the interpretation that the force limit is likely exceeded before the insertion can be completed, when the force level is too close to or above the allowed force limit.
-
-The record offset in \figref{fig:da1_physical_record_offset_global} shows a gradual increase in success rate from the early to the late recording windows. This group is reported for completeness, but it is not interpreted as a physical cause of insertion success or failure.
-
-Finally, \figref{fig:da1_physical_grasp_approach_height_global} shows that grasp height and approach height have comparatively low global effects. The grasp height differs slightly between 0 mm and 7 mm, while the three approach-height levels show almost identical success rates.
-
-The sample counts and class balances for all global deviation groups are listed in \tabref{tab:da1_class_split_global}. The table shows that the deviation groups are not equally sized. This is especially visible for the tilt groups, where the large-tilt group contains substantially more samples than the no-tilt group. This imbalance is due to the goal to have balanced class splits for all levels in a deviation group. \figref{fig:da1_sankey_tilt} visualizes this split exemplarily for the tilt groups and shows how the complete dataset is divided into tilt levels and physical insertion outcomes. This principle holds for every deviation group.
-
-Overall, the global screening identifies tilt magnitude and force interaction as the most relevant deviation groups for further investigation. Offset direction is also considered because it indicates a possible directional asymmetry. In contrast, grasp height and approach height show only weak global effects and are therefore not investigated in detail in the following domain-specific analysis.
 
 \begin{figure}[htbp]
     \centering
@@ -372,6 +350,14 @@ Overall, the global screening identifies tilt magnitude and force interaction as
     \end{minipage}
 \end{figure}
 
+\figref{fig:da1_physical_position_tilt_global} shows the physical success rate for the individual position-offset and tilt levels. The position-offset groups alone show only low variation, with success rates between 0.52 and 0.58. In contrast, the tilt groups show a noticeable trend. Insertions without relevant tilt reach a success rate of 0.81, while moderate tilt reduces the success rate to 0.62 and large tilt further reduces it to 0.47. This indicates that angular misalignment is a more informative deviation parameter than the radial position offset alone.
+
+The combined position--tilt groups in \figref{fig:da1_physical_position_over_tilt_global} support this interpretation. For each position-offset level, the success rate decreases as the tilt magnitude increases. No-offset insertions decrease from 0.89 for no tilt to 0.47 for large tilt, moderate-offset insertions decrease from 0.87 to 0.45, and large-offset insertions decrease from 0.68 to 0.48. The position offset therefore does not explain the success rate independently of tilt. Instead, the tilt magnitude appears to be the dominant factor in the global dataset, while the effect of position offset becomes more relevant when considered together with tilt.
+
+The offset-direction groups in \figref{fig:da1_physical_offset_direction_global} show a smaller but still visible directional asymmetry. The positive $x$ direction has the highest success rate at 0.61, while the negative $x$ direction has the lowest success rate at 0.48. The $y$ directions lie between these values. This suggests that the insertion process may contain a setup-specific directional bias.
+% However, because the differences are smaller than for the tilt groups, the direction effect is mainly treated as a secondary candidate for further investigation.
+
+The force-related groups show a stronger effect. \figref{fig:da1_physical_force_level_and_limit_global} shows that the success rate generally decreases for high commanded force levels, especially for \texttt{F35} and \texttt{F40}. The force limit alone is less directly interpretable, because its effect depends on the force level. This becomes clear in \figref{fig:da1_physical_force_interaction_global}, where the combination of force level and force limit produces large differences in success rate. In particular, combinations where the difference between force level and force limit ($L - F$ in \figref{fig:da1_physical_force_interaction_global}) is close to zero or negative show very low success rates. Therefore, the force interaction is more informative than force level or force limit considered separately.
 
 \begin{figure}[htbp]
     \centering
@@ -397,6 +383,12 @@ Overall, the global screening identifies tilt magnitude and force interaction as
     \label{fig:da1_physical_force_interaction_global}
 \end{figure}
 
+\newpage
+
+To further investigate the force interaction, two subsets are shown in \figref{fig:da1_physical_force_no_tilt_no_offset} and \figref{fig:da1_physical_position_tilt_f40_l30}. The first subset in \figref{fig:da1_physical_force_no_tilt_no_offset} considers only insertions without relevant position offset and without relevant tilt. Due to limitations of the deviation planner explained in Section \ref{sec:dataset_collection}, the force limits \texttt{L30} and \texttt{L50} were not recorded with no tilt and no offset, which means that all force levels (\texttt{F15 - F40}) had the force limit \texttt{L40} during insertions. In this specific subset,the force interaction levels \texttt{F15/L40}, \texttt{F20/L40}, \texttt{F25/L40}, and \texttt{F30/L40} reach a physical success rate of 1.0. This indicates that, in the absence of relevant translational and angular misalignment, several force settings are sufficient for reliable insertion. However, the success rate decreases for higher force levels, especially for \texttt{F40}.
+
+The opposite case is shown in \figref{fig:da1_physical_position_tilt_f40_l30}, where the force interaction is fixed to \texttt{F40/L30}, resulting in a force difference of $30 - 40 = -10$N. Across the available position--tilt groups, the physical success rate remains close to zero. This confirms that the low success rate of \texttt{F40/L30} is not caused by a single position--tilt group alone, but is a generally unfavorable force interaction in the recorded dataset. This result supports the interpretation that the force limit is likely exceeded before the insertion can be completed, when the force level is too close to or above the allowed force limit.
+
 \begin{figure}[htbp]
     \centering
     \begin{minipage}[t]{0.49\textwidth}
@@ -413,6 +405,15 @@ Overall, the global screening identifies tilt magnitude and force interaction as
         \label{fig:da1_physical_position_tilt_f40_l30}
     \end{minipage}
 \end{figure}
+
+The record offset in \figref{fig:da1_physical_record_offset_global} shows a gradual increase in success rate from the early to the late recording windows. This group is reported for completeness, but it is not interpreted as a physical cause of insertion success or failure.
+
+Finally, \figref{fig:da1_physical_grasp_approach_height_global} shows that grasp height and approach height have comparatively low global effects. The grasp height differs slightly between 0 mm and 7 mm, while the three approach-height levels show almost identical success rates.
+
+The sample counts and class balances for all global deviation groups are listed in \tabref{tab:da1_class_split_global}. The table shows that the deviation groups are not equally sized. This is especially visible for the tilt groups, where the large-tilt group contains substantially more samples than the no-tilt group. This imbalance is due to the goal to have balanced class splits for all levels in a deviation group. \figref{fig:da1_sankey_tilt} visualizes this split exemplarily for the tilt groups and shows how the complete dataset is divided into tilt levels and physical insertion outcomes. This principle holds for every deviation group.
+
+Overall, the global screening identifies tilt magnitude and force interaction as the most relevant deviation groups for further investigation. Offset direction is also considered because it indicates a possible directional asymmetry. In contrast, grasp height and approach height show only weak global effects and are therefore not investigated in detail in the following domain-specific analysis.
+
 
 \begin{figure}[htbp]
     \centering
@@ -527,22 +528,14 @@ The analysis is focused on the hole domains, defined by the combination of \text
 \end{equation}
 \texttt{small\_rod\_t0.2} is the only case where $\text{SR}(\texttt{M.T.}) < \text{SR}(\texttt{L.T.})$.
 
-In contrast, the position-offset groups do not show the same consistent decline of success rate. No offset is not always clearly superior to moderate or large offset, which indicates that positional offset magnitude alone is not sufficient to explain the physical outcome.
-
-The combined position--tilt groups in \figref{fig:da1_domain_position_over_tilt_holes} provide a more detailed view of this effect. The highest success rates occur mostly in groups where no-tilt is involved, especially for the no-offset with no-tilt case. However, the effect is not identical in all hole domains. Some combinations are missing due to the deterministic structure of the deviation planner, and some domains show local patterns that differ from the global trend. In particular, \texttt{small\_rod\_t0.3} shows no samples for \texttt{M.O./N.T.} and a very low success rate for \texttt{M.O./L.T.}. 
-
-\figref{fig:da1_domain_offset_direction_holes} shows the hole domain specific view on the success rate of the five offset-directions. The domain \texttt{small\_rod\_t0.3} shows unexpected behavior, where offsets in the negative $x$ and negative $y$ directions are associated with much lower success rates than offsets in the positive directions. This could reveal a directional bias or asymmetry in the robotic setup. If the targeted insertion pose without deviations applied, is slightly shifted relative to the ground truth hole center, repeated deviations in one direction can show different behavior than deviations in the opposite direction.
-
-Because of these two anomalies regarding \texttt{small\_rod\_t0.3}, this domain is further investigated in Section \ref{subsubsec:da1_small_rod_t03_directional_bias}.
-
-The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes} shows particularly stronger variation across hole domains. The combination \texttt{F40/L30} remains one of the least successful settings across several hole domains, which is consistent with the global result in \figref{fig:da1_physical_force_interaction_global}. This setting combines the highest commanded force level with the lowest force limit, so the force limit is likely to be reached before the insertion can be completed. At the same time, the heatmap shows that the force interaction global pattern does not apply to all hole domains. The \texttt{rect\_rod\_t0.1} domain in particular shows extreme differences, with some force interactions leading to almost complete success (\texttt{F20/L40}) with direclty adjacent force interactions leading to almost complete failure (\texttt{F20/L50}). This motivated the second focused investigation of \texttt{rect\_rod\_t0.1} in Subsection \ref{subsubsec:da1_rect_rod_t01_force_modes}.
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{chapters/7-results_and_discussion/DA1/domain/physical_hole_domains_position_and_tilt.png}
     \caption{Physical success rate of position-offset and tilt groups across all hole domains.}
     \label{fig:da1_domain_position_tilt_holes}
 \end{figure}
+
+In contrast, the position-offset groups do not show the same consistent decline of success rate. No offset is not always clearly superior to moderate or large offset, which indicates that positional offset magnitude alone is not sufficient to explain the physical outcome.
 
 \begin{figure}[htbp]
     \centering
@@ -551,12 +544,18 @@ The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes}
     \label{fig:da1_domain_position_over_tilt_holes}
 \end{figure}
 
+The combined position--tilt groups in \figref{fig:da1_domain_position_over_tilt_holes} provide a more detailed view of this effect. The highest success rates occur mostly in groups where no-tilt is involved, especially for the no-offset with no-tilt case. However, the effect is not identical in all hole domains. Some combinations are missing due to the deterministic structure of the deviation planner, and some domains show local patterns that differ from the global trend. In particular, \texttt{small\_rod\_t0.3} shows no samples for \texttt{M.O./N.T.} and a very low success rate for \texttt{M.O./L.T.}. 
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{chapters/7-results_and_discussion/DA1/domain/physical_hole_domains_offset_direction.png}
     \caption{Physical success rate of offset-direction groups across all hole domains.}
     \label{fig:da1_domain_offset_direction_holes}
 \end{figure}
+
+\figref{fig:da1_domain_offset_direction_holes} shows the hole domain specific view on the success rate of the five offset-directions. The domain \texttt{small\_rod\_t0.3} shows unexpected behavior, where offsets in the negative $x$ and negative $y$ directions are associated with much lower success rates than offsets in the positive directions. This could reveal a directional bias or asymmetry in the robotic setup. If the targeted insertion pose without deviations applied, is slightly shifted relative to the ground truth hole center, repeated deviations in one direction can show different behavior than deviations in the opposite direction.
+
+Because of these two anomalies regarding \texttt{small\_rod\_t0.3}, this domain is further investigated.
 
 \begin{figure}[htbp]
     \centering
@@ -565,18 +564,14 @@ The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes}
     \label{fig:da1_domain_force_interaction_holes}
 \end{figure}
 
+The force-interaction heatmap in \figref{fig:da1_domain_force_interaction_holes} shows particularly stronger variation across hole domains. The combination \texttt{F40/L30} remains one of the least successful settings across several hole domains, which is consistent with the global result in \figref{fig:da1_physical_force_interaction_global}. This setting combines the highest commanded force level with the lowest force limit, so the force limit is likely to be reached before the insertion can be completed. At the same time, the heatmap shows that the force interaction global pattern does not apply to all hole domains. The \texttt{rect\_rod\_t0.1} domain in particular shows extreme differences, with some force interactions leading to almost complete success (\texttt{F20/L40}) with direclty adjacent force interactions leading to almost complete failure (\texttt{F20/L50}). This motivated the second focused investigation of \texttt{rect\_rod\_t0.1}.
+
+
+
 For the focused investigations, the heatmap tiles are extended with additional failure-mode information. This comes from the metadata entry \texttt{failure\_reason} in \tabref{tab:recorded_metadata} and its description in Section \ref{sec:dataset_labeling}. Besides the success rate, each tile reports the number of samples $n$ and the distribution of failure reasons. The abbreviation \texttt{T} denotes the count of timeouts, \texttt{F} denotes the count of force-limit reached failures, and \texttt{S} counts the amounf of stall/jam failures. These failure modes allow the success rate to be interpreted more precisely, because a failed insertion can result from different physical mechanisms.
 
 \subsubsection{Directional Bias in \texttt{small\_rod\_t0.3}}
 \label{subsubsec:da1_small_rod_t03_directional_bias}
-
-The offset-direction result for \texttt{small\_rod\_t0.3} is investigated in more detail in \figref{fig:da1_small_rod_t03_offset_direction_batch}. The first recorded \texttt{batch\_1} shows a more uniform distribution of offset directions. This is not the case for the later batches, where the asymmetry becomes apparent. This is consistent with the data collection procedure, where in \texttt{batch\_1}, position and orientation deviations were applied more randomly, which can produce individual outliers but does not repeatedly test the same deviation direction with the same offset magnitude. In \texttt{batch\_2} and \texttt{batch\_3}, the deviation planner generated more structured and repeated deviations, so a systematic positional bias becomes more visible.
-
-The distinction between gripper types must be interpreted carefully here. The \texttt{flat} gripper only occurs in \texttt{batch\_3}, while the \texttt{round} gripper is essentially a weighted average of \texttt{batch\_2} and \texttt{batch\_3}. Therefore, the apparent gripper effect is partly coupled with the batch structure and should not be interpreted independently.
-
-\figref{fig:da1_small_rod_t03_offset_direction_detailed} focuses on the negative $x$ and negative $y$ directions and separates them by offset and tilt magnitude, not combined. Since centered samples are assigned to the centered group \texttt{C}, no-offset cases are not shown for the directional groups. For the negative $x$ direction, the success rate decreases with increasing offset magnitude, which is consistent with the fact that large positional deviations cause make failures more likely. Counterintuitively however, does the no-tilt group in the negative $x$ direction show 0\% success rate. One possible explanation is that, for this specific hole domain and direction, if a tilted rod hits the edge of the hole it can guide itself into the opening, while an untilted rod may hit the top surface of the taskboard more directly and stalls completely. Since for this domain the tolerance is the largest level (\texttt{t0.3}), after a possible self-alignment, the robot can successfully continue the insertion under moderate or large tilt.
-
-The failure-cause annotations support the interpretation that the negative-direction failures are not caused by a single mechanism alone. The failures include force-limit terminations, timeouts, and stall/jam detections. This suggests that the directional bias changes the contact situation in several ways. From a practical perspective, this result is useful, because it suggests a possible correction of the physical insertion setup. Because repeated failures occur mainly for negative $x$ and negative $y$ offsets, the starting pose of an insertion without deviations applied could be shifted slightly in the opposite direction, towards the true hole center, to improve insertion reliability.
 
 \begin{figure}[htbp]
     \centering
@@ -585,6 +580,10 @@ The failure-cause annotations support the interpretation that the negative-direc
     \label{fig:da1_small_rod_t03_offset_direction_batch}
 \end{figure}
 
+The offset-direction result for \texttt{small\_rod\_t0.3} is investigated in more detail in \figref{fig:da1_small_rod_t03_offset_direction_batch}. The first recorded \texttt{batch\_1} shows a more uniform distribution of offset directions. This is not the case for the later batches, where the asymmetry becomes apparent. This is consistent with the data collection procedure, where in \texttt{batch\_1}, position and orientation deviations were applied more randomly, which can produce individual outliers but does not repeatedly test the same deviation direction with the same offset magnitude. In \texttt{batch\_2} and \texttt{batch\_3}, the deviation planner generated more structured and repeated deviations, so a systematic positional bias becomes more visible.
+
+The distinction between gripper types must be interpreted carefully here. The \texttt{flat} gripper only occurs in \texttt{batch\_3}, while the \texttt{round} gripper is essentially a weighted average of \texttt{batch\_2} and \texttt{batch\_3}. Therefore, the apparent gripper effect is partly coupled with the batch structure and should not be interpreted independently.
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{chapters/7-results_and_discussion/DA1/domain/physical_small_rod_t0.3_domains_offset_direction_3.png}
@@ -592,10 +591,19 @@ The failure-cause annotations support the interpretation that the negative-direc
     \label{fig:da1_small_rod_t03_offset_direction_detailed}
 \end{figure}
 
+\figref{fig:da1_small_rod_t03_offset_direction_detailed} focuses on the negative $x$ and negative $y$ directions and separates them by offset and tilt magnitude, not combined. Since centered samples are assigned to the centered group \texttt{C}, no-offset cases are not shown for the directional groups. For the negative $x$ direction, the success rate decreases with increasing offset magnitude, which is consistent with the fact that large positional deviations cause make failures more likely. Counterintuitively however, does the no-tilt group in the negative $x$ direction show 0\% success rate. One possible explanation is that, for this specific hole domain and direction, if a tilted rod hits the edge of the hole it can guide itself into the opening, while an untilted rod may hit the top surface of the taskboard more directly and stalls completely. Since for this domain the tolerance is the largest level (\texttt{t0.3}), after a possible self-alignment, the robot can successfully continue the insertion under moderate or large tilt.
 
+The failure-cause annotations support the interpretation that the negative-direction failures are not caused by a single mechanism alone. The failures include force-limit terminations, timeouts, and stall/jam detections. This suggests that the directional bias changes the contact situation in several ways. From a practical perspective, this result is useful, because it suggests a possible correction of the physical insertion setup. Because repeated failures occur mainly for negative $x$ and negative $y$ offsets, the starting pose of an insertion without deviations applied could be shifted slightly in the opposite direction, towards the true hole center, to improve insertion reliability.
 
-\subsubsection{Failure-Mode Analysis for \texttt{rect\_rod\_t0.1}}
+\subsubsection{Failure-Cause Analysis for \texttt{rect\_rod\_t0.1}}
 \label{subsubsec:da1_rect_rod_t01_force_modes}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{chapters/7-results_and_discussion/DA1/domain/physical_rect_rod_t0.1_domains_force_interaction_4.png}
+    \caption{Detailed physical success rate of force-interaction groups for \texttt{rect\_rod\_t0.1}. Tile annotations include sample counts and failure reasons.}
+    \label{fig:da1_rect_rod_t01_force_interaction_failure_modes}
+\end{figure}
 
 The hole-domain investigation also identified \texttt{rect\_rod\_t0.1} as an unusual case for the force-interaction groups. This domain is analyzed in more detail in \figref{fig:da1_rect_rod_t01_force_interaction_failure_modes}. The plot separates all insertions from the \texttt{rect\_rod\_t0.1} domain in the \texttt{rect\_gripper} and \texttt{flat\_gripper} domains. This separation also reflects the batch structure, where the rectangular gripper was used in \texttt{batch\_1} and \texttt{batch\_2}, while the flat gripper was exclusively used in \texttt{batch\_3}. Therefore, the observations made, are also gripper- and batch-dependent.
 
@@ -609,12 +617,6 @@ Therefore the force difference is a crucial metric to explain failures caused by
 
 This focused investigation shows why the force-interaction results must be interpreted carefully. The global heatmap correctly identifies force interaction as an important deviation group, but the underlying failure modes and coupled deviations determine whether a low success rate is caused by force-limit termination, timeout, or stall/jam.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\linewidth]{chapters/7-results_and_discussion/DA1/domain/physical_rect_rod_t0.1_domains_force_interaction_4.png}
-    \caption{Detailed physical success rate of force-interaction groups for \texttt{rect\_rod\_t0.1}. Tile annotations include sample counts and failure reasons.}
-    \label{fig:da1_rect_rod_t01_force_interaction_failure_modes}
-\end{figure}
 
 \subsubsection{Summary of Deviation Analysis I}
 \label{subsubsec:da1_summary}
@@ -631,7 +633,7 @@ Overall, Deviation Analysis I concludes that tilt magnitude and force interactio
 
 % MARK: DA2 Model Confusion
 \section{Deviation Analysis II: Model Confusion}
-\label{subsec:results_deviation_analysis_2}
+\label{sec:results_deviation_analysis_2}
 
 The second part of the deviation analysis evaluates whether specific deviation groups lead to systematic classification errors. The analysis is performed with the PatchTST \texttt{Big} model using the best channel configuration. The model is trained nine times with the same seed combinations used throughout the benchmark experiments. For each run, the mixed data split is 5852 samples for training, 1033 samples for validation and 1215 (659 successful, 556 failed) samples for the test set. Across the nine runs, this produces $1215\times 9 = 10935$ test prediction records.
 
@@ -643,32 +645,6 @@ The global investigation follows the same deviation groups as Deviation Analysis
 \label{subsec:da2_global_screening}
 
 \figref{fig:da2_model_position_tilt_global} and \figref{fig:da2_model_position_over_tilt_global} show the position offset and tilt magnitude side by side and combined, respectively. Here they do not follow the same trend as they did for physical success rate in \figref{fig:da1_physical_position_tilt_global} and \figref{fig:da1_physical_position_over_tilt_global}. In Deviation Analysis I, large tilt was associated with a clear decrease in physical success rate. In the current model-confusion analysis, however, the large-tilt groups still achieve balanced accuracies around 0.86 to 0.90. This indicates that large tilt produces more physical failures, but these failures are often still recognizable from the signal patterns and therefore are not necessarily difficult for the model to classify.
-
-The lowest balanced accuracies within the combined position--tilt groups occur for \texttt{N.O./N.T.} and \texttt{M.O./N.T.}. These groups have really high insertion success rates (\figref{fig:da1_physical_position_over_tilt_global}), but that also means that rare failed insertions in these groups are harder for the model to detect, because of the big class imbalance. This is visible in the false-positive rates listed in \tabref{tab:da2_global_selected_groups}, where \texttt{N.O./N.T.} and \texttt{M.O./N.T.} show comparatively high false-positive rates of around 0.4. In this case, false positive means that a failed insertion is predicted as successful. Thus, the lower balanced accuracy is not caused by generally difficult deviations, but by rare failure cases that are not enough for the model to recognize them.
-
-The offset-direction groups in \figref{fig:da2_model_offset_direction_global} show no strong global model-confusion pattern. While Deviation Analysis I showed that offset direction can reveal domain-specific robotic setup asymmetries, the global model balanced accuracy is relatively uniform across the offset directions. This suggests that offset direction is not a major global source of model confusion.
-
-The force-related results are more informative. \figref{fig:da2_model_force_level_and_limit_global} shows that low and medium force levels, especially \texttt{F15} and \texttt{F25}, are classified with high balanced accuracy, which when comparing with physical success rate in \figref{fig:da1_physical_force_level_and_limit_global} shows the same trend as for the \texttt{N.O./N.T.} and \texttt{M.O./N.T.} cases, only in the opposite direction. Meaning, an unpreferable physical success rate of close to 50\%  provides a favorable class split for the model to train on.
-
-The force limit alone is less informative, because the effect depends on the commanded force level. Therefore, the force-interaction groups in \figref{fig:da2_model_force_interaction_global} and \figref{fig:da2_model_loss_force_interaction_global} provide the clearest view. The lowest balanced accuracy occurs for \texttt{F40/L30}, with $0.467 \pm 0.019$. This group is physically almost always a failure, with only 15 successful insertions among 543 prediction records. The false-negative rate is 1.0, meaning that all rare successful insertions in this group are predicted as failures.
-This does not mean that the model fails to recognize the dominant failures \texttt{F40/L30}. The opposite is the case, where the few successful exceptions are not recognized by the model. This is a case where the group is physically very difficult and where the class distribution itself makes the rare positive class hard to identify.
-
-In an unbalanced case like this, it is really beneficial to report the balanced accuracy, because accuracy alone does not compensate for the high class imbalance.
-In this specific case the balanced accuracy and accuracy have a huge difference:
-\begin{align*}
-    &\text{TP} = 0, \qquad \text{TN} = 493, \qquad \text{FP} = 35, \qquad \text{FN} = 15\\
-    &\text{Balanced Accuracy} = \frac{1}{2}\left( \frac{\text{TP}}{\text{TP} + \text{FN}} + \frac{\text{TN}}{\text{TN} + \text{FP}} \right)= \frac{1}{2}(0 + 0.934) = 0.467\\
-    &\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} = 0.908
-    \label{eq:bal_acc_vs_acc}
-\end{align*}
-
-Other force-interaction groups show a different kind of model confusion. In particular, \texttt{F30/L30} and \texttt{F40/L40} have both low balanced accuracy and the highest binary cross-entropy losses. The group \texttt{F30/L30} reaches only $0.619 \pm 0.102$ balanced accuracy with a loss of $1.878 \pm 0.640$, while \texttt{F40/L40} reaches $0.568 \pm 0.066$ balanced accuracy with a loss of $1.735 \pm 0.566$. A high loss means that the model often assigns high confidence to the wrong class, or gives low probability to the true class, which is penalized more strongly than an uncertain prediction near the decision boundary. Thus, the issue is not only that some samples fall on the wrong side of the threshold, but that the predicted probabilities themselves are mostly wrong. This indicates genuinely ambiguous or inconsistent signal patterns for the model.
-
-Within several force levels, increasing the force limit improves the model performance. For example, the balanced accuracy increases from \texttt{F30/L30} to \texttt{F30/L50}, and from \texttt{F40/L30} to \texttt{F40/L50}. This is consistent with the interpretation from Deviation Analysis I: when the commanded force is close to or above the force limit, the insertion behavior is dominated by early termination (force limit reached) or unusual contact dynamics. This produces signal patterns that are less consistent for the classifier.
-
-The record-offset groups in \figref{fig:da2_model_record_offset_global} are very uniform. The early-offset group (\texttt{ROE}) has the highest balanced accuracy, but the mid (\texttt{ROM}), and late (\texttt{ROL}) groups remain in a similar range. This suggests that the classifier is not strongly dependent on one exact temporal recording-window position. Since record offset is not a physical insertion deviation, this is mainly a model-side result: the tested recording-window shifts do not create a severe global model-confusion effect.
-
-Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach height 0 mm (\texttt{AH0}) reaches a very high balanced accuracy of $0.985 \pm 0.008$. This result should be interpreted carefully, because batch 1 was exclusively recorded with approach height 0 mm and grasp height 0 mm as well. It is therefore not interpreted as an isolated effect of approach height. Instead, it is treated as a candidate for domain-specific inspection if required.
 
 \begin{figure}[htbp]
     \centering
@@ -687,6 +663,11 @@ Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach
     \end{minipage}
 \end{figure}
 
+The lowest balanced accuracies within the combined position--tilt groups occur for \texttt{N.O./N.T.} and \texttt{M.O./N.T.}. These groups have really high insertion success rates (\figref{fig:da1_physical_position_over_tilt_global}), but that also means that rare failed insertions in these groups are harder for the model to detect, because of the big class imbalance. This is visible in the false-positive rates listed in \tabref{tab:da2_global_selected_groups}, where \texttt{N.O./N.T.} and \texttt{M.O./N.T.} show comparatively high false-positive rates of around 0.4. In this case, false positive means that a failed insertion is predicted as successful. Thus, the lower balanced accuracy is not caused by generally difficult deviations, but by rare failure cases that are not enough for the model to recognize them.
+
+The offset-direction groups in \figref{fig:da2_model_offset_direction_global} show no strong global model-confusion pattern. While Deviation Analysis I showed that offset direction can reveal domain-specific robotic setup asymmetries, the global model balanced accuracy is relatively uniform across the offset directions. This suggests that offset direction is not a major global source of model confusion.
+
+The force-related results are more informative. \figref{fig:da2_model_force_level_and_limit_global} shows that low and medium force levels, especially \texttt{F15} and \texttt{F25}, are classified with high balanced accuracy, which when comparing with physical success rate in \figref{fig:da1_physical_force_level_and_limit_global} shows the same trend as for the \texttt{N.O./N.T.} and \texttt{M.O./N.T.} cases, only in the opposite direction. Meaning, an unpreferable physical success rate of close to 50\%  provides a favorable class split for the model to train on.
 
 \begin{figure}[htbp]
     \centering
@@ -705,6 +686,9 @@ Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach
     \end{minipage}
 \end{figure}
 
+The force limit alone is less informative, because the effect depends on the commanded force level. Therefore, the force-interaction groups in \figref{fig:da2_model_force_interaction_global} and \figref{fig:da2_model_loss_force_interaction_global} provide the clearest view. The lowest balanced accuracy occurs for \texttt{F40/L30}, with $0.467 \pm 0.019$. This group is physically almost always a failure, with only 15 successful insertions among 543 prediction records. The false-negative rate is 1.0, meaning that all rare successful insertions in this group are predicted as failures.
+This does not mean that the model fails to recognize the dominant failures \texttt{F40/L30}. The opposite is the case, where the few successful exceptions are not recognized by the model. This is a case where the group is physically very difficult and where the class distribution itself makes the rare positive class hard to identify.
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\linewidth]{chapters/7-results_and_discussion/DA2/global/model_force_interaction.png}
@@ -718,6 +702,18 @@ Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach
     \caption{Global binary cross-entropy loss for force-interaction groups.}
     \label{fig:da2_model_loss_force_interaction_global}
 \end{figure}
+
+In an unbalanced case like this, it is really beneficial to report the balanced accuracy, because accuracy alone does not compensate for the high class imbalance.
+In this specific case the confusion matrix is $\text{TP} = 0, \text{TN} = 493, \text{FP} = 35, \text{FN} = 15$, which according to the formulas in \tabref{tab:classification_metrics} computes a balanced accuracy of 0.467 and accuracy of 0.908, which is huge difference.
+
+Other force-interaction groups show a different kind of model confusion. In particular, \texttt{F30/L30} and \texttt{F40/L40} have both low balanced accuracy and the highest binary cross-entropy losses. The group \texttt{F30/L30} reaches only $0.619 \pm 0.102$ balanced accuracy with a loss of $1.878 \pm 0.640$, while \texttt{F40/L40} reaches $0.568 \pm 0.066$ balanced accuracy with a loss of $1.735 \pm 0.566$. A high loss means that the model often assigns high confidence to the wrong class, or gives low probability to the true class, which is penalized more strongly than an uncertain prediction near the decision boundary. Thus, the issue is not only that some samples fall on the wrong side of the threshold, but that the predicted probabilities themselves are mostly wrong. This indicates genuinely ambiguous or inconsistent signal patterns for the model.
+
+Within several force levels, increasing the force limit improves the model performance. For example, the balanced accuracy increases from \texttt{F30/L30} to \texttt{F30/L50}, and from \texttt{F40/L30} to \texttt{F40/L50}. This is consistent with the interpretation from Deviation Analysis I: when the commanded force is close to or above the force limit, the insertion behavior is dominated by early termination (force limit reached) or unusual contact dynamics. This produces signal patterns that are less consistent for the classifier.
+
+The record-offset groups in \figref{fig:da2_model_record_offset_global} are very uniform. The early-offset group (\texttt{ROE}) has the highest balanced accuracy, but the mid (\texttt{ROM}), and late (\texttt{ROL}) groups remain in a similar range. This suggests that the classifier is not strongly dependent on one exact temporal recording-window position. Since record offset is not a physical insertion deviation, this is mainly a model-side result: the tested recording-window shifts do not create a severe global model-confusion effect.
+
+Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach height 0 mm (\texttt{AH0}) reaches a very high balanced accuracy of $0.985 \pm 0.008$. This result should be interpreted carefully, because batch 1 was exclusively recorded with approach height 0 mm and grasp height 0 mm as well. It is therefore not interpreted as an isolated effect of approach height. Instead, it is treated as a candidate for domain-specific inspection if required.
+
 
 \begin{figure}[htbp]
     \centering
@@ -776,16 +772,16 @@ Finally, \figref{fig:da2_model_grasp_approach_height_global} shows that approach
         \texttt{F30/L50} & 594 & (414, 180) & (535,59) & 0.918 $\pm$ 0.022 & 0.395 & 0.041 & 0.123 \\
         \texttt{F35/L40} & 498 & (309, 189) & (396,102) & 0.788 $\pm$ 0.034 & 1.270 & 0.245 & 0.178 \\
         \texttt{F40/L30} & 543 & (15, 528) & (493,50) & 0.467 $\pm$ 0.019 & 0.568 & 0.067 & 1.000 \\
-        \texttt{F40/L40} & 537 & (84, 453) & (126, 411) & 0.568 $\pm$ 0.066 & 1.735 & 0.211 & 0.653 \\
-        \texttt{F40/L50} & 507 & (366, 141) & (286, 221) & 0.815 $\pm$ 0.062 & 0.902 & 0.106 & 0.263 \\
+        \texttt{F40/L40} & 537 & (84, 453) & (385,152) & 0.568 $\pm$ 0.066 & 1.735 & 0.211 & 0.653 \\
+        \texttt{F40/L50} & 507 & (366, 141) & (395,112) & 0.815 $\pm$ 0.062 & 0.902 & 0.106 & 0.263 \\
         \midrule
         \texttt{record\_offset} \\
-        \texttt{ROE} & 5193 & (2721, 2472) & (2659, 2534) & 0.897 $\pm$ 0.009 & 0.556 & 0.0959 & 0.110 \\
+        \texttt{ROE} & 5193 & (2721, 2472) & (4657, 536) & 0.897 $\pm$ 0.009 & 0.556 & 0.0959 & 0.110 \\
         \texttt{ROM} & 1797 & (996, 801) & (975, 822) & 0.887 $\pm$ 0.017 & 0.527 & 0.112 & 0.113 \\
         \texttt{ROE} & 3945 & (2214, 1731) & (2200, 1745) & 0.883 $\pm$ 0.018 & 0.623 & 0.129 & 0.106 \\
         \midrule
         \texttt{approach\_height} \\
-        \texttt{AH0} & 1284 & (705, 579) & (712, 572) & 0.985 $\pm$ 0.008 & 0.081 & 0.022 & 0.008 \\
+        \texttt{AH0} & 1284 & (705, 579) & (1265, 19) & 0.985 $\pm$ 0.008 & 0.081 & 0.022 & 0.008 \\
         \bottomrule
     \end{tabular}
     \end{adjustbox}

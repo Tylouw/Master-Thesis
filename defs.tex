@@ -21,6 +21,25 @@
 \titleformat{\chapter}[display]{\normalfont\Large}{\chaptertitlename\ \thechapter}{0pt}{\huge\bfseries}[\vspace{8pt}\titlerule]
 \titlespacing{\chapter}{0cm}{0cm}{0.5cm}
 
+\makeatletter
+\providecommand*{\toclevel@plainchapter}{0}
+\newcommand*\l@plainchapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\makeatother
+
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -278,7 +297,7 @@
 % resources
 \addbibresource{chapters/2-background_and_related_works/bg.bib}
 \addbibresource{chapters/4-dataset_construction_and_labeling/dataset.bib}
-\addbibresource{chapters/5-methodology/meth.bib}
+\addbibresource{chapters/5-patchtst/meth.bib}
 
 % \addbibresource{resources/resources-appendix.bib}
 % \addbibresource{resources/resources-introduction.bib}

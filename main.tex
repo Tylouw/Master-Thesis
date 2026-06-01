@@ -36,10 +36,10 @@
 % \addcontentsline{toc}{section}{Acknowledgments}
 
 % glossary & acronyms
-\clearpage
-\addcontentsline{toc}{section}{Acronyms and Terms}
-\printglossary[type=acronym, title=Acronyms, style=mcolindex]
-\printglossary[type=main, title=Terms]
+% \clearpage
+% \addcontentsline{toc}{section}{Acronyms and Terms}
+% \printglossary[type=acronym, title=Acronyms, style=mcolindex]
+% \printglossary[type=main, title=Terms]
 
 % main document
 \clearpage
@@ -82,10 +82,14 @@
 % \begin{multicols}{2}[\printbibheading]
 % \printbibliography[heading=none]
 % \end{multicols}
-\printbibliography
+\printbibliography[heading=bibintoc]
 
-\newpage
+\clearpage
+\input{chapters/use_of_generative_ai.tex}
 
 \appendix
+\begingroup
+\let\clearpage\relax
 \input{chapters/10-appendix/appendix.tex}
+\endgroup
 \end{document}

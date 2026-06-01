@@ -1,4 +1,10 @@
 \chapter{Experiments} \label{ch:experiments}
+This chapter defines and explains the experimental structure used in the thesis. It first introduces in Section \ref{sec:reporing_of_experiments} the concept of a domain, which is used to select dataset subsets based on batch, rod type, tolerance, and gripper type. It also describes how benchmark experiments are reported, including the repeated seed-based evaluation procedure and the plot format used to compare performance across runs.
+
+The chapter then presents three experiments. Experiment 1 in Section \ref{sec:exp1_best_channel_study} is the best channel study, which is treated as a separate exploratory study because its result defines the channel configuration used in the remaining thesis. It therefore contains its own motivation, method, results, discussion, and conclusion. Experiment 2 in Section \ref{sec:experiment_2} evaluates the selected PatchTST configurations through three benchmark settings: a mixed-split test, a leave-one-hole-out test, and held-out domain group tests. These benchmarks analyze how performance changes depending on which domain is used as the test set.
+
+Finally, Experiment 3 in Section \ref{sec:experiment_3} investigates the recorded deviations in the dataset. This deviation analysis is divided into DA1, which studies how deviation groups affect the physical insertion success rate, and DA2, which analyzes whether specific deviations lead to systematic model confusion. Together, the experiments define how the dataset is evaluated both as a classification benchmark and as a source for analyzing physical insertion behavior.
+
 \section{Domain Definition and Reporting of Experiments} \label{sec:reporing_of_experiments}
 \paragraph{Domain Definition}
 For the later Benchmarks and Deviation Analysis the recorded dataset must be split into subsets that are then used for further testing. To be able to clearly index the dataset to create different subsets a domain is defined as a unique combination of attributes:
@@ -64,7 +70,7 @@ are combined, resulting in nine runs per experiment. An experiment is a specific
 \end{figure}
 
 This design makes it possible to assess not only average performance but also robustness with respect to both data partitioning and stochastic training effects.
-
+\newpage
 
 \figref{fig:exp_vis} shows visually how the experiments are conducted, what domains and channels are used. Red arrows indicate that all domains are used, meaning the whole dataset. Experiment 1 starts with the Best Channel Study, which uses the whole dataset and asses the best channels below. The FT channel is used as input for the PatchTST Base model, forming the Base config for the later Benchmarks. The best channels are used with the Big PatchTST model to form the Big Config.
 Experiment 2 defines the benchmarks:
@@ -152,7 +158,7 @@ The results of the individual channel-group tests are shown in \figref{fig:best_
     \label{fig:best_channel_single_val_loss}
 \end{figure}
 
-Several important observations can be made from these results. First, force/torque data provides the best standalone modality and is therefore the main candidate for the later stage 2 combination study. This is physically plausible, F/T describes the contact interaction during insertion most directly. Second, TCP pose and current also achieve comparatively high validation balanced accuracy, despite being more indirect measurements. This indicates that the insertion outcome is not encoded only in direct contact signals, but also in robot state and actuator-related signals. Third, joint velocity performs better than TCP velocity and tool acceleration, making it the more promising dynamic complement. Classification with temperature performs almost random and is therefore not considered further.
+Several important observations can be made from these results. First, force/torque data provides the best standalone modality and is therefore the main candidate for the later stage 2 combination study. This is physically plausible, F/T describes the contact interaction during insertion most directly. Second, TCP pose and current also achieve comparatively high validation balanced accuracy, despite being more indirect measurements. This indicates that the insertion outcome is not encoded only in direct contact signals, but also in robot state and actuator-related signals. Third, joint velocity performs better than TCP velocity, joint pose and tool acceleration, making it the more promising dynamic complement. Especially tool acceleration shows high and spread loss with comparatively high validation balanced accuracy, indicating that the models predictions are mostly correct, but outliers on some seed combinations are classified confindently wrong. Classification with temperature performs almost random and is therefore not considered further.
 
 To summarize, the individual tests suggested that the most informative single groups are F/T, TCP pose, current, and joint velocity. These groups were therefore selected as the basis for the next stage of the study.
 
@@ -234,6 +240,7 @@ Overall, the results show that robust insertion-success classification benefits 
 
 % MARK: Experiment 2
 \section{Experiment 2: PatchTST Benchmark Evaluation}
+\label{sec:experiment_2}
 \subsection{Benchmark 1: Test on Mixed Split}
 \label{sec:sq2_mixed_split}
 
@@ -339,6 +346,7 @@ The held-out rod and held-out tolerance domains are shown in \figref{fig:heldout
 \newpage
 % MARK: Experiment 3
 \section{Experiment 3: Deviation Analysis}
+\label{sec:experiment_3}
 
 \subsection{Motivation}
 The dataset recorded in this thesis is not only useful for training a classifier, but the saved metadata alongside each sequence holds valuable information as well, which is useful for further experiments. In particular does each metadata-file hold the information about the exact deviations applied during insertion. This allows the dataset to be analyzed in two ways.

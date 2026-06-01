@@ -1,4 +1,8 @@
 \chapter{Conclusion and Future Work}\label{ch:conclusion}
+This chapter first concludes the thesis in Section \ref{sec:conclusion} by summarizing the dataset, the adapted PatchTST classification approach, the best channel study, the benchmark experiments, and the deviation analyses. The section then answers the research question.
+
+Section \ref{sec:practical_implications} then derives practical recommendations for insertion setup design. These recommendations are divided according to two different objectives: maximizing the physical insertion success rate and maximizing classification performance. Finally, Section \ref{sec:limitations_future_work} discusses the main limitations of the robotic setup, dataset generation strategy, labeling approach, and offline classification evaluation, and outlines corresponding directions for future work.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -23,7 +27,35 @@ Deviation Analysis II showed that physical difficulty and classification difficu
 
 A central finding of the thesis is that the physical success rate of a deviation group directly affects the local class balance available for training and evaluation. From a robotic industrial perspective, a success rate close to 100\% is desirable and a success rate close to 0\% is undesirable. From a classification perspective, however, both extremes are problematic because they create highly imbalanced classes. In these cases, the model tends to learn the dominant outcome and struggles with rare exceptions. Conversely, a physical success rate around 50\% is not desirable for the real insertion process, but provides a more balanced class distribution for the classifier. This explains why physically easy groups can still show increased false-positive behavior and physically difficult groups can show increased false-negative behavior. The classification difficulty of a dataset region therefore depends not only on the physical difficulty of the insertion, but also on how many successful and failed examples are present.
 
-Overall, the thesis shows that the recorded insertion dataset contains rich and learnable structure, but that this structure is not uniform across all domains and deviation groups. Multi-modal robot signals make reliable insertion-success classification possible under favorable and moderately shifted conditions. At the same time, rectangular contact geometries, batch-level shifts, unfavorable force interactions, and locally imbalanced deviation groups reveal clear limits of the classifier. The biggest insight is therefore not simply that a model can classify insertion success, but that the combination of time-series classification and metadata-based deviation analysis can identify which parts of a robotic insertion dataset are physically difficult, which parts are difficult to classify, and where these two differ. This makes the dataset itself the central result of the thesis, because it provides a structured basis for studying robotic insertion processes, machine-learning classification performance, and the relationship between physical process variation and data-driven model behavior.
+The research question can therefore be answered explicitly by separating the physical insertion perspective from the classification perspective, and then comparing where both perspectives overlap or differ. This summary is given in \tabref{tab:research_question_answer}.
+
+\begin{table}[htbp]
+\centering
+\caption{Explicit answer to the research question based on the dataset, metadata analysis, and classification results.}
+\label{tab:research_question_answer}
+% \renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{0.3\textwidth}p{0.65\textwidth}}
+\toprule
+\textbf{Aspect of the research question} & \textbf{Answer} \\
+\midrule
+Insertion conditions affecting physical success &
+Physical success is mainly affected by angular misalignment and force interaction. Increasing tilt consistently reduces the success rate and is more influential than the tested position offsets alone. Force level and force limit must be interpreted together, because a small or negative difference between force limit and force level strongly reduces success and changes the dominant failure cause. Additional local effects, such as the directional bias in \texttt{small\_rod\_t0.3}, show that metadata-defined subgroups can reveal setup-specific physical asymmetries. \\
+\midrule
+Insertion conditions affecting classification performance &
+Classification performance is affected by the available signal modalities in combination with model capacity, the train/validation/test split, the insertion condition, and the local class balance. The best results are obtained with the combined use of force/torque, TCP pose, joint velocity, and current consumption. Generalization is strongest under in-distribution conditions and among held-out tolerance levels and more difficult for rectangular contact geometries, tight rectangular tolerances, batch-level shifts, and force-interaction groups with ambiguous or imbalanced outcomes. \\
+\midrule
+Insertion conditions where both perspectives overlap &
+The clearest overlap occurs for unfavorable force-interaction settings. Small or negative force differences reduce the physical success rate and can also reduce classification performance, especially when they create rare successful exceptions or ambiguous signal patterns. Rectangular geometries with low tolerance also represent a shared difficulty because they introduce more challenging physical contact behavior and lower generalization performance. \\
+\midrule
+Insertion conditions where both perspectives differ &
+Large tilt is the clearest example where both perspectives differ. It is physically unfavorable because it reduces the success rate, but it often remains comparatively easy to classify because it produces information-rich signal patterns. Conversely, physically easy or physically difficult groups with success rates close to 100\% or 0\% can become difficult for the classifier because they create locally imbalanced classes and rare exceptions. Thus, a physical success rate close to 50\% is undesirable for an operational insertion system, but useful for classification because both classes are sufficiently represented. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+Overall, the thesis shows that the recorded insertion dataset contains rich and learnable structure, but that this structure is not uniform across all domains and deviation groups. Multi-modal robot signals make reliable insertion-success classification possible under favorable and moderately shifted conditions. At the same time, rectangular contact geometries, batch-level shifts, unfavorable force interactions, and locally imbalanced deviation groups reveal clear limits of the classifier.
+% The biggest insight is therefore not simply that a model can classify insertion success, but that the combination of time-series classification and metadata-based deviation analysis can identify which parts of a robotic insertion dataset are physically difficult, which parts are difficult to classify, and where these two differ. This makes the dataset itself the central result of the thesis, because it provides a structured basis for studying robotic insertion processes, machine-learning classification performance, and the relationship between physical process variation and data-driven model behavior.
 
 \section{Practical Recommendations for Insertion Setup Design}
 \label{sec:practical_implications}
@@ -39,12 +71,18 @@ If the goal is to maximize the physical insertion success rate, the following re
     \item The start pose should be carefully centered. The directional asymmetries observed in the dataset indicate that even a small bias in the nominal insertion pose can reduce success rates in specific domains.
 \end{enumerate}
 
-If the goal is to maximize classification performance, the setup should not be optimized only for physical success. Instead, the dataset should be designed to contain informative and sufficiently balanced success and failure examples. The following recommendations should be considered by descending priority:
+If a high physical insertion success rate cannot be achieved reliably, a classifier becomes practically relevant as a monitoring layer. In this case, the objective is no longer only to make the insertion succeed, but also to ensure that failed insertions can be detected reliably so that the system can stop the process, trigger a recovery strategy, or reject the part. For an operational setup, the highest possible physical success rate should still be maintained. However, the training and validation data for the classifier must contain sufficiently informative success and failure examples. That means only for the duration of data gathering, the setup most produce a lot of failure cases.
+
+If the goal is to build such a dataset or to tune the setup for high classification performance, the following recommendations should be considered by descending priority:
 \begin{enumerate}
-    \item The dataset should be locally balanced with respect to the relevant deviation groups. A physical success rate close to 50\% is not desirable for an operational insertion system, but it provides both successful and failed examples for the classifier. This is more useful for classification than groups with almost only successful or almost only failed insertions, where the model tends to learn the dominant class and misses rare exceptions.
-    \item Failure cases should be generated by deviations that produce recognizable signal patterns rather than ambiguous behavior. The best candidate deviation is large tilt, because it strongly reduces physical success, while being very informative for classification. Positional offset in combination with large tilt does not provide a meaningful reduction of success rate and improvement of classification performance, so its addition is not necessary.
-    \item Force-interaction settings should be selected carefully. In this dataset, \texttt{F25/L50} and \texttt{F35/L50} are recommended settings, because they combines a low physical success rate of 0.47 and 0.53 with a high balanced accuracy of about 0.95 and 0.92 respectively. In contrast, settings with low or negative force difference such as \texttt{F30/L30}, \texttt{F40/L30}, and \texttt{F40/L40} should be avoided, because they either create rare exceptions or ambiguous signal patterns that reduce classification performance.
-    \item The recording should include the most information signal groups identified in the channel study. Force/torque should be included as the main contact-related modality, but TCP pose, joint velocity and current consumption should also be recorded because they provide additional information about robot state, motion dynamics and actuator load.
+\item The training dataset should be locally balanced with respect to the relevant deviation groups. A physical success rate close to 50\% is not desirable for an operational insertion system, but it is useful for training and evaluating a classifier because both successful and failed insertions must be sufficiently represented. In contrast, groups with almost only successful or almost only failed insertions can lead the model to learn the dominant class and miss rare exceptions.
+
+\item Failure cases should be generated by deviations that produce recognizable signal patterns rather than ambiguous behavior. Large tilt is the most suitable deviation for this purpose, because it strongly reduces physical success while remaining informative for classification. In contrast, adding position offset to large tilt did not provide a meaningful additional reduction of success rate or improvement of classification performance in this dataset and is therefore not necessary as a primary mechanism for generating classifiable failures.
+
+\item Force-interaction settings should be selected carefully. The objective is not to create arbitrary failures, but failures with consistent and distinguishable signal patterns. In the thesis dataset, \texttt{F25/L50} and \texttt{F35/L50} are recommended settings, because they combine physical success rates of 0.47 and 0.53 with balanced accuracies of approximately 0.95 and 0.92, respectively. In contrast, settings with a small or negative force difference, such as \texttt{F30/L30}, \texttt{F40/L30}, and \texttt{F40/L40}, should be avoided for this purpose because they can create rare exceptions or ambiguous signal patterns that reduce classification performance.
+
+\item The recording should include the most informative signal groups identified in the channel study. Force/torque should be included as the main contact-related modality, but TCP pose, joint velocity, and current consumption should also be recorded because they provide additional information about robot state, motion dynamics, and actuator load.
+
 \end{enumerate}
 
 
