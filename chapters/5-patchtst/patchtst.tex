@@ -48,7 +48,7 @@ After patchification, the data has the shape
 Thus, each sample is represented by $N$ overlapping temporal patches, each of length $P$, over all $C$ channels.
 
 \paragraph{Channel-mixing instead of Channel-independence, \figref{fig:patchtst} Step 2}
-Nie et al. process each channel separately and project patches of shape $\mathbf{X}_{\text{patch}} \in \mathbb{R}^P$ into the models embedding dimension directly $\mathbf{d}_{\text{model}} \in \mathbb{R}^D$ \cite{nieTimeSeriesWorth2023b}. However, the implementation used here concatenats all channels within one patch into a single token. Therefore, each patch is reshaped from
+Nie et al. process each channel separately and project patches of shape $\mathbf{X}_{\text{patch}} \in \mathbb{R}^P$ into the models embedding dimension directly $\mathbf{d}_{\text{model}} \in \mathbb{R}^D$ \cite{nieTimeSeriesWorth2023b}. However, the implementation used here concatenates all channels within one patch into a single token. Therefore, each patch is reshaped from
 \begin{equation}
 \mathbb{R}^{P \times C}
 \;\rightarrow\;
@@ -180,7 +180,7 @@ The complete list of hyperparameters of the model and training settings can be s
     \vspace{0.2cm}
     \begin{minipage}{0.95\linewidth}
         \footnotesize
-        \textit{Note.} The original values refer to the supervised PatchTST forecasting setup reported by Nie et al. The names \texttt{PatchTST/42} and \texttt{PatchTST/64} denote the number of input patches, not the patch length. Training and scheduler parameters are only included where they are explicitly reported in the paper.
+        \textit{Note.} The original values refer to the supervised PatchTST forecasting setup reported by Nie et al. \cite{nieTimeSeriesWorth2023b}. The names \texttt{PatchTST/42} and \texttt{PatchTST/64} denote the number of input patches, not the patch length. Training and scheduler parameters are only included where they are explicitly reported in the paper.
     \end{minipage}
 \end{table}
 
@@ -201,7 +201,7 @@ The complete list of hyperparameters of the model and training settings can be s
 The training and evaluation pipeline used in this thesis follows a fixed procedure across all benchmarks in order to ensure comparability between experiments. Only the input channel selection and the data split strategy are varied depending on the respective sub-research question.
 
 \subsection{Train, validation, and test splits} \label{subsec:train_val_test_splits}
-First an indexed pool is created, where each sequence in the dataset is indexed by its class label (\texttt{True} or \texttt{False} for success of failed insertion), batch (the batch number in which the sequence got recorded in), domain (the geometry--tolerance combination), and gripper type. Based on this indexed pool, the train, validation, and test sets are constructed. The implementation supports two types of test split strategies. The first split strategy is mixed, test-, validation- and training-set. Here the test set is obtained by randomly holding out a set of sequences from the full dataset according to the configured test ratio. In the second selector-based split strategy, all samples matching a predefined condition, for example a specific geometry--tolerance combination or gripper type, are assigned to the test set and removed entirely from the remaining pool. In both cases, the validation set is then obtained by a second random holdout split from the remaining non-test samples. The default ratios are
+First an indexed pool is created, where each sequence in the dataset is indexed by its class label (\texttt{True} or \texttt{False} for success or failed insertion), batch (the batch number in which the sequence got recorded in), domain (the geometry--tolerance combination), and gripper type. Based on this indexed pool, the train, validation, and test sets are constructed. The implementation supports two types of test split strategies. The first split strategy is mixed, test-, validation- and training-set. Here the test set is obtained by randomly holding out a set of sequences from the full dataset according to the configured test ratio. In the second selector-based split strategy, all samples matching a predefined condition, for example a specific geometry--tolerance combination or gripper type, are assigned to the test set and removed entirely from the remaining pool. In both cases, the validation set is then obtained by a second random holdout split from the remaining non-test samples. The default ratios are
 \begin{equation}
 r_{\mathrm{val}} = 0.15,
 \qquad
@@ -337,7 +337,7 @@ and computing the corresponding binary predictions, confusion matrix, and thresh
 
 If a test set is selected, the best determined threshold on the validation set is used for the test set. In this way, threshold optimization is performed only on the validation set, while the test set remains unseen during model and threshold selection.
 
-In addition to the previously defined threshold-dependent metrics, one \textbf{threshold-independent} metric is calculated. It is the AUROC value, that stands for the area under the receiver operating characteristic curve and is obtained by using the same threshold range as in \equref{eq:threshold} and plotting for each threshold the true positive rate
+In addition to the previously defined threshold-dependent metrics, one \textbf{threshold-independent} metric is calculated. It is the AUROC value, that stands for the \textbf{A}rea \textbf{U}nder the \textbf{R}eceiver \textbf{O}perating \textbf{C}haracteristic curve and is obtained by using the same threshold range as in \equref{eq:threshold} and plotting for each threshold the true positive rate
 \begin{equation}
 \mathrm{TPR} = \frac{TP}{TP+FN} = \text{Recall}
 \end{equation}

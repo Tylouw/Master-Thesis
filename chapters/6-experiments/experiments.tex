@@ -36,7 +36,7 @@ However the \texttt{gripper\_type} attribute cannot be freely selected, because 
 
 \begin{table}[htbp]
     \centering
-    \caption{Attributes with their associated values, that define a domain.}
+    \caption{Allowed gripper-type combinations by batch and rod type.}
     \label{tab:gripper_type_exception}
     \begin{tabular}{lll}
         \toprule
@@ -60,7 +60,7 @@ To reduce the influence of randomness, the benchmark experiments are repeated wi
 \qquad\rightarrow
 \mathcal{S}_{\text{seeds}} = \mathcal{S}_{\text{train}} \times \mathcal{S}_{\text{split}}
 \end{equation}
-are combined, resulting in nine runs per experiment. An experiment is a specific model preset trained nine times on the same test set, training and validation sets and model initializations are different, because they depend on the split and model seed, respectively.  The performance is then summarized across these nine runs exemplary in \figref{fig:bm_example}. Each dot is its own training run for one specific seed combination. In this way, different runs (in \figref{fig:bm_example} $x$-axis "Experiment 1" and "Experiment 2") and their specific seed combinations can be diretly compared as well as their mean and standard deviation.
+are combined, resulting in nine runs per experiment. An experiment is a specific model preset trained nine times on the same test set, training and validation sets and model initializations are different, because they depend on the split and model seed, respectively.  The performance is then summarized across these nine runs exemplary in \figref{fig:bm_example}. Each dot is its own training run for one specific seed combination. In this way, different runs (in \figref{fig:bm_example} $x$-axis "Experiment 1" and "Experiment 2") and their specific seed combinations can be directly compared as well as their mean and standard deviation.
 
 \begin{figure}[htpb]
     \centering
@@ -85,7 +85,7 @@ DA2 Model Confusion asses how the deviations affect classification performance. 
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.9\textwidth]{chapters/6-experiments/Experiments_figure.png}
-    \caption{Visualzation of experiments conducted.}
+    \caption{Visualization of experiments conducted.}
     \label{fig:exp_vis}
 \end{figure}
 \newpage
@@ -98,7 +98,7 @@ DA2 Model Confusion asses how the deviations affect classification performance. 
 
 The recorded dataset contains several different signal modalities, including force/torque, TCP pose, TCP velocity, joint pose, joint velocity, tool acceleration, per-joint current, and temperature. These channel groups differ strongly in physical meaning and in how directly they describe the insertion process. Since the later benchmark studies should be done with one fixed channel configuration, it is necessary to determine beforehand which channel groups provide the most informative input for the classification task.
 
-To keep the search doable, the study was not designed a full evaluation of all possible channel subsets. Instead, it was structured as a two-stage procedure: first, each channel group was evaluated individually to identify promising signal sources and second, the strongest groups were combined in different ways to determine an effective multi-modal channel configuration.
+To keep the search doable, the study was not designed as a full evaluation of all possible channel subsets. Instead, it was structured as a two-stage procedure: first, each channel group was evaluated individually to identify promising signal sources and second, the strongest groups were combined in different ways to determine an effective multi-modal channel configuration.
 
 \subsection{Methods}
 % All training runs in this study had no dedicated test set. The dataset is always split randomly in training and validation sets according to split ratios defined in Section \ref{subsec:train_val_test_splits}.
@@ -158,7 +158,7 @@ The results of the individual channel-group tests are shown in \figref{fig:best_
     \label{fig:best_channel_single_val_loss}
 \end{figure}
 
-Several important observations can be made from these results. First, force/torque data provides the best standalone modality and is therefore the main candidate for the later stage 2 combination study. This is physically plausible, F/T describes the contact interaction during insertion most directly. Second, TCP pose and current also achieve comparatively high validation balanced accuracy, despite being more indirect measurements. This indicates that the insertion outcome is not encoded only in direct contact signals, but also in robot state and actuator-related signals. Third, joint velocity performs better than TCP velocity, joint pose and tool acceleration, making it the more promising dynamic complement. Especially tool acceleration shows high and spread loss with comparatively high validation balanced accuracy, indicating that the models predictions are mostly correct, but outliers on some seed combinations are classified confindently wrong. Classification with temperature performs almost random and is therefore not considered further.
+Several important observations can be made from these results. First, force/torque data provides the best standalone modality and is therefore the main candidate for the later stage 2 combination study. This is physically plausible, F/T describes the contact interaction during insertion most directly. Second, TCP pose and current also achieve comparatively high validation balanced accuracy, despite being more indirect measurements. This indicates that the insertion outcome is not encoded only in direct contact signals, but also in robot state and actuator-related signals. Third, joint velocity performs better than TCP velocity, joint pose and tool acceleration, making it the more promising dynamic complement. Especially tool acceleration shows high and spread loss with comparatively high validation balanced accuracy, indicating that the models predictions are mostly correct, but outliers on some seed combinations are classified confidently wrong. Classification with temperature performs almost random and is therefore not considered further.
 
 To summarize, the individual tests suggested that the most informative single groups are F/T, TCP pose, current, and joint velocity. These groups were therefore selected as the basis for the next stage of the study.
 
@@ -205,7 +205,7 @@ For completeness, \figref{fig:channel_combination_overview} summarizes the full 
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=1.0\textwidth]{chapters/6-experiments/channel_matrix_plot.png}
-    \caption{Overview of the evaluated channel configurations. Crosses indicate which channel groups are included in each configuration. The corresponding validation balanced accuracy and validation loss for the available \texttt{Base} and \texttt{Big} runs are shown on the right. The temperature signal is not shown, because it heavily scews the plot.}
+    \caption{Overview of the evaluated channel configurations. Crosses indicate which channel groups are included in each configuration. The corresponding validation balanced accuracy and validation loss for the available \texttt{Base} and \texttt{Big} runs are shown on the right. The temperature signal is not shown, because it heavily skews the plot.}
     \label{fig:channel_combination_overview}
 \end{figure}
 
@@ -294,7 +294,7 @@ Thus, the test set contains unseen insertion attempts from one domain that is co
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{chapters/6-experiments/bm1_taskboard.png}
-    \caption{Schematic drawing of the insertion taskboard. The nine hole domains used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific domain, defined in \tabref{tab:bm2_domains}. 1: \texttt{BM2\_Hole\_1} $\dots$ 9: \texttt{BM2\_Hole\_9}.}
+    \caption{Schematic drawing of the insertion taskboard. The nine hole domains used in Benchmark 2 are labeled from 1 to 9. Each hole corresponds to one specific domain, defined in \tabref{tab:bm2_domains}. 1: \texttt{BM2\_big\_1} $\dots$ 9: \texttt{BM2\_rect\_3}.}
     \label{fig:taskboard_holes}
 \end{figure}
 \newpage
@@ -339,7 +339,7 @@ The held-out rod and held-out tolerance domains are shown in \figref{fig:heldout
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{chapters/6-experiments/bm2_taskboard.png}
-    \caption{Held-out group domains used in Benchmark 3. In each case, all sequences belonging to the highlighted group are assigned to the test set. 1: \texttt{BM3\_rod\_geometry\_1} $\dots$ 3: \texttt{BM3\_rod\_geometry\_3}, 4: \texttt{BM3\_tolerance\_1} $\dots$ 6: \texttt{BM3\_tolerance\_3}}
+    \caption{Held-out group domains used in Benchmark 3. In each case, all sequences belonging to the highlighted group are assigned to the test set. 1: \texttt{BM3\_big} $\dots$ 3: \texttt{BM3\_rect}, 4: \texttt{BM3\_tol\_1} $\dots$ 6: \texttt{BM3\_tol\_3}}
     \label{fig:heldout_groups}
 \end{figure}
 
@@ -603,5 +603,5 @@ Balanced accuracy is used as the main classification metric because individual d
 As in Deviation Analysis I, the model-confusion analysis is then repeated for domain-specific subsets. This allows the same deviation group to be evaluated for specific rods, tolerances, grippers, or batches. The resulting domain-specific analysis is used to check whether model confusion is a global property of a deviation group or whether it mainly occurs in specific dataset domains.
 
 % Only the most relevant model-confusion results are selected for the results chapter. These include deviation groups with low balanced accuracy, high loss, low confidence, or notable false-positive or false-negative tendencies.\\\\
-Furthermore, cases where physical difficulty and model difficulty differ, are highlighted as well, because a deviation group can be physically difficult but easy for the model to classify if it produces clear failure signatures. On the other hand, a deviation group can have a high physical success rate but still be model-confusing if the signal patterns are ambiguous.
+% Furthermore, cases where physical difficulty and model difficulty differ, are highlighted as well, because a deviation group can be physically difficult but easy for the model to classify if it produces clear failure signatures. On the other hand, a deviation group can have a high physical success rate but still be model-confusing if the signal patterns are ambiguous.
 

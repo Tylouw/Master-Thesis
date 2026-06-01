@@ -6,7 +6,7 @@ This chapter describes in the first Section \ref{sec:dataset_collection} how the
 
 All data was recorded on the real robotic system described in \chapref{ch:rob_setup}. Each sample corresponds to one insertion attempt of one rod into one hole under a defined set of deviations. During each cycle, the robot grasped one of the rods from the dedicated holder, moved to the selected insertion pose above the corresponding hole, performed the insertion under force control, and if the insertion was successful pulled the rod back out and released it in its holder or if the insertion failed, released the rod (opened gripper) where it failed, requiring for manual intervention to place the rod back in its holder.
 
-The dataset was generated in three recording batches. In the first recording batch, 100 insertions for each of the nine holes were recorded, resulting in 900 samples in total. This first batch had random positional and angular deviations applied, while other experimental factors were kept fixed. The positional deviation was generated in polar coordiantes by sampling a random radius in a range from [$0.0$, \texttt{max\_radius}] mm, with a random angle range from [$0.0$, $2\pi$] rad. Angular deviations were applied randomly in a range from [-\texttt{min\_max\_devi}, \texttt{min\_max\_devi}] rad around the TCP's $x$- and $y$-axis.
+The dataset was generated in three recording batches. In the first recording batch, 100 insertions for each of the nine holes were recorded, resulting in 900 samples in total. This first batch had random positional and angular deviations applied, while other experimental factors were kept fixed. The positional deviation was generated in polar coordinates by sampling a random radius in a range from [$0.0$, \texttt{max\_radius}] mm, with a random angle range from [$0.0$, $2\pi$] rad. Angular deviations were applied randomly in a range from [-\texttt{min\_max\_devi}, \texttt{min\_max\_devi}] rad around the TCP's $x$- and $y$-axis.
 \figref{fig:batch1_example} shows time series plots of all insertions marked as success in green and fail in red of the first batch on \texttt{big\_rod\_t0.1} for force and torque about the $x,y,z$-axis.
 
 \begin{figure}[htbp]
@@ -29,7 +29,7 @@ The dataset was generated in three recording batches. In the first recording bat
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/SF_batch_1_big_rod_t01_fry.pdf}
-        \caption{Troque Y}
+        \caption{Torque Y}
     \end{subfigure}
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
@@ -47,7 +47,7 @@ The dataset was generated in three recording batches. In the first recording bat
 
 For the second and third recording batches, the data collection strategy was redesigned and made systematic, meaning deterministic and not random within bounds as before. First, the dataset should include a broader, more controlled variety of insertion configurations. Which consequently required more attempts per run to cover the full range of possibilities and more time. Typically took one recording session about 1 to 1.5 hours. Second, these long recording runs should be resumable in a reproducible manner without losing track of which settings had already been recorded.
 
-The systematic recording plan was built around three main factors: grasp height, approach height, and insertion force level. Grasp height describes the height at which the rod is grasped from the rod holder. Two grasp heights are used (\SIlist{0.0;7.0}{\milli\meter}), which influences the rods stability in the gripper. At position $0.0$ mm the rod is more stable than position $7.0$ mm, where is rod is grasped more towards the tip. Two approach heights (\SIlist{-5.0;2.0}{\milli\meter}) are used which alter the height above the hole before insertion. Three force levels (\SIlist{15;25;35}{\newton}) are used which specify the UR force mode's target force along the $z$-axis. These factors result in
+The systematic recording plan was built around three main factors: grasp height, approach height, and insertion force level. Grasp height describes the height at which the rod is grasped from the rod holder. Two grasp heights are used (\SIlist{0.0;7.0}{\milli\meter}), which influences the rods stability in the gripper. At position $0.0$ mm the rod is more stable than position $7.0$ mm, where the rod is grasped more towards the tip. Two approach heights (\SIlist{-5.0;2.0}{\milli\meter}) are used which alter the height above the hole before insertion. Three force levels (\SIlist{15;25;35}{\newton}) are used which specify the UR force mode's target force along the $z$-axis. These factors result in
 \begin{equation}
     2 \times 2 \times 3 = 12
     \label{eq:combs_per_hole}
@@ -67,7 +67,7 @@ samples per hole. For non-tight holes, i.e.\ the medium and loose tolerances, 30
 samples per hole.
 
 In addition to these three main factors, each insertion attempt was assigned a deterministic deviation state. This deviation state contains one position, orientation, force limit and record offset. The position relative to the holes center is generated in polar coordinates with a radius and angle. The radius is sampled linearly in a range from $0.0$ mm to $0.3$ mm in three steps. Each radius is combined with four angles, them being $0^\circ,90^\circ,180^\circ,270^\circ$, resulting in $3\times 4 = 12$ positional offset states. Note that position $(0,0)$ appears four times, which closer represents reality, when insertions happen successful more often.\\
-The orientational tilt around the tools $x$- and $y$-axes was varied using the values \(-3^\circ\), \(0^\circ\), and \(3^\circ\) arranged in a $3\times3$ grid, resulting in $9$ tilt combinations. The force limit for aborting an insertion was cycled through \SIlist{30;40;50}{\newton}, and the recording offset was cycled through \SIlist{-0.2;0.0;0.3;0.6;0.9}{\second}, which starts the recording of data $0.2$ s after or up to $0.9$ s before an insertion was started, which introduced temporal variation into the dataset. As a result, the later batches were no longer purely random, but followed a deterministic, pseudorandom and reproducible recording schedule. This means that the dataset was not a full cartesian sweep over all factors, but it still ensured broad and repeatable coverage of the relevant operating conditions. \figref{fig:create_plan_periodic_bars} shows visually how position, orientation, force limit and record offset are periodially samples along the $30$ or $40$ insertions.
+The orientational tilt around the tools $x$- and $y$-axes was varied using the values \(-3^\circ\), \(0^\circ\), and \(3^\circ\) arranged in a $3\times3$ grid, resulting in $9$ tilt combinations. The force limit for aborting an insertion was cycled through \SIlist{30;40;50}{\newton}, and the recording offset was cycled through \SIlist{-0.2;0.0;0.3;0.6;0.9}{\second}, which starts the recording of data $0.2$ s after or up to $0.9$ s before an insertion was started, which introduced temporal variation into the dataset. As a result, the later batches were no longer purely random, but followed a deterministic, pseudorandom and reproducible recording schedule. This means that the dataset was not a full cartesian sweep over all factors, but it still ensured broad and repeatable coverage of the relevant operating conditions. \figref{fig:create_plan_periodic_bars} shows visually how position, orientation, force limit and record offset are periodially sampled along the $30$ or $40$ insertions.
 
 \usetikzlibrary{calc}
 
@@ -148,7 +148,7 @@ The orientational tilt around the tools $x$- and $y$-axes was varied using the v
     \label{fig:create_plan_periodic_bars}
 \end{figure}
 
-The function \texttt{create\_plan()} generats this schedule before the recording run started. The detailed executing can be seen in \algoref{alg:create_plan}.
+The function \texttt{create\_plan()} generates this schedule before the recording run started. The detailed executing can be seen in \algoref{alg:create_plan}.
 
 % In document
 \begin{algorithm}[htbp]
@@ -175,7 +175,7 @@ The function \texttt{create\_plan()} generats this schedule before the recording
                 \State \texttt{radius} $\gets$ \texttt{radius\_steps}[floor($i$ / len(\texttt{angle\_steps})) $\mod$ len(\texttt{radius\_steps})]
                 \State $\texttt{devi} \gets (\texttt{radius}\cos(\texttt{angle}),\texttt{radius}\sin(\texttt{angle}))$
                 \State \texttt{tilt} $\gets$ \texttt{tilt\_combinations}[$i \mod$ len(\texttt{tilt\_combinations})]
-                \State \texttt{f\_limit} $\gets$ \texttt{force\_limits}[$i \mod$ len(\texttt{f\_limit})]
+                \State \texttt{f\_limit} $\gets$ \texttt{force\_limits}[$i \mod$ len(\texttt{force\_limit})]
                 \State \texttt{record\_offset} $\gets$ \texttt{record\_offset\_s}[$i \mod$ len(\texttt{record\_offset\_s})]
                 \State append $(\texttt{gh},\texttt{ah},\texttt{fl},\texttt{devi},\texttt{tilt},\texttt{f\_limit},\texttt{record\_offset})$ to \texttt{plan}
             \EndFor
@@ -236,7 +236,7 @@ All remaining attempts were labelled as failures. In order to preserve additiona
 
 \section{Dataset Composition and Storage}\label{sec:dataset_composition}
 
-For each recorded insertion attempt, 48 robot signals were sampled at \SI{500}{\hertz}, UR's Real-Time Data Exchange (RTDE) maximum poll rate\cite{ur-rtde-guide}. Since each sequence has a fixed length of \SI{3.0}{\second}, each sequence contains 1500 time sampels. One insertion attempt was saved as one CSV file containing the time series data and one JSON file containing the associated metadata. Both files shared the same basename and followed the naming scheme \texttt{sample\_\{n\}\_session\_\{m\}\_\{hash\}}.
+For each recorded insertion attempt, 48 robot signals were sampled at \SI{500}{\hertz}, UR's Real-Time Data Exchange (RTDE) maximum poll rate\cite{ur-rtde-guide}. Since each sequence has a fixed length of \SI{3.0}{\second}, each sequence contains 1500 time samples. One insertion attempt was saved as one CSV file containing the time series data and one JSON file containing the associated metadata. Both files shared the same basename and followed the naming scheme \texttt{sample\_\{n\}\_session\_\{m\}\_\{hash\}}.
 
 The sample index $n$ denotes the running insertion number, while the session index $m$ denotes the recording session. The session number was increased whenever a recording run was interrupted and later resumed, for example after changing settings or taking a break. This was particularly useful for the longer systematic recordings, because it allowed the collection process to resume from the current point in the plan without overwriting existing files. Furthermore has each file pair its own unique 12 digit hash number, so filenames in the training data do not duplicate, as for example the first insertion of one recording session always starts with \texttt{sample\_1\_session\_1\_}.
 
@@ -300,7 +300,7 @@ Besides the recorded time series, a JSON metadata file was stored for each inser
         \texttt{rod\_geometry} & its physical geometry type (\texttt{round} or \text{rect}) & \texttt{string} \\
         \texttt{gripper\_type} & the gripper used (\texttt{round}, \texttt{rect} or \texttt{flat}) & \texttt{string}\\
         \hline
-        \texttt{holderPose\_Up}, \texttt{holderPose\_Down} & grasping poses & \texttt{ndarray [6]} \\
+        \makecell[l]{\texttt{holderPose\_Up},\\ \texttt{holderPose\_Down}} & grasping poses & \texttt{ndarray [6]} \\
         \texttt{insertionPose} & insertion pose without deviation & \texttt{ndarray [6]} \\
         \hline
         \texttt{cycle\_time\_s} & measured cycle duration [s] & \texttt{float} \\
@@ -358,7 +358,7 @@ Exemplary plots from all signals for a successful insertion are shown in \figref
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{chapters/4-dataset_construction_and_labeling/sample_1_session_1_122843870717.pdf}
-    \caption{Combined plot showing all signals for the one successful insertion of \texttt{big\_rod\_t0.1} in Batch 1. The exact location of this file in the dataset is: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_1\_session\_1\_122843870717.csv}. The corresponding metadata from the \texttt{.json} file to this sample is listed in \tabref{tab:example_sample_metadata}.}
+    \caption{Combined plot showing all signals for one successful insertion of \texttt{big\_rod\_t0.1} in Batch 1. The exact location of this file in the dataset is: \texttt{training\_data/batch\_1/big\_rod\_t0.1/sample\_1\_session\_1\_122843870717.csv}. The corresponding metadata from the \texttt{.json} file to this sample is listed in \tabref{tab:example_sample_metadata}.}
     \label{fig:all_signals_success}
 \end{figure}
 
@@ -448,7 +448,7 @@ denote the recorded wrench of sample \(i\) in base-frame coordinates, and let
     \label{eq:wrench_2}
 \end{equation}
 
-be the corresponding TCP pose, where $[r_{x,i},r_{y,i},r_{z,i}]^{\mathsf T}$ is the rotational part. From this rotation and the additional $180^\circ$ rotation about the $y$-axis used in the coordinate convetion to have positive forces in $z$-direction pointing up in the world, a $3\times3$ rotation matrix
+be the corresponding TCP pose, where $[r_{x,i},r_{y,i},r_{z,i}]^{\mathsf T}$ is the rotational part. From this rotation and the additional $180^\circ$ rotation about the $y$-axis used in the coordinate convention to have positive forces in $z$-direction pointing up in the world, a $3\times3$ rotation matrix
 
 \begin{equation}
     \mathbf{R}_i = \mathbf{R}_y(\pi)\,\mathbf{R}(\mathbf{r}_i)
